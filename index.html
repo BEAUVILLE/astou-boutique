@@ -1,0 +1,1215 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Astou Boutique · Maison, plage & élégance</title>
+  <meta name="description" content="Astou Boutique à Saly : linge de maison, serviettes, draps, peignoirs, foutas, plage, robes, tenues stylées, confection et crèmes de beauté. Contact WhatsApp direct." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── VARIABLES ── */
+    :root{
+      --bg:#060f0c;
+      --bg2:#030b08;
+      --card:rgba(18,44,34,.72);
+      --ink:#f5f0e8;
+      --muted:#b8cfc5;
+      --soft:#e7f2eb;
+      --line:rgba(255,255,255,.12);
+      --line2:rgba(245,199,107,.22);
+      --gold:#f5c76b;
+      --gold2:#ffe8a8;
+      --gold3:rgba(245,199,107,.15);
+      --green:#16c784;
+      --deep:#03100d;
+      --red:#c7432f;
+      --shadow:0 32px 80px rgba(0,0,0,.48);
+      --font-head:'Cormorant Garamond',Georgia,serif;
+      --font-body:'DM Sans',system-ui,sans-serif;
+      --radius:28px;
+      --radius-sm:16px;
+    }
+
+    /* ── RESET ── */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(245,199,107,.4) rgba(0,0,0,.2)}
+    ::-webkit-scrollbar{width:5px}
+    ::-webkit-scrollbar-track{background:rgba(0,0,0,.2)}
+    ::-webkit-scrollbar-thumb{background:rgba(245,199,107,.4);border-radius:999px}
+    body{
+      font-family:var(--font-body);
+      color:var(--ink);
+      background:var(--bg);
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    strong{font-weight:700}
+
+    /* ── AURORA BACKGROUND ── */
+    #aurora{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      overflow:hidden;
+    }
+    .aurora-blob{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(80px);
+      opacity:.18;
+      animation:auroraFloat linear infinite;
+    }
+    .aurora-blob:nth-child(1){width:700px;height:700px;background:radial-gradient(circle,rgba(22,199,132,.8),transparent 70%);top:-20%;left:-15%;animation-duration:28s}
+    .aurora-blob:nth-child(2){width:500px;height:500px;background:radial-gradient(circle,rgba(245,199,107,.7),transparent 70%);top:30%;right:-10%;animation-duration:34s;animation-delay:-12s}
+    .aurora-blob:nth-child(3){width:600px;height:600px;background:radial-gradient(circle,rgba(22,199,132,.5),transparent 70%);bottom:-15%;left:30%;animation-duration:22s;animation-delay:-7s}
+    .aurora-blob:nth-child(4){width:350px;height:350px;background:radial-gradient(circle,rgba(245,199,107,.6),transparent 70%);top:55%;left:5%;animation-duration:40s;animation-delay:-20s}
+    @keyframes auroraFloat{
+      0%{transform:translate(0,0) scale(1)}
+      25%{transform:translate(40px,-30px) scale(1.08)}
+      50%{transform:translate(-20px,50px) scale(.94)}
+      75%{transform:translate(60px,20px) scale(1.05)}
+      100%{transform:translate(0,0) scale(1)}
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity:.022;
+      background-size:200px 200px;
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    #prog{
+      position:fixed;
+      top:0;left:0;
+      width:0%;
+      height:2px;
+      background:linear-gradient(90deg,var(--green),var(--gold));
+      z-index:1000;
+      transition:width .1s linear;
+      box-shadow:0 0 10px rgba(245,199,107,.5);
+    }
+
+    /* ── LAYOUT ── */
+    .wrap{position:relative;z-index:2;width:min(1140px,100%);margin:0 auto;padding:24px}
+
+    /* ── TOPBAR ── */
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:12px 0 22px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:4px;
+    }
+    .brandmark{
+      font-family:var(--font-head);
+      font-weight:700;
+      font-size:15px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--gold2);
+    }
+    .brandmark span{color:var(--muted);font-weight:300;font-size:12px;letter-spacing:.08em}
+    .pill{
+      display:inline-flex;align-items:center;gap:7px;
+      border:1px solid var(--line2);
+      border-radius:999px;padding:9px 14px;
+      background:rgba(245,199,107,.07);
+      font-size:13px;font-weight:500;
+      transition:background .2s;
+    }
+    .pill:hover{background:rgba(245,199,107,.13)}
+
+    /* ── HERO ── */
+    .hero{min-height:86vh;display:grid;align-items:center;padding:18px 0 40px}
+    .hero-inner{
+      background:linear-gradient(160deg,rgba(22,44,34,.9),rgba(6,15,12,.8));
+      border:1px solid var(--line2);
+      border-radius:var(--radius);
+      padding:40px 42px;
+      box-shadow:var(--shadow),0 0 0 1px rgba(245,199,107,.06) inset;
+      backdrop-filter:blur(14px);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-inner::before{
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(245,199,107,.4),transparent);
+    }
+    .kicker{
+      display:inline-flex;align-items:center;gap:8px;
+      font-family:var(--font-body);
+      font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--gold);
+      border:1px solid var(--line2);
+      border-radius:999px;
+      padding:7px 14px;
+      background:rgba(245,199,107,.07);
+      margin-bottom:20px;
+    }
+    .kicker::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+    .title{
+      font-family:var(--font-head);
+      font-size:clamp(56px,9vw,110px);
+      line-height:.88;
+      letter-spacing:-.04em;
+      font-weight:600;
+      margin:0 0 6px;
+      background:linear-gradient(135deg,#fff5dc,var(--gold2),#c8f0dc);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .subtitle{
+      font-family:var(--font-head);
+      font-size:clamp(24px,4vw,44px);
+      line-height:1.05;
+      font-style:italic;
+      font-weight:400;
+      color:rgba(255,247,220,.7);
+      margin:0 0 20px;
+    }
+    .lead{
+      font-size:17px;line-height:1.72;
+      color:var(--muted);
+      max-width:900px;
+      margin-bottom:12px;
+      font-weight:300;
+    }
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch;margin-top:28px}
+    .hero-photo{
+      min-height:440px;border-radius:22px;overflow:hidden;
+      border:1px solid var(--line2);
+      position:relative;
+      box-shadow:0 32px 64px rgba(0,0,0,.5);
+    }
+    .hero-photo img{width:100%;height:100%;object-fit:cover}
+    .hero-photo::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(180deg,transparent 40%,rgba(3,12,9,.8));
+    }
+    .photo-caption{
+      position:absolute;left:16px;right:16px;bottom:16px;z-index:1;
+      padding:12px 16px;border-radius:14px;
+      background:rgba(3,14,10,.6);
+      backdrop-filter:blur(8px);
+      font-family:var(--font-head);
+      font-size:15px;font-weight:600;
+      color:var(--gold2);
+      border:1px solid rgba(245,199,107,.2);
+    }
+
+    /* ── NAV ── */
+    .nav{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 4px}
+    .nav a{
+      border:1px solid var(--line);border-radius:999px;
+      padding:9px 14px;font-size:13px;font-weight:500;
+      background:rgba(255,255,255,.04);
+      transition:all .2s;
+      color:var(--muted);
+    }
+    .nav a:hover{background:rgba(245,199,107,.1);border-color:var(--line2);color:var(--gold2)}
+
+    /* ── BUTTONS ── */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border:1px solid var(--line);
+      border-radius:999px;padding:13px 18px;
+      font-family:var(--font-body);font-weight:600;font-size:14px;
+      min-height:48px;cursor:pointer;
+      transition:all .22s;
+      position:relative;overflow:hidden;
+    }
+    .btn::after{
+      content:'';position:absolute;inset:0;border-radius:inherit;
+      background:rgba(255,255,255,.08);
+      opacity:0;transition:opacity .2s;
+    }
+    .btn:hover::after{opacity:1}
+    .btn.gold{
+      background:linear-gradient(135deg,var(--gold),#e8b44a);
+      border-color:rgba(245,199,107,.8);
+      color:#0f2218;
+      box-shadow:0 8px 28px rgba(245,199,107,.28);
+    }
+    .btn.gold:hover{box-shadow:0 12px 38px rgba(245,199,107,.42);transform:translateY(-1px)}
+    .btn.green{
+      background:linear-gradient(135deg,var(--green),#10a86d);
+      border-color:rgba(22,199,132,.8);
+      color:#06231a;
+      box-shadow:0 8px 28px rgba(22,199,132,.22);
+    }
+    .btn.green:hover{box-shadow:0 12px 38px rgba(22,199,132,.36);transform:translateY(-1px)}
+    .btn.ghost{background:rgba(255,255,255,.055);color:var(--gold2)}
+    .btn.ghost:hover{background:rgba(245,199,107,.1)}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+
+    /* ── SECTIONS ── */
+    .section{
+      padding:40px 0;
+      scroll-margin-top:16px;
+      opacity:0;transform:translateY(28px);
+      transition:opacity .6s ease,transform .6s ease;
+    }
+    .section.visible{opacity:1;transform:translateY(0)}
+    .section h2{
+      font-family:var(--font-head);
+      font-size:clamp(32px,5vw,52px);
+      line-height:.95;letter-spacing:-.03em;
+      font-weight:600;
+      margin-bottom:16px;
+      color:var(--gold2);
+    }
+    .section-intro{
+      color:var(--muted);font-size:16px;line-height:1.68;
+      max-width:840px;margin:0 0 22px;font-weight:300;
+    }
+    .section-divider{
+      height:1px;
+      background:linear-gradient(90deg,transparent,var(--line2),transparent);
+      margin:8px 0 32px;
+    }
+
+    /* ── CARDS / BOXES ── */
+    .card,.box{
+      background:linear-gradient(160deg,rgba(22,44,34,.75),rgba(6,15,12,.65));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      backdrop-filter:blur(12px);
+      box-shadow:var(--shadow);
+      transition:border-color .3s,box-shadow .3s;
+    }
+    .card{padding:36px 40px}
+    .box{padding:26px 28px}
+    .box:hover{border-color:rgba(245,199,107,.28);box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 0 1px rgba(245,199,107,.08) inset}
+    .box h3{
+      font-family:var(--font-head);
+      font-size:22px;font-weight:600;
+      color:var(--gold2);margin-bottom:10px;
+    }
+    .box p,.box li{color:var(--muted);line-height:1.65;font-weight:300;font-size:15px}
+    .box ul{margin:10px 0 0;padding-left:20px}
+    .box ul li{margin-bottom:6px}
+
+    /* ── GRID ── */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}
+    .grid.two{grid-template-columns:repeat(2,1fr)}
+    .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+
+    /* ── TAGS ── */
+    .taglist{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+    .tag{
+      border:1px solid rgba(245,199,107,.3);
+      background:rgba(245,199,107,.07);
+      color:var(--gold2);
+      border-radius:999px;padding:8px 12px;
+      font-size:12px;font-weight:500;letter-spacing:.05em;
+      transition:all .2s;
+    }
+    .tag:hover{background:rgba(245,199,107,.15);transform:translateY(-1px)}
+
+    /* ── GALLERY ── */
+    .gallery-premium{display:grid;gap:16px;margin:20px 0 30px}
+    .gallery-stage{
+      position:relative;
+      border:1px solid var(--line2);border-radius:var(--radius);
+      overflow:hidden;
+      background:rgba(6,15,12,.9);
+      box-shadow:0 32px 90px rgba(0,0,0,.4);
+    }
+    .gallery-slides{position:relative;min-height:440px;touch-action:pan-y}
+    .gallery-slide{display:none;position:relative;margin:0}
+    .gallery-slide.active{display:block}
+    .gallery-slide img{width:100%;height:clamp(440px,58vw,700px);object-fit:cover}
+    .gallery-slide figcaption{
+      position:absolute;left:18px;right:18px;bottom:18px;
+      padding:13px 16px;border-radius:16px;
+      background:rgba(5,14,10,.72);backdrop-filter:blur(8px);
+      border:1px solid rgba(245,199,107,.18);
+      font-family:var(--font-head);font-size:17px;font-weight:600;color:var(--gold2);
+    }
+    .gallery-arrow{
+      position:absolute;top:50%;transform:translateY(-50%);
+      width:50px;height:50px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(4,14,10,.62);backdrop-filter:blur(8px);
+      color:var(--gold2);font-size:28px;z-index:2;cursor:pointer;
+      transition:all .2s;
+    }
+    .gallery-arrow:hover{background:rgba(245,199,107,.18);border-color:var(--line2)}
+    .gallery-arrow.prev{left:16px}.gallery-arrow.next{right:16px}
+    .gallery-counter{
+      position:absolute;top:16px;right:16px;
+      padding:7px 14px;border-radius:999px;
+      background:rgba(4,14,10,.65);border:1px solid var(--line2);
+      color:var(--gold2);font-weight:600;font-size:12px;letter-spacing:.06em;z-index:2;
+    }
+    .gallery-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .gallery-thumb{
+      appearance:none;border:1px solid var(--line);padding:0;
+      border-radius:16px;overflow:hidden;
+      background:rgba(255,255,255,.03);min-height:84px;cursor:pointer;
+      transition:all .22s;
+    }
+    .gallery-thumb:hover{border-color:rgba(245,199,107,.4)}
+    .gallery-thumb img{width:100%;height:88px;object-fit:cover}
+    .gallery-thumb.active{outline:2px solid rgba(245,199,107,.8);outline-offset:2px}
+
+    /* ── FORM ── */
+    .info{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form label{
+      display:block;color:var(--gold2);
+      font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+      margin-top:8px;margin-bottom:5px;
+    }
+    .form input,.form textarea{
+      width:100%;padding:13px 15px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.25);
+      color:var(--ink);margin-bottom:10px;font:inherit;font-size:14px;
+      transition:border-color .2s;
+    }
+    .form input:focus,.form textarea:focus{
+      outline:none;border-color:rgba(245,199,107,.4);
+      background:rgba(0,0,0,.32);
+    }
+    .form textarea{min-height:130px;resize:vertical}
+    .form-btn{
+      width:100%;padding:14px;border:0;border-radius:14px;
+      background:linear-gradient(135deg,var(--green),#10a86d);
+      color:#06231a;font-family:var(--font-body);font-size:15px;font-weight:700;
+      cursor:pointer;letter-spacing:.03em;
+      box-shadow:0 8px 28px rgba(22,199,132,.24);
+      transition:all .22s;
+    }
+    .form-btn:hover{box-shadow:0 12px 40px rgba(22,199,132,.36);transform:translateY(-1px)}
+
+    .notice{
+      border-top:1px solid rgba(245,199,107,.2);margin-top:14px;padding-top:14px;
+      color:var(--gold2)!important;font-size:13px;line-height:1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer{
+      position:relative;z-index:2;
+      padding:48px 0 32px;
+      color:var(--muted);font-size:13px;text-align:center;
+      border-top:1px solid var(--line);
+    }
+    footer .footer-brand{
+      font-family:var(--font-head);font-size:28px;font-weight:600;
+      color:var(--gold2);letter-spacing:.04em;
+      margin-bottom:10px;
+    }
+    footer p{line-height:1.7;font-weight:300;max-width:500px;margin:0 auto 6px}
+
+    /* ── FLOATING WA ── */
+    .floating-wa{
+      position:fixed;right:18px;bottom:18px;z-index:50;
+      background:linear-gradient(135deg,var(--green),#10a86d);
+      color:#06231a;border-radius:999px;padding:13px 18px;
+      font-weight:700;font-size:14px;
+      box-shadow:0 16px 44px rgba(22,199,132,.36);
+      transition:all .22s;
+      border:1px solid rgba(22,199,132,.5);
+    }
+    .floating-wa:hover{box-shadow:0 20px 56px rgba(22,199,132,.52);transform:translateY(-2px)}
+
+    /* ══════════════════════════════════════════
+       PREMIUM AUDIO WIDGET
+    ══════════════════════════════════════════ */
+    .digiy-audio{
+      position:fixed;
+      left:18px;bottom:18px;
+      z-index:49;
+      width:min(320px,calc(100vw - 36px));
+      border:1px solid rgba(245,199,107,.32);
+      border-radius:22px;
+      background:linear-gradient(160deg,rgba(14,36,26,.97),rgba(4,18,12,.97));
+      box-shadow:0 24px 64px rgba(0,0,0,.52),0 0 0 1px rgba(245,199,107,.06) inset;
+      backdrop-filter:blur(16px);
+      overflow:hidden;
+    }
+    .digiy-audio::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(245,199,107,.5),transparent);
+    }
+    .audio-inner{padding:14px 16px 16px}
+    .audio-head{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:10px;
+    }
+    .audio-brand{
+      display:flex;align-items:center;gap:8px;
+      font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);
+    }
+    .audio-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 8px var(--green);
+      animation:audioPulse 2s ease-in-out infinite;
+    }
+    .audio-dot.off{background:rgba(255,255,255,.2);box-shadow:none;animation:none}
+    @keyframes audioPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+    .audio-minimize{
+      appearance:none;border:1px solid var(--line);border-radius:999px;
+      background:rgba(255,255,255,.05);color:var(--muted);
+      width:26px;height:26px;cursor:pointer;font-size:13px;
+      transition:all .2s;
+    }
+    .audio-minimize:hover{background:rgba(255,255,255,.1);color:var(--ink)}
+
+    /* Tabs */
+    .audio-tabs{display:flex;gap:6px;margin-bottom:12px}
+    .audio-tab{
+      flex:1;appearance:none;border:1px solid var(--line);border-radius:999px;
+      padding:7px 0;font-family:var(--font-body);font-size:11px;font-weight:600;
+      letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
+      background:rgba(255,255,255,.04);color:var(--muted);
+      transition:all .2s;
+    }
+    .audio-tab.active{
+      background:rgba(245,199,107,.14);
+      border-color:rgba(245,199,107,.4);
+      color:var(--gold2);
+    }
+
+    /* Equalizer bars */
+    .eq-bars{display:flex;align-items:flex-end;gap:3px;height:24px;margin-bottom:12px}
+    .eq-bar{
+      flex:1;border-radius:2px;
+      background:linear-gradient(180deg,var(--gold2),var(--green));
+      height:4px;transition:height .1s ease;
+      opacity:.7;
+    }
+    .eq-bar.anim{animation:eqAnim var(--d,.4s) ease-in-out infinite alternate}
+    @keyframes eqAnim{0%{height:4px}100%{height:var(--h,18px)}}
+
+    /* Track info */
+    .audio-track{
+      font-size:12px;color:var(--muted);line-height:1.4;
+      margin-bottom:12px;font-weight:300;
+    }
+    .audio-track strong{color:var(--ink);font-weight:600;font-size:13px}
+
+    /* Controls */
+    .audio-controls{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+    .ac-btn{
+      appearance:none;border:1px solid var(--line);border-radius:999px;
+      padding:9px 13px;
+      background:rgba(255,255,255,.055);
+      color:var(--ink);font-family:var(--font-body);font-size:13px;font-weight:600;
+      cursor:pointer;transition:all .2s;flex:1;
+    }
+    .ac-btn:hover{background:rgba(255,255,255,.1)}
+    .ac-btn.primary{
+      background:linear-gradient(135deg,rgba(245,199,107,.22),rgba(245,199,107,.1));
+      border-color:rgba(245,199,107,.5);color:var(--gold2);
+    }
+    .ac-btn.primary:hover{background:linear-gradient(135deg,rgba(245,199,107,.35),rgba(245,199,107,.18))}
+
+    /* Volume */
+    .vol-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+    .vol-row span{width:16px;text-align:center;font-size:13px}
+    input[type=range].vol-slider{
+      flex:1;-webkit-appearance:none;appearance:none;
+      height:3px;border-radius:999px;
+      background:linear-gradient(90deg,var(--gold) calc(var(--pct,60)*1%),rgba(255,255,255,.12) calc(var(--pct,60)*1%));
+      outline:none;cursor:pointer;
+    }
+    input[type=range].vol-slider::-webkit-slider-thumb{
+      -webkit-appearance:none;width:13px;height:13px;border-radius:50%;
+      background:var(--gold2);border:none;cursor:pointer;
+      box-shadow:0 2px 8px rgba(245,199,107,.5);
+    }
+
+    /* Minimized state */
+    .digiy-audio.minimized .audio-expandable{display:none}
+    .digiy-audio.minimized{border-radius:999px}
+    .digiy-audio.minimized .audio-inner{padding:10px 16px}
+    .digiy-audio.minimized .audio-tabs{display:none}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:860px){
+      .hero-grid,.grid,.grid.two,.trust,.info{grid-template-columns:1fr}
+      .hero{min-height:auto;padding-top:8px}
+      .card,.box{padding:22px 20px}
+      .hero-inner{padding:28px 22px}
+      .hero-photo{min-height:320px}
+      .gallery-slides{min-height:300px}
+      .gallery-slide img{height:clamp(300px,80vw,500px)}
+      .gallery-thumbs{display:flex;overflow:auto;padding:4px 2px 6px}
+      .gallery-thumb{min-width:90px}
+      .topbar{align-items:flex-start;flex-direction:column}
+      .floating-wa{left:18px;right:18px;text-align:center;bottom:90px}
+      .digiy-audio{left:18px;right:18px;bottom:18px;width:auto;max-width:none}
+      .title{font-size:clamp(48px,12vw,80px)}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Aurora background -->
+<div id="aurora" aria-hidden="true">
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
+</div>
+
+<!-- Scroll progress -->
+<div id="prog" role="progressbar" aria-hidden="true"></div>
+
+<main class="wrap">
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="brandmark">Astou Boutique <span>· BY DIGIYLYFE</span></div>
+    <a class="pill" href="#demande">💬 WhatsApp direct</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="accueil" class="hero section visible">
+    <div class="hero-inner">
+      <div class="kicker">Saly, Sénégal · Maison · Hôtels · Villas · Plage · Style · Beauté</div>
+      <h1 class="title">Astou<br>Boutique</h1>
+      <p class="subtitle">Maison, plage &amp; élégance</p>
+      <p class="lead">Astou Boutique propose du linge de maison, des serviettes, des draps, des couvertures, des peignoirs, des foutas pour transats, des serviettes de plage, des robes, des tenues stylées, de la confection et des crèmes de beauté.</p>
+      <p class="lead">Une vitrine claire pour découvrir les produits, préparer sa visite, contacter la boutique directement sur WhatsApp, retrouver le repère Google Maps et suivre les nouveautés sur TikTok.</p>
+      <div class="cta-row">
+        <a class="btn green" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique%2C%20je%20souhaite%20avoir%20des%20informations%20sur%20vos%20produits." target="_blank" rel="noopener">💬 Contacter sur WhatsApp</a>
+        <a class="btn gold" href="#galerie">🖼️ Voir la galerie</a>
+        <a class="btn ghost" href="#google-maps-repere">📍 Google Maps</a>
+        <a class="btn ghost" href="#tiktok-nouveautes">🎥 TikTok</a>
+      </div>
+      <nav class="nav" aria-label="Navigation de la page">
+        <a href="#offre">Offre</a>
+        <a href="#univers-maison">Maison</a>
+        <a href="#hotels-villas-locations">Hôtels &amp; villas</a>
+        <a href="#plage-transats">Plage</a>
+        <a href="#confection-tenues-stylees">Style</a>
+        <a href="#beaute">Beauté</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#demande">Contact</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- OFFRE -->
+  <section id="offre" class="section">
+    <div class="section-divider"></div>
+    <h2>Une boutique utile, belle et directe</h2>
+    <p class="section-intro">Astou Boutique parle à plusieurs publics : familles, femmes, touristes, hôtels, villas, maisons d'hôtes, locations courte durée et propriétaires qui veulent équiper chambres, salles d'eau, piscines ou transats.</p>
+    <div class="grid">
+      <div class="box">
+        <h3>🛏️ Maison &amp; linge</h3>
+        <p>Draps, serviettes, couvertures et peignoirs pour équiper la maison avec goût, douceur et simplicité.</p>
+      </div>
+      <div class="box">
+        <h3>🏨 Hôtels &amp; villas</h3>
+        <p>Des articles propres et présentables pour chambres, salles d'eau, piscines, transats, villas et locations.</p>
+      </div>
+      <div class="box">
+        <h3>👗 Style &amp; beauté</h3>
+        <p>Robes, tenues stylées, confection et crèmes de beauté pour compléter l'univers féminin de la boutique.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIVERS MAISON -->
+  <section id="univers-maison" class="section">
+    <div class="section-divider"></div>
+    <h2>Univers maison</h2>
+    <div class="box">
+      <h3>Linge de maison, serviettes, draps, couvertures et peignoirs</h3>
+      <p>Astou Boutique propose des articles pratiques pour la maison, les familles et les maisons de vacances : serviettes, draps, couvertures, peignoirs et linge utile au quotidien.</p>
+      <div class="taglist">
+        <span class="tag">Serviettes</span><span class="tag">Draps</span><span class="tag">Couvertures</span><span class="tag">Peignoirs</span><span class="tag">Linge de maison</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HÔTELS -->
+  <section id="hotels-villas-locations" class="section">
+    <div class="section-divider"></div>
+    <h2>Hôtels, villas &amp; locations</h2>
+    <div class="box">
+      <h3>Des textiles prêts pour recevoir</h3>
+      <p>Pour les hôtels, villas, maisons d'hôtes et locations courte durée, Astou Boutique peut aider à préparer les chambres, les salles d'eau, les piscines et les espaces détente avec des serviettes, draps, peignoirs et foutas.</p>
+      <p class="notice">Le client professionnel comprend vite quoi demander : quantités, couleurs, tailles, usage maison, usage hôtel, plage ou transats.</p>
+    </div>
+  </section>
+
+  <!-- PLAGE -->
+  <section id="plage-transats" class="section">
+    <div class="section-divider"></div>
+    <h2>Plage &amp; transats</h2>
+    <div class="box">
+      <h3>Foutas, serviettes de plage et textile détente</h3>
+      <p>Des foutas pour transats, des serviettes de plage et des textiles légers pour les journées au soleil, les piscines, les villas, les maisons de vacances et les espaces détente.</p>
+    </div>
+  </section>
+
+  <!-- STYLE -->
+  <section id="confection-tenues-stylees" class="section">
+    <div class="section-divider"></div>
+    <h2>Confection &amp; tenues stylées</h2>
+    <div class="box">
+      <h3>Robes, tenues stylées et pièces choisies</h3>
+      <p>Astou Boutique propose aussi des robes, des tenues stylées et de la confection pour les femmes qui veulent rester élégantes, à l'aise et bien habillées.</p>
+    </div>
+  </section>
+
+  <!-- BEAUTÉ -->
+  <section id="beaute" class="section">
+    <div class="section-divider"></div>
+    <h2>Beauté</h2>
+    <div class="box">
+      <h3>Crèmes de beauté et soins simples</h3>
+      <p>La boutique complète son univers textile avec une sélection de crèmes de beauté et de produits de soin, présentés simplement pour aider la cliente à choisir.</p>
+    </div>
+  </section>
+
+  <!-- TIKTOK -->
+  <section id="tiktok-nouveautes" class="section">
+    <div class="section-divider"></div>
+    <h2>TikTok &amp; nouveautés</h2>
+    <div class="box">
+      <h3>Voir les produits en mouvement</h3>
+      <p>Astou Boutique publie aussi sur TikTok : vidéos produits, nouveautés, arrivages, inspirations, démonstrations, linge, plage, tenues et beauté.</p>
+      <p class="notice">À remplacer par le vrai lien TikTok dès qu'il est confirmé.</p>
+    </div>
+  </section>
+
+  <!-- GOOGLE MAPS -->
+  <section id="google-maps-repere" class="section">
+    <div class="section-divider"></div>
+    <h2>Google Maps &amp; repère</h2>
+    <div class="box">
+      <h3>Une boutique facile à retrouver</h3>
+      <p>Astou Boutique est référencée sur Google Maps. Le client peut préparer sa visite, vérifier le repère et contacter la boutique sur WhatsApp avant de se déplacer.</p>
+      <p class="notice">À remplacer par le vrai lien Google Maps dès qu'il est confirmé.</p>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section id="galerie" class="section">
+    <div class="section-divider"></div>
+    <h2>Galerie Astou Boutique</h2>
+    <p class="section-intro">Une galerie simple pour montrer les familles de produits : peignoirs, foutas, serviettes de plage, robes, tenues stylées et beauté.</p>
+    <div class="gallery-premium" data-gallery>
+      <div class="gallery-stage">
+        <div class="gallery-slides">
+          <figure class="gallery-slide active">
+            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png" alt="Peignoirs et linge de maison Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
+            <figcaption><strong>Peignoirs &amp; linge de maison</strong></figcaption>
+          </figure>
+          <figure class="gallery-slide">
+            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt="Foutas pour transats Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
+            <figcaption><strong>Foutas pour transats</strong></figcaption>
+          </figure>
+          <figure class="gallery-slide">
+            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png" alt="Serviettes de plage Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
+            <figcaption><strong>Serviettes de plage</strong></figcaption>
+          </figure>
+          <figure class="gallery-slide">
+            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt="Robes et tenues stylées Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
+            <figcaption><strong>Robes &amp; tenues stylées</strong></figcaption>
+          </figure>
+          <figure class="gallery-slide">
+            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png" alt="Crèmes de beauté Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
+            <figcaption><strong>Crèmes de beauté</strong></figcaption>
+          </figure>
+        </div>
+        <button class="gallery-arrow prev" type="button" data-prev aria-label="Photo précédente">‹</button>
+        <button class="gallery-arrow next" type="button" data-next aria-label="Photo suivante">›</button>
+        <div class="gallery-counter" data-counter>1 / 5</div>
+      </div>
+      <div class="gallery-thumbs" aria-label="Miniatures galerie">
+        <button class="gallery-thumb active" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png" alt=""></button>
+        <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt=""></button>
+        <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png" alt=""></button>
+        <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt=""></button>
+        <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png" alt=""></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMANDE -->
+  <section id="demande" class="section">
+    <div class="section-divider"></div>
+    <h2>Commander / contacter</h2>
+    <div class="info">
+      <div class="box form">
+        <label for="clientName">Nom</label>
+        <input id="clientName" autocomplete="name" placeholder="Votre nom">
+        <label for="clientPhone">Téléphone</label>
+        <input id="clientPhone" inputmode="tel" autocomplete="tel" placeholder="Votre WhatsApp">
+        <label for="clientMessage">Message</label>
+        <textarea id="clientMessage" placeholder="Exemple : Bonjour, je cherche des draps, serviettes ou foutas. Qu'avez-vous de disponible ?"></textarea>
+        <button id="sendRequest" type="button" class="form-btn">Envoyer la demande sur WhatsApp</button>
+      </div>
+      <div class="box">
+        <h3>Informations pratiques</h3>
+        <p><strong>WhatsApp :</strong> +221 77 876 57 85</p>
+        <p style="margin-top:10px"><strong>Horaires :</strong> à confirmer avec Astou</p>
+        <p style="margin-top:10px"><strong>Repère :</strong> Astou Boutique · référencée sur Google Maps</p>
+        <p style="margin-top:10px"><strong>Réseaux :</strong> TikTok · nouveautés, produits et inspirations</p>
+        <p class="notice">Le client doit comprendre vite quoi faire : écrire, demander les produits disponibles, préparer sa visite ou passer par la galerie.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT DÉTAILLÉ -->
+  <section id="contact" class="section">
+    <div class="section-divider"></div>
+    <h2>Contact et besoins particuliers</h2>
+    <div class="grid two">
+      <div class="box">
+        <h3>Pour particuliers</h3>
+        <ul>
+          <li>Linge de maison</li>
+          <li>Serviettes et draps</li>
+          <li>Peignoirs et couvertures</li>
+          <li>Robes, tenues stylées et beauté</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Pour pros du séjour</h3>
+        <ul>
+          <li>Serviettes hôtel</li>
+          <li>Foutas pour transats</li>
+          <li>Textile plage et piscine</li>
+          <li>Équipement villas, locations et maisons d'hôtes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKET -->
+  <section id="market" class="section">
+    <div class="section-divider"></div>
+    <h2>Présence DIGIY MARKET</h2>
+    <div class="box">
+      <h3>Une vitrine partenaire reliée au terrain</h3>
+      <p>Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible : le client découvre la boutique dans la galerie, puis arrive sur cette page pour comprendre, voir les produits et contacter directement.</p>
+      <p class="notice">À brancher ensuite côté MARKET avec l'adresse publique de la vitrine Astou Boutique.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">Astou Boutique</div>
+    <p>Chaque partenaire est une facette. DIGIY lui donne la lumière.</p>
+    <p style="margin-top:6px;font-size:12px;opacity:.6">Page générée et recousue pour Astou Boutique · BY DIGIYLYFE</p>
+  </footer>
+</main>
+
+<!-- FLOATING WA -->
+<a class="floating-wa" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique%2C%20je%20souhaite%20faire%20une%20demande." target="_blank" rel="noopener">💬 WhatsApp Astou</a>
+
+<!-- ══════════════════════════════════════════
+     PREMIUM AUDIO WIDGET
+══════════════════════════════════════════ -->
+<aside class="digiy-audio" id="digiyAudioWidget" aria-label="Lecteur audio DIGIY">
+  <div class="audio-inner">
+    <div class="audio-head">
+      <div class="audio-brand">
+        <div class="audio-dot off" id="audioDot"></div>
+        🎧 DIGIY AUDIO
+      </div>
+      <button class="audio-minimize" id="audioMinBtn" type="button" title="Réduire">−</button>
+    </div>
+    <div class="audio-expandable">
+      <div class="audio-tabs">
+        <button class="audio-tab active" id="tabAmbiance" type="button">🎵 Ambiance</button>
+        <button class="audio-tab" id="tabPresentation" type="button">🎙 Présentation</button>
+      </div>
+
+      <!-- EQ bars -->
+      <div class="eq-bars" id="eqBars">
+        <div class="eq-bar" style="--d:.31s;--h:18px"></div>
+        <div class="eq-bar" style="--d:.41s;--h:22px"></div>
+        <div class="eq-bar" style="--d:.27s;--h:14px"></div>
+        <div class="eq-bar" style="--d:.35s;--h:20px"></div>
+        <div class="eq-bar" style="--d:.45s;--h:16px"></div>
+        <div class="eq-bar" style="--d:.29s;--h:24px"></div>
+        <div class="eq-bar" style="--d:.38s;--h:12px"></div>
+        <div class="eq-bar" style="--d:.33s;--h:18px"></div>
+      </div>
+
+      <!-- AMBIANCE panel -->
+      <div id="panelAmbiance">
+        <div class="audio-track">
+          <strong>Ambiance boutique</strong><br>
+          Son d'ambiance génératif · chaleureux &amp; élégant
+        </div>
+        <div class="audio-controls">
+          <button class="ac-btn primary" id="ambPlay" type="button">▶ Écouter</button>
+          <button class="ac-btn" id="ambStop" type="button">■ Stop</button>
+        </div>
+        <div class="vol-row">
+          <span>🔈</span>
+          <input type="range" class="vol-slider" id="volSlider" min="0" max="100" value="60" style="--pct:60">
+          <span>🔊</span>
+        </div>
+      </div>
+
+      <!-- PRÉSENTATION panel -->
+      <div id="panelPresentation" style="display:none">
+        <div class="audio-track">
+          <strong>Présentation vocale</strong><br>
+          Écouter la vitrine avant de contacter la boutique
+        </div>
+        <div class="audio-controls">
+          <button class="ac-btn primary" id="digiyAudioPlay" type="button">▶ Écouter</button>
+          <button class="ac-btn" id="digiyAudioStop" type="button">■ Stop</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+
+  /* ── SCROLL PROGRESS ── */
+  var prog = document.getElementById('prog');
+  function updateProgress(){
+    var s = document.documentElement;
+    var pct = (s.scrollTop || document.body.scrollTop) / (s.scrollHeight - s.clientHeight) * 100;
+    prog.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, {passive:true});
+
+  /* ── SECTION REVEAL ── */
+  var sections = document.querySelectorAll('.section');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, {threshold:.08});
+  sections.forEach(function(s){ if(!s.classList.contains('visible')) observer.observe(s); });
+
+  /* ── GALLERY ── */
+  function initGallery(gallery){
+    var slides=[].slice.call(gallery.querySelectorAll('.gallery-slide'));
+    var thumbs=[].slice.call(gallery.querySelectorAll('.gallery-thumb'));
+    var prev=gallery.querySelector('[data-prev]');
+    var next=gallery.querySelector('[data-next]');
+    var counter=gallery.querySelector('[data-counter]');
+    if(!slides.length) return;
+    var index=slides.findIndex(function(s){return s.classList.contains('active');});
+    if(index<0) index=0;
+    function show(i){
+      index=(i+slides.length)%slides.length;
+      slides.forEach(function(sl,idx){sl.classList.toggle('active',idx===index);});
+      thumbs.forEach(function(th,idx){th.classList.toggle('active',idx===index);});
+      if(counter) counter.textContent=(index+1)+' / '+slides.length;
+    }
+    if(prev) prev.addEventListener('click',function(){show(index-1);});
+    if(next) next.addEventListener('click',function(){show(index+1);});
+    thumbs.forEach(function(th,idx){th.addEventListener('click',function(){show(idx);});});
+    gallery.addEventListener('keydown',function(e){
+      if(e.key==='ArrowLeft') show(index-1);
+      if(e.key==='ArrowRight') show(index+1);
+    });
+    show(index);
+  }
+  document.querySelectorAll('[data-gallery]').forEach(initGallery);
+
+  /* ── WA FORM ── */
+  var phone='221778765785';
+  var project='Astou Boutique';
+  var send=document.getElementById('sendRequest');
+  if(send){
+    send.addEventListener('click',function(){
+      var nom=(document.getElementById('clientName').value||'').trim();
+      var tel=(document.getElementById('clientPhone').value||'').trim();
+      var msg=(document.getElementById('clientMessage').value||'').trim();
+      var text='Bonjour, je souhaite faire une demande pour '+project+'.';
+      if(nom) text+=' Nom : '+nom+'.';
+      if(tel) text+=' Téléphone : '+tel+'.';
+      if(msg) text+=' Message : '+msg;
+      window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(text),'_blank','noopener');
+    });
+  }
+
+  /* ══════════════════════════════════════════
+     AMBIENT MUSIC ENGINE (Web Audio API)
+  ══════════════════════════════════════════ */
+  var DigiAmbient = (function(){
+    var ctx=null, masterGain=null, oscNodes=[], timers=[], running=false;
+
+    function buildImpulse(dur, decay){
+      var sr=ctx.sampleRate;
+      var len=Math.floor(sr*dur);
+      var buf=ctx.createBuffer(2,len,sr);
+      for(var ch=0;ch<2;ch++){
+        var d=buf.getChannelData(ch);
+        for(var i=0;i<len;i++){
+          d[i]=(Math.random()*2-1)*Math.pow(1-i/len,decay);
+        }
+      }
+      return buf;
+    }
+
+    function ensureCtx(){
+      if(!ctx){
+        ctx=new(window.AudioContext||window.webkitAudioContext)();
+        masterGain=ctx.createGain();
+        masterGain.gain.value=0;
+        var comp=ctx.createDynamicsCompressor();
+        comp.threshold.value=-16; comp.knee.value=8; comp.ratio.value=4;
+        comp.attack.value=0.01; comp.release.value=0.25;
+        masterGain.connect(comp);
+        comp.connect(ctx.destination);
+      }
+      if(ctx.state==='suspended') ctx.resume();
+    }
+
+    function makeReverb(){
+      var conv=ctx.createConvolver();
+      conv.buffer=buildImpulse(5,2.5);
+      var g=ctx.createGain();
+      g.gain.value=0.48;
+      conv.connect(g);
+      g.connect(masterGain);
+      return conv;
+    }
+
+    function addPad(rev, freq, gainVal, detune, type){
+      type=type||'sine';
+      var osc=ctx.createOscillator();
+      var gn=ctx.createGain();
+      var flt=ctx.createBiquadFilter();
+      osc.type=type; osc.frequency.value=freq; osc.detune.value=detune||0;
+      gn.gain.value=gainVal;
+      flt.type='lowpass'; flt.frequency.value=1100; flt.Q.value=0.7;
+
+      /* Filter LFO */
+      var lfo=ctx.createOscillator();
+      var lfoG=ctx.createGain();
+      lfo.frequency.value=0.025+Math.random()*0.07;
+      lfoG.gain.value=380+Math.random()*280;
+      lfo.connect(lfoG); lfoG.connect(flt.frequency);
+
+      /* Amplitude LFO (slow shimmer) */
+      var aLfo=ctx.createOscillator();
+      var aLfoG=ctx.createGain();
+      aLfo.frequency.value=0.008+Math.random()*0.025;
+      aLfoG.gain.value=gainVal*0.28;
+      aLfo.connect(aLfoG); aLfoG.connect(gn.gain);
+
+      osc.connect(flt); flt.connect(gn);
+      gn.connect(masterGain); /* dry */
+      gn.connect(rev);        /* wet */
+
+      osc.start(); lfo.start(); aLfo.start();
+      oscNodes.push(osc,lfo,aLfo);
+    }
+
+    function scheduleChime(rev){
+      if(!running) return;
+      var t=ctx.currentTime;
+      /* A major pentatonic: A5 C#6 E6 A6 / A4 E5 */
+      var notes=[880,1108.73,1318.51,1760,659.26,440];
+      var freq=notes[Math.floor(Math.random()*notes.length)];
+      var osc=ctx.createOscillator();
+      var g=ctx.createGain();
+      osc.type='sine'; osc.frequency.value=freq;
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(0.045,t+0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+2.8);
+      osc.connect(g); g.connect(masterGain); g.connect(rev);
+      osc.start(t); osc.stop(t+3.2);
+      var delay=7000+Math.random()*14000;
+      timers.push(setTimeout(function(){scheduleChime(rev);},delay));
+    }
+
+    function play(vol){
+      ensureCtx();
+      running=true;
+      var rev=makeReverb();
+      /* Sub bass A1 */
+      addPad(rev,55,0.12,0,'sine');
+      /* A2 root */
+      addPad(rev,110,0.09,0,'sine');
+      addPad(rev,110,0.04,9,'triangle');
+      /* E3 fifth */
+      addPad(rev,165,0.065,-5,'sine');
+      /* A3 octave */
+      addPad(rev,220,0.07,4,'sine');
+      /* C#4 third */
+      addPad(rev,277.18,0.05,-7,'sine');
+      /* E4 fifth */
+      addPad(rev,329.63,0.048,6,'sine');
+      /* A4 shimmer */
+      addPad(rev,440,0.025,-3,'sine');
+
+      var targetVol=(vol!==undefined?vol:0.6)*0.9;
+      masterGain.gain.setValueAtTime(0,ctx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(targetVol,ctx.currentTime+4.5);
+
+      timers.push(setTimeout(function(){scheduleChime(rev);},6000));
+    }
+
+    function stop(){
+      if(!ctx) return;
+      running=false;
+      timers.forEach(function(t){clearTimeout(t);}); timers=[];
+      var now=ctx.currentTime;
+      masterGain.gain.setValueAtTime(masterGain.gain.value,now);
+      masterGain.gain.linearRampToValueAtTime(0,now+2.5);
+      setTimeout(function(){
+        oscNodes.forEach(function(n){try{n.stop();}catch(e){}});
+        oscNodes=[];
+      },2700);
+    }
+
+    function setVolume(v){
+      if(!ctx||!masterGain) return;
+      masterGain.gain.linearRampToValueAtTime(v*0.9,ctx.currentTime+0.5);
+    }
+
+    function isRunning(){return running;}
+
+    return {play:play, stop:stop, setVolume:setVolume, isRunning:isRunning};
+  })();
+
+  /* ── AUDIO WIDGET UI ── */
+  var dot=document.getElementById('audioDot');
+  var eqBars=document.getElementById('eqBars').querySelectorAll('.eq-bar');
+  var ambPlayBtn=document.getElementById('ambPlay');
+  var ambStopBtn=document.getElementById('ambStop');
+  var volSlider=document.getElementById('volSlider');
+  var minBtn=document.getElementById('audioMinBtn');
+  var widget=document.getElementById('digiyAudioWidget');
+  var tabAmb=document.getElementById('tabAmbiance');
+  var tabPres=document.getElementById('tabPresentation');
+  var panelAmb=document.getElementById('panelAmbiance');
+  var panelPres=document.getElementById('panelPresentation');
+
+  function setEQActive(on){
+    eqBars.forEach(function(b){
+      if(on){ b.classList.add('anim'); }
+      else { b.classList.remove('anim'); b.style.height='4px'; }
+    });
+  }
+
+  function setDot(on){
+    if(on){ dot.classList.remove('off'); }
+    else { dot.classList.add('off'); }
+  }
+
+  ambPlayBtn.addEventListener('click',function(){
+    if(DigiAmbient.isRunning()){
+      DigiAmbient.stop();
+      ambPlayBtn.textContent='▶ Écouter';
+      setEQActive(false); setDot(false);
+    } else {
+      var vol=parseInt(volSlider.value)/100;
+      DigiAmbient.play(vol);
+      ambPlayBtn.textContent='⏹ En cours';
+      setEQActive(true); setDot(true);
+    }
+  });
+
+  ambStopBtn.addEventListener('click',function(){
+    DigiAmbient.stop();
+    ambPlayBtn.textContent='▶ Écouter';
+    setEQActive(false); setDot(false);
+  });
+
+  volSlider.addEventListener('input',function(){
+    var v=parseInt(this.value)/100;
+    this.style.setProperty('--pct',this.value);
+    DigiAmbient.setVolume(v);
+  });
+
+  /* TABS */
+  tabAmb.addEventListener('click',function(){
+    tabAmb.classList.add('active'); tabPres.classList.remove('active');
+    panelAmb.style.display=''; panelPres.style.display='none';
+  });
+  tabPres.addEventListener('click',function(){
+    tabPres.classList.add('active'); tabAmb.classList.remove('active');
+    panelPres.style.display=''; panelAmb.style.display='none';
+  });
+
+  /* MINIMIZE */
+  var minimized=false;
+  minBtn.addEventListener('click',function(){
+    minimized=!minimized;
+    widget.classList.toggle('minimized',minimized);
+    minBtn.textContent=minimized?'+':'−';
+  });
+
+  /* ── SPEECH SYNTHESIS (Présentation) ── */
+  var audioText=[
+    'Bienvenue chez Astou Boutique, à Saly.',
+    'Ici, on retrouve du linge de maison, des serviettes, des draps, des couvertures, des peignoirs, des serviettes pour hôtels, des foutas pour transats et des serviettes de plage.',
+    'La boutique propose aussi des robes, des tenues stylées, de la confection et des crèmes de beauté.',
+    'Astou Boutique s\'adresse aux familles, aux clientes locales, aux touristes, aux hôtels, aux villas, aux maisons d\'hôtes et aux locations courte durée.',
+    'Vous pouvez regarder la galerie, préparer votre demande, puis contacter directement la boutique sur WhatsApp.',
+    'DIGIYLYFE donne la lumière au commerce du terrain. Le client voit, comprend et contacte directement.'
+  ].join(' ');
+
+  var playBtn=document.getElementById('digiyAudioPlay');
+  var stopBtn=document.getElementById('digiyAudioStop');
+
+  function pickFrVoice(){
+    var vv=window.speechSynthesis?window.speechSynthesis.getVoices():[];
+    return vv.find(function(v){return (v.lang||'').toLowerCase().indexOf('fr')===0;})||vv[0]||null;
+  }
+  function resetSpeech(){if(playBtn)playBtn.textContent='▶ Écouter';}
+  function startSpeech(){
+    if(!('speechSynthesis' in window)){alert('Lecteur non disponible.');return;}
+    if(window.speechSynthesis.speaking&&window.speechSynthesis.paused){
+      window.speechSynthesis.resume();
+      playBtn.textContent='⏸ Pause';
+      setEQActive(true); setDot(true);
+      return;
+    }
+    if(window.speechSynthesis.speaking){
+      window.speechSynthesis.pause();
+      playBtn.textContent='▶ Reprendre';
+      setEQActive(false);
+      return;
+    }
+    window.speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(audioText);
+    u.lang='fr-FR'; u.rate=.86; u.pitch=1.04;
+    u.voice=pickFrVoice();
+    u.onend=function(){ resetSpeech(); setEQActive(false); setDot(false); };
+    u.onerror=function(){ resetSpeech(); setEQActive(false); setDot(false); };
+    window.speechSynthesis.speak(u);
+    playBtn.textContent='⏸ Pause';
+    setEQActive(true); setDot(true);
+  }
+  if(playBtn) playBtn.addEventListener('click',startSpeech);
+  if(stopBtn) stopBtn.addEventListener('click',function(){
+    if('speechSynthesis' in window) window.speechSynthesis.cancel();
+    resetSpeech(); setEQActive(false); setDot(false);
+  });
+  if('speechSynthesis' in window){
+    window.speechSynthesis.onvoiceschanged=function(){pickFrVoice();};
+    window.addEventListener('beforeunload',function(){window.speechSynthesis.cancel();});
+  }
+
+})();
+</script>
+</body>
+</html>
