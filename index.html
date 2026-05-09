@@ -1,1213 +1,984 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Astou Boutique · Maison, plage & élégance</title>
-  <meta name="description" content="Astou Boutique à Saly : linge de maison, serviettes, draps, peignoirs, foutas, plage, robes, tenues stylées, confection et crèmes de beauté. Contact WhatsApp direct." />
+  <meta name="description" content="Astou Boutique à Saly : linge de maison, serviettes, draps, peignoirs, foutas, plage, robes, tenues stylées, confection et crèmes de beauté."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ── VARIABLES ── */
     :root{
       --bg:#060f0c;
-      --bg2:#030b08;
-      --card:rgba(18,44,34,.72);
+      --card:rgba(16,38,28,.82);
       --ink:#f5f0e8;
-      --muted:#b8cfc5;
-      --soft:#e7f2eb;
-      --line:rgba(255,255,255,.12);
-      --line2:rgba(245,199,107,.22);
+      --muted:#b0c8bc;
+      --line:rgba(255,255,255,.10);
+      --line-gold:rgba(245,199,107,.26);
       --gold:#f5c76b;
       --gold2:#ffe8a8;
-      --gold3:rgba(245,199,107,.15);
       --green:#16c784;
-      --deep:#03100d;
-      --red:#c7432f;
-      --shadow:0 32px 80px rgba(0,0,0,.48);
-      --font-head:'Cormorant Garamond',Georgia,serif;
-      --font-body:'DM Sans',system-ui,sans-serif;
-      --radius:28px;
-      --radius-sm:16px;
+      --deep:#030d09;
+      --shadow:0 28px 70px rgba(0,0,0,.52);
+      --topH:58px;
+      --playerH:80px;
+      --slideH:calc(100dvh - var(--topH) - var(--playerH));
+      --font-h:'Cormorant Garamond',Georgia,serif;
+      --font-b:'DM Sans',system-ui,sans-serif;
+      --r:26px;
     }
-
-    /* ── RESET ── */
     *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(245,199,107,.4) rgba(0,0,0,.2)}
-    ::-webkit-scrollbar{width:5px}
-    ::-webkit-scrollbar-track{background:rgba(0,0,0,.2)}
-    ::-webkit-scrollbar-thumb{background:rgba(245,199,107,.4);border-radius:999px}
+    html{overflow:hidden}
     body{
-      font-family:var(--font-body);
+      font-family:var(--font-b);
       color:var(--ink);
       background:var(--bg);
-      overflow-x:hidden;
+      height:100dvh;
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
     }
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
-    strong{font-weight:700}
 
-    /* ── AURORA BACKGROUND ── */
-    #aurora{
-      position:fixed;
-      inset:0;
-      z-index:0;
-      pointer-events:none;
-      overflow:hidden;
-    }
-    .aurora-blob{
-      position:absolute;
-      border-radius:50%;
-      filter:blur(80px);
-      opacity:.18;
-      animation:auroraFloat linear infinite;
-    }
-    .aurora-blob:nth-child(1){width:700px;height:700px;background:radial-gradient(circle,rgba(22,199,132,.8),transparent 70%);top:-20%;left:-15%;animation-duration:28s}
-    .aurora-blob:nth-child(2){width:500px;height:500px;background:radial-gradient(circle,rgba(245,199,107,.7),transparent 70%);top:30%;right:-10%;animation-duration:34s;animation-delay:-12s}
-    .aurora-blob:nth-child(3){width:600px;height:600px;background:radial-gradient(circle,rgba(22,199,132,.5),transparent 70%);bottom:-15%;left:30%;animation-duration:22s;animation-delay:-7s}
-    .aurora-blob:nth-child(4){width:350px;height:350px;background:radial-gradient(circle,rgba(245,199,107,.6),transparent 70%);top:55%;left:5%;animation-duration:40s;animation-delay:-20s}
-    @keyframes auroraFloat{
+    /* ── AURORA ── */
+    #aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .ab{position:absolute;border-radius:50%;filter:blur(90px);opacity:.15;animation:af linear infinite}
+    .ab:nth-child(1){width:700px;height:700px;background:radial-gradient(circle,rgba(22,199,132,.9),transparent 65%);top:-20%;left:-15%;animation-duration:30s}
+    .ab:nth-child(2){width:550px;height:550px;background:radial-gradient(circle,rgba(245,199,107,.8),transparent 65%);top:25%;right:-12%;animation-duration:38s;animation-delay:-14s}
+    .ab:nth-child(3){width:600px;height:600px;background:radial-gradient(circle,rgba(22,199,132,.5),transparent 65%);bottom:-15%;left:28%;animation-duration:25s;animation-delay:-9s}
+    @keyframes af{
       0%{transform:translate(0,0) scale(1)}
-      25%{transform:translate(40px,-30px) scale(1.08)}
-      50%{transform:translate(-20px,50px) scale(.94)}
-      75%{transform:translate(60px,20px) scale(1.05)}
+      33%{transform:translate(35px,-25px) scale(1.06)}
+      66%{transform:translate(-18px,42px) scale(.95)}
       100%{transform:translate(0,0) scale(1)}
     }
-
-    /* ── GRAIN OVERLAY ── */
     body::before{
-      content:'';
-      position:fixed;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity:.022;
-      background-size:200px 200px;
+      content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity:.02;background-size:180px 180px;
     }
-
-    /* ── SCROLL PROGRESS ── */
-    #prog{
-      position:fixed;
-      top:0;left:0;
-      width:0%;
-      height:2px;
-      background:linear-gradient(90deg,var(--green),var(--gold));
-      z-index:1000;
-      transition:width .1s linear;
-      box-shadow:0 0 10px rgba(245,199,107,.5);
-    }
-
-    /* ── LAYOUT ── */
-    .wrap{position:relative;z-index:2;width:min(1140px,100%);margin:0 auto;padding:24px}
 
     /* ── TOPBAR ── */
     .topbar{
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-      padding:12px 0 22px;
-      border-bottom:1px solid var(--line);
-      margin-bottom:4px;
+      position:relative;z-index:10;
+      height:var(--topH);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 28px;
+      background:rgba(4,12,8,.88);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line-gold);
+      flex-shrink:0;
     }
     .brandmark{
-      font-family:var(--font-head);
-      font-weight:700;
-      font-size:15px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
+      font-family:var(--font-h);
+      font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;
       color:var(--gold2);
+      display:flex;align-items:center;gap:10px;
     }
-    .brandmark span{color:var(--muted);font-weight:300;font-size:12px;letter-spacing:.08em}
-    .pill{
+    .brand-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+    .slide-dots{display:flex;align-items:center;gap:6px}
+    .sdot{
+      width:6px;height:6px;border-radius:50%;
+      background:rgba(255,255,255,.2);
+      border:none;cursor:pointer;
+      transition:all .25s;
+    }
+    .sdot.active{width:20px;border-radius:3px;background:var(--gold)}
+    .sdot:hover:not(.active){background:rgba(245,199,107,.4)}
+    .slide-counter{
+      font-size:12px;font-weight:600;letter-spacing:.12em;
+      color:var(--muted);
+    }
+    .topbar-right{display:flex;align-items:center;gap:16px}
+    .wa-pill{
       display:inline-flex;align-items:center;gap:7px;
-      border:1px solid var(--line2);
-      border-radius:999px;padding:9px 14px;
-      background:rgba(245,199,107,.07);
-      font-size:13px;font-weight:500;
+      border:1px solid var(--line-gold);border-radius:999px;
+      padding:8px 14px;font-size:13px;font-weight:600;
+      background:rgba(22,199,132,.1);color:var(--green);
       transition:background .2s;
     }
-    .pill:hover{background:rgba(245,199,107,.13)}
+    .wa-pill:hover{background:rgba(22,199,132,.2)}
 
-    /* ── HERO ── */
-    .hero{min-height:86vh;display:grid;align-items:center;padding:18px 0 40px}
-    .hero-inner{
-      background:linear-gradient(160deg,rgba(22,44,34,.9),rgba(6,15,12,.8));
-      border:1px solid var(--line2);
-      border-radius:var(--radius);
-      padding:40px 42px;
-      box-shadow:var(--shadow),0 0 0 1px rgba(245,199,107,.06) inset;
-      backdrop-filter:blur(14px);
-      position:relative;
+    /* ── SLIDESHOW ── */
+    .slideshow{
+      position:relative;z-index:2;
+      height:var(--slideH);
       overflow:hidden;
+      flex-shrink:0;
     }
-    .hero-inner::before{
-      content:'';
-      position:absolute;top:0;left:0;right:0;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(245,199,107,.4),transparent);
+    .slide{
+      position:absolute;inset:0;
+      opacity:0;pointer-events:none;
+      transition:opacity .5s ease, transform .5s ease;
+      transform:translateX(30px);
+      overflow-y:auto;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(245,199,107,.3) transparent;
     }
-    .kicker{
+    .slide::-webkit-scrollbar{width:4px}
+    .slide::-webkit-scrollbar-thumb{background:rgba(245,199,107,.3);border-radius:2px}
+    .slide.active{opacity:1;pointer-events:auto;z-index:1;transform:translateX(0)}
+    .slide.exit-left{opacity:0;transform:translateX(-30px)}
+    .slide-inner{
+      max-width:1100px;margin:0 auto;
+      padding:32px 32px;
+      min-height:100%;
+    }
+
+    /* ── SLIDE NAV ARROWS ── */
+    .snav{
+      position:absolute;top:50%;transform:translateY(-50%);
+      z-index:5;
+      width:46px;height:46px;border-radius:50%;
+      border:1px solid var(--line-gold);
+      background:rgba(4,14,10,.72);
+      backdrop-filter:blur(8px);
+      color:var(--gold2);font-size:22px;
+      cursor:pointer;
+      transition:all .22s;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .snav:hover{background:rgba(245,199,107,.18);border-color:rgba(245,199,107,.5)}
+    .snav.prev{left:14px}
+    .snav.next{right:14px}
+    .snav:disabled{opacity:.2;cursor:default}
+
+    /* ── SLIDE CONTENT HELPERS ── */
+    .s-kicker{
       display:inline-flex;align-items:center;gap:8px;
-      font-family:var(--font-body);
-      font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+      font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
       color:var(--gold);
-      border:1px solid var(--line2);
-      border-radius:999px;
-      padding:7px 14px;
+      border:1px solid var(--line-gold);border-radius:999px;
+      padding:6px 14px;background:rgba(245,199,107,.07);
+      margin-bottom:18px;
+    }
+    .s-kicker::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 7px var(--green)}
+    .s-title{
+      font-family:var(--font-h);
+      font-size:clamp(52px,8vw,100px);
+      line-height:.88;letter-spacing:-.04em;font-weight:600;
+      background:linear-gradient(135deg,#fff5dc,var(--gold2),#b8f0d8);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      margin-bottom:8px;
+    }
+    .s-subtitle{
+      font-family:var(--font-h);
+      font-size:clamp(22px,3.5vw,38px);
+      font-style:italic;font-weight:400;
+      color:rgba(255,247,220,.65);
+      margin-bottom:18px;
+    }
+    .s-lead{
+      font-size:16px;line-height:1.72;color:var(--muted);
+      max-width:820px;margin-bottom:10px;font-weight:300;
+    }
+    .s-h2{
+      font-family:var(--font-h);
+      font-size:clamp(34px,5vw,54px);line-height:.92;
+      letter-spacing:-.03em;font-weight:600;
+      color:var(--gold2);margin-bottom:16px;
+    }
+    .s-intro{
+      font-size:15px;line-height:1.68;color:var(--muted);
+      max-width:820px;margin-bottom:24px;font-weight:300;
+    }
+
+    /* ── GRID ── */
+    .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .g2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .g1{display:grid;gap:14px}
+
+    /* ── BOX ── */
+    .box{
+      background:linear-gradient(160deg,rgba(20,42,32,.8),rgba(6,15,12,.7));
+      border:1px solid var(--line);border-radius:var(--r);
+      padding:24px 26px;
+      backdrop-filter:blur(10px);
+      transition:border-color .3s,box-shadow .3s;
+    }
+    .box:hover{border-color:rgba(245,199,107,.3);box-shadow:0 16px 50px rgba(0,0,0,.4)}
+    .box h3{
+      font-family:var(--font-h);font-size:22px;font-weight:600;
+      color:var(--gold2);margin-bottom:10px;
+    }
+    .box p,.box li{color:var(--muted);line-height:1.65;font-weight:300;font-size:14px}
+    .box ul{margin:10px 0 0;padding-left:18px}
+    .box ul li{margin-bottom:6px}
+    .notice{
+      margin-top:14px;padding-top:14px;
+      border-top:1px solid rgba(245,199,107,.2);
+      color:rgba(245,220,120,.9)!important;font-size:13px;line-height:1.6;
+    }
+
+    /* ── TAGS ── */
+    .taglist{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .tag{
+      border:1px solid var(--line-gold);
       background:rgba(245,199,107,.07);
-      margin-bottom:20px;
+      color:var(--gold2);border-radius:999px;
+      padding:7px 12px;font-size:12px;font-weight:500;
+      transition:all .2s;
     }
-    .kicker::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
-    .title{
-      font-family:var(--font-head);
-      font-size:clamp(56px,9vw,110px);
-      line-height:.88;
-      letter-spacing:-.04em;
-      font-weight:600;
-      margin:0 0 6px;
-      background:linear-gradient(135deg,#fff5dc,var(--gold2),#c8f0dc);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
+    .tag:hover{background:rgba(245,199,107,.16)}
+
+    /* ── CTA BUTTONS ── */
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    .btn{
+      display:inline-flex;align-items:center;gap:7px;
+      border:1px solid var(--line);border-radius:999px;
+      padding:12px 18px;font-size:13px;font-weight:600;
+      cursor:pointer;transition:all .22s;
     }
-    .subtitle{
-      font-family:var(--font-head);
-      font-size:clamp(24px,4vw,44px);
-      line-height:1.05;
-      font-style:italic;
-      font-weight:400;
-      color:rgba(255,247,220,.7);
-      margin:0 0 20px;
+    .btn.green{
+      background:linear-gradient(135deg,var(--green),#10a86d);
+      border-color:rgba(22,199,132,.7);color:#06231a;
+      box-shadow:0 6px 24px rgba(22,199,132,.24);
     }
-    .lead{
-      font-size:17px;line-height:1.72;
-      color:var(--muted);
-      max-width:900px;
-      margin-bottom:12px;
-      font-weight:300;
+    .btn.green:hover{box-shadow:0 10px 34px rgba(22,199,132,.4);transform:translateY(-1px)}
+    .btn.gold{
+      background:linear-gradient(135deg,var(--gold),#e8b44a);
+      border-color:rgba(245,199,107,.7);color:#0f2218;
+      box-shadow:0 6px 24px rgba(245,199,107,.22);
     }
-    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:stretch;margin-top:28px}
+    .btn.gold:hover{box-shadow:0 10px 34px rgba(245,199,107,.38);transform:translateY(-1px)}
+    .btn.ghost{background:rgba(255,255,255,.05);color:var(--gold2)}
+    .btn.ghost:hover{background:rgba(245,199,107,.1)}
+
+    /* ── HERO GRID ── */
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:24px}
     .hero-photo{
-      min-height:440px;border-radius:22px;overflow:hidden;
-      border:1px solid var(--line2);
-      position:relative;
-      box-shadow:0 32px 64px rgba(0,0,0,.5);
+      min-height:240px;border-radius:20px;overflow:hidden;
+      border:1px solid var(--line-gold);position:relative;
     }
     .hero-photo img{width:100%;height:100%;object-fit:cover}
     .hero-photo::after{
       content:'';position:absolute;inset:0;
-      background:linear-gradient(180deg,transparent 40%,rgba(3,12,9,.8));
+      background:linear-gradient(180deg,transparent 40%,rgba(3,10,7,.75));
     }
-    .photo-caption{
-      position:absolute;left:16px;right:16px;bottom:16px;z-index:1;
-      padding:12px 16px;border-radius:14px;
-      background:rgba(3,14,10,.6);
-      backdrop-filter:blur(8px);
-      font-family:var(--font-head);
-      font-size:15px;font-weight:600;
-      color:var(--gold2);
+    .hero-photo-cap{
+      position:absolute;left:14px;right:14px;bottom:14px;z-index:1;
+      padding:10px 14px;border-radius:12px;
+      background:rgba(3,10,7,.65);backdrop-filter:blur(8px);
       border:1px solid rgba(245,199,107,.2);
+      font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--gold2);
     }
-
-    /* ── NAV ── */
-    .nav{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 4px}
-    .nav a{
-      border:1px solid var(--line);border-radius:999px;
-      padding:9px 14px;font-size:13px;font-weight:500;
-      background:rgba(255,255,255,.04);
-      transition:all .2s;
-      color:var(--muted);
-    }
-    .nav a:hover{background:rgba(245,199,107,.1);border-color:var(--line2);color:var(--gold2)}
-
-    /* ── BUTTONS ── */
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      border:1px solid var(--line);
-      border-radius:999px;padding:13px 18px;
-      font-family:var(--font-body);font-weight:600;font-size:14px;
-      min-height:48px;cursor:pointer;
-      transition:all .22s;
-      position:relative;overflow:hidden;
-    }
-    .btn::after{
-      content:'';position:absolute;inset:0;border-radius:inherit;
-      background:rgba(255,255,255,.08);
-      opacity:0;transition:opacity .2s;
-    }
-    .btn:hover::after{opacity:1}
-    .btn.gold{
-      background:linear-gradient(135deg,var(--gold),#e8b44a);
-      border-color:rgba(245,199,107,.8);
-      color:#0f2218;
-      box-shadow:0 8px 28px rgba(245,199,107,.28);
-    }
-    .btn.gold:hover{box-shadow:0 12px 38px rgba(245,199,107,.42);transform:translateY(-1px)}
-    .btn.green{
-      background:linear-gradient(135deg,var(--green),#10a86d);
-      border-color:rgba(22,199,132,.8);
-      color:#06231a;
-      box-shadow:0 8px 28px rgba(22,199,132,.22);
-    }
-    .btn.green:hover{box-shadow:0 12px 38px rgba(22,199,132,.36);transform:translateY(-1px)}
-    .btn.ghost{background:rgba(255,255,255,.055);color:var(--gold2)}
-    .btn.ghost:hover{background:rgba(245,199,107,.1)}
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-
-    /* ── SECTIONS ── */
-    .section{
-      padding:40px 0;
-      scroll-margin-top:16px;
-      opacity:0;transform:translateY(28px);
-      transition:opacity .6s ease,transform .6s ease;
-    }
-    .section.visible{opacity:1;transform:translateY(0)}
-    .section h2{
-      font-family:var(--font-head);
-      font-size:clamp(32px,5vw,52px);
-      line-height:.95;letter-spacing:-.03em;
-      font-weight:600;
-      margin-bottom:16px;
-      color:var(--gold2);
-    }
-    .section-intro{
-      color:var(--muted);font-size:16px;line-height:1.68;
-      max-width:840px;margin:0 0 22px;font-weight:300;
-    }
-    .section-divider{
-      height:1px;
-      background:linear-gradient(90deg,transparent,var(--line2),transparent);
-      margin:8px 0 32px;
-    }
-
-    /* ── CARDS / BOXES ── */
-    .card,.box{
-      background:linear-gradient(160deg,rgba(22,44,34,.75),rgba(6,15,12,.65));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      backdrop-filter:blur(12px);
-      box-shadow:var(--shadow);
-      transition:border-color .3s,box-shadow .3s;
-    }
-    .card{padding:36px 40px}
-    .box{padding:26px 28px}
-    .box:hover{border-color:rgba(245,199,107,.28);box-shadow:0 24px 60px rgba(0,0,0,.4),0 0 0 1px rgba(245,199,107,.08) inset}
-    .box h3{
-      font-family:var(--font-head);
-      font-size:22px;font-weight:600;
-      color:var(--gold2);margin-bottom:10px;
-    }
-    .box p,.box li{color:var(--muted);line-height:1.65;font-weight:300;font-size:15px}
-    .box ul{margin:10px 0 0;padding-left:20px}
-    .box ul li{margin-bottom:6px}
-
-    /* ── GRID ── */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}
-    .grid.two{grid-template-columns:repeat(2,1fr)}
-    .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
-
-    /* ── TAGS ── */
-    .taglist{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
-    .tag{
-      border:1px solid rgba(245,199,107,.3);
-      background:rgba(245,199,107,.07);
-      color:var(--gold2);
-      border-radius:999px;padding:8px 12px;
-      font-size:12px;font-weight:500;letter-spacing:.05em;
-      transition:all .2s;
-    }
-    .tag:hover{background:rgba(245,199,107,.15);transform:translateY(-1px)}
 
     /* ── GALLERY ── */
-    .gallery-premium{display:grid;gap:16px;margin:20px 0 30px}
     .gallery-stage{
-      position:relative;
-      border:1px solid var(--line2);border-radius:var(--radius);
-      overflow:hidden;
-      background:rgba(6,15,12,.9);
-      box-shadow:0 32px 90px rgba(0,0,0,.4);
+      border:1px solid var(--line-gold);border-radius:var(--r);
+      overflow:hidden;position:relative;
+      background:rgba(4,12,8,.9);
+      box-shadow:0 28px 80px rgba(0,0,0,.45);
     }
-    .gallery-slides{position:relative;min-height:440px;touch-action:pan-y}
-    .gallery-slide{display:none;position:relative;margin:0}
+    .gallery-slides{position:relative;min-height:280px;touch-action:pan-y}
+    .gallery-slide{display:none;position:relative}
     .gallery-slide.active{display:block}
-    .gallery-slide img{width:100%;height:clamp(440px,58vw,700px);object-fit:cover}
+    .gallery-slide img{width:100%;height:clamp(260px,40vh,420px);object-fit:cover}
     .gallery-slide figcaption{
-      position:absolute;left:18px;right:18px;bottom:18px;
-      padding:13px 16px;border-radius:16px;
-      background:rgba(5,14,10,.72);backdrop-filter:blur(8px);
+      position:absolute;left:14px;right:14px;bottom:14px;
+      padding:10px 14px;border-radius:12px;
+      background:rgba(3,10,7,.72);backdrop-filter:blur(8px);
       border:1px solid rgba(245,199,107,.18);
-      font-family:var(--font-head);font-size:17px;font-weight:600;color:var(--gold2);
+      font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--gold2);
     }
     .gallery-arrow{
       position:absolute;top:50%;transform:translateY(-50%);
-      width:50px;height:50px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.22);
-      background:rgba(4,14,10,.62);backdrop-filter:blur(8px);
-      color:var(--gold2);font-size:28px;z-index:2;cursor:pointer;
-      transition:all .2s;
+      width:40px;height:40px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.2);
+      background:rgba(4,12,8,.65);backdrop-filter:blur(6px);
+      color:var(--gold2);font-size:22px;z-index:2;cursor:pointer;
+      transition:all .2s;display:flex;align-items:center;justify-content:center;
     }
-    .gallery-arrow:hover{background:rgba(245,199,107,.18);border-color:var(--line2)}
-    .gallery-arrow.prev{left:16px}.gallery-arrow.next{right:16px}
+    .gallery-arrow:hover{background:rgba(245,199,107,.2)}
+    .gallery-arrow.prev{left:12px}.gallery-arrow.next{right:12px}
     .gallery-counter{
-      position:absolute;top:16px;right:16px;
-      padding:7px 14px;border-radius:999px;
-      background:rgba(4,14,10,.65);border:1px solid var(--line2);
-      color:var(--gold2);font-weight:600;font-size:12px;letter-spacing:.06em;z-index:2;
+      position:absolute;top:12px;right:12px;
+      padding:5px 11px;border-radius:999px;
+      background:rgba(4,12,8,.65);border:1px solid var(--line-gold);
+      color:var(--gold2);font-size:11px;font-weight:700;z-index:2;
     }
-    .gallery-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .gallery-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding:2px 2px 6px}
     .gallery-thumb{
       appearance:none;border:1px solid var(--line);padding:0;
-      border-radius:16px;overflow:hidden;
-      background:rgba(255,255,255,.03);min-height:84px;cursor:pointer;
-      transition:all .22s;
+      border-radius:12px;overflow:hidden;
+      min-width:72px;height:52px;cursor:pointer;flex-shrink:0;
+      transition:all .2s;
     }
-    .gallery-thumb:hover{border-color:rgba(245,199,107,.4)}
-    .gallery-thumb img{width:100%;height:88px;object-fit:cover}
+    .gallery-thumb img{width:100%;height:100%;object-fit:cover}
     .gallery-thumb.active{outline:2px solid rgba(245,199,107,.8);outline-offset:2px}
 
     /* ── FORM ── */
-    .info{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     .form label{
-      display:block;color:var(--gold2);
-      font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
-      margin-top:8px;margin-bottom:5px;
+      display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      color:var(--gold);margin-bottom:5px;
     }
     .form input,.form textarea{
-      width:100%;padding:13px 15px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.25);
-      color:var(--ink);margin-bottom:10px;font:inherit;font-size:14px;
+      width:100%;padding:11px 13px;border-radius:10px;
+      border:1px solid var(--line);background:rgba(0,0,0,.25);
+      color:var(--ink);font:inherit;font-size:13px;margin-bottom:12px;
       transition:border-color .2s;
     }
-    .form input:focus,.form textarea:focus{
-      outline:none;border-color:rgba(245,199,107,.4);
-      background:rgba(0,0,0,.32);
-    }
-    .form textarea{min-height:130px;resize:vertical}
+    .form input:focus,.form textarea:focus{outline:none;border-color:rgba(245,199,107,.4)}
+    .form textarea{min-height:100px;resize:vertical}
     .form-btn{
-      width:100%;padding:14px;border:0;border-radius:14px;
+      width:100%;padding:13px;border:none;border-radius:12px;
       background:linear-gradient(135deg,var(--green),#10a86d);
-      color:#06231a;font-family:var(--font-body);font-size:15px;font-weight:700;
-      cursor:pointer;letter-spacing:.03em;
-      box-shadow:0 8px 28px rgba(22,199,132,.24);
-      transition:all .22s;
+      color:#06231a;font-family:var(--font-b);font-size:14px;font-weight:700;
+      cursor:pointer;transition:all .22s;
+      box-shadow:0 6px 22px rgba(22,199,132,.24);
     }
-    .form-btn:hover{box-shadow:0 12px 40px rgba(22,199,132,.36);transform:translateY(-1px)}
-
-    .notice{
-      border-top:1px solid rgba(245,199,107,.2);margin-top:14px;padding-top:14px;
-      color:var(--gold2)!important;font-size:13px;line-height:1.6;
-    }
-
-    /* ── FOOTER ── */
-    footer{
-      position:relative;z-index:2;
-      padding:48px 0 32px;
-      color:var(--muted);font-size:13px;text-align:center;
-      border-top:1px solid var(--line);
-    }
-    footer .footer-brand{
-      font-family:var(--font-head);font-size:28px;font-weight:600;
-      color:var(--gold2);letter-spacing:.04em;
-      margin-bottom:10px;
-    }
-    footer p{line-height:1.7;font-weight:300;max-width:500px;margin:0 auto 6px}
-
-    /* ── FLOATING WA ── */
-    .floating-wa{
-      position:fixed;right:18px;bottom:18px;z-index:50;
-      background:linear-gradient(135deg,var(--green),#10a86d);
-      color:#06231a;border-radius:999px;padding:13px 18px;
-      font-weight:700;font-size:14px;
-      box-shadow:0 16px 44px rgba(22,199,132,.36);
-      transition:all .22s;
-      border:1px solid rgba(22,199,132,.5);
-    }
-    .floating-wa:hover{box-shadow:0 20px 56px rgba(22,199,132,.52);transform:translateY(-2px)}
+    .form-btn:hover{box-shadow:0 10px 34px rgba(22,199,132,.4);transform:translateY(-1px)}
 
     /* ══════════════════════════════════════════
-       PREMIUM AUDIO WIDGET
+       MUSIC PLAYER BAR
     ══════════════════════════════════════════ */
-    .digiy-audio{
-      position:fixed;
-      left:18px;bottom:18px;
-      z-index:49;
-      width:min(320px,calc(100vw - 36px));
-      border:1px solid rgba(245,199,107,.32);
-      border-radius:22px;
-      background:linear-gradient(160deg,rgba(14,36,26,.97),rgba(4,18,12,.97));
-      box-shadow:0 24px 64px rgba(0,0,0,.52),0 0 0 1px rgba(245,199,107,.06) inset;
-      backdrop-filter:blur(16px);
-      overflow:hidden;
+    .player{
+      position:relative;z-index:10;
+      height:var(--playerH);
+      background:rgba(4,12,8,.95);
+      backdrop-filter:blur(20px);
+      border-top:1px solid var(--line-gold);
+      display:flex;align-items:center;
+      padding:0 20px;gap:16px;
+      flex-shrink:0;
     }
-    .digiy-audio::before{
-      content:'';position:absolute;top:0;left:0;right:0;height:1px;
-      background:linear-gradient(90deg,transparent,rgba(245,199,107,.5),transparent);
-    }
-    .audio-inner{padding:14px 16px 16px}
-    .audio-head{
-      display:flex;align-items:center;justify-content:space-between;
-      margin-bottom:10px;
-    }
-    .audio-brand{
-      display:flex;align-items:center;gap:8px;
-      font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);
-    }
-    .audio-dot{
-      width:7px;height:7px;border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 8px var(--green);
-      animation:audioPulse 2s ease-in-out infinite;
-    }
-    .audio-dot.off{background:rgba(255,255,255,.2);box-shadow:none;animation:none}
-    @keyframes audioPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
-    .audio-minimize{
-      appearance:none;border:1px solid var(--line);border-radius:999px;
-      background:rgba(255,255,255,.05);color:var(--muted);
-      width:26px;height:26px;cursor:pointer;font-size:13px;
-      transition:all .2s;
-    }
-    .audio-minimize:hover{background:rgba(255,255,255,.1);color:var(--ink)}
-
-    /* Tabs */
-    .audio-tabs{display:flex;gap:6px;margin-bottom:12px}
-    .audio-tab{
-      flex:1;appearance:none;border:1px solid var(--line);border-radius:999px;
-      padding:7px 0;font-family:var(--font-body);font-size:11px;font-weight:600;
-      letter-spacing:.06em;text-transform:uppercase;cursor:pointer;
-      background:rgba(255,255,255,.04);color:var(--muted);
-      transition:all .2s;
-    }
-    .audio-tab.active{
-      background:rgba(245,199,107,.14);
-      border-color:rgba(245,199,107,.4);
-      color:var(--gold2);
-    }
-
-    /* Equalizer bars */
-    .eq-bars{display:flex;align-items:flex-end;gap:3px;height:24px;margin-bottom:12px}
-    .eq-bar{
-      flex:1;border-radius:2px;
-      background:linear-gradient(180deg,var(--gold2),var(--green));
-      height:4px;transition:height .1s ease;
-      opacity:.7;
-    }
-    .eq-bar.anim{animation:eqAnim var(--d,.4s) ease-in-out infinite alternate}
-    @keyframes eqAnim{0%{height:4px}100%{height:var(--h,18px)}}
 
     /* Track info */
-    .audio-track{
-      font-size:12px;color:var(--muted);line-height:1.4;
-      margin-bottom:12px;font-weight:300;
+    .p-info{
+      display:flex;align-items:center;gap:12px;
+      min-width:0;flex:0 0 200px;
     }
-    .audio-track strong{color:var(--ink);font-weight:600;font-size:13px}
+    .p-disc{
+      width:42px;height:42px;border-radius:50%;
+      background:linear-gradient(135deg,rgba(245,199,107,.3),rgba(22,199,132,.2));
+      border:1px solid var(--line-gold);
+      display:flex;align-items:center;justify-content:center;
+      font-size:18px;flex-shrink:0;
+      animation:spin 8s linear infinite;
+      animation-play-state:paused;
+    }
+    .p-disc.spinning{animation-play-state:running}
+    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .p-text{min-width:0}
+    .p-title{
+      font-size:13px;font-weight:700;color:var(--ink);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+      max-width:140px;
+    }
+    .p-sub{font-size:11px;color:var(--muted);font-weight:300;margin-top:2px}
+
+    /* EQ bars */
+    .p-eq{display:flex;align-items:flex-end;gap:2px;height:22px;flex-shrink:0}
+    .p-eq-bar{
+      width:3px;border-radius:2px;
+      background:linear-gradient(180deg,var(--gold2),var(--green));
+      height:4px;
+      opacity:.7;
+    }
+    .p-eq-bar.anim{animation:eqA var(--d,.4s) ease-in-out infinite alternate}
+    @keyframes eqA{0%{height:4px}100%{height:var(--h,16px)}}
 
     /* Controls */
-    .audio-controls{display:flex;gap:8px;align-items:center;margin-bottom:12px}
-    .ac-btn{
-      appearance:none;border:1px solid var(--line);border-radius:999px;
-      padding:9px 13px;
-      background:rgba(255,255,255,.055);
-      color:var(--ink);font-family:var(--font-body);font-size:13px;font-weight:600;
-      cursor:pointer;transition:all .2s;flex:1;
+    .p-controls{
+      display:flex;align-items:center;gap:8px;
+      flex-shrink:0;
     }
-    .ac-btn:hover{background:rgba(255,255,255,.1)}
-    .ac-btn.primary{
-      background:linear-gradient(135deg,rgba(245,199,107,.22),rgba(245,199,107,.1));
-      border-color:rgba(245,199,107,.5);color:var(--gold2);
+    .pc-btn{
+      appearance:none;border:none;background:none;
+      color:var(--muted);cursor:pointer;
+      padding:6px;border-radius:50%;
+      transition:all .2s;font-size:16px;
+      width:36px;height:36px;display:flex;align-items:center;justify-content:center;
     }
-    .ac-btn.primary:hover{background:linear-gradient(135deg,rgba(245,199,107,.35),rgba(245,199,107,.18))}
+    .pc-btn:hover{color:var(--ink);background:rgba(255,255,255,.08)}
+    .pc-btn.play{
+      width:44px;height:44px;
+      background:linear-gradient(135deg,var(--gold),#e8b44a);
+      color:#0f2218;border-radius:50%;font-size:18px;
+      box-shadow:0 4px 18px rgba(245,199,107,.34);
+    }
+    .pc-btn.play:hover{box-shadow:0 6px 26px rgba(245,199,107,.52);transform:scale(1.06)}
+
+    /* Progress */
+    .p-progress{flex:1;min-width:60px}
+    .p-time-row{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px}
+    .p-bar-wrap{
+      width:100%;height:3px;border-radius:2px;
+      background:rgba(255,255,255,.1);cursor:pointer;position:relative;
+    }
+    .p-bar-fill{
+      height:100%;border-radius:2px;
+      background:linear-gradient(90deg,var(--green),var(--gold));
+      width:0%;transition:width .2s linear;pointer-events:none;
+    }
+    .p-bar-wrap::after{
+      content:'';position:absolute;
+      top:50%;left:var(--pos,0%);
+      transform:translate(-50%,-50%);
+      width:10px;height:10px;border-radius:50%;
+      background:var(--gold2);
+      box-shadow:0 0 6px rgba(245,199,107,.6);
+      pointer-events:none;
+      opacity:0;transition:opacity .2s;
+    }
+    .p-bar-wrap:hover::after{opacity:1}
 
     /* Volume */
-    .vol-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-    .vol-row span{width:16px;text-align:center;font-size:13px}
-    input[type=range].vol-slider{
-      flex:1;-webkit-appearance:none;appearance:none;
-      height:3px;border-radius:999px;
-      background:linear-gradient(90deg,var(--gold) calc(var(--pct,60)*1%),rgba(255,255,255,.12) calc(var(--pct,60)*1%));
+    .p-vol{display:flex;align-items:center;gap:8px;flex-shrink:0;min-width:100px}
+    .p-vol-icon{font-size:14px;color:var(--muted);cursor:pointer}
+    input[type=range].vol{
+      width:80px;-webkit-appearance:none;appearance:none;
+      height:3px;border-radius:2px;
+      background:linear-gradient(90deg,var(--gold) var(--pv,70%),rgba(255,255,255,.1) var(--pv,70%));
       outline:none;cursor:pointer;
     }
-    input[type=range].vol-slider::-webkit-slider-thumb{
-      -webkit-appearance:none;width:13px;height:13px;border-radius:50%;
-      background:var(--gold2);border:none;cursor:pointer;
-      box-shadow:0 2px 8px rgba(245,199,107,.5);
+    input[type=range].vol::-webkit-slider-thumb{
+      -webkit-appearance:none;width:12px;height:12px;
+      border-radius:50%;background:var(--gold2);
+      box-shadow:0 2px 8px rgba(245,199,107,.5);cursor:pointer;
     }
 
-    /* Minimized state */
-    .digiy-audio.minimized .audio-expandable{display:none}
-    .digiy-audio.minimized{border-radius:999px}
-    .digiy-audio.minimized .audio-inner{padding:10px 16px}
-    .digiy-audio.minimized .audio-tabs{display:none}
-
     /* ── RESPONSIVE ── */
-    @media(max-width:860px){
-      .hero-grid,.grid,.grid.two,.trust,.info{grid-template-columns:1fr}
-      .hero{min-height:auto;padding-top:8px}
-      .card,.box{padding:22px 20px}
-      .hero-inner{padding:28px 22px}
-      .hero-photo{min-height:320px}
-      .gallery-slides{min-height:300px}
-      .gallery-slide img{height:clamp(300px,80vw,500px)}
-      .gallery-thumbs{display:flex;overflow:auto;padding:4px 2px 6px}
-      .gallery-thumb{min-width:90px}
-      .topbar{align-items:flex-start;flex-direction:column}
-      .floating-wa{left:18px;right:18px;text-align:center;bottom:90px}
-      .digiy-audio{left:18px;right:18px;bottom:18px;width:auto;max-width:none}
-      .title{font-size:clamp(48px,12vw,80px)}
+    @media(max-width:760px){
+      :root{--topH:52px;--playerH:72px}
+      .topbar{padding:0 16px}
+      .wa-pill{display:none}
+      .slide-inner{padding:20px 16px}
+      .g3,.g2,.hero-grid,.form-2col{grid-template-columns:1fr}
+      .s-title{font-size:clamp(42px,12vw,70px)}
+      .snav{display:none}
+      .p-info{flex:0 0 130px}
+      .p-title{max-width:100px}
+      .p-vol{display:none}
+      .p-eq{display:none}
     }
   </style>
 </head>
 <body>
 
-<!-- Aurora background -->
 <div id="aurora" aria-hidden="true">
-  <div class="aurora-blob"></div>
-  <div class="aurora-blob"></div>
-  <div class="aurora-blob"></div>
-  <div class="aurora-blob"></div>
+  <div class="ab"></div><div class="ab"></div><div class="ab"></div>
 </div>
 
-<!-- Scroll progress -->
-<div id="prog" role="progressbar" aria-hidden="true"></div>
-
-<main class="wrap">
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="brandmark">Astou Boutique <span>· BY DIGIYLYFE</span></div>
-    <a class="pill" href="#demande">💬 WhatsApp direct</a>
+<!-- ══ TOPBAR ══ -->
+<header class="topbar">
+  <div class="brandmark">
+    <div class="brand-dot"></div>
+    Astou Boutique
   </div>
+  <div class="slide-dots" id="slideDots" role="tablist" aria-label="Navigation slides"></div>
+  <div class="topbar-right">
+    <span class="slide-counter" id="slideCounter">1 / 7</span>
+    <a class="wa-pill" href="https://wa.me/221778765785" target="_blank" rel="noopener">💬 WhatsApp</a>
+  </div>
+</header>
 
-  <!-- HERO -->
-  <section id="accueil" class="hero section visible">
-    <div class="hero-inner">
-      <div class="kicker">Saly, Sénégal · Maison · Hôtels · Villas · Plage · Style · Beauté</div>
-      <h1 class="title">Astou<br>Boutique</h1>
-      <p class="subtitle">Maison, plage &amp; élégance</p>
-      <p class="lead">Astou Boutique propose du linge de maison, des serviettes, des draps, des couvertures, des peignoirs, des foutas pour transats, des serviettes de plage, des robes, des tenues stylées, de la confection et des crèmes de beauté.</p>
-      <p class="lead">Une vitrine claire pour découvrir les produits, préparer sa visite, contacter la boutique directement sur WhatsApp, retrouver le repère Google Maps et suivre les nouveautés sur TikTok.</p>
+<!-- ══ SLIDESHOW ══ -->
+<div class="slideshow" id="slideshow" aria-live="polite">
+
+  <!-- ── SLIDE 1 : ACCUEIL ── -->
+  <div class="slide active" role="tabpanel" aria-label="Accueil">
+    <div class="slide-inner">
+      <div class="s-kicker">Saly, Sénégal · Maison · Plage · Style · Beauté</div>
+      <h1 class="s-title">Astou<br>Boutique</h1>
+      <p class="s-subtitle">Maison, plage &amp; élégance</p>
+      <p class="s-lead">Linge de maison, serviettes, draps, peignoirs, foutas, tenues stylées, confection et crèmes de beauté. Une boutique utile, belle et directe à Saly.</p>
       <div class="cta-row">
-        <a class="btn green" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique%2C%20je%20souhaite%20avoir%20des%20informations%20sur%20vos%20produits." target="_blank" rel="noopener">💬 Contacter sur WhatsApp</a>
-        <a class="btn gold" href="#galerie">🖼️ Voir la galerie</a>
-        <a class="btn ghost" href="#google-maps-repere">📍 Google Maps</a>
-        <a class="btn ghost" href="#tiktok-nouveautes">🎥 TikTok</a>
-      </div>
-      <nav class="nav" aria-label="Navigation de la page">
-        <a href="#offre">Offre</a>
-        <a href="#univers-maison">Maison</a>
-        <a href="#hotels-villas-locations">Hôtels &amp; villas</a>
-        <a href="#plage-transats">Plage</a>
-        <a href="#confection-tenues-stylees">Style</a>
-        <a href="#beaute">Beauté</a>
-        <a href="#galerie">Galerie</a>
-        <a href="#demande">Contact</a>
-      </nav>
-    </div>
-  </section>
-
-  <!-- OFFRE -->
-  <section id="offre" class="section">
-    <div class="section-divider"></div>
-    <h2>Une boutique utile, belle et directe</h2>
-    <p class="section-intro">Astou Boutique parle à plusieurs publics : familles, femmes, touristes, hôtels, villas, maisons d'hôtes, locations courte durée et propriétaires qui veulent équiper chambres, salles d'eau, piscines ou transats.</p>
-    <div class="grid">
-      <div class="box">
-        <h3>🛏️ Maison &amp; linge</h3>
-        <p>Draps, serviettes, couvertures et peignoirs pour équiper la maison avec goût, douceur et simplicité.</p>
-      </div>
-      <div class="box">
-        <h3>🏨 Hôtels &amp; villas</h3>
-        <p>Des articles propres et présentables pour chambres, salles d'eau, piscines, transats, villas et locations.</p>
-      </div>
-      <div class="box">
-        <h3>👗 Style &amp; beauté</h3>
-        <p>Robes, tenues stylées, confection et crèmes de beauté pour compléter l'univers féminin de la boutique.</p>
+        <a class="btn green" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique" target="_blank" rel="noopener">💬 Contacter sur WhatsApp</a>
+        <button class="btn gold" type="button" onclick="goSlide(4)">🖼️ Voir la galerie</button>
+        <button class="btn ghost" type="button" onclick="goSlide(1)">Découvrir l'offre →</button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- UNIVERS MAISON -->
-  <section id="univers-maison" class="section">
-    <div class="section-divider"></div>
-    <h2>Univers maison</h2>
-    <div class="box">
-      <h3>Linge de maison, serviettes, draps, couvertures et peignoirs</h3>
-      <p>Astou Boutique propose des articles pratiques pour la maison, les familles et les maisons de vacances : serviettes, draps, couvertures, peignoirs et linge utile au quotidien.</p>
-      <div class="taglist">
-        <span class="tag">Serviettes</span><span class="tag">Draps</span><span class="tag">Couvertures</span><span class="tag">Peignoirs</span><span class="tag">Linge de maison</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- HÔTELS -->
-  <section id="hotels-villas-locations" class="section">
-    <div class="section-divider"></div>
-    <h2>Hôtels, villas &amp; locations</h2>
-    <div class="box">
-      <h3>Des textiles prêts pour recevoir</h3>
-      <p>Pour les hôtels, villas, maisons d'hôtes et locations courte durée, Astou Boutique peut aider à préparer les chambres, les salles d'eau, les piscines et les espaces détente avec des serviettes, draps, peignoirs et foutas.</p>
-      <p class="notice">Le client professionnel comprend vite quoi demander : quantités, couleurs, tailles, usage maison, usage hôtel, plage ou transats.</p>
-    </div>
-  </section>
-
-  <!-- PLAGE -->
-  <section id="plage-transats" class="section">
-    <div class="section-divider"></div>
-    <h2>Plage &amp; transats</h2>
-    <div class="box">
-      <h3>Foutas, serviettes de plage et textile détente</h3>
-      <p>Des foutas pour transats, des serviettes de plage et des textiles légers pour les journées au soleil, les piscines, les villas, les maisons de vacances et les espaces détente.</p>
-    </div>
-  </section>
-
-  <!-- STYLE -->
-  <section id="confection-tenues-stylees" class="section">
-    <div class="section-divider"></div>
-    <h2>Confection &amp; tenues stylées</h2>
-    <div class="box">
-      <h3>Robes, tenues stylées et pièces choisies</h3>
-      <p>Astou Boutique propose aussi des robes, des tenues stylées et de la confection pour les femmes qui veulent rester élégantes, à l'aise et bien habillées.</p>
-    </div>
-  </section>
-
-  <!-- BEAUTÉ -->
-  <section id="beaute" class="section">
-    <div class="section-divider"></div>
-    <h2>Beauté</h2>
-    <div class="box">
-      <h3>Crèmes de beauté et soins simples</h3>
-      <p>La boutique complète son univers textile avec une sélection de crèmes de beauté et de produits de soin, présentés simplement pour aider la cliente à choisir.</p>
-    </div>
-  </section>
-
-  <!-- TIKTOK -->
-  <section id="tiktok-nouveautes" class="section">
-    <div class="section-divider"></div>
-    <h2>TikTok &amp; nouveautés</h2>
-    <div class="box">
-      <h3>Voir les produits en mouvement</h3>
-      <p>Astou Boutique publie aussi sur TikTok : vidéos produits, nouveautés, arrivages, inspirations, démonstrations, linge, plage, tenues et beauté.</p>
-      <p class="notice">À remplacer par le vrai lien TikTok dès qu'il est confirmé.</p>
-    </div>
-  </section>
-
-  <!-- GOOGLE MAPS -->
-  <section id="google-maps-repere" class="section">
-    <div class="section-divider"></div>
-    <h2>Google Maps &amp; repère</h2>
-    <div class="box">
-      <h3>Une boutique facile à retrouver</h3>
-      <p>Astou Boutique est référencée sur Google Maps. Le client peut préparer sa visite, vérifier le repère et contacter la boutique sur WhatsApp avant de se déplacer.</p>
-      <p class="notice">À remplacer par le vrai lien Google Maps dès qu'il est confirmé.</p>
-    </div>
-  </section>
-
-  <!-- GALERIE -->
-  <section id="galerie" class="section">
-    <div class="section-divider"></div>
-    <h2>Galerie Astou Boutique</h2>
-    <p class="section-intro">Une galerie simple pour montrer les familles de produits : peignoirs, foutas, serviettes de plage, robes, tenues stylées et beauté.</p>
-    <div class="gallery-premium" data-gallery>
-      <div class="gallery-stage">
-        <div class="gallery-slides">
-          <figure class="gallery-slide active">
-            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png" alt="Peignoirs et linge de maison Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
-            <figcaption><strong>Peignoirs &amp; linge de maison</strong></figcaption>
-          </figure>
-          <figure class="gallery-slide">
-            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt="Foutas pour transats Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
-            <figcaption><strong>Foutas pour transats</strong></figcaption>
-          </figure>
-          <figure class="gallery-slide">
-            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png" alt="Serviettes de plage Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
-            <figcaption><strong>Serviettes de plage</strong></figcaption>
-          </figure>
-          <figure class="gallery-slide">
-            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt="Robes et tenues stylées Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
-            <figcaption><strong>Robes &amp; tenues stylées</strong></figcaption>
-          </figure>
-          <figure class="gallery-slide">
-            <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png" alt="Crèmes de beauté Astou Boutique" loading="lazy" referrerpolicy="no-referrer">
-            <figcaption><strong>Crèmes de beauté</strong></figcaption>
-          </figure>
+  <!-- ── SLIDE 2 : OFFRE ── -->
+  <div class="slide" role="tabpanel" aria-label="L'offre">
+    <div class="slide-inner">
+      <div class="s-kicker">Ce que propose la boutique</div>
+      <h2 class="s-h2">Une boutique utile,<br>belle et directe</h2>
+      <p class="s-intro">Astou Boutique parle à plusieurs publics : familles, femmes, touristes, hôtels, villas, maisons d'hôtes, locations courte durée et propriétaires.</p>
+      <div class="g3">
+        <div class="box">
+          <h3>🛏️ Maison &amp; linge</h3>
+          <p>Draps, serviettes, couvertures et peignoirs pour équiper la maison avec goût, douceur et simplicité.</p>
         </div>
-        <button class="gallery-arrow prev" type="button" data-prev aria-label="Photo précédente">‹</button>
-        <button class="gallery-arrow next" type="button" data-next aria-label="Photo suivante">›</button>
-        <div class="gallery-counter" data-counter>1 / 5</div>
-      </div>
-      <div class="gallery-thumbs" aria-label="Miniatures galerie">
-        <button class="gallery-thumb active" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png" alt=""></button>
-        <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt=""></button>
-        <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png" alt=""></button>
-        <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt=""></button>
-        <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png" alt=""></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- DEMANDE -->
-  <section id="demande" class="section">
-    <div class="section-divider"></div>
-    <h2>Commander / contacter</h2>
-    <div class="info">
-      <div class="box form">
-        <label for="clientName">Nom</label>
-        <input id="clientName" autocomplete="name" placeholder="Votre nom">
-        <label for="clientPhone">Téléphone</label>
-        <input id="clientPhone" inputmode="tel" autocomplete="tel" placeholder="Votre WhatsApp">
-        <label for="clientMessage">Message</label>
-        <textarea id="clientMessage" placeholder="Exemple : Bonjour, je cherche des draps, serviettes ou foutas. Qu'avez-vous de disponible ?"></textarea>
-        <button id="sendRequest" type="button" class="form-btn">Envoyer la demande sur WhatsApp</button>
-      </div>
-      <div class="box">
-        <h3>Informations pratiques</h3>
-        <p><strong>WhatsApp :</strong> +221 77 876 57 85</p>
-        <p style="margin-top:10px"><strong>Horaires :</strong> à confirmer avec Astou</p>
-        <p style="margin-top:10px"><strong>Repère :</strong> Astou Boutique · référencée sur Google Maps</p>
-        <p style="margin-top:10px"><strong>Réseaux :</strong> TikTok · nouveautés, produits et inspirations</p>
-        <p class="notice">Le client doit comprendre vite quoi faire : écrire, demander les produits disponibles, préparer sa visite ou passer par la galerie.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT DÉTAILLÉ -->
-  <section id="contact" class="section">
-    <div class="section-divider"></div>
-    <h2>Contact et besoins particuliers</h2>
-    <div class="grid two">
-      <div class="box">
-        <h3>Pour particuliers</h3>
-        <ul>
-          <li>Linge de maison</li>
-          <li>Serviettes et draps</li>
-          <li>Peignoirs et couvertures</li>
-          <li>Robes, tenues stylées et beauté</li>
-        </ul>
-      </div>
-      <div class="box">
-        <h3>Pour pros du séjour</h3>
-        <ul>
-          <li>Serviettes hôtel</li>
-          <li>Foutas pour transats</li>
-          <li>Textile plage et piscine</li>
-          <li>Équipement villas, locations et maisons d'hôtes</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- MARKET -->
-  <section id="market" class="section">
-    <div class="section-divider"></div>
-    <h2>Présence DIGIY MARKET</h2>
-    <div class="box">
-      <h3>Une vitrine partenaire reliée au terrain</h3>
-      <p>Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible : le client découvre la boutique dans la galerie, puis arrive sur cette page pour comprendre, voir les produits et contacter directement.</p>
-      <p class="notice">À brancher ensuite côté MARKET avec l'adresse publique de la vitrine Astou Boutique.</p>
-    </div>
-  </section>
-
-  <footer>
-    <div class="footer-brand">Astou Boutique</div>
-    <p>Chaque partenaire est une facette. DIGIY lui donne la lumière.</p>
-    <p style="margin-top:6px;font-size:12px;opacity:.6">Page générée et recousue pour Astou Boutique · BY DIGIYLYFE</p>
-  </footer>
-</main>
-
-<!-- FLOATING WA -->
-<a class="floating-wa" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique%2C%20je%20souhaite%20faire%20une%20demande." target="_blank" rel="noopener">💬 WhatsApp Astou</a>
-
-<!-- ══════════════════════════════════════════
-     PREMIUM AUDIO WIDGET
-══════════════════════════════════════════ -->
-<aside class="digiy-audio" id="digiyAudioWidget" aria-label="Lecteur audio DIGIY">
-  <div class="audio-inner">
-    <div class="audio-head">
-      <div class="audio-brand">
-        <div class="audio-dot off" id="audioDot"></div>
-        🎧 DIGIY AUDIO
-      </div>
-      <button class="audio-minimize" id="audioMinBtn" type="button" title="Réduire">−</button>
-    </div>
-    <div class="audio-expandable">
-      <div class="audio-tabs">
-        <button class="audio-tab active" id="tabAmbiance" type="button">🎵 Ambiance</button>
-        <button class="audio-tab" id="tabPresentation" type="button">🎙 Présentation</button>
-      </div>
-
-      <!-- EQ bars -->
-      <div class="eq-bars" id="eqBars">
-        <div class="eq-bar" style="--d:.31s;--h:18px"></div>
-        <div class="eq-bar" style="--d:.41s;--h:22px"></div>
-        <div class="eq-bar" style="--d:.27s;--h:14px"></div>
-        <div class="eq-bar" style="--d:.35s;--h:20px"></div>
-        <div class="eq-bar" style="--d:.45s;--h:16px"></div>
-        <div class="eq-bar" style="--d:.29s;--h:24px"></div>
-        <div class="eq-bar" style="--d:.38s;--h:12px"></div>
-        <div class="eq-bar" style="--d:.33s;--h:18px"></div>
-      </div>
-
-      <!-- AMBIANCE panel -->
-      <div id="panelAmbiance">
-        <div class="audio-track">
-          <strong>Ambiance boutique</strong><br>
-          Son d'ambiance génératif · chaleureux &amp; élégant
+        <div class="box">
+          <h3>🏨 Hôtels &amp; villas</h3>
+          <p>Articles propres et présentables pour chambres, piscines, transats, villas et locations courte durée.</p>
         </div>
-        <div class="audio-controls">
-          <button class="ac-btn primary" id="ambPlay" type="button">▶ Écouter</button>
-          <button class="ac-btn" id="ambStop" type="button">■ Stop</button>
-        </div>
-        <div class="vol-row">
-          <span>🔈</span>
-          <input type="range" class="vol-slider" id="volSlider" min="0" max="100" value="60" style="--pct:60">
-          <span>🔊</span>
-        </div>
-      </div>
-
-      <!-- PRÉSENTATION panel -->
-      <div id="panelPresentation" style="display:none">
-        <div class="audio-track">
-          <strong>Présentation vocale</strong><br>
-          Écouter la vitrine avant de contacter la boutique
-        </div>
-        <div class="audio-controls">
-          <button class="ac-btn primary" id="digiyAudioPlay" type="button">▶ Écouter</button>
-          <button class="ac-btn" id="digiyAudioStop" type="button">■ Stop</button>
+        <div class="box">
+          <h3>👗 Style &amp; beauté</h3>
+          <p>Robes, tenues stylées, confection et crèmes de beauté pour compléter l'univers féminin.</p>
         </div>
       </div>
     </div>
   </div>
-</aside>
 
-<!-- ══════════════════════════════════════════
-     SCRIPTS
-══════════════════════════════════════════ -->
+  <!-- ── SLIDE 3 : MAISON + HÔTELS ── -->
+  <div class="slide" role="tabpanel" aria-label="Maison et hôtels">
+    <div class="slide-inner">
+      <div class="s-kicker">Textile & hébergement</div>
+      <h2 class="s-h2">Maison, hôtels<br>&amp; villas</h2>
+      <div class="g2">
+        <div class="box">
+          <h3>Univers maison</h3>
+          <p>Linge de maison, serviettes, draps, couvertures et peignoirs pour la maison, les familles et les maisons de vacances.</p>
+          <div class="taglist">
+            <span class="tag">Serviettes</span>
+            <span class="tag">Draps</span>
+            <span class="tag">Couvertures</span>
+            <span class="tag">Peignoirs</span>
+          </div>
+        </div>
+        <div class="box">
+          <h3>Pros du séjour</h3>
+          <ul>
+            <li>Serviettes hôtel</li>
+            <li>Foutas pour transats</li>
+            <li>Textile plage et piscine</li>
+            <li>Équipement villas et maisons d'hôtes</li>
+          </ul>
+          <p class="notice">Le client professionnel comprend vite quoi demander : quantités, couleurs, tailles, usage hôtel ou plage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 4 : PLAGE + STYLE + BEAUTÉ ── -->
+  <div class="slide" role="tabpanel" aria-label="Plage, style et beauté">
+    <div class="slide-inner">
+      <div class="s-kicker">Plage · Mode · Beauté</div>
+      <h2 class="s-h2">Plage, style<br>&amp; beauté</h2>
+      <div class="g3">
+        <div class="box">
+          <h3>🌊 Plage &amp; transats</h3>
+          <p>Foutas pour transats, serviettes de plage et textiles légers pour les journées au soleil, les piscines et les espaces détente.</p>
+        </div>
+        <div class="box">
+          <h3>👗 Tenues stylées</h3>
+          <p>Robes, tenues stylées et confection pour les femmes qui veulent rester élégantes, à l'aise et bien habillées.</p>
+        </div>
+        <div class="box">
+          <h3>✨ Crèmes &amp; soins</h3>
+          <p>Sélection de crèmes de beauté et produits de soin, présentés simplement pour aider la cliente à choisir.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 5 : GALERIE ── -->
+  <div class="slide" role="tabpanel" aria-label="Galerie">
+    <div class="slide-inner">
+      <div class="s-kicker">Galerie produits</div>
+      <h2 class="s-h2">Nos produits<br>en images</h2>
+      <div data-gallery>
+        <div class="gallery-stage">
+          <div class="gallery-slides">
+            <figure class="gallery-slide active">
+              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png" alt="Peignoirs et linge" loading="lazy" referrerpolicy="no-referrer">
+              <figcaption><strong>Peignoirs &amp; linge de maison</strong></figcaption>
+            </figure>
+            <figure class="gallery-slide">
+              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt="Foutas pour transats" loading="lazy" referrerpolicy="no-referrer">
+              <figcaption><strong>Foutas pour transats</strong></figcaption>
+            </figure>
+            <figure class="gallery-slide">
+              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png" alt="Serviettes de plage" loading="lazy" referrerpolicy="no-referrer">
+              <figcaption><strong>Serviettes de plage</strong></figcaption>
+            </figure>
+            <figure class="gallery-slide">
+              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt="Robes et tenues" loading="lazy" referrerpolicy="no-referrer">
+              <figcaption><strong>Robes &amp; tenues stylées</strong></figcaption>
+            </figure>
+            <figure class="gallery-slide">
+              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png" alt="Crèmes de beauté" loading="lazy" referrerpolicy="no-referrer">
+              <figcaption><strong>Crèmes de beauté</strong></figcaption>
+            </figure>
+          </div>
+          <button class="gallery-arrow prev" type="button" data-prev aria-label="Précédent">‹</button>
+          <button class="gallery-arrow next" type="button" data-next aria-label="Suivant">›</button>
+          <div class="gallery-counter" data-counter>1 / 5</div>
+        </div>
+        <div class="gallery-thumbs">
+          <button class="gallery-thumb active" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png" alt=""></button>
+          <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt=""></button>
+          <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png" alt=""></button>
+          <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt=""></button>
+          <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png" alt=""></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 6 : CONTACT ── -->
+  <div class="slide" role="tabpanel" aria-label="Contact">
+    <div class="slide-inner">
+      <div class="s-kicker">Commander &amp; contacter</div>
+      <h2 class="s-h2">Préparez votre<br>demande</h2>
+      <div class="form-2col">
+        <div class="box form">
+          <label for="clientName">Nom</label>
+          <input id="clientName" autocomplete="name" placeholder="Votre nom">
+          <label for="clientPhone">Téléphone WhatsApp</label>
+          <input id="clientPhone" inputmode="tel" autocomplete="tel" placeholder="+221 ...">
+          <label for="clientMessage">Message</label>
+          <textarea id="clientMessage" placeholder="Exemple : Je cherche des draps, serviettes ou foutas. Qu'avez-vous ?"></textarea>
+          <button type="button" id="sendRequest" class="form-btn">Envoyer sur WhatsApp →</button>
+        </div>
+        <div class="box">
+          <h3>Informations pratiques</h3>
+          <p><strong>WhatsApp :</strong> +221 77 876 57 85</p>
+          <p style="margin-top:10px"><strong>Horaires :</strong> à confirmer avec Astou</p>
+          <p style="margin-top:10px"><strong>Repère :</strong> Astou Boutique · Google Maps</p>
+          <p style="margin-top:10px"><strong>Réseaux :</strong> TikTok · nouveautés et produits</p>
+          <p class="notice">Écrire, demander les produits disponibles, préparer sa visite ou passer par la galerie.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 7 : PRÉSENCE DIGITALE ── -->
+  <div class="slide" role="tabpanel" aria-label="Présence digitale">
+    <div class="slide-inner">
+      <div class="s-kicker">Présence digitale</div>
+      <h2 class="s-h2">Sur le terrain<br>&amp; en ligne</h2>
+      <div class="g3">
+        <div class="box">
+          <h3>🎥 TikTok</h3>
+          <p>Vidéos produits, nouveautés, arrivages, inspirations et démonstrations.</p>
+          <p class="notice">Lien TikTok à confirmer.</p>
+        </div>
+        <div class="box">
+          <h3>📍 Google Maps</h3>
+          <p>Astou Boutique est référencée sur Google Maps. Préparez votre visite et venez directement.</p>
+          <p class="notice">Lien Google Maps à confirmer.</p>
+        </div>
+        <div class="box">
+          <h3>🛒 DIGIY MARKET</h3>
+          <p>Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible sur la plateforme.</p>
+          <p class="notice">À brancher côté MARKET avec l'adresse publique.</p>
+        </div>
+      </div>
+      <div style="margin-top:18px;text-align:center;opacity:.4;font-family:var(--font-h);font-style:italic;font-size:15px">
+        Chaque partenaire est une facette. DIGIY lui donne la lumière. · BY DIGIYLYFE
+      </div>
+    </div>
+  </div>
+
+  <!-- ARROWS -->
+  <button class="snav prev" id="snavPrev" type="button" aria-label="Slide précédent">‹</button>
+  <button class="snav next" id="snavNext" type="button" aria-label="Slide suivant">›</button>
+
+</div><!-- /slideshow -->
+
+<!-- ══ MUSIC PLAYER BAR ══ -->
+<div class="player" role="region" aria-label="Lecteur de musique">
+
+  <!-- Disc + info -->
+  <div class="p-info">
+    <div class="p-disc" id="pDisc">🎵</div>
+    <div class="p-text">
+      <div class="p-title" id="pTitle">Ambiance boutique</div>
+      <div class="p-sub" id="pSub">Piste 1 · 0:00</div>
+    </div>
+  </div>
+
+  <!-- EQ bars -->
+  <div class="p-eq" id="pEq">
+    <div class="p-eq-bar" style="--d:.33s;--h:14px"></div>
+    <div class="p-eq-bar" style="--d:.41s;--h:18px"></div>
+    <div class="p-eq-bar" style="--d:.28s;--h:12px"></div>
+    <div class="p-eq-bar" style="--d:.38s;--h:20px"></div>
+    <div class="p-eq-bar" style="--d:.45s;--h:10px"></div>
+  </div>
+
+  <!-- Controls -->
+  <div class="p-controls">
+    <button class="pc-btn" id="pPrev" type="button" title="Précédent">⏮</button>
+    <button class="pc-btn play" id="pPlay" type="button" title="Lecture / Pause">▶</button>
+    <button class="pc-btn" id="pNext" type="button" title="Suivant">⏭</button>
+  </div>
+
+  <!-- Progress -->
+  <div class="p-progress">
+    <div class="p-time-row">
+      <span id="pCurrent">0:00</span>
+      <span id="pDuration">0:00</span>
+    </div>
+    <div class="p-bar-wrap" id="pBarWrap">
+      <div class="p-bar-fill" id="pBarFill"></div>
+    </div>
+  </div>
+
+  <!-- Volume -->
+  <div class="p-vol">
+    <span class="p-vol-icon" id="pVolIcon">🔈</span>
+    <input type="range" class="vol" id="pVol" min="0" max="100" value="70" style="--pv:70%">
+  </div>
+
+</div>
+
+<!-- Hidden audio element -->
+<audio id="audioEl" preload="metadata"></audio>
+
 <script>
 (function(){
   'use strict';
 
-  /* ── SCROLL PROGRESS ── */
-  var prog = document.getElementById('prog');
-  function updateProgress(){
-    var s = document.documentElement;
-    var pct = (s.scrollTop || document.body.scrollTop) / (s.scrollHeight - s.clientHeight) * 100;
-    prog.style.width = pct + '%';
+  /* ══════════════════════════════════
+     SLIDESHOW
+  ══════════════════════════════════ */
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var dotsWrap=document.getElementById('slideDots');
+  var counter=document.getElementById('slideCounter');
+  var btnPrev=document.getElementById('snavPrev');
+  var btnNext=document.getElementById('snavNext');
+  var current=0;
+  var N=slides.length;
+  var galleryActive=false; /* prevent arrow conflict on gallery slide */
+
+  /* Build dots */
+  slides.forEach(function(_,i){
+    var d=document.createElement('button');
+    d.className='sdot'+(i===0?' active':'');
+    d.setAttribute('role','tab');
+    d.setAttribute('aria-selected',i===0?'true':'false');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.addEventListener('click',function(){goSlide(i);});
+    dotsWrap.appendChild(d);
+  });
+
+  function goSlide(to){
+    if(to===current) return;
+    slides[current].classList.remove('active');
+    slides[current].classList.add('exit-left');
+    setTimeout(function(){slides[current].classList.remove('exit-left');},520);
+    current=((to%N)+N)%N;
+    slides[current].classList.add('active');
+    updateUI();
   }
-  window.addEventListener('scroll', updateProgress, {passive:true});
+  window.goSlide=goSlide;
 
-  /* ── SECTION REVEAL ── */
-  var sections = document.querySelectorAll('.section');
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  function updateUI(){
+    var dots=[].slice.call(dotsWrap.querySelectorAll('.sdot'));
+    dots.forEach(function(d,i){
+      d.classList.toggle('active',i===current);
+      d.setAttribute('aria-selected',i===current?'true':'false');
     });
-  }, {threshold:.08});
-  sections.forEach(function(s){ if(!s.classList.contains('visible')) observer.observe(s); });
+    counter.textContent=(current+1)+' / '+N;
+    btnPrev.disabled=(current===0);
+    btnNext.disabled=(current===N-1);
+  }
+  updateUI();
 
-  /* ── GALLERY ── */
-  function initGallery(gallery){
-    var slides=[].slice.call(gallery.querySelectorAll('.gallery-slide'));
-    var thumbs=[].slice.call(gallery.querySelectorAll('.gallery-thumb'));
-    var prev=gallery.querySelector('[data-prev]');
-    var next=gallery.querySelector('[data-next]');
-    var counter=gallery.querySelector('[data-counter]');
-    if(!slides.length) return;
-    var index=slides.findIndex(function(s){return s.classList.contains('active');});
-    if(index<0) index=0;
-    function show(i){
-      index=(i+slides.length)%slides.length;
-      slides.forEach(function(sl,idx){sl.classList.toggle('active',idx===index);});
-      thumbs.forEach(function(th,idx){th.classList.toggle('active',idx===index);});
-      if(counter) counter.textContent=(index+1)+' / '+slides.length;
+  btnPrev.addEventListener('click',function(){goSlide(current-1);});
+  btnNext.addEventListener('click',function(){goSlide(current+1);});
+
+  document.addEventListener('keydown',function(e){
+    if(galleryActive) return;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown') goSlide(current+1);
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp') goSlide(current-1);
+  });
+
+  /* Touch swipe */
+  var touchX=0;
+  document.getElementById('slideshow').addEventListener('touchstart',function(e){
+    touchX=e.changedTouches[0].clientX;
+  },{passive:true});
+  document.getElementById('slideshow').addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>48){
+      if(dx<0) goSlide(current+1);
+      else goSlide(current-1);
     }
-    if(prev) prev.addEventListener('click',function(){show(index-1);});
-    if(next) next.addEventListener('click',function(){show(index+1);});
-    thumbs.forEach(function(th,idx){th.addEventListener('click',function(){show(idx);});});
-    gallery.addEventListener('keydown',function(e){
-      if(e.key==='ArrowLeft') show(index-1);
-      if(e.key==='ArrowRight') show(index+1);
-    });
-    show(index);
+  },{passive:true});
+
+  /* ══════════════════════════════════
+     PHOTO GALLERY
+  ══════════════════════════════════ */
+  function initGallery(g){
+    var sl=[].slice.call(g.querySelectorAll('.gallery-slide'));
+    var th=[].slice.call(g.querySelectorAll('.gallery-thumb'));
+    var pv=g.querySelector('[data-prev]');
+    var nx=g.querySelector('[data-next]');
+    var ct=g.querySelector('[data-counter]');
+    var idx=0;
+    function show(i){
+      idx=(i+sl.length)%sl.length;
+      sl.forEach(function(s,j){s.classList.toggle('active',j===idx);});
+      th.forEach(function(t,j){t.classList.toggle('active',j===idx);});
+      if(ct) ct.textContent=(idx+1)+' / '+sl.length;
+    }
+    if(pv) pv.addEventListener('click',function(e){e.stopPropagation();show(idx-1);});
+    if(nx) nx.addEventListener('click',function(e){e.stopPropagation();show(idx+1);});
+    th.forEach(function(t,j){t.addEventListener('click',function(){show(j);});});
+    g.addEventListener('mouseenter',function(){galleryActive=true;});
+    g.addEventListener('mouseleave',function(){galleryActive=false;});
+    show(0);
   }
   document.querySelectorAll('[data-gallery]').forEach(initGallery);
 
-  /* ── WA FORM ── */
-  var phone='221778765785';
-  var project='Astou Boutique';
-  var send=document.getElementById('sendRequest');
-  if(send){
-    send.addEventListener('click',function(){
+  /* ══════════════════════════════════
+     WA FORM
+  ══════════════════════════════════ */
+  var sendBtn=document.getElementById('sendRequest');
+  if(sendBtn){
+    sendBtn.addEventListener('click',function(){
       var nom=(document.getElementById('clientName').value||'').trim();
       var tel=(document.getElementById('clientPhone').value||'').trim();
       var msg=(document.getElementById('clientMessage').value||'').trim();
-      var text='Bonjour, je souhaite faire une demande pour '+project+'.';
+      var text='Bonjour Astou Boutique, je souhaite faire une demande.';
       if(nom) text+=' Nom : '+nom+'.';
-      if(tel) text+=' Téléphone : '+tel+'.';
+      if(tel) text+=' Tél : '+tel+'.';
       if(msg) text+=' Message : '+msg;
-      window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(text),'_blank','noopener');
+      window.open('https://wa.me/221778765785?text='+encodeURIComponent(text),'_blank','noopener');
     });
   }
 
-  /* ══════════════════════════════════════════
-     AMBIENT MUSIC ENGINE (Web Audio API)
-  ══════════════════════════════════════════ */
-  var DigiAmbient = (function(){
-    var ctx=null, masterGain=null, oscNodes=[], timers=[], running=false;
+  /* ══════════════════════════════════
+     MUSIC PLAYER
+     ─────────────────────────────────
+     Ajoutez vos fichiers MP3 dans
+     le tableau "tracks" ci-dessous.
+     Exemple :
+       { title:'Ambiance 1', src:'musique/ambiance1.mp3' }
+       { title:'Track 2', src:'https://...mp3' }
+  ══════════════════════════════════ */
+  var tracks = [
+    /* ← REMPLACEZ PAR VOS PROPRES FICHIERS MP3 → */
+    { title: 'Ambiance boutique',  src: '' },
+    { title: 'Détente & style',    src: '' },
+    { title: 'Saly vibes',         src: '' }
+  ];
 
-    function buildImpulse(dur, decay){
-      var sr=ctx.sampleRate;
-      var len=Math.floor(sr*dur);
-      var buf=ctx.createBuffer(2,len,sr);
-      for(var ch=0;ch<2;ch++){
-        var d=buf.getChannelData(ch);
-        for(var i=0;i<len;i++){
-          d[i]=(Math.random()*2-1)*Math.pow(1-i/len,decay);
-        }
-      }
-      return buf;
+  var audio    = document.getElementById('audioEl');
+  var pPlay    = document.getElementById('pPlay');
+  var pPrev    = document.getElementById('pPrev');
+  var pNext    = document.getElementById('pNext');
+  var pTitle   = document.getElementById('pTitle');
+  var pSub     = document.getElementById('pSub');
+  var pBarFill = document.getElementById('pBarFill');
+  var pBarWrap = document.getElementById('pBarWrap');
+  var pCurrent = document.getElementById('pCurrent');
+  var pDuration= document.getElementById('pDuration');
+  var pVol     = document.getElementById('pVol');
+  var pVolIcon = document.getElementById('pVolIcon');
+  var pDisc    = document.getElementById('pDisc');
+  var pEqBars  = [].slice.call(document.getElementById('pEq').querySelectorAll('.p-eq-bar'));
+  var trackIdx = 0;
+  var playing  = false;
+
+  function fmt(s){
+    if(isNaN(s)||s===Infinity) return '0:00';
+    var m=Math.floor(s/60);
+    var sc=Math.floor(s%60);
+    return m+':'+(sc<10?'0':'')+sc;
+  }
+
+  function loadTrack(i){
+    trackIdx=((i%tracks.length)+tracks.length)%tracks.length;
+    var t=tracks[trackIdx];
+    pTitle.textContent=t.title||'Sans titre';
+    pSub.textContent='Piste '+(trackIdx+1);
+    pBarFill.style.width='0%';
+    pBarWrap.style.setProperty('--pos','0%');
+    pCurrent.textContent='0:00';
+    pDuration.textContent='0:00';
+    if(t.src){
+      audio.src=t.src;
+      audio.load();
+    } else {
+      audio.removeAttribute('src');
+      pSub.textContent='Piste '+(trackIdx+1)+' · Ajouter un fichier MP3';
     }
+  }
 
-    function ensureCtx(){
-      if(!ctx){
-        ctx=new(window.AudioContext||window.webkitAudioContext)();
-        masterGain=ctx.createGain();
-        masterGain.gain.value=0;
-        var comp=ctx.createDynamicsCompressor();
-        comp.threshold.value=-16; comp.knee.value=8; comp.ratio.value=4;
-        comp.attack.value=0.01; comp.release.value=0.25;
-        masterGain.connect(comp);
-        comp.connect(ctx.destination);
-      }
-      if(ctx.state==='suspended') ctx.resume();
-    }
+  function setPlaying(on){
+    playing=on;
+    pPlay.textContent=on?'⏸':'▶';
+    pDisc.classList.toggle('spinning',on);
+    setEQ(on);
+  }
 
-    function makeReverb(){
-      var conv=ctx.createConvolver();
-      conv.buffer=buildImpulse(5,2.5);
-      var g=ctx.createGain();
-      g.gain.value=0.48;
-      conv.connect(g);
-      g.connect(masterGain);
-      return conv;
-    }
-
-    function addPad(rev, freq, gainVal, detune, type){
-      type=type||'sine';
-      var osc=ctx.createOscillator();
-      var gn=ctx.createGain();
-      var flt=ctx.createBiquadFilter();
-      osc.type=type; osc.frequency.value=freq; osc.detune.value=detune||0;
-      gn.gain.value=gainVal;
-      flt.type='lowpass'; flt.frequency.value=1100; flt.Q.value=0.7;
-
-      /* Filter LFO */
-      var lfo=ctx.createOscillator();
-      var lfoG=ctx.createGain();
-      lfo.frequency.value=0.025+Math.random()*0.07;
-      lfoG.gain.value=380+Math.random()*280;
-      lfo.connect(lfoG); lfoG.connect(flt.frequency);
-
-      /* Amplitude LFO (slow shimmer) */
-      var aLfo=ctx.createOscillator();
-      var aLfoG=ctx.createGain();
-      aLfo.frequency.value=0.008+Math.random()*0.025;
-      aLfoG.gain.value=gainVal*0.28;
-      aLfo.connect(aLfoG); aLfoG.connect(gn.gain);
-
-      osc.connect(flt); flt.connect(gn);
-      gn.connect(masterGain); /* dry */
-      gn.connect(rev);        /* wet */
-
-      osc.start(); lfo.start(); aLfo.start();
-      oscNodes.push(osc,lfo,aLfo);
-    }
-
-    function scheduleChime(rev){
-      if(!running) return;
-      var t=ctx.currentTime;
-      /* A major pentatonic: A5 C#6 E6 A6 / A4 E5 */
-      var notes=[880,1108.73,1318.51,1760,659.26,440];
-      var freq=notes[Math.floor(Math.random()*notes.length)];
-      var osc=ctx.createOscillator();
-      var g=ctx.createGain();
-      osc.type='sine'; osc.frequency.value=freq;
-      g.gain.setValueAtTime(0,t);
-      g.gain.linearRampToValueAtTime(0.045,t+0.03);
-      g.gain.exponentialRampToValueAtTime(0.0001,t+2.8);
-      osc.connect(g); g.connect(masterGain); g.connect(rev);
-      osc.start(t); osc.stop(t+3.2);
-      var delay=7000+Math.random()*14000;
-      timers.push(setTimeout(function(){scheduleChime(rev);},delay));
-    }
-
-    function play(vol){
-      ensureCtx();
-      running=true;
-      var rev=makeReverb();
-      /* Sub bass A1 */
-      addPad(rev,55,0.12,0,'sine');
-      /* A2 root */
-      addPad(rev,110,0.09,0,'sine');
-      addPad(rev,110,0.04,9,'triangle');
-      /* E3 fifth */
-      addPad(rev,165,0.065,-5,'sine');
-      /* A3 octave */
-      addPad(rev,220,0.07,4,'sine');
-      /* C#4 third */
-      addPad(rev,277.18,0.05,-7,'sine');
-      /* E4 fifth */
-      addPad(rev,329.63,0.048,6,'sine');
-      /* A4 shimmer */
-      addPad(rev,440,0.025,-3,'sine');
-
-      var targetVol=(vol!==undefined?vol:0.6)*0.9;
-      masterGain.gain.setValueAtTime(0,ctx.currentTime);
-      masterGain.gain.linearRampToValueAtTime(targetVol,ctx.currentTime+4.5);
-
-      timers.push(setTimeout(function(){scheduleChime(rev);},6000));
-    }
-
-    function stop(){
-      if(!ctx) return;
-      running=false;
-      timers.forEach(function(t){clearTimeout(t);}); timers=[];
-      var now=ctx.currentTime;
-      masterGain.gain.setValueAtTime(masterGain.gain.value,now);
-      masterGain.gain.linearRampToValueAtTime(0,now+2.5);
-      setTimeout(function(){
-        oscNodes.forEach(function(n){try{n.stop();}catch(e){}});
-        oscNodes=[];
-      },2700);
-    }
-
-    function setVolume(v){
-      if(!ctx||!masterGain) return;
-      masterGain.gain.linearRampToValueAtTime(v*0.9,ctx.currentTime+0.5);
-    }
-
-    function isRunning(){return running;}
-
-    return {play:play, stop:stop, setVolume:setVolume, isRunning:isRunning};
-  })();
-
-  /* ── AUDIO WIDGET UI ── */
-  var dot=document.getElementById('audioDot');
-  var eqBars=document.getElementById('eqBars').querySelectorAll('.eq-bar');
-  var ambPlayBtn=document.getElementById('ambPlay');
-  var ambStopBtn=document.getElementById('ambStop');
-  var volSlider=document.getElementById('volSlider');
-  var minBtn=document.getElementById('audioMinBtn');
-  var widget=document.getElementById('digiyAudioWidget');
-  var tabAmb=document.getElementById('tabAmbiance');
-  var tabPres=document.getElementById('tabPresentation');
-  var panelAmb=document.getElementById('panelAmbiance');
-  var panelPres=document.getElementById('panelPresentation');
-
-  function setEQActive(on){
-    eqBars.forEach(function(b){
+  function setEQ(on){
+    pEqBars.forEach(function(b){
       if(on){ b.classList.add('anim'); }
       else { b.classList.remove('anim'); b.style.height='4px'; }
     });
   }
 
-  function setDot(on){
-    if(on){ dot.classList.remove('off'); }
-    else { dot.classList.add('off'); }
-  }
-
-  ambPlayBtn.addEventListener('click',function(){
-    if(DigiAmbient.isRunning()){
-      DigiAmbient.stop();
-      ambPlayBtn.textContent='▶ Écouter';
-      setEQActive(false); setDot(false);
+  pPlay.addEventListener('click',function(){
+    if(!tracks[trackIdx].src){
+      alert('Ajoutez un fichier MP3 dans le tableau "tracks" du code.');
+      return;
+    }
+    if(audio.paused){
+      audio.play().then(function(){setPlaying(true);}).catch(function(){});
     } else {
-      var vol=parseInt(volSlider.value)/100;
-      DigiAmbient.play(vol);
-      ambPlayBtn.textContent='⏹ En cours';
-      setEQActive(true); setDot(true);
+      audio.pause();
+      setPlaying(false);
     }
   });
 
-  ambStopBtn.addEventListener('click',function(){
-    DigiAmbient.stop();
-    ambPlayBtn.textContent='▶ Écouter';
-    setEQActive(false); setDot(false);
+  pPrev.addEventListener('click',function(){
+    loadTrack(trackIdx-1);
+    if(playing){ audio.play().then(function(){setPlaying(true);}).catch(function(){}); }
   });
 
-  volSlider.addEventListener('input',function(){
+  pNext.addEventListener('click',function(){
+    loadTrack(trackIdx+1);
+    if(playing){ audio.play().then(function(){setPlaying(true);}).catch(function(){}); }
+  });
+
+  audio.addEventListener('ended',function(){
+    loadTrack(trackIdx+1);
+    audio.play().then(function(){setPlaying(true);}).catch(function(){});
+  });
+
+  audio.addEventListener('timeupdate',function(){
+    if(!audio.duration) return;
+    var pct=(audio.currentTime/audio.duration)*100;
+    pBarFill.style.width=pct+'%';
+    pBarWrap.style.setProperty('--pos',pct+'%');
+    pCurrent.textContent=fmt(audio.currentTime);
+    pSub.textContent='Piste '+(trackIdx+1)+' · '+fmt(audio.currentTime);
+  });
+
+  audio.addEventListener('loadedmetadata',function(){
+    pDuration.textContent=fmt(audio.duration);
+  });
+
+  audio.addEventListener('pause',function(){ setPlaying(false); });
+  audio.addEventListener('play',function(){ setPlaying(true); });
+
+  /* Seek */
+  pBarWrap.addEventListener('click',function(e){
+    if(!audio.duration) return;
+    var rect=this.getBoundingClientRect();
+    var pct=(e.clientX-rect.left)/rect.width;
+    audio.currentTime=pct*audio.duration;
+  });
+
+  /* Volume */
+  audio.volume=0.70;
+  pVol.addEventListener('input',function(){
     var v=parseInt(this.value)/100;
-    this.style.setProperty('--pct',this.value);
-    DigiAmbient.setVolume(v);
+    audio.volume=v;
+    this.style.setProperty('--pv',this.value+'%');
+    pVolIcon.textContent=v===0?'🔇':v<0.4?'🔈':'🔊';
+    if(audio.muted&&v>0) audio.muted=false;
+  });
+  pVolIcon.addEventListener('click',function(){
+    audio.muted=!audio.muted;
+    pVolIcon.textContent=audio.muted?'🔇':'🔊';
   });
 
-  /* TABS */
-  tabAmb.addEventListener('click',function(){
-    tabAmb.classList.add('active'); tabPres.classList.remove('active');
-    panelAmb.style.display=''; panelPres.style.display='none';
-  });
-  tabPres.addEventListener('click',function(){
-    tabPres.classList.add('active'); tabAmb.classList.remove('active');
-    panelPres.style.display=''; panelAmb.style.display='none';
-  });
-
-  /* MINIMIZE */
-  var minimized=false;
-  minBtn.addEventListener('click',function(){
-    minimized=!minimized;
-    widget.classList.toggle('minimized',minimized);
-    minBtn.textContent=minimized?'+':'−';
-  });
-
-  /* ── SPEECH SYNTHESIS (Présentation) ── */
-  var audioText=[
-    'Bienvenue chez Astou Boutique, à Saly.',
-    'Ici, on retrouve du linge de maison, des serviettes, des draps, des couvertures, des peignoirs, des serviettes pour hôtels, des foutas pour transats et des serviettes de plage.',
-    'La boutique propose aussi des robes, des tenues stylées, de la confection et des crèmes de beauté.',
-    'Astou Boutique s\'adresse aux familles, aux clientes locales, aux touristes, aux hôtels, aux villas, aux maisons d\'hôtes et aux locations courte durée.',
-    'Vous pouvez regarder la galerie, préparer votre demande, puis contacter directement la boutique sur WhatsApp.',
-    'DIGIYLYFE donne la lumière au commerce du terrain. Le client voit, comprend et contacte directement.'
-  ].join(' ');
-
-  var playBtn=document.getElementById('digiyAudioPlay');
-  var stopBtn=document.getElementById('digiyAudioStop');
-
-  function pickFrVoice(){
-    var vv=window.speechSynthesis?window.speechSynthesis.getVoices():[];
-    return vv.find(function(v){return (v.lang||'').toLowerCase().indexOf('fr')===0;})||vv[0]||null;
-  }
-  function resetSpeech(){if(playBtn)playBtn.textContent='▶ Écouter';}
-  function startSpeech(){
-    if(!('speechSynthesis' in window)){alert('Lecteur non disponible.');return;}
-    if(window.speechSynthesis.speaking&&window.speechSynthesis.paused){
-      window.speechSynthesis.resume();
-      playBtn.textContent='⏸ Pause';
-      setEQActive(true); setDot(true);
-      return;
-    }
-    if(window.speechSynthesis.speaking){
-      window.speechSynthesis.pause();
-      playBtn.textContent='▶ Reprendre';
-      setEQActive(false);
-      return;
-    }
-    window.speechSynthesis.cancel();
-    var u=new SpeechSynthesisUtterance(audioText);
-    u.lang='fr-FR'; u.rate=.86; u.pitch=1.04;
-    u.voice=pickFrVoice();
-    u.onend=function(){ resetSpeech(); setEQActive(false); setDot(false); };
-    u.onerror=function(){ resetSpeech(); setEQActive(false); setDot(false); };
-    window.speechSynthesis.speak(u);
-    playBtn.textContent='⏸ Pause';
-    setEQActive(true); setDot(true);
-  }
-  if(playBtn) playBtn.addEventListener('click',startSpeech);
-  if(stopBtn) stopBtn.addEventListener('click',function(){
-    if('speechSynthesis' in window) window.speechSynthesis.cancel();
-    resetSpeech(); setEQActive(false); setDot(false);
-  });
-  if('speechSynthesis' in window){
-    window.speechSynthesis.onvoiceschanged=function(){pickFrVoice();};
-    window.addEventListener('beforeunload',function(){window.speechSynthesis.cancel();});
-  }
+  /* Init */
+  loadTrack(0);
 
 })();
 </script>
