@@ -261,13 +261,23 @@
     .gallery-stage{
       border:1px solid var(--lg);border-radius:var(--r);
       overflow:hidden;position:relative;
-      background:rgba(4,12,8,.9);
+      background:
+        radial-gradient(circle at 50% 18%,rgba(245,199,107,.11),transparent 46%),
+        linear-gradient(145deg,rgba(8,24,17,.98),rgba(2,8,5,.98));
       box-shadow:0 32px 90px rgba(0,0,0,.5);
       margin-bottom:12px;
     }
-    .gallery-slide{display:none;position:relative}
+    .gallery-slide{display:none;position:relative;background:transparent}
     .gallery-slide.active{display:block}
-    .gallery-slide img{width:100%;height:clamp(280px,42vh,460px);object-fit:cover}
+    /* Recadrage DIGIY : photo grande, mais entière. Pas de zoom qui coupe le produit. */
+    .gallery-slide img{
+      width:100%;
+      height:clamp(440px,66vh,780px);
+      object-fit:contain;
+      object-position:center center;
+      padding:10px;
+      background:transparent;
+    }
     .gallery-slide figcaption{
       position:absolute;left:16px;right:16px;bottom:16px;
       padding:12px 18px;border-radius:16px;
@@ -298,7 +308,7 @@
       border-radius:14px;overflow:hidden;
       min-width:78px;height:58px;cursor:pointer;flex-shrink:0;transition:all .2s;
     }
-    .gallery-thumb img{width:100%;height:100%;object-fit:cover}
+    .gallery-thumb img{width:100%;height:100%;object-fit:cover;object-position:center}
     .gallery-thumb.active{outline:2.5px solid rgba(245,199,107,.9);outline-offset:2px}
 
     /* ════════════════════════════
@@ -328,7 +338,7 @@
     .form-btn:hover{box-shadow:0 12px 40px rgba(22,199,132,.46);transform:translateY(-2px)}
 
     /* ════════════════════════════
-       MUSIC PLAYER BAR
+       DIGIY AUDIO READER BAR
     ════════════════════════════ */
     .player{
       position:relative;z-index:10;flex-shrink:0;
@@ -354,6 +364,9 @@
     @keyframes spin{to{transform:rotate(360deg)}}
     .p-name{font-size:14px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:155px}
     .p-status{font-size:11px;font-weight:500;color:var(--muted);margin-top:3px}
+    .p-note{font-size:11px;font-weight:800;letter-spacing:.14em;color:rgba(255,232,168,.72);white-space:nowrap;flex-shrink:0}
+    .digiy-reader .p-track{cursor:default}
+    .digiy-reader .p-disc{animation:none}
 
     /* EQ */
     .p-eq{display:flex;align-items:flex-end;gap:3px;height:24px;flex-shrink:0}
@@ -430,6 +443,12 @@
       .p-prog{flex:1.5}
       .p-vol{display:none}
       .player{gap:12px;padding:0 16px}
+      .gallery-slide img{
+        height:clamp(390px,58dvh,620px);
+        object-fit:contain;
+        padding:8px;
+      }
+      .p-note{display:none}
     }
 
     /* Slide helper for hero layout */
@@ -653,17 +672,17 @@
   <button class="snav next" id="snavNext" type="button">›</button>
 </div>
 
-<!-- ══ PLAYER BAR ══ -->
-<div class="player">
+<!-- ══ LECTEUR DIGIY AUDIO ══ -->
+<div class="player digiy-reader" aria-label="Lecteur vocal DIGIY">
   <div class="p-info">
-    <div class="p-disc" id="pDisc">🎵</div>
+    <div class="p-disc" id="pDisc">🎧</div>
     <div>
-      <div class="p-name" id="pName">Ambiance Boutique</div>
-      <div class="p-status" id="pStatus">En pause</div>
+      <div class="p-name" id="pName">Astou Boutique en audio</div>
+      <div class="p-status" id="pStatus">Présentation vocale · prêt</div>
     </div>
   </div>
 
-  <div class="p-eq" id="pEq">
+  <div class="p-eq" id="pEq" aria-hidden="true">
     <div class="p-eq-b" style="--d:.33s;--h:14px"></div>
     <div class="p-eq-b" style="--d:.42s;--h:20px"></div>
     <div class="p-eq-b" style="--d:.27s;--h:11px"></div>
@@ -672,25 +691,22 @@
   </div>
 
   <div class="p-ctrl">
-    <button class="pc" id="pPrev" title="Précédent">⏮</button>
-    <button class="pc main" id="pPlay" title="Lecture">▶</button>
-    <button class="pc" id="pNext" title="Suivant">⏭</button>
+    <button class="pc" id="pReplay" title="Recommencer">↺</button>
+    <button class="pc main" id="pPlay" title="Écouter / pause">▶</button>
+    <button class="pc" id="pStop" title="Stop">■</button>
   </div>
 
   <div class="p-prog">
     <div class="p-times">
       <span id="pCur">0:00</span>
-      <span id="pDur">3:45</span>
+      <span id="pDur">~1:20</span>
     </div>
-    <div class="p-track" id="pTrack">
+    <div class="p-track" id="pTrack" aria-hidden="true">
       <div class="p-fill" id="pFill"></div>
     </div>
   </div>
 
-  <div class="p-vol">
-    <button class="p-vol-ic" id="pVolIc" title="Muet">🔊</button>
-    <input type="range" class="vslide" id="pVolR" min="0" max="100" value="70" style="--pv:70%">
-  </div>
+  <div class="p-note">BY DIGIYLYFE</div>
 </div>
 
 <script>
@@ -794,233 +810,170 @@ if(sendBtn) sendBtn.addEventListener('click',function(){
 });
 
 /* ══════════════════════════════════
-   LECTEUR AUDIO — WEB AUDIO API
-   3 ambiances différentes
-   Lecteur avec contrôles complets
+   DIGIY AUDIO — LECTEUR VOCAL
+   Sans musique. Présentation claire de la boutique.
 ══════════════════════════════════ */
-var TRACKS=[
-  {name:'Ambiance Boutique', dur:225, root:110,   bells:[880,1108.73,1318.51,1760]},
-  {name:'Détente & Style',   dur:260, root:130.81, bells:[1046.5,1318.51,1567.98,2093]},
-  {name:'Saly Vibes',        dur:238, root:146.83, bells:[987.77,1174.66,1479.98,1975.53]}
-];
+var audioText=[
+  'Bienvenue chez Astou Boutique, à Saly.',
+  'Astou Boutique propose du linge de maison, des serviettes, des draps, des couvertures, des peignoirs, des foutas pour transats et des serviettes de plage.',
+  'La boutique accompagne aussi les hôtels, les villas, les maisons d’hôtes, les locations courte durée et les familles qui veulent équiper leurs espaces avec goût.',
+  'On y retrouve aussi des robes, des tenues stylées, de la confection et des crèmes de beauté.',
+  'Vous pouvez regarder la galerie, préparer votre demande, puis contacter directement Astou Boutique sur WhatsApp.',
+  'DIGIYLYFE donne la lumière au commerce du terrain. Le client voit, comprend et contacte directement.'
+].join(' ');
 
-/* Build harmonic chord from root */
-function chord(root){
-  return [
-    root/2,     /* sub octave  */
-    root,       /* root        */
-    root*1.5,   /* fifth       */
-    root*2,     /* octave      */
-    root*2.52,  /* major third */
-    root*3,     /* fifth+oct   */
-    root*4      /* 2nd octave  */
-  ];
-}
-
-var AudioCtx=window.AudioContext||window.webkitAudioContext;
-var ctx=null,master=null,rev=null;
-var activeOsc=[],activeTimers=[];
-var trackIdx=0,playing=false;
-var startCtxTime=0,pauseOff=0;
-var muted=false,volVal=0.70;
-var rafId=null;
-
-function ensureCtx(){
-  if(!ctx){
-    ctx=new AudioCtx();
-    master=ctx.createGain();master.gain.value=0;
-    var comp=ctx.createDynamicsCompressor();
-    comp.threshold.value=-14;comp.knee.value=8;comp.ratio.value=4;
-    master.connect(comp);comp.connect(ctx.destination);
-  }
-  if(ctx.state==='suspended') ctx.resume();
-}
-
-function buildReverb(){
-  var c=ctx.createConvolver();
-  var sr=ctx.sampleRate,len=Math.floor(sr*5);
-  var buf=ctx.createBuffer(2,len,sr);
-  for(var ch=0;ch<2;ch++){
-    var d=buf.getChannelData(ch);
-    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.5);
-  }
-  c.buffer=buf;
-  return c;
-}
-
-function addOsc(freq,gain,type){
-  var o=ctx.createOscillator();
-  var g=ctx.createGain();
-  var f=ctx.createBiquadFilter();
-  o.type=type||'sine';o.frequency.value=freq;
-  o.detune.value=(Math.random()-.5)*10;
-  g.gain.value=gain;f.type='lowpass';f.frequency.value=1100;
-  /* filter LFO */
-  var lfo=ctx.createOscillator();var lfoG=ctx.createGain();
-  lfo.frequency.value=0.02+Math.random()*0.06;lfoG.gain.value=280+Math.random()*220;
-  lfo.connect(lfoG);lfoG.connect(f.frequency);
-  o.connect(f);f.connect(g);g.connect(master);g.connect(rev);
-  o.start();lfo.start();
-  activeOsc.push(o,lfo);
-}
-
-function spawnChime(){
-  if(!playing) return;
-  var t=ctx.currentTime;
-  var notes=TRACKS[trackIdx].bells;
-  var freq=notes[Math.floor(Math.random()*notes.length)];
-  var o=ctx.createOscillator();var g=ctx.createGain();
-  o.type='sine';o.frequency.value=freq;
-  g.gain.setValueAtTime(0,t);
-  g.gain.linearRampToValueAtTime(0.04,t+0.03);
-  g.gain.exponentialRampToValueAtTime(0.0001,t+2.6);
-  o.connect(g);g.connect(master);g.connect(rev);
-  o.start(t);o.stop(t+3);
-  var tid=setTimeout(spawnChime,7000+Math.random()*12000);
-  activeTimers.push(tid);
-}
-
-function startSound(){
-  ensureCtx();
-  if(!rev){
-    rev=buildReverb();
-    var rg=ctx.createGain();rg.gain.value=0.42;
-    rev.connect(rg);rg.connect(master);
-  }
-  var freqs=chord(TRACKS[trackIdx].root);
-  var gains=[0.10,0.09,0.065,0.07,0.055,0.045,0.025];
-  freqs.forEach(function(f,i){addOsc(f,gains[i]||0.03);});
-  master.gain.setValueAtTime(0,ctx.currentTime);
-  master.gain.linearRampToValueAtTime(muted?0:volVal,ctx.currentTime+3);
-  startCtxTime=ctx.currentTime-pauseOff;
-  playing=true;
-  setTimeout(spawnChime,5000);
-  tick();
-}
-
-function stopSound(soft){
-  playing=false;
-  cancelAnimationFrame(rafId);
-  activeTimers.forEach(clearTimeout);activeTimers=[];
-  if(!ctx) return;
-  var now=ctx.currentTime;
-  var fadeT=soft?2:0.3;
-  master.gain.setValueAtTime(master.gain.value,now);
-  master.gain.linearRampToValueAtTime(0,now+fadeT);
-  setTimeout(function(){
-    activeOsc.forEach(function(n){try{n.stop();}catch(e){}});
-    activeOsc=[];
-  },(fadeT+0.2)*1000);
-}
-
-function elapsed(){
-  if(!ctx) return pauseOff;
-  return playing ? Math.min(ctx.currentTime-startCtxTime, TRACKS[trackIdx].dur) : pauseOff;
-}
+var playBtn=document.getElementById('pPlay');
+var stopBtn=document.getElementById('pStop');
+var replayBtn=document.getElementById('pReplay');
+var pDisc=document.getElementById('pDisc');
+var pStatus=document.getElementById('pStatus');
+var pFill=document.getElementById('pFill');
+var pTrack=document.getElementById('pTrack');
+var pCur=document.getElementById('pCur');
+var pDur=document.getElementById('pDur');
+var eq=document.getElementById('pEq');
+var eqBars=[].slice.call(eq.querySelectorAll('.p-eq-b'));
+var utterance=null;
+var isSpeaking=false;
+var isPaused=false;
+var simElapsed=0;
+var simStart=0;
+var progressTimer=null;
+var estimatedDuration=80;
 
 function fmt(s){
   s=Math.max(0,Math.floor(s));
-  return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
+  return Math.floor(s/60)+':'+(s%60<10?'0':'')+(s%60);
 }
 
-function tick(){
-  if(!playing) return;
-  var e=elapsed();
-  var dur=TRACKS[trackIdx].dur;
-  if(e>=dur){nextTrack(true);return;}
-  var pct=e/dur;
-  document.getElementById('pFill').style.width=(pct*100)+'%';
-  document.getElementById('pTrack').style.setProperty('--pos',(pct*100)+'%');
-  document.getElementById('pCur').textContent=fmt(e);
-  document.getElementById('pStatus').textContent='Piste '+(trackIdx+1)+' · '+fmt(e);
-  rafId=requestAnimationFrame(tick);
+pDur.textContent='~'+fmt(estimatedDuration);
+
+function pickFrVoice(){
+  var voices=window.speechSynthesis?window.speechSynthesis.getVoices():[];
+  return voices.find(function(v){return (v.lang||'').toLowerCase().indexOf('fr')===0;}) || voices[0] || null;
 }
 
 function setEQ(on){
-  [].slice.call(document.getElementById('pEq').querySelectorAll('.p-eq-b')).forEach(function(b){
-    b.classList.toggle('on',on);
-  });
+  eqBars.forEach(function(b){b.classList.toggle('on',on);});
+  pDisc.classList.toggle('on',on);
 }
 
-function setPlaying(on){
-  document.getElementById('pPlay').textContent=on?'⏸':'▶';
-  document.getElementById('pDisc').classList.toggle('on',on);
-  document.getElementById('pStatus').textContent=on?('Piste '+(trackIdx+1)):'En pause';
-  setEQ(on);
+function setProgress(seconds){
+  var pct=Math.min(100,(seconds/estimatedDuration)*100);
+  pFill.style.width=pct+'%';
+  pTrack.style.setProperty('--pos',pct+'%');
+  pCur.textContent=fmt(seconds);
 }
 
-function loadTrack(i){
-  pauseOff=0;
-  trackIdx=((i%TRACKS.length)+TRACKS.length)%TRACKS.length;
-  document.getElementById('pName').textContent=TRACKS[trackIdx].name;
-  document.getElementById('pDur').textContent=fmt(TRACKS[trackIdx].dur);
-  document.getElementById('pCur').textContent='0:00';
-  document.getElementById('pFill').style.width='0%';
+function startProgress(){
+  clearInterval(progressTimer);
+  simStart=Date.now()-simElapsed*1000;
+  progressTimer=setInterval(function(){
+    if(!isSpeaking || isPaused) return;
+    simElapsed=(Date.now()-simStart)/1000;
+    setProgress(simElapsed);
+  },250);
 }
 
-function nextTrack(auto){
-  var wasPlaying=playing;
-  if(playing){stopSound(!auto);setPlaying(false);}
-  loadTrack(trackIdx+1);
-  if(wasPlaying){setTimeout(function(){startSound();setPlaying(true);},auto?200:300);}
+function stopProgress(reset){
+  clearInterval(progressTimer);
+  progressTimer=null;
+  if(reset){
+    simElapsed=0;
+    setProgress(0);
+  }
 }
 
-/* PLAY/PAUSE */
-document.getElementById('pPlay').addEventListener('click',function(){
-  if(playing){
-    pauseOff=elapsed();
-    stopSound(false);setPlaying(false);
-  } else {
-    startSound();setPlaying(true);
+function resetReader(){
+  isSpeaking=false;
+  isPaused=false;
+  utterance=null;
+  playBtn.textContent='▶';
+  pStatus.textContent='Présentation vocale · prêt';
+  setEQ(false);
+  stopProgress(true);
+}
+
+function finishReader(){
+  isSpeaking=false;
+  isPaused=false;
+  playBtn.textContent='▶';
+  pStatus.textContent='Lecture terminée';
+  setEQ(false);
+  setProgress(estimatedDuration);
+  clearInterval(progressTimer);
+  setTimeout(function(){
+    if(!isSpeaking){
+      simElapsed=0;
+      setProgress(0);
+      pStatus.textContent='Présentation vocale · prêt';
+    }
+  },1200);
+}
+
+function speakFresh(){
+  if(!('speechSynthesis' in window)){
+    alert('Lecteur vocal non disponible sur ce navigateur.');
+    return;
   }
-});
+  window.speechSynthesis.cancel();
+  stopProgress(true);
+  utterance=new SpeechSynthesisUtterance(audioText);
+  utterance.lang='fr-FR';
+  utterance.rate=.86;
+  utterance.pitch=1.04;
+  utterance.volume=1;
+  utterance.voice=pickFrVoice();
+  utterance.onend=finishReader;
+  utterance.onerror=resetReader;
+  isSpeaking=true;
+  isPaused=false;
+  playBtn.textContent='⏸';
+  pStatus.textContent='Lecture en cours';
+  setEQ(true);
+  startProgress();
+  window.speechSynthesis.speak(utterance);
+}
 
-/* PREV */
-document.getElementById('pPrev').addEventListener('click',function(){
-  var wasP=playing;
-  if(playing){stopSound(false);setPlaying(false);}
-  loadTrack(trackIdx-1);
-  if(wasP){setTimeout(function(){startSound();setPlaying(true);},300);}
-});
-
-/* NEXT */
-document.getElementById('pNext').addEventListener('click',function(){
-  nextTrack(false);
-});
-
-/* SEEK */
-document.getElementById('pTrack').addEventListener('click',function(e){
-  var rect=this.getBoundingClientRect();
-  var pct=(e.clientX-rect.left)/rect.width;
-  pauseOff=pct*TRACKS[trackIdx].dur;
-  if(playing){
-    stopSound(false);
-    setTimeout(function(){startSound();setPlaying(true);},320);
-  } else {
-    document.getElementById('pFill').style.width=(pct*100)+'%';
-    document.getElementById('pCur').textContent=fmt(pauseOff);
+playBtn.addEventListener('click',function(){
+  if(!('speechSynthesis' in window)){
+    alert('Lecteur vocal non disponible sur ce navigateur.');
+    return;
   }
-});
-
-/* VOLUME */
-document.getElementById('pVolR').addEventListener('input',function(){
-  volVal=parseInt(this.value)/100;
-  this.style.setProperty('--pv',this.value+'%');
-  document.getElementById('pVolIc').textContent=volVal===0?'🔇':volVal<0.4?'🔈':'🔊';
-  if(master&&playing){
-    master.gain.linearRampToValueAtTime(muted?0:volVal,ctx.currentTime+0.3);
+  if(isSpeaking && !isPaused){
+    window.speechSynthesis.pause();
+    isPaused=true;
+    playBtn.textContent='▶';
+    pStatus.textContent='Pause';
+    setEQ(false);
+    return;
   }
-});
-
-document.getElementById('pVolIc').addEventListener('click',function(){
-  muted=!muted;
-  this.textContent=muted?'🔇':'🔊';
-  if(master&&playing){
-    master.gain.linearRampToValueAtTime(muted?0:volVal,ctx.currentTime+0.3);
+  if(isSpeaking && isPaused){
+    window.speechSynthesis.resume();
+    isPaused=false;
+    playBtn.textContent='⏸';
+    pStatus.textContent='Lecture en cours';
+    setEQ(true);
+    startProgress();
+    return;
   }
+  speakFresh();
 });
 
-loadTrack(0);
+stopBtn.addEventListener('click',function(){
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  resetReader();
+});
+
+replayBtn.addEventListener('click',function(){
+  speakFresh();
+});
+
+if('speechSynthesis' in window){
+  window.speechSynthesis.onvoiceschanged=function(){pickFrVoice();};
+  window.addEventListener('beforeunload',function(){window.speechSynthesis.cancel();});
+}
+
 
 })();
 </script>
