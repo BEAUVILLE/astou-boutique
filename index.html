@@ -7,27 +7,24 @@
   <meta name="description" content="Astou Boutique à Saly : linge de maison, serviettes, draps, peignoirs, foutas, plage, robes, tenues stylées, confection et crèmes de beauté."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ── VARIABLES ── */
     :root{
       --bg:#060f0c;
-      --card:rgba(16,38,28,.82);
-      --ink:#f5f0e8;
-      --muted:#b0c8bc;
-      --line:rgba(255,255,255,.10);
-      --line-gold:rgba(245,199,107,.26);
+      --ink:#ffffff;
+      --ink2:#e8f4ef;
+      --muted:#c2ddd5;
+      --line:rgba(255,255,255,.13);
+      --lg:rgba(245,199,107,.30);
       --gold:#f5c76b;
       --gold2:#ffe8a8;
       --green:#16c784;
-      --deep:#030d09;
-      --shadow:0 28px 70px rgba(0,0,0,.52);
-      --topH:58px;
-      --playerH:80px;
+      --topH:62px;
+      --playerH:88px;
       --slideH:calc(100dvh - var(--topH) - var(--playerH));
       --font-h:'Cormorant Garamond',Georgia,serif;
       --font-b:'DM Sans',system-ui,sans-serif;
-      --r:26px;
+      --r:28px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html{overflow:hidden}
@@ -36,8 +33,7 @@
       color:var(--ink);
       background:var(--bg);
       height:100dvh;
-      display:flex;
-      flex-direction:column;
+      display:flex;flex-direction:column;
       overflow:hidden;
     }
     a{color:inherit;text-decoration:none}
@@ -45,417 +41,401 @@
 
     /* ── AURORA ── */
     #aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-    .ab{position:absolute;border-radius:50%;filter:blur(90px);opacity:.15;animation:af linear infinite}
-    .ab:nth-child(1){width:700px;height:700px;background:radial-gradient(circle,rgba(22,199,132,.9),transparent 65%);top:-20%;left:-15%;animation-duration:30s}
-    .ab:nth-child(2){width:550px;height:550px;background:radial-gradient(circle,rgba(245,199,107,.8),transparent 65%);top:25%;right:-12%;animation-duration:38s;animation-delay:-14s}
-    .ab:nth-child(3){width:600px;height:600px;background:radial-gradient(circle,rgba(22,199,132,.5),transparent 65%);bottom:-15%;left:28%;animation-duration:25s;animation-delay:-9s}
+    .ab{position:absolute;border-radius:50%;filter:blur(90px);opacity:.18;animation:af linear infinite}
+    .ab:nth-child(1){width:700px;height:700px;background:radial-gradient(circle,rgba(22,199,132,.9),transparent 65%);top:-18%;left:-12%;animation-duration:30s}
+    .ab:nth-child(2){width:600px;height:600px;background:radial-gradient(circle,rgba(245,199,107,.75),transparent 65%);top:30%;right:-10%;animation-duration:38s;animation-delay:-14s}
+    .ab:nth-child(3){width:550px;height:550px;background:radial-gradient(circle,rgba(22,199,132,.5),transparent 65%);bottom:-12%;left:30%;animation-duration:25s;animation-delay:-9s}
     @keyframes af{
       0%{transform:translate(0,0) scale(1)}
-      33%{transform:translate(35px,-25px) scale(1.06)}
-      66%{transform:translate(-18px,42px) scale(.95)}
+      33%{transform:translate(40px,-28px) scale(1.07)}
+      66%{transform:translate(-20px,44px) scale(.94)}
       100%{transform:translate(0,0) scale(1)}
     }
     body::before{
       content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity:.02;background-size:180px 180px;
+      opacity:.022;background-size:180px;
     }
 
-    /* ── TOPBAR ── */
+    /* ════════════════════════════
+       TOPBAR
+    ════════════════════════════ */
     .topbar{
       position:relative;z-index:10;
-      height:var(--topH);
+      height:var(--topH);flex-shrink:0;
       display:flex;align-items:center;justify-content:space-between;
-      padding:0 28px;
-      background:rgba(4,12,8,.88);
-      backdrop-filter:blur(18px);
-      border-bottom:1px solid var(--line-gold);
-      flex-shrink:0;
+      padding:0 30px;
+      background:rgba(3,10,7,.92);
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--lg);
     }
     .brandmark{
       font-family:var(--font-h);
-      font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;
+      font-weight:700;font-size:17px;letter-spacing:.14em;text-transform:uppercase;
       color:var(--gold2);
       display:flex;align-items:center;gap:10px;
     }
-    .brand-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
-    .slide-dots{display:flex;align-items:center;gap:6px}
+    .bdot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+    .slide-dots{display:flex;align-items:center;gap:7px}
     .sdot{
-      width:6px;height:6px;border-radius:50%;
-      background:rgba(255,255,255,.2);
-      border:none;cursor:pointer;
-      transition:all .25s;
+      width:7px;height:7px;border-radius:4px;
+      background:rgba(255,255,255,.22);
+      border:none;cursor:pointer;transition:all .28s;
     }
-    .sdot.active{width:20px;border-radius:3px;background:var(--gold)}
-    .sdot:hover:not(.active){background:rgba(245,199,107,.4)}
-    .slide-counter{
-      font-size:12px;font-weight:600;letter-spacing:.12em;
-      color:var(--muted);
-    }
-    .topbar-right{display:flex;align-items:center;gap:16px}
+    .sdot.active{width:22px;background:var(--gold)}
+    .sdot:hover:not(.active){background:rgba(245,199,107,.5)}
+    .slide-counter{font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--muted)}
+    .topbar-r{display:flex;align-items:center;gap:16px}
     .wa-pill{
       display:inline-flex;align-items:center;gap:7px;
-      border:1px solid var(--line-gold);border-radius:999px;
-      padding:8px 14px;font-size:13px;font-weight:600;
-      background:rgba(22,199,132,.1);color:var(--green);
+      border:1px solid var(--lg);border-radius:999px;
+      padding:9px 16px;font-size:13px;font-weight:700;
+      background:rgba(22,199,132,.12);color:var(--green);
       transition:background .2s;
     }
-    .wa-pill:hover{background:rgba(22,199,132,.2)}
+    .wa-pill:hover{background:rgba(22,199,132,.24)}
 
-    /* ── SLIDESHOW ── */
+    /* ════════════════════════════
+       SLIDESHOW
+    ════════════════════════════ */
     .slideshow{
       position:relative;z-index:2;
       height:var(--slideH);
-      overflow:hidden;
-      flex-shrink:0;
+      overflow:hidden;flex-shrink:0;
     }
     .slide{
       position:absolute;inset:0;
       opacity:0;pointer-events:none;
-      transition:opacity .5s ease, transform .5s ease;
-      transform:translateX(30px);
+      transition:opacity .48s ease,transform .48s ease;
+      transform:translateX(36px);
       overflow-y:auto;
-      scrollbar-width:thin;
-      scrollbar-color:rgba(245,199,107,.3) transparent;
+      scrollbar-width:thin;scrollbar-color:rgba(245,199,107,.3) transparent;
     }
     .slide::-webkit-scrollbar{width:4px}
     .slide::-webkit-scrollbar-thumb{background:rgba(245,199,107,.3);border-radius:2px}
-    .slide.active{opacity:1;pointer-events:auto;z-index:1;transform:translateX(0)}
-    .slide.exit-left{opacity:0;transform:translateX(-30px)}
+    .slide.active{opacity:1;pointer-events:auto;z-index:1;transform:none}
+    .slide.out-l{opacity:0;transform:translateX(-36px)}
     .slide-inner{
-      max-width:1100px;margin:0 auto;
-      padding:32px 32px;
+      max-width:1200px;margin:0 auto;
+      padding:40px 44px 48px;
       min-height:100%;
     }
 
-    /* ── SLIDE NAV ARROWS ── */
+    /* ARROWS */
     .snav{
       position:absolute;top:50%;transform:translateY(-50%);
-      z-index:5;
-      width:46px;height:46px;border-radius:50%;
-      border:1px solid var(--line-gold);
-      background:rgba(4,14,10,.72);
-      backdrop-filter:blur(8px);
-      color:var(--gold2);font-size:22px;
-      cursor:pointer;
-      transition:all .22s;
+      z-index:5;width:50px;height:50px;border-radius:50%;
+      border:1px solid var(--lg);
+      background:rgba(3,10,7,.78);backdrop-filter:blur(10px);
+      color:var(--gold2);font-size:24px;cursor:pointer;
       display:flex;align-items:center;justify-content:center;
+      transition:all .22s;
     }
-    .snav:hover{background:rgba(245,199,107,.18);border-color:rgba(245,199,107,.5)}
-    .snav.prev{left:14px}
-    .snav.next{right:14px}
-    .snav:disabled{opacity:.2;cursor:default}
+    .snav:hover{background:rgba(245,199,107,.2);border-color:rgba(245,199,107,.55)}
+    .snav.prev{left:16px}.snav.next{right:16px}
+    .snav:disabled{opacity:.18;cursor:default}
 
-    /* ── SLIDE CONTENT HELPERS ── */
-    .s-kicker{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-      color:var(--gold);
-      border:1px solid var(--line-gold);border-radius:999px;
-      padding:6px 14px;background:rgba(245,199,107,.07);
-      margin-bottom:18px;
+    /* ════════════════════════════
+       TYPOGRAPHY
+    ════════════════════════════ */
+    .kicker{
+      display:inline-flex;align-items:center;gap:9px;
+      font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+      color:var(--gold);border:1px solid var(--lg);border-radius:999px;
+      padding:7px 16px;background:rgba(245,199,107,.08);margin-bottom:22px;
     }
-    .s-kicker::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--green);box-shadow:0 0 7px var(--green)}
+    .kicker::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
     .s-title{
       font-family:var(--font-h);
-      font-size:clamp(52px,8vw,100px);
-      line-height:.88;letter-spacing:-.04em;font-weight:600;
-      background:linear-gradient(135deg,#fff5dc,var(--gold2),#b8f0d8);
+      font-size:clamp(60px,8.5vw,116px);
+      line-height:.86;letter-spacing:-.04em;font-weight:700;
+      background:linear-gradient(140deg,#ffffff,var(--gold2),#b8f0d8);
       -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      margin-bottom:8px;
+      margin-bottom:10px;
     }
-    .s-subtitle{
+    .s-sub{
       font-family:var(--font-h);
-      font-size:clamp(22px,3.5vw,38px);
-      font-style:italic;font-weight:400;
-      color:rgba(255,247,220,.65);
-      margin-bottom:18px;
+      font-size:clamp(24px,4vw,42px);font-style:italic;font-weight:400;
+      color:rgba(255,255,255,.7);margin-bottom:22px;
     }
     .s-lead{
-      font-size:16px;line-height:1.72;color:var(--muted);
-      max-width:820px;margin-bottom:10px;font-weight:300;
+      font-size:18px;line-height:1.72;
+      color:var(--ink2);font-weight:500;
+      max-width:840px;margin-bottom:12px;
     }
     .s-h2{
       font-family:var(--font-h);
-      font-size:clamp(34px,5vw,54px);line-height:.92;
-      letter-spacing:-.03em;font-weight:600;
-      color:var(--gold2);margin-bottom:16px;
+      font-size:clamp(38px,5.5vw,60px);line-height:.9;
+      letter-spacing:-.03em;font-weight:700;
+      color:#fff;margin-bottom:18px;
     }
     .s-intro{
-      font-size:15px;line-height:1.68;color:var(--muted);
-      max-width:820px;margin-bottom:24px;font-weight:300;
+      font-size:17px;line-height:1.7;color:var(--ink2);
+      max-width:860px;margin-bottom:28px;font-weight:500;
     }
 
-    /* ── GRID ── */
-    .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .g2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-    .g1{display:grid;gap:14px}
+    /* ════════════════════════════
+       GRID
+    ════════════════════════════ */
+    .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .g2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 
-    /* ── BOX ── */
+    /* ════════════════════════════
+       BOX — PLUS GRAND, BLANC PUR
+    ════════════════════════════ */
     .box{
-      background:linear-gradient(160deg,rgba(20,42,32,.8),rgba(6,15,12,.7));
+      background:linear-gradient(155deg,rgba(22,46,34,.88),rgba(6,16,11,.80));
       border:1px solid var(--line);border-radius:var(--r);
-      padding:24px 26px;
-      backdrop-filter:blur(10px);
-      transition:border-color .3s,box-shadow .3s;
+      padding:40px 42px;
+      backdrop-filter:blur(12px);
+      box-shadow:0 28px 72px rgba(0,0,0,.50);
+      transition:border-color .3s,box-shadow .3s,transform .3s;
     }
-    .box:hover{border-color:rgba(245,199,107,.3);box-shadow:0 16px 50px rgba(0,0,0,.4)}
+    .box:hover{
+      border-color:rgba(245,199,107,.35);
+      box-shadow:0 36px 90px rgba(0,0,0,.55);
+      transform:translateY(-2px);
+    }
     .box h3{
-      font-family:var(--font-h);font-size:22px;font-weight:600;
-      color:var(--gold2);margin-bottom:10px;
+      font-family:var(--font-h);
+      font-size:28px;font-weight:700;
+      color:#fff;margin-bottom:14px;line-height:1.05;
     }
-    .box p,.box li{color:var(--muted);line-height:1.65;font-weight:300;font-size:14px}
-    .box ul{margin:10px 0 0;padding-left:18px}
-    .box ul li{margin-bottom:6px}
+    .box p{
+      color:var(--ink2);line-height:1.72;
+      font-weight:500;font-size:16px;
+    }
+    .box p+p{margin-top:10px}
+    .box ul{margin:12px 0 0;padding-left:22px}
+    .box li{
+      color:var(--ink2);line-height:1.7;
+      font-weight:500;font-size:16px;margin-bottom:8px;
+    }
     .notice{
-      margin-top:14px;padding-top:14px;
-      border-top:1px solid rgba(245,199,107,.2);
-      color:rgba(245,220,120,.9)!important;font-size:13px;line-height:1.6;
+      margin-top:18px;padding-top:16px;
+      border-top:1px solid rgba(245,199,107,.22);
+      color:rgba(255,232,130,.9)!important;
+      font-size:14px;font-weight:600;line-height:1.6;
     }
 
-    /* ── TAGS ── */
-    .taglist{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    /* ════════════════════════════
+       TAGS
+    ════════════════════════════ */
+    .taglist{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
     .tag{
-      border:1px solid var(--line-gold);
-      background:rgba(245,199,107,.07);
-      color:var(--gold2);border-radius:999px;
-      padding:7px 12px;font-size:12px;font-weight:500;
-      transition:all .2s;
+      border:1px solid var(--lg);background:rgba(245,199,107,.09);
+      color:#fff;border-radius:999px;
+      padding:9px 16px;font-size:13px;font-weight:700;
+      transition:all .2s;letter-spacing:.04em;
     }
-    .tag:hover{background:rgba(245,199,107,.16)}
+    .tag:hover{background:rgba(245,199,107,.2);transform:translateY(-1px)}
 
-    /* ── CTA BUTTONS ── */
-    .cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+    /* ════════════════════════════
+       BUTTONS
+    ════════════════════════════ */
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
     .btn{
-      display:inline-flex;align-items:center;gap:7px;
+      display:inline-flex;align-items:center;gap:8px;
       border:1px solid var(--line);border-radius:999px;
-      padding:12px 18px;font-size:13px;font-weight:600;
+      padding:14px 22px;font-size:15px;font-weight:700;
       cursor:pointer;transition:all .22s;
     }
     .btn.green{
       background:linear-gradient(135deg,var(--green),#10a86d);
       border-color:rgba(22,199,132,.7);color:#06231a;
-      box-shadow:0 6px 24px rgba(22,199,132,.24);
+      box-shadow:0 6px 24px rgba(22,199,132,.3);
     }
-    .btn.green:hover{box-shadow:0 10px 34px rgba(22,199,132,.4);transform:translateY(-1px)}
+    .btn.green:hover{box-shadow:0 10px 36px rgba(22,199,132,.5);transform:translateY(-2px)}
     .btn.gold{
       background:linear-gradient(135deg,var(--gold),#e8b44a);
       border-color:rgba(245,199,107,.7);color:#0f2218;
-      box-shadow:0 6px 24px rgba(245,199,107,.22);
+      box-shadow:0 6px 24px rgba(245,199,107,.28);
     }
-    .btn.gold:hover{box-shadow:0 10px 34px rgba(245,199,107,.38);transform:translateY(-1px)}
-    .btn.ghost{background:rgba(255,255,255,.05);color:var(--gold2)}
-    .btn.ghost:hover{background:rgba(245,199,107,.1)}
+    .btn.gold:hover{box-shadow:0 10px 36px rgba(245,199,107,.46);transform:translateY(-2px)}
+    .btn.ghost{background:rgba(255,255,255,.07);color:#fff;border-color:rgba(255,255,255,.18)}
+    .btn.ghost:hover{background:rgba(245,199,107,.12);border-color:var(--lg)}
 
-    /* ── HERO GRID ── */
-    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:24px}
-    .hero-photo{
-      min-height:240px;border-radius:20px;overflow:hidden;
-      border:1px solid var(--line-gold);position:relative;
-    }
-    .hero-photo img{width:100%;height:100%;object-fit:cover}
-    .hero-photo::after{
-      content:'';position:absolute;inset:0;
-      background:linear-gradient(180deg,transparent 40%,rgba(3,10,7,.75));
-    }
-    .hero-photo-cap{
-      position:absolute;left:14px;right:14px;bottom:14px;z-index:1;
-      padding:10px 14px;border-radius:12px;
-      background:rgba(3,10,7,.65);backdrop-filter:blur(8px);
-      border:1px solid rgba(245,199,107,.2);
-      font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--gold2);
-    }
-
-    /* ── GALLERY ── */
+    /* ════════════════════════════
+       GALLERY
+    ════════════════════════════ */
     .gallery-stage{
-      border:1px solid var(--line-gold);border-radius:var(--r);
+      border:1px solid var(--lg);border-radius:var(--r);
       overflow:hidden;position:relative;
       background:rgba(4,12,8,.9);
-      box-shadow:0 28px 80px rgba(0,0,0,.45);
+      box-shadow:0 32px 90px rgba(0,0,0,.5);
+      margin-bottom:12px;
     }
-    .gallery-slides{position:relative;min-height:280px;touch-action:pan-y}
     .gallery-slide{display:none;position:relative}
     .gallery-slide.active{display:block}
-    .gallery-slide img{width:100%;height:clamp(260px,40vh,420px);object-fit:cover}
+    .gallery-slide img{width:100%;height:clamp(280px,42vh,460px);object-fit:cover}
     .gallery-slide figcaption{
-      position:absolute;left:14px;right:14px;bottom:14px;
-      padding:10px 14px;border-radius:12px;
-      background:rgba(3,10,7,.72);backdrop-filter:blur(8px);
-      border:1px solid rgba(245,199,107,.18);
-      font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--gold2);
+      position:absolute;left:16px;right:16px;bottom:16px;
+      padding:12px 18px;border-radius:16px;
+      background:rgba(3,10,7,.78);backdrop-filter:blur(8px);
+      border:1px solid rgba(245,199,107,.22);
+      font-family:var(--font-h);font-size:18px;font-weight:700;color:#fff;
     }
     .gallery-arrow{
       position:absolute;top:50%;transform:translateY(-50%);
-      width:40px;height:40px;border-radius:50%;
-      border:1px solid rgba(255,255,255,.2);
-      background:rgba(4,12,8,.65);backdrop-filter:blur(6px);
-      color:var(--gold2);font-size:22px;z-index:2;cursor:pointer;
-      transition:all .2s;display:flex;align-items:center;justify-content:center;
-    }
-    .gallery-arrow:hover{background:rgba(245,199,107,.2)}
-    .gallery-arrow.prev{left:12px}.gallery-arrow.next{right:12px}
-    .gallery-counter{
-      position:absolute;top:12px;right:12px;
-      padding:5px 11px;border-radius:999px;
-      background:rgba(4,12,8,.65);border:1px solid var(--line-gold);
-      color:var(--gold2);font-size:11px;font-weight:700;z-index:2;
-    }
-    .gallery-thumbs{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding:2px 2px 6px}
-    .gallery-thumb{
-      appearance:none;border:1px solid var(--line);padding:0;
-      border-radius:12px;overflow:hidden;
-      min-width:72px;height:52px;cursor:pointer;flex-shrink:0;
+      width:44px;height:44px;border-radius:50%;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(4,12,8,.72);backdrop-filter:blur(6px);
+      color:var(--gold2);font-size:24px;z-index:2;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
       transition:all .2s;
     }
+    .gallery-arrow:hover{background:rgba(245,199,107,.22)}
+    .gallery-arrow.prev{left:14px}.gallery-arrow.next{right:14px}
+    .gallery-counter{
+      position:absolute;top:14px;right:14px;
+      padding:6px 14px;border-radius:999px;
+      background:rgba(4,12,8,.7);border:1px solid var(--lg);
+      color:#fff;font-size:12px;font-weight:700;z-index:2;
+    }
+    .gallery-thumbs{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 4px}
+    .gallery-thumb{
+      appearance:none;border:1px solid var(--line);padding:0;
+      border-radius:14px;overflow:hidden;
+      min-width:78px;height:58px;cursor:pointer;flex-shrink:0;transition:all .2s;
+    }
     .gallery-thumb img{width:100%;height:100%;object-fit:cover}
-    .gallery-thumb.active{outline:2px solid rgba(245,199,107,.8);outline-offset:2px}
+    .gallery-thumb.active{outline:2.5px solid rgba(245,199,107,.9);outline-offset:2px}
 
-    /* ── FORM ── */
-    .form-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    /* ════════════════════════════
+       FORM
+    ════════════════════════════ */
+    .form-2col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     .form label{
-      display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-      color:var(--gold);margin-bottom:5px;
+      display:block;font-size:12px;font-weight:800;letter-spacing:.14em;
+      text-transform:uppercase;color:var(--gold);margin-bottom:7px;
     }
     .form input,.form textarea{
-      width:100%;padding:11px 13px;border-radius:10px;
-      border:1px solid var(--line);background:rgba(0,0,0,.25);
-      color:var(--ink);font:inherit;font-size:13px;margin-bottom:12px;
+      width:100%;padding:15px 17px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.28);
+      color:#fff;font:inherit;font-size:15px;font-weight:500;margin-bottom:14px;
       transition:border-color .2s;
     }
-    .form input:focus,.form textarea:focus{outline:none;border-color:rgba(245,199,107,.4)}
-    .form textarea{min-height:100px;resize:vertical}
+    .form input::placeholder,.form textarea::placeholder{color:rgba(255,255,255,.35)}
+    .form input:focus,.form textarea:focus{outline:none;border-color:rgba(245,199,107,.45)}
+    .form textarea{min-height:110px;resize:vertical}
     .form-btn{
-      width:100%;padding:13px;border:none;border-radius:12px;
+      width:100%;padding:16px;border:none;border-radius:14px;
       background:linear-gradient(135deg,var(--green),#10a86d);
-      color:#06231a;font-family:var(--font-b);font-size:14px;font-weight:700;
+      color:#06231a;font-family:var(--font-b);font-size:16px;font-weight:800;
       cursor:pointer;transition:all .22s;
-      box-shadow:0 6px 22px rgba(22,199,132,.24);
+      box-shadow:0 6px 24px rgba(22,199,132,.28);letter-spacing:.03em;
     }
-    .form-btn:hover{box-shadow:0 10px 34px rgba(22,199,132,.4);transform:translateY(-1px)}
+    .form-btn:hover{box-shadow:0 12px 40px rgba(22,199,132,.46);transform:translateY(-2px)}
 
-    /* ══════════════════════════════════════════
+    /* ════════════════════════════
        MUSIC PLAYER BAR
-    ══════════════════════════════════════════ */
+    ════════════════════════════ */
     .player{
-      position:relative;z-index:10;
+      position:relative;z-index:10;flex-shrink:0;
       height:var(--playerH);
-      background:rgba(4,12,8,.95);
-      backdrop-filter:blur(20px);
-      border-top:1px solid var(--line-gold);
+      background:rgba(3,9,6,.97);
+      backdrop-filter:blur(22px);
+      border-top:1px solid var(--lg);
       display:flex;align-items:center;
-      padding:0 20px;gap:16px;
-      flex-shrink:0;
+      padding:0 22px;gap:18px;
     }
 
-    /* Track info */
-    .p-info{
-      display:flex;align-items:center;gap:12px;
-      min-width:0;flex:0 0 200px;
-    }
+    /* Disc + info */
+    .p-info{display:flex;align-items:center;gap:13px;flex:0 0 220px;min-width:0}
     .p-disc{
-      width:42px;height:42px;border-radius:50%;
-      background:linear-gradient(135deg,rgba(245,199,107,.3),rgba(22,199,132,.2));
-      border:1px solid var(--line-gold);
-      display:flex;align-items:center;justify-content:center;
-      font-size:18px;flex-shrink:0;
-      animation:spin 8s linear infinite;
-      animation-play-state:paused;
+      width:46px;height:46px;border-radius:50%;flex-shrink:0;
+      background:linear-gradient(135deg,rgba(245,199,107,.4),rgba(22,199,132,.25));
+      border:1px solid var(--lg);
+      display:flex;align-items:center;justify-content:center;font-size:20px;
+      animation:spin 9s linear infinite;animation-play-state:paused;
+      transition:box-shadow .3s;
     }
-    .p-disc.spinning{animation-play-state:running}
-    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-    .p-text{min-width:0}
-    .p-title{
-      font-size:13px;font-weight:700;color:var(--ink);
-      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-      max-width:140px;
-    }
-    .p-sub{font-size:11px;color:var(--muted);font-weight:300;margin-top:2px}
+    .p-disc.on{animation-play-state:running;box-shadow:0 0 20px rgba(245,199,107,.3)}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .p-name{font-size:14px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:155px}
+    .p-status{font-size:11px;font-weight:500;color:var(--muted);margin-top:3px}
 
-    /* EQ bars */
-    .p-eq{display:flex;align-items:flex-end;gap:2px;height:22px;flex-shrink:0}
-    .p-eq-bar{
-      width:3px;border-radius:2px;
-      background:linear-gradient(180deg,var(--gold2),var(--green));
-      height:4px;
-      opacity:.7;
-    }
-    .p-eq-bar.anim{animation:eqA var(--d,.4s) ease-in-out infinite alternate}
-    @keyframes eqA{0%{height:4px}100%{height:var(--h,16px)}}
+    /* EQ */
+    .p-eq{display:flex;align-items:flex-end;gap:3px;height:24px;flex-shrink:0}
+    .p-eq-b{width:3px;border-radius:2px;background:linear-gradient(180deg,var(--gold2),var(--green));height:4px;opacity:.75}
+    .p-eq-b.on{animation:eqA var(--d,.4s) ease-in-out infinite alternate}
+    @keyframes eqA{from{height:4px}to{height:var(--h,16px)}}
 
     /* Controls */
-    .p-controls{
-      display:flex;align-items:center;gap:8px;
-      flex-shrink:0;
-    }
-    .pc-btn{
+    .p-ctrl{display:flex;align-items:center;gap:6px;flex-shrink:0}
+    .pc{
       appearance:none;border:none;background:none;
-      color:var(--muted);cursor:pointer;
-      padding:6px;border-radius:50%;
-      transition:all .2s;font-size:16px;
-      width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+      color:var(--muted);cursor:pointer;border-radius:50%;
+      width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+      font-size:17px;transition:all .2s;
     }
-    .pc-btn:hover{color:var(--ink);background:rgba(255,255,255,.08)}
-    .pc-btn.play{
-      width:44px;height:44px;
+    .pc:hover{color:#fff;background:rgba(255,255,255,.1)}
+    .pc.main{
+      width:48px;height:48px;font-size:20px;
       background:linear-gradient(135deg,var(--gold),#e8b44a);
-      color:#0f2218;border-radius:50%;font-size:18px;
-      box-shadow:0 4px 18px rgba(245,199,107,.34);
+      color:#0f2218;border-radius:50%;
+      box-shadow:0 4px 18px rgba(245,199,107,.38);
     }
-    .pc-btn.play:hover{box-shadow:0 6px 26px rgba(245,199,107,.52);transform:scale(1.06)}
+    .pc.main:hover{box-shadow:0 6px 28px rgba(245,199,107,.58);transform:scale(1.07)}
 
     /* Progress */
-    .p-progress{flex:1;min-width:60px}
-    .p-time-row{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:4px}
-    .p-bar-wrap{
-      width:100%;height:3px;border-radius:2px;
-      background:rgba(255,255,255,.1);cursor:pointer;position:relative;
+    .p-prog{flex:1;min-width:80px}
+    .p-times{display:flex;justify-content:space-between;font-size:10px;font-weight:600;color:var(--muted);margin-bottom:5px}
+    .p-track{width:100%;height:4px;border-radius:2px;background:rgba(255,255,255,.12);cursor:pointer;position:relative}
+    .p-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--green),var(--gold));width:0%;transition:width .18s linear;pointer-events:none}
+    .p-track::after{
+      content:'';position:absolute;top:50%;left:var(--pos,0%);
+      transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;
+      background:var(--gold2);box-shadow:0 0 8px rgba(245,199,107,.6);
+      pointer-events:none;opacity:0;transition:opacity .2s;
     }
-    .p-bar-fill{
-      height:100%;border-radius:2px;
-      background:linear-gradient(90deg,var(--green),var(--gold));
-      width:0%;transition:width .2s linear;pointer-events:none;
-    }
-    .p-bar-wrap::after{
-      content:'';position:absolute;
-      top:50%;left:var(--pos,0%);
-      transform:translate(-50%,-50%);
-      width:10px;height:10px;border-radius:50%;
-      background:var(--gold2);
-      box-shadow:0 0 6px rgba(245,199,107,.6);
-      pointer-events:none;
-      opacity:0;transition:opacity .2s;
-    }
-    .p-bar-wrap:hover::after{opacity:1}
+    .p-track:hover::after{opacity:1}
 
     /* Volume */
-    .p-vol{display:flex;align-items:center;gap:8px;flex-shrink:0;min-width:100px}
-    .p-vol-icon{font-size:14px;color:var(--muted);cursor:pointer}
-    input[type=range].vol{
-      width:80px;-webkit-appearance:none;appearance:none;
-      height:3px;border-radius:2px;
-      background:linear-gradient(90deg,var(--gold) var(--pv,70%),rgba(255,255,255,.1) var(--pv,70%));
-      outline:none;cursor:pointer;
+    .p-vol{display:flex;align-items:center;gap:9px;flex-shrink:0}
+    .p-vol-ic{font-size:16px;color:var(--muted);cursor:pointer;border:none;background:none}
+    input[type=range].vslide{
+      width:90px;-webkit-appearance:none;appearance:none;
+      height:4px;border-radius:2px;outline:none;cursor:pointer;
+      background:linear-gradient(90deg,var(--gold) var(--pv,70%),rgba(255,255,255,.12) var(--pv,70%));
     }
-    input[type=range].vol::-webkit-slider-thumb{
-      -webkit-appearance:none;width:12px;height:12px;
-      border-radius:50%;background:var(--gold2);
-      box-shadow:0 2px 8px rgba(245,199,107,.5);cursor:pointer;
+    input[type=range].vslide::-webkit-slider-thumb{
+      -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+      background:var(--gold2);box-shadow:0 2px 8px rgba(245,199,107,.6);cursor:pointer;
     }
 
-    /* ── RESPONSIVE ── */
-    @media(max-width:760px){
-      :root{--topH:52px;--playerH:72px}
-      .topbar{padding:0 16px}
+    /* ════════════════════════════
+       MOBILE — FORMAT MODERNE
+    ════════════════════════════ */
+    @media(max-width:700px){
+      :root{--topH:54px;--playerH:80px}
+      .topbar{padding:0 18px}
       .wa-pill{display:none}
-      .slide-inner{padding:20px 16px}
-      .g3,.g2,.hero-grid,.form-2col{grid-template-columns:1fr}
-      .s-title{font-size:clamp(42px,12vw,70px)}
+      .slide-counter{display:none}
+      .slide-inner{padding:24px 20px 36px}
+      .g3,.g2,.form-2col{grid-template-columns:1fr}
+      .s-title{font-size:clamp(52px,14vw,80px)}
+      .s-h2{font-size:clamp(38px,9vw,54px)}
+      .s-lead{font-size:17px}
+      .s-intro{font-size:16px}
+      .box{padding:28px 24px}
+      .box h3{font-size:24px}
+      .box p,.box li{font-size:15px}
       .snav{display:none}
-      .p-info{flex:0 0 130px}
-      .p-title{max-width:100px}
-      .p-vol{display:none}
+      .btn{font-size:14px;padding:13px 18px}
+      /* player compact mobile */
+      .p-info{flex:1;min-width:0}
+      .p-name{max-width:120px}
       .p-eq{display:none}
+      .p-prog{flex:1.5}
+      .p-vol{display:none}
+      .player{gap:12px;padding:0 16px}
     }
+
+    /* Slide helper for hero layout */
+    .hero-cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;margin-top:24px}
+    .info-block p{margin-bottom:10px}
+    @media(max-width:700px){.hero-cols{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -466,41 +446,38 @@
 
 <!-- ══ TOPBAR ══ -->
 <header class="topbar">
-  <div class="brandmark">
-    <div class="brand-dot"></div>
-    Astou Boutique
-  </div>
-  <div class="slide-dots" id="slideDots" role="tablist" aria-label="Navigation slides"></div>
-  <div class="topbar-right">
+  <div class="brandmark"><div class="bdot"></div>Astou Boutique</div>
+  <div class="slide-dots" id="slideDots"></div>
+  <div class="topbar-r">
     <span class="slide-counter" id="slideCounter">1 / 7</span>
     <a class="wa-pill" href="https://wa.me/221778765785" target="_blank" rel="noopener">💬 WhatsApp</a>
   </div>
 </header>
 
 <!-- ══ SLIDESHOW ══ -->
-<div class="slideshow" id="slideshow" aria-live="polite">
+<div class="slideshow" id="slideshow">
 
-  <!-- ── SLIDE 1 : ACCUEIL ── -->
-  <div class="slide active" role="tabpanel" aria-label="Accueil">
+  <!-- ─ SLIDE 1 : ACCUEIL ─ -->
+  <div class="slide active">
     <div class="slide-inner">
-      <div class="s-kicker">Saly, Sénégal · Maison · Plage · Style · Beauté</div>
+      <div class="kicker">Saly, Sénégal · Maison · Plage · Style · Beauté</div>
       <h1 class="s-title">Astou<br>Boutique</h1>
-      <p class="s-subtitle">Maison, plage &amp; élégance</p>
+      <p class="s-sub">Maison, plage &amp; élégance</p>
       <p class="s-lead">Linge de maison, serviettes, draps, peignoirs, foutas, tenues stylées, confection et crèmes de beauté. Une boutique utile, belle et directe à Saly.</p>
       <div class="cta-row">
-        <a class="btn green" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique" target="_blank" rel="noopener">💬 Contacter sur WhatsApp</a>
-        <button class="btn gold" type="button" onclick="goSlide(4)">🖼️ Voir la galerie</button>
-        <button class="btn ghost" type="button" onclick="goSlide(1)">Découvrir l'offre →</button>
+        <a class="btn green" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique" target="_blank" rel="noopener">💬 WhatsApp direct</a>
+        <button class="btn gold" onclick="goSlide(4)">🖼️ Galerie</button>
+        <button class="btn ghost" onclick="goSlide(1)">Voir l'offre →</button>
       </div>
     </div>
   </div>
 
-  <!-- ── SLIDE 2 : OFFRE ── -->
-  <div class="slide" role="tabpanel" aria-label="L'offre">
+  <!-- ─ SLIDE 2 : OFFRE ─ -->
+  <div class="slide">
     <div class="slide-inner">
-      <div class="s-kicker">Ce que propose la boutique</div>
-      <h2 class="s-h2">Une boutique utile,<br>belle et directe</h2>
-      <p class="s-intro">Astou Boutique parle à plusieurs publics : familles, femmes, touristes, hôtels, villas, maisons d'hôtes, locations courte durée et propriétaires.</p>
+      <div class="kicker">Ce que propose la boutique</div>
+      <h2 class="s-h2">Utile, belle<br>et directe</h2>
+      <p class="s-intro">Familles, femmes, touristes, hôtels, villas, maisons d'hôtes et locations — Astou Boutique s'adresse à tous ceux qui veulent du beau et du pratique.</p>
       <div class="g3">
         <div class="box">
           <h3>🛏️ Maison &amp; linge</h3>
@@ -512,16 +489,16 @@
         </div>
         <div class="box">
           <h3>👗 Style &amp; beauté</h3>
-          <p>Robes, tenues stylées, confection et crèmes de beauté pour compléter l'univers féminin.</p>
+          <p>Robes, tenues stylées, confection et crèmes de beauté pour compléter l'univers féminin de la boutique.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ── SLIDE 3 : MAISON + HÔTELS ── -->
-  <div class="slide" role="tabpanel" aria-label="Maison et hôtels">
+  <!-- ─ SLIDE 3 : MAISON + HÔTELS ─ -->
+  <div class="slide">
     <div class="slide-inner">
-      <div class="s-kicker">Textile & hébergement</div>
+      <div class="kicker">Textile &amp; hébergement</div>
       <h2 class="s-h2">Maison, hôtels<br>&amp; villas</h2>
       <div class="g2">
         <div class="box">
@@ -532,6 +509,7 @@
             <span class="tag">Draps</span>
             <span class="tag">Couvertures</span>
             <span class="tag">Peignoirs</span>
+            <span class="tag">Linge de maison</span>
           </div>
         </div>
         <div class="box">
@@ -541,6 +519,7 @@
             <li>Foutas pour transats</li>
             <li>Textile plage et piscine</li>
             <li>Équipement villas et maisons d'hôtes</li>
+            <li>Locations courte durée</li>
           </ul>
           <p class="notice">Le client professionnel comprend vite quoi demander : quantités, couleurs, tailles, usage hôtel ou plage.</p>
         </div>
@@ -548,10 +527,10 @@
     </div>
   </div>
 
-  <!-- ── SLIDE 4 : PLAGE + STYLE + BEAUTÉ ── -->
-  <div class="slide" role="tabpanel" aria-label="Plage, style et beauté">
+  <!-- ─ SLIDE 4 : PLAGE + STYLE + BEAUTÉ ─ -->
+  <div class="slide">
     <div class="slide-inner">
-      <div class="s-kicker">Plage · Mode · Beauté</div>
+      <div class="kicker">Plage · Mode · Beauté</div>
       <h2 class="s-h2">Plage, style<br>&amp; beauté</h2>
       <div class="g3">
         <div class="box">
@@ -560,47 +539,47 @@
         </div>
         <div class="box">
           <h3>👗 Tenues stylées</h3>
-          <p>Robes, tenues stylées et confection pour les femmes qui veulent rester élégantes, à l'aise et bien habillées.</p>
+          <p>Robes, tenues et confection pour les femmes qui veulent rester élégantes, à l'aise et bien habillées en toutes circonstances.</p>
         </div>
         <div class="box">
           <h3>✨ Crèmes &amp; soins</h3>
-          <p>Sélection de crèmes de beauté et produits de soin, présentés simplement pour aider la cliente à choisir.</p>
+          <p>Sélection de crèmes de beauté et produits de soin, présentés simplement pour aider la cliente à choisir facilement.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ── SLIDE 5 : GALERIE ── -->
-  <div class="slide" role="tabpanel" aria-label="Galerie">
+  <!-- ─ SLIDE 5 : GALERIE ─ -->
+  <div class="slide">
     <div class="slide-inner">
-      <div class="s-kicker">Galerie produits</div>
+      <div class="kicker">Galerie produits</div>
       <h2 class="s-h2">Nos produits<br>en images</h2>
       <div data-gallery>
         <div class="gallery-stage">
-          <div class="gallery-slides">
+          <div id="gallSlides">
             <figure class="gallery-slide active">
               <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png" alt="Peignoirs et linge" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption><strong>Peignoirs &amp; linge de maison</strong></figcaption>
+              <figcaption>Peignoirs &amp; linge de maison</figcaption>
             </figure>
             <figure class="gallery-slide">
               <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt="Foutas pour transats" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption><strong>Foutas pour transats</strong></figcaption>
+              <figcaption>Foutas pour transats</figcaption>
             </figure>
             <figure class="gallery-slide">
               <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png" alt="Serviettes de plage" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption><strong>Serviettes de plage</strong></figcaption>
+              <figcaption>Serviettes de plage</figcaption>
             </figure>
             <figure class="gallery-slide">
               <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt="Robes et tenues" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption><strong>Robes &amp; tenues stylées</strong></figcaption>
+              <figcaption>Robes &amp; tenues stylées</figcaption>
             </figure>
             <figure class="gallery-slide">
               <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png" alt="Crèmes de beauté" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption><strong>Crèmes de beauté</strong></figcaption>
+              <figcaption>Crèmes de beauté</figcaption>
             </figure>
           </div>
-          <button class="gallery-arrow prev" type="button" data-prev aria-label="Précédent">‹</button>
-          <button class="gallery-arrow next" type="button" data-next aria-label="Suivant">›</button>
+          <button class="gallery-arrow prev" type="button" data-prev>‹</button>
+          <button class="gallery-arrow next" type="button" data-next>›</button>
           <div class="gallery-counter" data-counter>1 / 5</div>
         </div>
         <div class="gallery-thumbs">
@@ -614,10 +593,10 @@
     </div>
   </div>
 
-  <!-- ── SLIDE 6 : CONTACT ── -->
-  <div class="slide" role="tabpanel" aria-label="Contact">
+  <!-- ─ SLIDE 6 : CONTACT ─ -->
+  <div class="slide">
     <div class="slide-inner">
-      <div class="s-kicker">Commander &amp; contacter</div>
+      <div class="kicker">Commander &amp; contacter</div>
       <h2 class="s-h2">Préparez votre<br>demande</h2>
       <div class="form-2col">
         <div class="box form">
@@ -626,359 +605,422 @@
           <label for="clientPhone">Téléphone WhatsApp</label>
           <input id="clientPhone" inputmode="tel" autocomplete="tel" placeholder="+221 ...">
           <label for="clientMessage">Message</label>
-          <textarea id="clientMessage" placeholder="Exemple : Je cherche des draps, serviettes ou foutas. Qu'avez-vous ?"></textarea>
+          <textarea id="clientMessage" placeholder="Je cherche des draps, serviettes ou foutas. Qu'avez-vous ?"></textarea>
           <button type="button" id="sendRequest" class="form-btn">Envoyer sur WhatsApp →</button>
         </div>
-        <div class="box">
+        <div class="box info-block">
           <h3>Informations pratiques</h3>
           <p><strong>WhatsApp :</strong> +221 77 876 57 85</p>
-          <p style="margin-top:10px"><strong>Horaires :</strong> à confirmer avec Astou</p>
-          <p style="margin-top:10px"><strong>Repère :</strong> Astou Boutique · Google Maps</p>
-          <p style="margin-top:10px"><strong>Réseaux :</strong> TikTok · nouveautés et produits</p>
-          <p class="notice">Écrire, demander les produits disponibles, préparer sa visite ou passer par la galerie.</p>
+          <p><strong>Horaires :</strong> À confirmer avec Astou</p>
+          <p><strong>Repère :</strong> Astou Boutique · Google Maps</p>
+          <p><strong>Réseaux :</strong> TikTok · nouveautés et produits</p>
+          <p class="notice">Écrire directement pour connaître les produits disponibles, les prix ou préparer sa visite.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ── SLIDE 7 : PRÉSENCE DIGITALE ── -->
-  <div class="slide" role="tabpanel" aria-label="Présence digitale">
+  <!-- ─ SLIDE 7 : PRÉSENCE DIGITALE ─ -->
+  <div class="slide">
     <div class="slide-inner">
-      <div class="s-kicker">Présence digitale</div>
+      <div class="kicker">Présence digitale</div>
       <h2 class="s-h2">Sur le terrain<br>&amp; en ligne</h2>
       <div class="g3">
         <div class="box">
           <h3>🎥 TikTok</h3>
-          <p>Vidéos produits, nouveautés, arrivages, inspirations et démonstrations.</p>
+          <p>Vidéos produits, nouveautés, arrivages, inspirations et démonstrations en direct depuis la boutique.</p>
           <p class="notice">Lien TikTok à confirmer.</p>
         </div>
         <div class="box">
           <h3>📍 Google Maps</h3>
-          <p>Astou Boutique est référencée sur Google Maps. Préparez votre visite et venez directement.</p>
+          <p>Astou Boutique est référencée sur Google Maps. Retrouvez le repère, préparez votre visite et contactez avant de passer.</p>
           <p class="notice">Lien Google Maps à confirmer.</p>
         </div>
         <div class="box">
           <h3>🛒 DIGIY MARKET</h3>
-          <p>Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible sur la plateforme.</p>
+          <p>Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible sur la plateforme terrain.</p>
           <p class="notice">À brancher côté MARKET avec l'adresse publique.</p>
         </div>
       </div>
-      <div style="margin-top:18px;text-align:center;opacity:.4;font-family:var(--font-h);font-style:italic;font-size:15px">
+      <p style="margin-top:30px;text-align:center;opacity:.38;font-family:var(--font-h);font-style:italic;font-size:16px;color:#fff">
         Chaque partenaire est une facette. DIGIY lui donne la lumière. · BY DIGIYLYFE
-      </div>
+      </p>
     </div>
   </div>
 
   <!-- ARROWS -->
-  <button class="snav prev" id="snavPrev" type="button" aria-label="Slide précédent">‹</button>
-  <button class="snav next" id="snavNext" type="button" aria-label="Slide suivant">›</button>
-
-</div><!-- /slideshow -->
-
-<!-- ══ MUSIC PLAYER BAR ══ -->
-<div class="player" role="region" aria-label="Lecteur de musique">
-
-  <!-- Disc + info -->
-  <div class="p-info">
-    <div class="p-disc" id="pDisc">🎵</div>
-    <div class="p-text">
-      <div class="p-title" id="pTitle">Ambiance boutique</div>
-      <div class="p-sub" id="pSub">Piste 1 · 0:00</div>
-    </div>
-  </div>
-
-  <!-- EQ bars -->
-  <div class="p-eq" id="pEq">
-    <div class="p-eq-bar" style="--d:.33s;--h:14px"></div>
-    <div class="p-eq-bar" style="--d:.41s;--h:18px"></div>
-    <div class="p-eq-bar" style="--d:.28s;--h:12px"></div>
-    <div class="p-eq-bar" style="--d:.38s;--h:20px"></div>
-    <div class="p-eq-bar" style="--d:.45s;--h:10px"></div>
-  </div>
-
-  <!-- Controls -->
-  <div class="p-controls">
-    <button class="pc-btn" id="pPrev" type="button" title="Précédent">⏮</button>
-    <button class="pc-btn play" id="pPlay" type="button" title="Lecture / Pause">▶</button>
-    <button class="pc-btn" id="pNext" type="button" title="Suivant">⏭</button>
-  </div>
-
-  <!-- Progress -->
-  <div class="p-progress">
-    <div class="p-time-row">
-      <span id="pCurrent">0:00</span>
-      <span id="pDuration">0:00</span>
-    </div>
-    <div class="p-bar-wrap" id="pBarWrap">
-      <div class="p-bar-fill" id="pBarFill"></div>
-    </div>
-  </div>
-
-  <!-- Volume -->
-  <div class="p-vol">
-    <span class="p-vol-icon" id="pVolIcon">🔈</span>
-    <input type="range" class="vol" id="pVol" min="0" max="100" value="70" style="--pv:70%">
-  </div>
-
+  <button class="snav prev" id="snavPrev" type="button">‹</button>
+  <button class="snav next" id="snavNext" type="button">›</button>
 </div>
 
-<!-- Hidden audio element -->
-<audio id="audioEl" preload="metadata"></audio>
+<!-- ══ PLAYER BAR ══ -->
+<div class="player">
+  <div class="p-info">
+    <div class="p-disc" id="pDisc">🎵</div>
+    <div>
+      <div class="p-name" id="pName">Ambiance Boutique</div>
+      <div class="p-status" id="pStatus">En pause</div>
+    </div>
+  </div>
+
+  <div class="p-eq" id="pEq">
+    <div class="p-eq-b" style="--d:.33s;--h:14px"></div>
+    <div class="p-eq-b" style="--d:.42s;--h:20px"></div>
+    <div class="p-eq-b" style="--d:.27s;--h:11px"></div>
+    <div class="p-eq-b" style="--d:.38s;--h:18px"></div>
+    <div class="p-eq-b" style="--d:.46s;--h:13px"></div>
+  </div>
+
+  <div class="p-ctrl">
+    <button class="pc" id="pPrev" title="Précédent">⏮</button>
+    <button class="pc main" id="pPlay" title="Lecture">▶</button>
+    <button class="pc" id="pNext" title="Suivant">⏭</button>
+  </div>
+
+  <div class="p-prog">
+    <div class="p-times">
+      <span id="pCur">0:00</span>
+      <span id="pDur">3:45</span>
+    </div>
+    <div class="p-track" id="pTrack">
+      <div class="p-fill" id="pFill"></div>
+    </div>
+  </div>
+
+  <div class="p-vol">
+    <button class="p-vol-ic" id="pVolIc" title="Muet">🔊</button>
+    <input type="range" class="vslide" id="pVolR" min="0" max="100" value="70" style="--pv:70%">
+  </div>
+</div>
 
 <script>
 (function(){
-  'use strict';
+'use strict';
 
-  /* ══════════════════════════════════
-     SLIDESHOW
-  ══════════════════════════════════ */
-  var slides=[].slice.call(document.querySelectorAll('.slide'));
-  var dotsWrap=document.getElementById('slideDots');
-  var counter=document.getElementById('slideCounter');
-  var btnPrev=document.getElementById('snavPrev');
-  var btnNext=document.getElementById('snavNext');
-  var current=0;
-  var N=slides.length;
-  var galleryActive=false; /* prevent arrow conflict on gallery slide */
+/* ══════════════════════════════════
+   SLIDESHOW
+══════════════════════════════════ */
+var slides=[].slice.call(document.querySelectorAll('.slide'));
+var dotsEl=document.getElementById('slideDots');
+var counterEl=document.getElementById('slideCounter');
+var btnP=document.getElementById('snavPrev');
+var btnN=document.getElementById('snavNext');
+var cur=0;var N=slides.length;
+var gallFocus=false;
 
-  /* Build dots */
-  slides.forEach(function(_,i){
-    var d=document.createElement('button');
-    d.className='sdot'+(i===0?' active':'');
-    d.setAttribute('role','tab');
-    d.setAttribute('aria-selected',i===0?'true':'false');
-    d.setAttribute('aria-label','Slide '+(i+1));
-    d.addEventListener('click',function(){goSlide(i);});
-    dotsWrap.appendChild(d);
+slides.forEach(function(_,i){
+  var d=document.createElement('button');
+  d.className='sdot'+(i===0?' active':'');
+  d.title='Slide '+(i+1);
+  d.addEventListener('click',function(){goSlide(i);});
+  dotsEl.appendChild(d);
+});
+
+function goSlide(to){
+  if(to===cur) return;
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('out-l');
+  var old=cur;
+  setTimeout(function(){slides[old].classList.remove('out-l');},500);
+  cur=((to%N)+N)%N;
+  slides[cur].classList.add('active');
+  updateNav();
+}
+window.goSlide=goSlide;
+
+function updateNav(){
+  [].slice.call(dotsEl.querySelectorAll('.sdot')).forEach(function(d,i){
+    d.classList.toggle('active',i===cur);
   });
+  counterEl.textContent=(cur+1)+' / '+N;
+  btnP.disabled=cur===0;
+  btnN.disabled=cur===N-1;
+}
+updateNav();
+btnP.addEventListener('click',function(){goSlide(cur-1);});
+btnN.addEventListener('click',function(){goSlide(cur+1);});
 
-  function goSlide(to){
-    if(to===current) return;
-    slides[current].classList.remove('active');
-    slides[current].classList.add('exit-left');
-    setTimeout(function(){slides[current].classList.remove('exit-left');},520);
-    current=((to%N)+N)%N;
-    slides[current].classList.add('active');
-    updateUI();
+document.addEventListener('keydown',function(e){
+  if(gallFocus) return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') goSlide(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') goSlide(cur-1);
+});
+
+var tx=0;
+var ss=document.getElementById('slideshow');
+ss.addEventListener('touchstart',function(e){tx=e.changedTouches[0].clientX;},{passive:true});
+ss.addEventListener('touchend',function(e){
+  var dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>50){if(dx<0)goSlide(cur+1);else goSlide(cur-1);}
+},{passive:true});
+
+/* ══════════════════════════════════
+   GALLERY
+══════════════════════════════════ */
+document.querySelectorAll('[data-gallery]').forEach(function(g){
+  var sl=[].slice.call(g.querySelectorAll('.gallery-slide'));
+  var th=[].slice.call(g.querySelectorAll('.gallery-thumb'));
+  var pv=g.querySelector('[data-prev]');
+  var nx=g.querySelector('[data-next]');
+  var ct=g.querySelector('[data-counter]');
+  var idx=0;
+  function show(i){
+    idx=(i+sl.length)%sl.length;
+    sl.forEach(function(s,j){s.classList.toggle('active',j===idx);});
+    th.forEach(function(t,j){t.classList.toggle('active',j===idx);});
+    if(ct) ct.textContent=(idx+1)+' / '+sl.length;
   }
-  window.goSlide=goSlide;
+  if(pv) pv.addEventListener('click',function(e){e.stopPropagation();show(idx-1);});
+  if(nx) nx.addEventListener('click',function(e){e.stopPropagation();show(idx+1);});
+  th.forEach(function(t,j){t.addEventListener('click',function(){show(j);});});
+  g.addEventListener('mouseenter',function(){gallFocus=true;});
+  g.addEventListener('mouseleave',function(){gallFocus=false;});
+  show(0);
+});
 
-  function updateUI(){
-    var dots=[].slice.call(dotsWrap.querySelectorAll('.sdot'));
-    dots.forEach(function(d,i){
-      d.classList.toggle('active',i===current);
-      d.setAttribute('aria-selected',i===current?'true':'false');
-    });
-    counter.textContent=(current+1)+' / '+N;
-    btnPrev.disabled=(current===0);
-    btnNext.disabled=(current===N-1);
-  }
-  updateUI();
+/* ══════════════════════════════════
+   WA FORM
+══════════════════════════════════ */
+var sendBtn=document.getElementById('sendRequest');
+if(sendBtn) sendBtn.addEventListener('click',function(){
+  var nom=(document.getElementById('clientName').value||'').trim();
+  var tel=(document.getElementById('clientPhone').value||'').trim();
+  var msg=(document.getElementById('clientMessage').value||'').trim();
+  var t='Bonjour Astou Boutique, je souhaite faire une demande.';
+  if(nom) t+=' Nom : '+nom+'.';
+  if(tel) t+=' Tél : '+tel+'.';
+  if(msg) t+=' Message : '+msg;
+  window.open('https://wa.me/221778765785?text='+encodeURIComponent(t),'_blank','noopener');
+});
 
-  btnPrev.addEventListener('click',function(){goSlide(current-1);});
-  btnNext.addEventListener('click',function(){goSlide(current+1);});
+/* ══════════════════════════════════
+   LECTEUR AUDIO — WEB AUDIO API
+   3 ambiances différentes
+   Lecteur avec contrôles complets
+══════════════════════════════════ */
+var TRACKS=[
+  {name:'Ambiance Boutique', dur:225, root:110,   bells:[880,1108.73,1318.51,1760]},
+  {name:'Détente & Style',   dur:260, root:130.81, bells:[1046.5,1318.51,1567.98,2093]},
+  {name:'Saly Vibes',        dur:238, root:146.83, bells:[987.77,1174.66,1479.98,1975.53]}
+];
 
-  document.addEventListener('keydown',function(e){
-    if(galleryActive) return;
-    if(e.key==='ArrowRight'||e.key==='ArrowDown') goSlide(current+1);
-    if(e.key==='ArrowLeft'||e.key==='ArrowUp') goSlide(current-1);
-  });
-
-  /* Touch swipe */
-  var touchX=0;
-  document.getElementById('slideshow').addEventListener('touchstart',function(e){
-    touchX=e.changedTouches[0].clientX;
-  },{passive:true});
-  document.getElementById('slideshow').addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-touchX;
-    if(Math.abs(dx)>48){
-      if(dx<0) goSlide(current+1);
-      else goSlide(current-1);
-    }
-  },{passive:true});
-
-  /* ══════════════════════════════════
-     PHOTO GALLERY
-  ══════════════════════════════════ */
-  function initGallery(g){
-    var sl=[].slice.call(g.querySelectorAll('.gallery-slide'));
-    var th=[].slice.call(g.querySelectorAll('.gallery-thumb'));
-    var pv=g.querySelector('[data-prev]');
-    var nx=g.querySelector('[data-next]');
-    var ct=g.querySelector('[data-counter]');
-    var idx=0;
-    function show(i){
-      idx=(i+sl.length)%sl.length;
-      sl.forEach(function(s,j){s.classList.toggle('active',j===idx);});
-      th.forEach(function(t,j){t.classList.toggle('active',j===idx);});
-      if(ct) ct.textContent=(idx+1)+' / '+sl.length;
-    }
-    if(pv) pv.addEventListener('click',function(e){e.stopPropagation();show(idx-1);});
-    if(nx) nx.addEventListener('click',function(e){e.stopPropagation();show(idx+1);});
-    th.forEach(function(t,j){t.addEventListener('click',function(){show(j);});});
-    g.addEventListener('mouseenter',function(){galleryActive=true;});
-    g.addEventListener('mouseleave',function(){galleryActive=false;});
-    show(0);
-  }
-  document.querySelectorAll('[data-gallery]').forEach(initGallery);
-
-  /* ══════════════════════════════════
-     WA FORM
-  ══════════════════════════════════ */
-  var sendBtn=document.getElementById('sendRequest');
-  if(sendBtn){
-    sendBtn.addEventListener('click',function(){
-      var nom=(document.getElementById('clientName').value||'').trim();
-      var tel=(document.getElementById('clientPhone').value||'').trim();
-      var msg=(document.getElementById('clientMessage').value||'').trim();
-      var text='Bonjour Astou Boutique, je souhaite faire une demande.';
-      if(nom) text+=' Nom : '+nom+'.';
-      if(tel) text+=' Tél : '+tel+'.';
-      if(msg) text+=' Message : '+msg;
-      window.open('https://wa.me/221778765785?text='+encodeURIComponent(text),'_blank','noopener');
-    });
-  }
-
-  /* ══════════════════════════════════
-     MUSIC PLAYER
-     ─────────────────────────────────
-     Ajoutez vos fichiers MP3 dans
-     le tableau "tracks" ci-dessous.
-     Exemple :
-       { title:'Ambiance 1', src:'musique/ambiance1.mp3' }
-       { title:'Track 2', src:'https://...mp3' }
-  ══════════════════════════════════ */
-  var tracks = [
-    /* ← REMPLACEZ PAR VOS PROPRES FICHIERS MP3 → */
-    { title: 'Ambiance boutique',  src: '' },
-    { title: 'Détente & style',    src: '' },
-    { title: 'Saly vibes',         src: '' }
+/* Build harmonic chord from root */
+function chord(root){
+  return [
+    root/2,     /* sub octave  */
+    root,       /* root        */
+    root*1.5,   /* fifth       */
+    root*2,     /* octave      */
+    root*2.52,  /* major third */
+    root*3,     /* fifth+oct   */
+    root*4      /* 2nd octave  */
   ];
+}
 
-  var audio    = document.getElementById('audioEl');
-  var pPlay    = document.getElementById('pPlay');
-  var pPrev    = document.getElementById('pPrev');
-  var pNext    = document.getElementById('pNext');
-  var pTitle   = document.getElementById('pTitle');
-  var pSub     = document.getElementById('pSub');
-  var pBarFill = document.getElementById('pBarFill');
-  var pBarWrap = document.getElementById('pBarWrap');
-  var pCurrent = document.getElementById('pCurrent');
-  var pDuration= document.getElementById('pDuration');
-  var pVol     = document.getElementById('pVol');
-  var pVolIcon = document.getElementById('pVolIcon');
-  var pDisc    = document.getElementById('pDisc');
-  var pEqBars  = [].slice.call(document.getElementById('pEq').querySelectorAll('.p-eq-bar'));
-  var trackIdx = 0;
-  var playing  = false;
+var AudioCtx=window.AudioContext||window.webkitAudioContext;
+var ctx=null,master=null,rev=null;
+var activeOsc=[],activeTimers=[];
+var trackIdx=0,playing=false;
+var startCtxTime=0,pauseOff=0;
+var muted=false,volVal=0.70;
+var rafId=null;
 
-  function fmt(s){
-    if(isNaN(s)||s===Infinity) return '0:00';
-    var m=Math.floor(s/60);
-    var sc=Math.floor(s%60);
-    return m+':'+(sc<10?'0':'')+sc;
+function ensureCtx(){
+  if(!ctx){
+    ctx=new AudioCtx();
+    master=ctx.createGain();master.gain.value=0;
+    var comp=ctx.createDynamicsCompressor();
+    comp.threshold.value=-14;comp.knee.value=8;comp.ratio.value=4;
+    master.connect(comp);comp.connect(ctx.destination);
   }
+  if(ctx.state==='suspended') ctx.resume();
+}
 
-  function loadTrack(i){
-    trackIdx=((i%tracks.length)+tracks.length)%tracks.length;
-    var t=tracks[trackIdx];
-    pTitle.textContent=t.title||'Sans titre';
-    pSub.textContent='Piste '+(trackIdx+1);
-    pBarFill.style.width='0%';
-    pBarWrap.style.setProperty('--pos','0%');
-    pCurrent.textContent='0:00';
-    pDuration.textContent='0:00';
-    if(t.src){
-      audio.src=t.src;
-      audio.load();
-    } else {
-      audio.removeAttribute('src');
-      pSub.textContent='Piste '+(trackIdx+1)+' · Ajouter un fichier MP3';
-    }
+function buildReverb(){
+  var c=ctx.createConvolver();
+  var sr=ctx.sampleRate,len=Math.floor(sr*5);
+  var buf=ctx.createBuffer(2,len,sr);
+  for(var ch=0;ch<2;ch++){
+    var d=buf.getChannelData(ch);
+    for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.5);
   }
+  c.buffer=buf;
+  return c;
+}
 
-  function setPlaying(on){
-    playing=on;
-    pPlay.textContent=on?'⏸':'▶';
-    pDisc.classList.toggle('spinning',on);
-    setEQ(on);
+function addOsc(freq,gain,type){
+  var o=ctx.createOscillator();
+  var g=ctx.createGain();
+  var f=ctx.createBiquadFilter();
+  o.type=type||'sine';o.frequency.value=freq;
+  o.detune.value=(Math.random()-.5)*10;
+  g.gain.value=gain;f.type='lowpass';f.frequency.value=1100;
+  /* filter LFO */
+  var lfo=ctx.createOscillator();var lfoG=ctx.createGain();
+  lfo.frequency.value=0.02+Math.random()*0.06;lfoG.gain.value=280+Math.random()*220;
+  lfo.connect(lfoG);lfoG.connect(f.frequency);
+  o.connect(f);f.connect(g);g.connect(master);g.connect(rev);
+  o.start();lfo.start();
+  activeOsc.push(o,lfo);
+}
+
+function spawnChime(){
+  if(!playing) return;
+  var t=ctx.currentTime;
+  var notes=TRACKS[trackIdx].bells;
+  var freq=notes[Math.floor(Math.random()*notes.length)];
+  var o=ctx.createOscillator();var g=ctx.createGain();
+  o.type='sine';o.frequency.value=freq;
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(0.04,t+0.03);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+2.6);
+  o.connect(g);g.connect(master);g.connect(rev);
+  o.start(t);o.stop(t+3);
+  var tid=setTimeout(spawnChime,7000+Math.random()*12000);
+  activeTimers.push(tid);
+}
+
+function startSound(){
+  ensureCtx();
+  if(!rev){
+    rev=buildReverb();
+    var rg=ctx.createGain();rg.gain.value=0.42;
+    rev.connect(rg);rg.connect(master);
   }
+  var freqs=chord(TRACKS[trackIdx].root);
+  var gains=[0.10,0.09,0.065,0.07,0.055,0.045,0.025];
+  freqs.forEach(function(f,i){addOsc(f,gains[i]||0.03);});
+  master.gain.setValueAtTime(0,ctx.currentTime);
+  master.gain.linearRampToValueAtTime(muted?0:volVal,ctx.currentTime+3);
+  startCtxTime=ctx.currentTime-pauseOff;
+  playing=true;
+  setTimeout(spawnChime,5000);
+  tick();
+}
 
-  function setEQ(on){
-    pEqBars.forEach(function(b){
-      if(on){ b.classList.add('anim'); }
-      else { b.classList.remove('anim'); b.style.height='4px'; }
-    });
+function stopSound(soft){
+  playing=false;
+  cancelAnimationFrame(rafId);
+  activeTimers.forEach(clearTimeout);activeTimers=[];
+  if(!ctx) return;
+  var now=ctx.currentTime;
+  var fadeT=soft?2:0.3;
+  master.gain.setValueAtTime(master.gain.value,now);
+  master.gain.linearRampToValueAtTime(0,now+fadeT);
+  setTimeout(function(){
+    activeOsc.forEach(function(n){try{n.stop();}catch(e){}});
+    activeOsc=[];
+  },(fadeT+0.2)*1000);
+}
+
+function elapsed(){
+  if(!ctx) return pauseOff;
+  return playing ? Math.min(ctx.currentTime-startCtxTime, TRACKS[trackIdx].dur) : pauseOff;
+}
+
+function fmt(s){
+  s=Math.max(0,Math.floor(s));
+  return Math.floor(s/60)+':'+(s%60<10?'0':'')+s%60;
+}
+
+function tick(){
+  if(!playing) return;
+  var e=elapsed();
+  var dur=TRACKS[trackIdx].dur;
+  if(e>=dur){nextTrack(true);return;}
+  var pct=e/dur;
+  document.getElementById('pFill').style.width=(pct*100)+'%';
+  document.getElementById('pTrack').style.setProperty('--pos',(pct*100)+'%');
+  document.getElementById('pCur').textContent=fmt(e);
+  document.getElementById('pStatus').textContent='Piste '+(trackIdx+1)+' · '+fmt(e);
+  rafId=requestAnimationFrame(tick);
+}
+
+function setEQ(on){
+  [].slice.call(document.getElementById('pEq').querySelectorAll('.p-eq-b')).forEach(function(b){
+    b.classList.toggle('on',on);
+  });
+}
+
+function setPlaying(on){
+  document.getElementById('pPlay').textContent=on?'⏸':'▶';
+  document.getElementById('pDisc').classList.toggle('on',on);
+  document.getElementById('pStatus').textContent=on?('Piste '+(trackIdx+1)):'En pause';
+  setEQ(on);
+}
+
+function loadTrack(i){
+  pauseOff=0;
+  trackIdx=((i%TRACKS.length)+TRACKS.length)%TRACKS.length;
+  document.getElementById('pName').textContent=TRACKS[trackIdx].name;
+  document.getElementById('pDur').textContent=fmt(TRACKS[trackIdx].dur);
+  document.getElementById('pCur').textContent='0:00';
+  document.getElementById('pFill').style.width='0%';
+}
+
+function nextTrack(auto){
+  var wasPlaying=playing;
+  if(playing){stopSound(!auto);setPlaying(false);}
+  loadTrack(trackIdx+1);
+  if(wasPlaying){setTimeout(function(){startSound();setPlaying(true);},auto?200:300);}
+}
+
+/* PLAY/PAUSE */
+document.getElementById('pPlay').addEventListener('click',function(){
+  if(playing){
+    pauseOff=elapsed();
+    stopSound(false);setPlaying(false);
+  } else {
+    startSound();setPlaying(true);
   }
+});
 
-  pPlay.addEventListener('click',function(){
-    if(!tracks[trackIdx].src){
-      alert('Ajoutez un fichier MP3 dans le tableau "tracks" du code.');
-      return;
-    }
-    if(audio.paused){
-      audio.play().then(function(){setPlaying(true);}).catch(function(){});
-    } else {
-      audio.pause();
-      setPlaying(false);
-    }
-  });
+/* PREV */
+document.getElementById('pPrev').addEventListener('click',function(){
+  var wasP=playing;
+  if(playing){stopSound(false);setPlaying(false);}
+  loadTrack(trackIdx-1);
+  if(wasP){setTimeout(function(){startSound();setPlaying(true);},300);}
+});
 
-  pPrev.addEventListener('click',function(){
-    loadTrack(trackIdx-1);
-    if(playing){ audio.play().then(function(){setPlaying(true);}).catch(function(){}); }
-  });
+/* NEXT */
+document.getElementById('pNext').addEventListener('click',function(){
+  nextTrack(false);
+});
 
-  pNext.addEventListener('click',function(){
-    loadTrack(trackIdx+1);
-    if(playing){ audio.play().then(function(){setPlaying(true);}).catch(function(){}); }
-  });
+/* SEEK */
+document.getElementById('pTrack').addEventListener('click',function(e){
+  var rect=this.getBoundingClientRect();
+  var pct=(e.clientX-rect.left)/rect.width;
+  pauseOff=pct*TRACKS[trackIdx].dur;
+  if(playing){
+    stopSound(false);
+    setTimeout(function(){startSound();setPlaying(true);},320);
+  } else {
+    document.getElementById('pFill').style.width=(pct*100)+'%';
+    document.getElementById('pCur').textContent=fmt(pauseOff);
+  }
+});
 
-  audio.addEventListener('ended',function(){
-    loadTrack(trackIdx+1);
-    audio.play().then(function(){setPlaying(true);}).catch(function(){});
-  });
+/* VOLUME */
+document.getElementById('pVolR').addEventListener('input',function(){
+  volVal=parseInt(this.value)/100;
+  this.style.setProperty('--pv',this.value+'%');
+  document.getElementById('pVolIc').textContent=volVal===0?'🔇':volVal<0.4?'🔈':'🔊';
+  if(master&&playing){
+    master.gain.linearRampToValueAtTime(muted?0:volVal,ctx.currentTime+0.3);
+  }
+});
 
-  audio.addEventListener('timeupdate',function(){
-    if(!audio.duration) return;
-    var pct=(audio.currentTime/audio.duration)*100;
-    pBarFill.style.width=pct+'%';
-    pBarWrap.style.setProperty('--pos',pct+'%');
-    pCurrent.textContent=fmt(audio.currentTime);
-    pSub.textContent='Piste '+(trackIdx+1)+' · '+fmt(audio.currentTime);
-  });
+document.getElementById('pVolIc').addEventListener('click',function(){
+  muted=!muted;
+  this.textContent=muted?'🔇':'🔊';
+  if(master&&playing){
+    master.gain.linearRampToValueAtTime(muted?0:volVal,ctx.currentTime+0.3);
+  }
+});
 
-  audio.addEventListener('loadedmetadata',function(){
-    pDuration.textContent=fmt(audio.duration);
-  });
-
-  audio.addEventListener('pause',function(){ setPlaying(false); });
-  audio.addEventListener('play',function(){ setPlaying(true); });
-
-  /* Seek */
-  pBarWrap.addEventListener('click',function(e){
-    if(!audio.duration) return;
-    var rect=this.getBoundingClientRect();
-    var pct=(e.clientX-rect.left)/rect.width;
-    audio.currentTime=pct*audio.duration;
-  });
-
-  /* Volume */
-  audio.volume=0.70;
-  pVol.addEventListener('input',function(){
-    var v=parseInt(this.value)/100;
-    audio.volume=v;
-    this.style.setProperty('--pv',this.value+'%');
-    pVolIcon.textContent=v===0?'🔇':v<0.4?'🔈':'🔊';
-    if(audio.muted&&v>0) audio.muted=false;
-  });
-  pVolIcon.addEventListener('click',function(){
-    audio.muted=!audio.muted;
-    pVolIcon.textContent=audio.muted?'🔇':'🔊';
-  });
-
-  /* Init */
-  loadTrack(0);
+loadTrack(0);
 
 })();
 </script>
