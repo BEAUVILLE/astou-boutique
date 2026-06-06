@@ -1013,5 +1013,46 @@ if('speechSynthesis' in window){
 
 })();
 </script>
+
+<!-- Retour La Voix du Business DIGIY -->
+<a href="https://action.digiylyfe.com/" id="digiyRetourVoix"
+   aria-label="Retour à La Voix du Business DIGIY">
+  ← La Voix du Business
+</a>
+<style>
+  #digiyRetourVoix{
+    position:fixed;
+    bottom:18px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:999;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    min-height:50px;
+    padding:0 22px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#fff2bf,#f6c453);
+    color:#0d170d;
+    font:900 14px system-ui,-apple-system,sans-serif;
+    text-decoration:none;
+    box-shadow:0 12px 32px rgba(18,60,45,.28);
+    border:1px solid rgba(255,255,255,.40);
+    white-space:nowrap;
+  }
+  #digiyRetourVoix:hover{
+    background:linear-gradient(135deg,#fde68a,#f6c453);
+    box-shadow:0 16px 40px rgba(18,60,45,.36);
+  }
+  @media(max-width:520px){
+    #digiyRetourVoix{
+      left:12px;
+      right:12px;
+      transform:none;
+      justify-content:center;
+      bottom:12px;
+    }
+  }
+</style>
 </body>
 </html>
