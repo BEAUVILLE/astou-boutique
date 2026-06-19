@@ -340,6 +340,87 @@
     .gallery-thumb img{width:100%;height:100%;object-fit:cover;object-position:center}
     .gallery-thumb.active{outline:2.5px solid rgba(245,199,107,.9);outline-offset:2px}
 
+
+    /* ════════════════════════════
+       QR OFFICIEL DIGIYLYFE
+    ════════════════════════════ */
+    .digiy-qr-officiel{
+      margin-top:18px;
+      border:1px solid rgba(245,199,107,.34);
+      border-radius:24px;
+      padding:18px;
+      background:
+        radial-gradient(circle at top,rgba(245,199,107,.16),transparent 42%),
+        linear-gradient(155deg,rgba(22,46,34,.78),rgba(6,16,11,.72));
+      box-shadow:0 18px 46px rgba(0,0,0,.34);
+      text-align:center;
+    }
+    .digiy-qr-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:8px 13px;
+      border-radius:999px;
+      border:1px solid rgba(245,199,107,.42);
+      background:rgba(245,199,107,.12);
+      color:var(--gold2);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:12px;
+    }
+    .digiy-qr-imgbox{
+      width:min(100%,240px);
+      margin:0 auto 12px;
+      padding:14px;
+      border-radius:22px;
+      background:#fff;
+      border:1px solid rgba(245,199,107,.50);
+      box-shadow:0 16px 36px rgba(0,0,0,.30);
+      display:block;
+    }
+    .digiy-qr-imgbox img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:12px;
+    }
+    .digiy-qr-officiel h3{
+      margin:0 0 8px;
+      font-family:var(--font-h);
+      font-size:28px;
+      line-height:1.05;
+      color:#fff;
+      font-weight:700;
+    }
+    .digiy-qr-officiel p{
+      margin:0;
+      color:var(--ink2);
+      font-size:15px;
+      line-height:1.55;
+      font-weight:600;
+    }
+    .digiy-qr-link{
+      margin-top:10px;
+      padding:9px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.22);
+      color:rgba(255,232,168,.88);
+      font-size:12px;
+      font-weight:800;
+      word-break:break-all;
+    }
+    .digiy-qr-actions{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px;
+      margin-top:14px;
+    }
+
     /* ════════════════════════════
        FORM
     ════════════════════════════ */
@@ -520,6 +601,7 @@
       <div class="cta-row">
         <a class="btn green" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique" target="_blank" rel="noopener">💬 WhatsApp direct</a>
         <button class="btn gold" onclick="goSlide(4)">🖼️ Galerie</button>
+        <button class="btn ghost" onclick="goSlide(5)">▣ QR officiel</button>
         <button class="btn ghost" onclick="goSlide(1)">Voir l'offre →</button>
       </div>
     </div>
@@ -669,6 +751,23 @@
           <p><strong>Repère :</strong> Astou Boutique · Google Maps</p>
           <p><strong>Réseaux :</strong> TikTok · nouveautés et produits</p>
           <p class="notice">Écrire directement pour connaître les produits disponibles, les prix ou préparer sa visite.</p>
+
+          <div class="digiy-qr-officiel" id="qrAstou">
+            <div class="digiy-qr-badge">▣ QR officiel DIGIYLYFE</div>
+            <a class="digiy-qr-imgbox" href="https://astou-boutique.digiylyfe.com/" target="_blank" rel="noopener" aria-label="Ouvrir Astou Boutique">
+              <img src="data:image/png;base64,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" alt="QR officiel Astou Boutique DIGIYLYFE">
+            </a>
+            <h3>Scannez Astou Boutique</h3>
+            <p>
+              Ce QR ouvre la vitrine officielle Astou Boutique : produits, galerie, WhatsApp direct et partage facile.
+              Le contact reste direct avec la boutique.
+            </p>
+            <div class="digiy-qr-link">https://astou-boutique.digiylyfe.com/</div>
+            <div class="digiy-qr-actions">
+              <a class="btn green" href="https://astou-boutique.digiylyfe.com/" target="_blank" rel="noopener">▣ Ouvrir la vitrine</a>
+              <button class="btn ghost" type="button" id="copyQrAstou">📋 Copier le lien</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -694,6 +793,11 @@
           <h3>🛒 DIGIY MARKET</h3>
           <p>Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible sur la plateforme terrain.</p>
           <p class="notice">À brancher côté MARKET avec l'adresse publique.</p>
+        </div>
+        <div class="box">
+          <h3>▣ QR officiel</h3>
+          <p>La vitrine Astou Boutique devient partageable par QR : le client scanne, voit les produits et contacte directement.</p>
+          <p class="notice">https://astou-boutique.digiylyfe.com/</p>
         </div>
       </div>
       <p style="margin-top:30px;text-align:center;opacity:.38;font-family:var(--font-h);font-style:italic;font-size:16px;color:#fff">
@@ -844,6 +948,19 @@ if(sendBtn) sendBtn.addEventListener('click',function(){
   window.open('https://wa.me/221778765785?text='+encodeURIComponent(t),'_blank','noopener');
 });
 
+var copyQrAstou=document.getElementById('copyQrAstou');
+if(copyQrAstou) copyQrAstou.addEventListener('click',function(){
+  var url='https://astou-boutique.digiylyfe.com/';
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(function(){
+      copyQrAstou.textContent='✅ Lien copié';
+      setTimeout(function(){copyQrAstou.textContent='📋 Copier le lien';},1600);
+    }).catch(function(){window.prompt('Copie le lien :',url);});
+  }else{
+    window.prompt('Copie le lien :',url);
+  }
+});
+
 /* ══════════════════════════════════
    DIGIY AUDIO — LECTEUR VOCAL
    Sans musique. Présentation claire de la boutique.
@@ -855,6 +972,7 @@ var audioText=[
   'La boutique accompagne aussi les hôtels, les villas, les maisons d’hôtes, les locations courte durée et les familles qui veulent équiper leurs espaces avec goût.',
   'On y retrouve aussi des robes, des tenues stylées, de la confection et des crèmes de beauté.',
   'Vous pouvez regarder la galerie, préparer votre demande, puis contacter directement Astou Boutique sur WhatsApp.',
+  'La fiche possède aussi son QR officiel DIGIYLYFE. Le client peut le scanner, garder le lien dans son téléphone et partager la boutique facilement.',
   'DIGIYLYFE donne la lumière au commerce du terrain. Le client voit, comprend et contacte directement.'
 ].join(' ');
 
@@ -1056,3 +1174,4 @@ if('speechSynthesis' in window){
 </style>
 </body>
 </html>
+
