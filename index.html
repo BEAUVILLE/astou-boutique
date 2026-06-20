@@ -1,14 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Astou Boutique · Maison, plage & élégance</title>
-  <meta name="description" content="Astou Boutique à Saly : linge de maison, serviettes, draps, peignoirs, foutas, plage, robes, tenues stylées, confection et crèmes de beauté."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Astou Boutique · Maison, plage &amp; élégance</title>
+<meta content="Astou Boutique à Saly : linge de maison, serviettes, draps, peignoirs, foutas, plage, robes, tenues stylées, confection et crèmes de beauté." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=DM+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
     :root{
       --bg:#060f0c;
       --ink:#ffffff;
@@ -565,289 +566,307 @@
     .hero-cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;margin-top:24px}
     .info-block p{margin-bottom:10px}
     @media(max-width:700px){.hero-cols{grid-template-columns:1fr}}
-  </style>
+  
+    /* ── DIGIY LANG SWITCH FR / EN ── */
+    .lang-switch{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:4px;
+      border-radius:999px;
+      border:1px solid var(--lg);
+      background:rgba(255,255,255,.07);
+      flex-shrink:0;
+    }
+    .lang-switch button{
+      border:0;
+      border-radius:999px;
+      min-width:38px;
+      height:32px;
+      padding:0 11px;
+      background:transparent;
+      color:var(--ink2);
+      font-family:var(--font-b);
+      font-size:12px;
+      font-weight:900;
+      cursor:pointer;
+      letter-spacing:.08em;
+    }
+    .lang-switch button.active{
+      background:linear-gradient(135deg,var(--gold),#e8b44a);
+      color:#0f2218;
+      box-shadow:0 4px 14px rgba(245,199,107,.24);
+    }
+    @media(max-width:700px){
+      .lang-switch{order:1}
+      .topbar-r{gap:8px}
+      .lang-switch button{min-width:36px;height:30px}
+    }
+</style>
 </head>
 <body>
-
-<div id="aurora" aria-hidden="true">
-  <div class="ab"></div><div class="ab"></div><div class="ab"></div>
+<div aria-hidden="true" id="aurora">
+<div class="ab"></div><div class="ab"></div><div class="ab"></div>
 </div>
-
 <!-- ══ TOPBAR ══ -->
 <header class="topbar">
-  <div class="brandmark"><div class="bdot"></div>Astou Boutique</div>
-  <div class="slide-dots" id="slideDots"></div>
-  <div class="topbar-r">
-    <span class="slide-counter" id="slideCounter">1 / 7</span>
-    <a class="wa-pill" href="https://wa.me/221778765785" target="_blank" rel="noopener">💬 WhatsApp</a>
-  </div>
+<div class="brandmark"><div class="bdot"></div>Astou Boutique</div>
+<div class="slide-dots" id="slideDots"></div>
+<div class="topbar-r">
+<span class="slide-counter" id="slideCounter">1 / 7</span>
+<div aria-label="Changer la langue" class="lang-switch"><button class="active" id="lang-fr" type="button">FR</button><button id="lang-en" type="button">EN</button></div><a class="wa-pill" href="https://wa.me/221778765785" rel="noopener" target="_blank">💬 WhatsApp</a>
+</div>
 </header>
-
 <!-- ══ SLIDESHOW ══ -->
 <div class="slideshow" id="slideshow">
-
-  <!-- ─ SLIDE 1 : ACCUEIL ─ -->
-  <div class="slide active">
-    <div class="slide-inner">
-      <div class="kicker">Saly, Sénégal · Maison · Plage · Style · Beauté</div>
-      <h1 class="s-title">Astou<br>Boutique</h1>
-      <p class="s-sub">Maison, plage &amp; élégance</p>
-      <p class="s-lead">Linge de maison, serviettes, draps, peignoirs, foutas, tenues stylées, confection et crèmes de beauté. Une boutique utile, belle et directe à Saly.</p>
-      <div class="visit-guide">
-        <strong>Visite douce en diaporama</strong>
-        <span>Avancez tranquillement, slide par slide, avec un déroulement latéral. Utilisez les flèches, les points du haut ou le geste du doigt sur téléphone.</span>
-        <span>La galerie dispose de plusieurs photos pour mieux apprécier les produits : linge, foutas, plage, tenues et beauté.</span>
-      </div>
-      <div class="cta-row">
-        <a class="btn green" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique" target="_blank" rel="noopener">💬 WhatsApp direct</a>
-        <button class="btn gold" onclick="goSlide(4)">🖼️ Galerie</button>
-        <button class="btn ghost" onclick="goSlide(5)">▣ QR officiel</button>
-        <button class="btn ghost" onclick="goSlide(1)">Voir l'offre →</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ─ SLIDE 2 : OFFRE ─ -->
-  <div class="slide">
-    <div class="slide-inner">
-      <div class="kicker">Ce que propose la boutique</div>
-      <h2 class="s-h2">Utile, belle<br>et directe</h2>
-      <p class="s-intro">Familles, femmes, touristes, hôtels, villas, maisons d'hôtes et locations — Astou Boutique s'adresse à tous ceux qui veulent du beau et du pratique.</p>
-      <div class="g3">
-        <div class="box">
-          <h3>🛏️ Maison &amp; linge</h3>
-          <p>Draps, serviettes, couvertures et peignoirs pour équiper la maison avec goût, douceur et simplicité.</p>
-        </div>
-        <div class="box">
-          <h3>🏨 Hôtels &amp; villas</h3>
-          <p>Articles propres et présentables pour chambres, piscines, transats, villas et locations courte durée.</p>
-        </div>
-        <div class="box">
-          <h3>👗 Style &amp; beauté</h3>
-          <p>Robes, tenues stylées, confection et crèmes de beauté pour compléter l'univers féminin de la boutique.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ─ SLIDE 3 : MAISON + HÔTELS ─ -->
-  <div class="slide">
-    <div class="slide-inner">
-      <div class="kicker">Textile &amp; hébergement</div>
-      <h2 class="s-h2">Maison, hôtels<br>&amp; villas</h2>
-      <div class="g2">
-        <div class="box">
-          <h3>Univers maison</h3>
-          <p>Linge de maison, serviettes, draps, couvertures et peignoirs pour la maison, les familles et les maisons de vacances.</p>
-          <div class="taglist">
-            <span class="tag">Serviettes</span>
-            <span class="tag">Draps</span>
-            <span class="tag">Couvertures</span>
-            <span class="tag">Peignoirs</span>
-            <span class="tag">Linge de maison</span>
-          </div>
-        </div>
-        <div class="box">
-          <h3>Pros du séjour</h3>
-          <ul>
-            <li>Serviettes hôtel</li>
-            <li>Foutas pour transats</li>
-            <li>Textile plage et piscine</li>
-            <li>Équipement villas et maisons d'hôtes</li>
-            <li>Locations courte durée</li>
-          </ul>
-          <p class="notice">Le client professionnel comprend vite quoi demander : quantités, couleurs, tailles, usage hôtel ou plage.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ─ SLIDE 4 : PLAGE + STYLE + BEAUTÉ ─ -->
-  <div class="slide">
-    <div class="slide-inner">
-      <div class="kicker">Plage · Mode · Beauté</div>
-      <h2 class="s-h2">Plage, style<br>&amp; beauté</h2>
-      <div class="g3">
-        <div class="box">
-          <h3>🌊 Plage &amp; transats</h3>
-          <p>Foutas pour transats, serviettes de plage et textiles légers pour les journées au soleil, les piscines et les espaces détente.</p>
-        </div>
-        <div class="box">
-          <h3>👗 Tenues stylées</h3>
-          <p>Robes, tenues et confection pour les femmes qui veulent rester élégantes, à l'aise et bien habillées en toutes circonstances.</p>
-        </div>
-        <div class="box">
-          <h3>✨ Crèmes &amp; soins</h3>
-          <p>Sélection de crèmes de beauté et produits de soin, présentés simplement pour aider la cliente à choisir facilement.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ─ SLIDE 5 : GALERIE ─ -->
-  <div class="slide">
-    <div class="slide-inner">
-      <div class="kicker">Galerie produits</div>
-      <h2 class="s-h2">Nos produits<br>en images</h2>
-      <p class="s-intro">La galerie contient plusieurs photos. Faites défiler avec les flèches, les vignettes ou le geste latéral pour voir les produits doucement, sans précipitation.</p>
-      <div data-gallery>
-        <div class="gallery-stage">
-          <div id="gallSlides">
-            <figure class="gallery-slide active">
-              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png" alt="Peignoirs et linge" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption>Peignoirs &amp; linge de maison</figcaption>
-            </figure>
-            <figure class="gallery-slide">
-              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt="Foutas pour transats" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption>Foutas pour transats</figcaption>
-            </figure>
-            <figure class="gallery-slide">
-              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png" alt="Serviettes de plage" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption>Serviettes de plage</figcaption>
-            </figure>
-            <figure class="gallery-slide">
-              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt="Robes et tenues" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption>Robes &amp; tenues stylées</figcaption>
-            </figure>
-            <figure class="gallery-slide">
-              <img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png" alt="Crèmes de beauté" loading="lazy" referrerpolicy="no-referrer">
-              <figcaption>Crèmes de beauté</figcaption>
-            </figure>
-          </div>
-          <button class="gallery-arrow prev" type="button" data-prev>‹</button>
-          <button class="gallery-arrow next" type="button" data-next>›</button>
-          <div class="gallery-counter" data-counter>1 / 5</div>
-        </div>
-        <div class="gallery-thumbs">
-          <button class="gallery-thumb active" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png" alt=""></button>
-          <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png" alt=""></button>
-          <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png" alt=""></button>
-          <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png" alt=""></button>
-          <button class="gallery-thumb" type="button"><img src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png" alt=""></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ─ SLIDE 6 : CONTACT ─ -->
-  <div class="slide">
-    <div class="slide-inner">
-      <div class="kicker">Commander &amp; contacter</div>
-      <h2 class="s-h2">Préparez votre<br>demande</h2>
-      <div class="form-2col">
-        <div class="box form">
-          <label for="clientName">Nom</label>
-          <input id="clientName" autocomplete="name" placeholder="Votre nom">
-          <label for="clientPhone">Téléphone WhatsApp</label>
-          <input id="clientPhone" inputmode="tel" autocomplete="tel" placeholder="+221 ...">
-          <label for="clientMessage">Message</label>
-          <textarea id="clientMessage" placeholder="Je cherche des draps, serviettes ou foutas. Qu'avez-vous ?"></textarea>
-          <button type="button" id="sendRequest" class="form-btn">Envoyer sur WhatsApp →</button>
-        </div>
-        <div class="box info-block">
-          <h3>Informations pratiques</h3>
-          <p><strong>WhatsApp :</strong> +221 77 876 57 85</p>
-          <p><strong>Horaires :</strong> À confirmer avec Astou</p>
-          <p><strong>Repère :</strong> Astou Boutique · Google Maps</p>
-          <p><strong>Réseaux :</strong> TikTok · nouveautés et produits</p>
-          <p class="notice">Écrire directement pour connaître les produits disponibles, les prix ou préparer sa visite.</p>
-
-          <div class="digiy-qr-officiel" id="qrAstou">
-            <div class="digiy-qr-badge">▣ QR officiel DIGIYLYFE</div>
-            <a class="digiy-qr-imgbox" href="https://astou-boutique.digiylyfe.com/" target="_blank" rel="noopener" aria-label="Ouvrir Astou Boutique">
-              <img src="data:image/png;base64,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" alt="QR officiel Astou Boutique DIGIYLYFE">
-            </a>
-            <h3>Scannez Astou Boutique</h3>
-            <p>
+<!-- ─ SLIDE 1 : ACCUEIL ─ -->
+<div class="slide active">
+<div class="slide-inner">
+<div class="kicker" data-i18n="s1_kicker">Saly, Sénégal · Maison · Plage · Style · Beauté</div>
+<h1 class="s-title" data-i18n="s1_title">Astou<br/>Boutique</h1>
+<p class="s-sub" data-i18n="s1_sub">Maison, plage &amp; élégance</p>
+<p class="s-lead" data-i18n="s1_lead">Linge de maison, serviettes, draps, peignoirs, foutas, tenues stylées, confection et crèmes de beauté. Une boutique utile, belle et directe à Saly.</p>
+<div class="visit-guide">
+<strong data-i18n="visit_title">Visite douce en diaporama</strong>
+<span data-i18n="visit_text_1">Avancez tranquillement, slide par slide, avec un déroulement latéral. Utilisez les flèches, les points du haut ou le geste du doigt sur téléphone.</span>
+<span data-i18n="visit_text_2">La galerie dispose de plusieurs photos pour mieux apprécier les produits : linge, foutas, plage, tenues et beauté.</span>
+</div>
+<div class="cta-row">
+<a class="btn green" data-i18n="btn_whatsapp_direct" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique" rel="noopener" target="_blank">💬 WhatsApp direct</a>
+<button class="btn gold" data-i18n="btn_gallery" onclick="goSlide(4)">🖼️ Galerie</button>
+<button class="btn ghost" data-i18n="btn_official_qr" onclick="goSlide(5)">▣ QR officiel</button>
+<button class="btn ghost" data-i18n="btn_view_offer" onclick="goSlide(1)">Voir l'offre →</button>
+</div>
+</div>
+</div>
+<!-- ─ SLIDE 2 : OFFRE ─ -->
+<div class="slide">
+<div class="slide-inner">
+<div class="kicker" data-i18n="s2_kicker">Ce que propose la boutique</div>
+<h2 class="s-h2" data-i18n="s2_title">Utile, belle<br/>et directe</h2>
+<p class="s-intro" data-i18n="s2_intro">Familles, femmes, touristes, hôtels, villas, maisons d'hôtes et locations — Astou Boutique s'adresse à tous ceux qui veulent du beau et du pratique.</p>
+<div class="g3">
+<div class="box">
+<h3 data-i18n="s2_box1_title">🛏️ Maison &amp; linge</h3>
+<p data-i18n="s2_box1_text">Draps, serviettes, couvertures et peignoirs pour équiper la maison avec goût, douceur et simplicité.</p>
+</div>
+<div class="box">
+<h3 data-i18n="s2_box2_title">🏨 Hôtels &amp; villas</h3>
+<p data-i18n="s2_box2_text">Articles propres et présentables pour chambres, piscines, transats, villas et locations courte durée.</p>
+</div>
+<div class="box">
+<h3 data-i18n="s2_box3_title">👗 Style &amp; beauté</h3>
+<p data-i18n="s2_box3_text">Robes, tenues stylées, confection et crèmes de beauté pour compléter l'univers féminin de la boutique.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ─ SLIDE 3 : MAISON + HÔTELS ─ -->
+<div class="slide">
+<div class="slide-inner">
+<div class="kicker" data-i18n="s3_kicker">Textile &amp; hébergement</div>
+<h2 class="s-h2" data-i18n="s3_title">Maison, hôtels<br/>&amp; villas</h2>
+<div class="g2">
+<div class="box">
+<h3 data-i18n="s3_box1_title">Univers maison</h3>
+<p data-i18n="s3_box1_text">Linge de maison, serviettes, draps, couvertures et peignoirs pour la maison, les familles et les maisons de vacances.</p>
+<div class="taglist">
+<span class="tag" data-i18n="s3_tag_1">Serviettes</span>
+<span class="tag" data-i18n="s3_tag_2">Draps</span>
+<span class="tag" data-i18n="s3_tag_3">Couvertures</span>
+<span class="tag" data-i18n="s3_tag_4">Peignoirs</span>
+<span class="tag" data-i18n="s3_tag_5">Linge de maison</span>
+</div>
+</div>
+<div class="box">
+<h3 data-i18n="s3_box2_title">Pros du séjour</h3>
+<ul>
+<li data-i18n="s3_li_1">Serviettes hôtel</li>
+<li data-i18n="s3_li_2">Foutas pour transats</li>
+<li data-i18n="s3_li_3">Textile plage et piscine</li>
+<li data-i18n="s3_li_4">Équipement villas et maisons d'hôtes</li>
+<li data-i18n="s3_li_5">Locations courte durée</li>
+</ul>
+<p class="notice" data-i18n="s3_notice">Le client professionnel comprend vite quoi demander : quantités, couleurs, tailles, usage hôtel ou plage.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ─ SLIDE 4 : PLAGE + STYLE + BEAUTÉ ─ -->
+<div class="slide">
+<div class="slide-inner">
+<div class="kicker" data-i18n="s4_kicker">Plage · Mode · Beauté</div>
+<h2 class="s-h2" data-i18n="s4_title">Plage, style<br/>&amp; beauté</h2>
+<div class="g3">
+<div class="box">
+<h3 data-i18n="s4_box1_title">🌊 Plage &amp; transats</h3>
+<p data-i18n="s4_box1_text">Foutas pour transats, serviettes de plage et textiles légers pour les journées au soleil, les piscines et les espaces détente.</p>
+</div>
+<div class="box">
+<h3 data-i18n="s4_box2_title">👗 Tenues stylées</h3>
+<p data-i18n="s4_box2_text">Robes, tenues et confection pour les femmes qui veulent rester élégantes, à l'aise et bien habillées en toutes circonstances.</p>
+</div>
+<div class="box">
+<h3 data-i18n="s4_box3_title">✨ Crèmes &amp; soins</h3>
+<p data-i18n="s4_box3_text">Sélection de crèmes de beauté et produits de soin, présentés simplement pour aider la cliente à choisir facilement.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- ─ SLIDE 5 : GALERIE ─ -->
+<div class="slide">
+<div class="slide-inner">
+<div class="kicker" data-i18n="s5_kicker">Galerie produits</div>
+<h2 class="s-h2" data-i18n="s5_title">Nos produits<br/>en images</h2>
+<p class="s-intro" data-i18n="s5_intro">La galerie contient plusieurs photos. Faites défiler avec les flèches, les vignettes ou le geste latéral pour voir les produits doucement, sans précipitation.</p>
+<div data-gallery="">
+<div class="gallery-stage">
+<div id="gallSlides">
+<figure class="gallery-slide active">
+<img alt="Peignoirs et linge" loading="lazy" referrerpolicy="no-referrer" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png"/>
+<figcaption data-i18n="s5_cap_1">Peignoirs &amp; linge de maison</figcaption>
+</figure>
+<figure class="gallery-slide">
+<img alt="Foutas pour transats" loading="lazy" referrerpolicy="no-referrer" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png"/>
+<figcaption data-i18n="s5_cap_2">Foutas pour transats</figcaption>
+</figure>
+<figure class="gallery-slide">
+<img alt="Serviettes de plage" loading="lazy" referrerpolicy="no-referrer" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png"/>
+<figcaption data-i18n="s5_cap_3">Serviettes de plage</figcaption>
+</figure>
+<figure class="gallery-slide">
+<img alt="Robes et tenues" loading="lazy" referrerpolicy="no-referrer" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png"/>
+<figcaption data-i18n="s5_cap_4">Robes &amp; tenues stylées</figcaption>
+</figure>
+<figure class="gallery-slide">
+<img alt="Crèmes de beauté" loading="lazy" referrerpolicy="no-referrer" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png"/>
+<figcaption data-i18n="s5_cap_5">Crèmes de beauté</figcaption>
+</figure>
+</div>
+<button class="gallery-arrow prev" data-prev="" type="button">‹</button>
+<button class="gallery-arrow next" data-next="" type="button">›</button>
+<div class="gallery-counter" data-counter="">1 / 5</div>
+</div>
+<div class="gallery-thumbs">
+<button class="gallery-thumb active" type="button"><img alt="" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-B.png"/></button>
+<button class="gallery-thumb" type="button"><img alt="" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-A.png"/></button>
+<button class="gallery-thumb" type="button"><img alt="" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-C.png"/></button>
+<button class="gallery-thumb" type="button"><img alt="" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-D.png"/></button>
+<button class="gallery-thumb" type="button"><img alt="" src="https://digiylyfe.net/wp-content/uploads/2026/05/ASTOU-E.png"/></button>
+</div>
+</div>
+</div>
+</div>
+<!-- ─ SLIDE 6 : CONTACT ─ -->
+<div class="slide">
+<div class="slide-inner">
+<div class="kicker" data-i18n="s6_kicker">Commander &amp; contacter</div>
+<h2 class="s-h2" data-i18n="s6_title">Préparez votre<br/>demande</h2>
+<div class="form-2col">
+<div class="box form">
+<label data-i18n="label_name" for="clientName">Nom</label>
+<input autocomplete="name" data-i18n-placeholder="ph_name" id="clientName" placeholder="Votre nom"/>
+<label data-i18n="label_phone" for="clientPhone">Téléphone WhatsApp</label>
+<input autocomplete="tel" data-i18n-placeholder="ph_phone" id="clientPhone" inputmode="tel" placeholder="+221 ..."/>
+<label data-i18n="label_message" for="clientMessage">Message</label>
+<textarea data-i18n-placeholder="ph_msg" id="clientMessage" placeholder="Je cherche des draps, serviettes ou foutas. Qu'avez-vous ?"></textarea>
+<button class="form-btn" data-i18n="send_whatsapp" id="sendRequest" type="button">Envoyer sur WhatsApp →</button>
+</div>
+<div class="box info-block">
+<h3 data-i18n="info_title">Informations pratiques</h3>
+<p data-i18n="info_whatsapp"><strong>WhatsApp :</strong> +221 77 876 57 85</p>
+<p data-i18n="info_hours"><strong>Horaires :</strong> À confirmer avec Astou</p>
+<p data-i18n="info_maps"><strong>Repère :</strong> Astou Boutique · Google Maps</p>
+<p data-i18n="info_social"><strong>Réseaux :</strong> TikTok · nouveautés et produits</p>
+<p class="notice" data-i18n="info_notice">Écrire directement pour connaître les produits disponibles, les prix ou préparer sa visite.</p>
+<div class="digiy-qr-officiel" id="qrAstou">
+<div class="digiy-qr-badge" data-i18n="qr_badge">▣ QR officiel DIGIYLYFE</div>
+<a aria-label="Ouvrir Astou Boutique" class="digiy-qr-imgbox" href="https://astou-boutique.digiylyfe.com/" rel="noopener" target="_blank">
+<img alt="QR officiel Astou Boutique DIGIYLYFE" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyCAIAAABnRsZeAAAHMklEQVR4nO3cwZEkNRRFUZoYC9jhAf5bgwfscCHxQBDoar6y+pztRFdlddfc0OKFvp7n+QWg8+v0AwCfRlaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChD7MfXGv/3+x9RbH/L3X38u/nXn85575Z333XHnM3+37+Q5TitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQGxsZbs2tQ5cm9qGrt93aoO7du6Zp74b3+07ucNpBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIXbqyXbvzJtSpVz5nZ+2683mnbgXe8cbv5DlOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitA7JUr2zc6dz/rnTe/rk3td/k5nFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgJiV7U8ydT/ruTtWp7xxVfzdOK0AMVkBYrICxGQFiMkKEJMVICYrQExWgJisALFXrmw/b0k59Yl2FrrnnnlnGTz1zJ/3ndzhtALEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxC5d2bqBtfrZKeeeeeru3s/7Tp7jtALEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxL6e55l+hm9hZ6N5boN753L0zt0w/53TChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQG7vLdmobOrU63XnfO7ew59z5V9jZ/t75bT/HaQWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFiI2tbNfu3JV+3lL23Arzzs+7Y2rt+sbbiJ1WgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoDYpSvbtTfedHvuFtWdde/U3a5rU9vfc7fVnvvZqdtq15xWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoDY1/M8I288dQfnG29vnVp/nnPnmvmcN+6GdzitADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrACxS++yvfOGzql7Yd+43526JffOe2HPPdWd/1OcVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaA2NhdtmtTK8zPe+U33gt750L3zg3umrtsgQ8hK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUg9sqV7Y47N6l3bkPvvH/3nKlNqpUtwL+QFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQ+zH9AP/HueXoufd944Lz3DNP/TZ2nPtNTu2zz3FaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFiY3fZTt2TOvXKa2+8zXTqDt1z7lxvW9kCyApQkxUgJitATFaAmKwAMVkBYrICxGQFiI2tbNemFpx3bkPPLYPf+L5rd35z7vxdneO0AsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEfky98Z1r18+7y3ZtaqN57vbWO++FvfOpznFaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFiYyvbO/edO84tdN94i+r6fe9cFU891edxWgFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYmMr27WpvePUUvbOz3vnLap3bmHvfKopTitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQOzreZ7pZ/gWpvasd95le+cr77hzZTu1k3ZaAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFiY3fZ3rlK3LGzaDy3HN1ZrO58onNL2XOmltBTf6NznFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgNjYynbtzu3gG++FPbfR3Hnlc7vSO2+6PefODa7TChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQu3Rluza1dj33ynduJc/9nqc+79Qdum/86+9wWgFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYq9c2b7R1H20dy50z92hu+PcU915o/A5TitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQMzK9lvbWaxO3Tj73XbD7rIFkBWgJitATFaAmKwAMVkBYrICxGQFiMkKEHvlyvaNu8PP26Te+b5r66c6d9/w2s5T3fl/wWkFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYhdurLd2SzeaWcree5n13Ze+c5t6Lnv1Z1r1ylOK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitA7Ot5nulnAD6K0woQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsRkBYjJChCTFSAmK0BMVoCYrAAxWQFisgLEZAWIyQoQkxUgJitATFaAmKwAMVkBYrICxGQFiMkKEJMVICYrQExWgJisADFZAWKyAsT+AewuNWzBv0tuAAAAAElFTkSuQmCC"/>
+</a>
+<h3 data-i18n="qr_heading">Scannez Astou Boutique</h3>
+<p data-i18n="qr_text">
               Ce QR ouvre la vitrine officielle Astou Boutique : produits, galerie, WhatsApp direct et partage facile.
               Le contact reste direct avec la boutique.
             </p>
-            <div class="digiy-qr-link">https://astou-boutique.digiylyfe.com/</div>
-            <div class="digiy-qr-actions">
-              <a class="btn green" href="https://astou-boutique.digiylyfe.com/" target="_blank" rel="noopener">▣ Ouvrir la vitrine</a>
-              <button class="btn ghost" type="button" id="copyQrAstou">📋 Copier le lien</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ─ SLIDE 7 : PRÉSENCE DIGITALE ─ -->
-  <div class="slide">
-    <div class="slide-inner">
-      <div class="kicker">Présence digitale</div>
-      <h2 class="s-h2">Sur le terrain<br>&amp; en ligne</h2>
-      <div class="g3">
-        <div class="box">
-          <h3>🎥 TikTok</h3>
-          <p>Vidéos produits, nouveautés, arrivages, inspirations et démonstrations en direct depuis la boutique.</p>
-          <p class="notice">Lien TikTok à confirmer.</p>
-        </div>
-        <div class="box">
-          <h3>📍 Google Maps</h3>
-          <p>Astou Boutique est référencée sur Google Maps. Retrouvez le repère, préparez votre visite et contactez avant de passer.</p>
-          <p class="notice">Lien Google Maps à confirmer.</p>
-        </div>
-        <div class="box">
-          <h3>🛒 DIGIY MARKET</h3>
-          <p>Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible sur la plateforme terrain.</p>
-          <p class="notice">À brancher côté MARKET avec l'adresse publique.</p>
-        </div>
-        <div class="box">
-          <h3>▣ QR officiel</h3>
-          <p>La vitrine Astou Boutique devient partageable par QR : le client scanne, voit les produits et contacte directement.</p>
-          <p class="notice">https://astou-boutique.digiylyfe.com/</p>
-        </div>
-      </div>
-      <p style="margin-top:30px;text-align:center;opacity:.38;font-family:var(--font-h);font-style:italic;font-size:16px;color:#fff">
+<div class="digiy-qr-link">https://astou-boutique.digiylyfe.com/</div>
+<div class="digiy-qr-actions">
+<a class="btn green" data-i18n="qr_open" href="https://astou-boutique.digiylyfe.com/" rel="noopener" target="_blank">▣ Ouvrir la vitrine</a>
+<button class="btn ghost" data-i18n="qr_copy" id="copyQrAstou" type="button">📋 Copier le lien</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ─ SLIDE 7 : PRÉSENCE DIGITALE ─ -->
+<div class="slide">
+<div class="slide-inner">
+<div class="kicker" data-i18n="s7_kicker">Présence digitale</div>
+<h2 class="s-h2" data-i18n="s7_title">Sur le terrain<br/>&amp; en ligne</h2>
+<div class="g3">
+<div class="box">
+<h3 data-i18n="s7_box1_title">🎥 TikTok</h3>
+<p data-i18n="s7_box1_text">Vidéos produits, nouveautés, arrivages, inspirations et démonstrations en direct depuis la boutique.</p>
+<p class="notice" data-i18n="s7_box1_notice">Lien TikTok à confirmer.</p>
+</div>
+<div class="box">
+<h3 data-i18n="s7_box2_title">📍 Google Maps</h3>
+<p data-i18n="s7_box2_text">Astou Boutique est référencée sur Google Maps. Retrouvez le repère, préparez votre visite et contactez avant de passer.</p>
+<p class="notice" data-i18n="s7_box2_notice">Lien Google Maps à confirmer.</p>
+</div>
+<div class="box">
+<h3 data-i18n="s7_box3_title">🛒 DIGIY MARKET</h3>
+<p data-i18n="s7_box3_text">Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible sur la plateforme terrain.</p>
+<p class="notice" data-i18n="s7_box3_notice">À brancher côté MARKET avec l'adresse publique.</p>
+</div>
+<div class="box">
+<h3 data-i18n="s7_box4_title">▣ QR officiel</h3>
+<p data-i18n="s7_box4_text">La vitrine Astou Boutique devient partageable par QR : le client scanne, voit les produits et contacte directement.</p>
+<p class="notice" data-i18n="s7_box4_notice">https://astou-boutique.digiylyfe.com/</p>
+</div>
+</div>
+<p data-i18n="s7_signature" style="margin-top:30px;text-align:center;opacity:.38;font-family:var(--font-h);font-style:italic;font-size:16px;color:#fff">
         Chaque partenaire est une facette. DIGIY lui donne la lumière. · BY DIGIYLYFE
       </p>
-    </div>
-  </div>
-
-  <!-- ARROWS -->
-  <button class="snav prev" id="snavPrev" type="button">‹</button>
-  <button class="snav next" id="snavNext" type="button">›</button>
 </div>
-
+</div>
+<!-- ARROWS -->
+<button class="snav prev" id="snavPrev" type="button">‹</button>
+<button class="snav next" id="snavNext" type="button">›</button>
+</div>
 <!-- ══ LECTEUR DIGIY AUDIO ══ -->
-<div class="player digiy-reader" aria-label="Lecteur vocal DIGIY">
-  <div class="p-info">
-    <div class="p-disc" id="pDisc">🎧</div>
-    <div>
-      <div class="p-name" id="pName">Astou Boutique en audio</div>
-      <div class="p-status" id="pStatus">Présentation vocale · prêt</div>
-    </div>
-  </div>
-
-  <div class="p-eq" id="pEq" aria-hidden="true">
-    <div class="p-eq-b" style="--d:.33s;--h:14px"></div>
-    <div class="p-eq-b" style="--d:.42s;--h:20px"></div>
-    <div class="p-eq-b" style="--d:.27s;--h:11px"></div>
-    <div class="p-eq-b" style="--d:.38s;--h:18px"></div>
-    <div class="p-eq-b" style="--d:.46s;--h:13px"></div>
-  </div>
-
-  <div class="p-ctrl">
-    <button class="pc" id="pReplay" title="Recommencer">↺</button>
-    <button class="pc main" id="pPlay" title="Écouter / pause">▶</button>
-    <button class="pc" id="pStop" title="Stop">■</button>
-  </div>
-
-  <div class="p-prog">
-    <div class="p-times">
-      <span id="pCur">0:00</span>
-      <span id="pDur">~1:20</span>
-    </div>
-    <div class="p-track" id="pTrack" aria-hidden="true">
-      <div class="p-fill" id="pFill"></div>
-    </div>
-  </div>
-
-  <div class="p-note">BY DIGIYLYFE</div>
+<div aria-label="Lecteur vocal DIGIY" class="player digiy-reader">
+<div class="p-info">
+<div class="p-disc" id="pDisc">🎧</div>
+<div>
+<div class="p-name" data-i18n="player_name" id="pName">Astou Boutique en audio</div>
+<div class="p-status" data-i18n="player_status_ready" id="pStatus">Présentation vocale · prêt</div>
 </div>
-
+</div>
+<div aria-hidden="true" class="p-eq" id="pEq">
+<div class="p-eq-b" style="--d:.33s;--h:14px"></div>
+<div class="p-eq-b" style="--d:.42s;--h:20px"></div>
+<div class="p-eq-b" style="--d:.27s;--h:11px"></div>
+<div class="p-eq-b" style="--d:.38s;--h:18px"></div>
+<div class="p-eq-b" style="--d:.46s;--h:13px"></div>
+</div>
+<div class="p-ctrl">
+<button class="pc" id="pReplay" title="Recommencer">↺</button>
+<button class="pc main" id="pPlay" title="Écouter / pause">▶</button>
+<button class="pc" id="pStop" title="Stop">■</button>
+</div>
+<div class="p-prog">
+<div class="p-times">
+<span id="pCur">0:00</span>
+<span id="pDur">~1:20</span>
+</div>
+<div aria-hidden="true" class="p-track" id="pTrack">
+<div class="p-fill" id="pFill"></div>
+</div>
+</div>
+<div class="p-note">BY DIGIYLYFE</div>
+</div>
 <script>
 (function(){
 'use strict';
@@ -941,10 +960,11 @@ if(sendBtn) sendBtn.addEventListener('click',function(){
   var nom=(document.getElementById('clientName').value||'').trim();
   var tel=(document.getElementById('clientPhone').value||'').trim();
   var msg=(document.getElementById('clientMessage').value||'').trim();
-  var t='Bonjour Astou Boutique, je souhaite faire une demande.';
-  if(nom) t+=' Nom : '+nom+'.';
-  if(tel) t+=' Tél : '+tel+'.';
-  if(msg) t+=' Message : '+msg;
+  var isEn = window.DIGIY_ACTIVE_LANG === 'en';
+  var t = isEn ? 'Hello Astou Boutique, I would like to make a request.' : 'Bonjour Astou Boutique, je souhaite faire une demande.';
+  if(nom) t += (isEn ? ' Name: ' : ' Nom : ') + nom + '.';
+  if(tel) t += (isEn ? ' Phone: ' : ' Tél : ') + tel + '.';
+  if(msg) t += (isEn ? ' Message: ' : ' Message : ') + msg;
   window.open('https://wa.me/221778765785?text='+encodeURIComponent(t),'_blank','noopener');
 });
 
@@ -953,11 +973,11 @@ if(copyQrAstou) copyQrAstou.addEventListener('click',function(){
   var url='https://astou-boutique.digiylyfe.com/';
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(url).then(function(){
-      copyQrAstou.textContent='✅ Lien copié';
-      setTimeout(function(){copyQrAstou.textContent='📋 Copier le lien';},1600);
-    }).catch(function(){window.prompt('Copie le lien :',url);});
+      copyQrAstou.textContent=(window.DIGIY_ACTIVE_LANG==='en'?'✅ Link copied':'✅ Lien copié');
+      setTimeout(function(){copyQrAstou.textContent=(window.DIGIY_ACTIVE_LANG==='en'?'📋 Copy link':'📋 Copier le lien');},1600);
+    }).catch(function(){window.prompt((window.DIGIY_ACTIVE_LANG==='en'?'Copy the link:':'Copie le lien :'),url);});
   }else{
-    window.prompt('Copie le lien :',url);
+    window.prompt((window.DIGIY_ACTIVE_LANG==='en'?'Copy the link:':'Copie le lien :'),url);
   }
 });
 
@@ -965,16 +985,8 @@ if(copyQrAstou) copyQrAstou.addEventListener('click',function(){
    DIGIY AUDIO — LECTEUR VOCAL
    Sans musique. Présentation claire de la boutique.
 ══════════════════════════════════ */
-var audioText=[
-  'Bienvenue chez Astou Boutique, à Saly.',
-  'La visite se fait doucement sous forme de diaporama, avec un déroulement latéral. Avancez à votre rythme avec les flèches, les points du haut ou le geste du doigt sur téléphone. La galerie dispose de plusieurs photos pour mieux apprécier les produits.',
-  'Astou Boutique propose du linge de maison, des serviettes, des draps, des couvertures, des peignoirs, des foutas pour transats et des serviettes de plage.',
-  'La boutique accompagne aussi les hôtels, les villas, les maisons d’hôtes, les locations courte durée et les familles qui veulent équiper leurs espaces avec goût.',
-  'On y retrouve aussi des robes, des tenues stylées, de la confection et des crèmes de beauté.',
-  'Vous pouvez regarder la galerie, préparer votre demande, puis contacter directement Astou Boutique sur WhatsApp.',
-  'La fiche possède aussi son QR officiel DIGIYLYFE. Le client peut le scanner, garder le lien dans son téléphone et partager la boutique facilement.',
-  'DIGIYLYFE donne la lumière au commerce du terrain. Le client voit, comprend et contacte directement.'
-].join(' ');
+var audioTexts={fr:["Bienvenue chez Astou Boutique, à Saly.", "La visite se fait doucement sous forme de diaporama, avec un déroulement latéral. Avancez à votre rythme avec les flèches, les points du haut ou le geste du doigt sur téléphone. La galerie dispose de plusieurs photos pour mieux apprécier les produits.", "Astou Boutique propose du linge de maison, des serviettes, des draps, des couvertures, des peignoirs, des foutas pour transats et des serviettes de plage.", "La boutique accompagne aussi les hôtels, les villas, les maisons d’hôtes, les locations courte durée et les familles qui veulent équiper leurs espaces avec goût.", "On y retrouve aussi des robes, des tenues stylées, de la confection et des crèmes de beauté.", "Vous pouvez regarder la galerie, préparer votre demande, puis contacter directement Astou Boutique sur WhatsApp.", "La fiche possède aussi son QR officiel DIGIYLYFE. Le client peut le scanner, garder le lien dans son téléphone et partager la boutique facilement.", "DIGIYLYFE donne la lumière au commerce du terrain. Le client voit, comprend et contacte directement."].join(' '),en:["Welcome to Astou Boutique in Saly.", "The visit flows gently as a slideshow, moving sideways. Go at your own pace with the arrows, the top dots, or a swipe on your phone. The gallery includes several photos so you can appreciate the products properly.", "Astou Boutique offers home linen, towels, sheets, blankets, bathrobes, foutas for loungers and beach towels.", "The boutique also supports hotels, villas, guesthouses, short-term rentals and families who want to equip their spaces with taste.", "You will also find dresses, stylish outfits, tailoring and beauty creams.", "You can view the gallery, prepare your request, then contact Astou Boutique directly on WhatsApp.", "The page also has its official DIGIYLYFE QR. Customers can scan it, keep the link on their phone and share the boutique easily.", "DIGIYLYFE gives light to ground-level commerce. The customer sees, understands and contacts directly."].join(' ')};
+function getAudioText(){return audioTexts[(window.DIGIY_ACTIVE_LANG==='en')?'en':'fr'];}
 
 var playBtn=document.getElementById('pPlay');
 var stopBtn=document.getElementById('pStop');
@@ -1002,9 +1014,10 @@ function fmt(s){
 
 pDur.textContent='~'+fmt(estimatedDuration);
 
-function pickFrVoice(){
+function pickVoice(){
   var voices=window.speechSynthesis?window.speechSynthesis.getVoices():[];
-  return voices.find(function(v){return (v.lang||'').toLowerCase().indexOf('fr')===0;}) || voices[0] || null;
+  var lang=(window.DIGIY_ACTIVE_LANG==='en')?'en':'fr';
+  return voices.find(function(v){return (v.lang||'').toLowerCase().indexOf(lang)===0;}) || voices[0] || null;
 }
 
 function setEQ(on){
@@ -1043,7 +1056,7 @@ function resetReader(){
   isPaused=false;
   utterance=null;
   playBtn.textContent='▶';
-  pStatus.textContent='Présentation vocale · prêt';
+  pStatus.textContent=(window.DIGIY_ACTIVE_LANG==='en'?'Voice presentation · ready':'Présentation vocale · prêt'); window.__ASTOU_AUDIO_PLAYING=false;
   setEQ(false);
   stopProgress(true);
 }
@@ -1052,7 +1065,7 @@ function finishReader(){
   isSpeaking=false;
   isPaused=false;
   playBtn.textContent='▶';
-  pStatus.textContent='Lecture terminée';
+  pStatus.textContent=(window.DIGIY_ACTIVE_LANG==='en'?'Playback finished':'Lecture terminée'); window.__ASTOU_AUDIO_PLAYING=false;
   setEQ(false);
   setProgress(estimatedDuration);
   clearInterval(progressTimer);
@@ -1060,7 +1073,7 @@ function finishReader(){
     if(!isSpeaking){
       simElapsed=0;
       setProgress(0);
-      pStatus.textContent='Présentation vocale · prêt';
+      pStatus.textContent=(window.DIGIY_ACTIVE_LANG==='en'?'Voice presentation · ready':'Présentation vocale · prêt'); window.__ASTOU_AUDIO_PLAYING=false;
     }
   },1200);
 }
@@ -1072,18 +1085,18 @@ function speakFresh(){
   }
   window.speechSynthesis.cancel();
   stopProgress(true);
-  utterance=new SpeechSynthesisUtterance(audioText);
-  utterance.lang='fr-FR';
+  utterance=new SpeechSynthesisUtterance(getAudioText());
+  utterance.lang=(window.DIGIY_ACTIVE_LANG==='en'?'en-US':'fr-FR');
   utterance.rate=.86;
   utterance.pitch=1.04;
   utterance.volume=1;
-  utterance.voice=pickFrVoice();
+  utterance.voice=pickVoice();
   utterance.onend=finishReader;
   utterance.onerror=resetReader;
   isSpeaking=true;
   isPaused=false;
   playBtn.textContent='⏸';
-  pStatus.textContent='Lecture en cours';
+  pStatus.textContent=(window.DIGIY_ACTIVE_LANG==='en'?'Playing':'Lecture en cours'); window.__ASTOU_AUDIO_PLAYING=true;
   setEQ(true);
   startProgress();
   window.speechSynthesis.speak(utterance);
@@ -1098,7 +1111,7 @@ playBtn.addEventListener('click',function(){
     window.speechSynthesis.pause();
     isPaused=true;
     playBtn.textContent='▶';
-    pStatus.textContent='Pause';
+    pStatus.textContent=(window.DIGIY_ACTIVE_LANG==='en'?'Paused':'Pause');
     setEQ(false);
     return;
   }
@@ -1106,7 +1119,7 @@ playBtn.addEventListener('click',function(){
     window.speechSynthesis.resume();
     isPaused=false;
     playBtn.textContent='⏸';
-    pStatus.textContent='Lecture en cours';
+    pStatus.textContent=(window.DIGIY_ACTIVE_LANG==='en'?'Playing':'Lecture en cours'); window.__ASTOU_AUDIO_PLAYING=true;
     setEQ(true);
     startProgress();
     return;
@@ -1124,17 +1137,15 @@ replayBtn.addEventListener('click',function(){
 });
 
 if('speechSynthesis' in window){
-  window.speechSynthesis.onvoiceschanged=function(){pickFrVoice();};
+  window.speechSynthesis.onvoiceschanged=function(){pickVoice();};
   window.addEventListener('beforeunload',function(){window.speechSynthesis.cancel();});
 }
 
 
 })();
 </script>
-
 <!-- Retour La Voix du Business DIGIY -->
-<a href="https://pro-action-digiy.digiylyfe.com/" id="digiyRetourVoix"
-   aria-label="Retour à La Voix du Business DIGIY">
+<a aria-label="Retour à La Voix du Business DIGIY" data-i18n="return_voice" href="https://pro-action-digiy.digiylyfe.com/" id="digiyRetourVoix">
   ← La Voix du Business
 </a>
 <style>
@@ -1172,6 +1183,427 @@ if('speechSynthesis' in window){
     }
   }
 </style>
-</body>
+<script>
+(function(){
+  "use strict";
+
+  const ASTOU_I18N = {
+  "s1_kicker": {
+    "fr": "Saly, Sénégal · Maison · Plage · Style · Beauté",
+    "en": "Saly, Senegal · Home · Beach · Style · Beauty"
+  },
+  "s1_title": {
+    "fr": "Astou<br>Boutique",
+    "en": "Astou<br>Boutique"
+  },
+  "s1_sub": {
+    "fr": "Maison, plage &amp; élégance",
+    "en": "Home, beach &amp; elegance"
+  },
+  "s1_lead": {
+    "fr": "Linge de maison, serviettes, draps, peignoirs, foutas, tenues stylées, confection et crèmes de beauté. Une boutique utile, belle et directe à Saly.",
+    "en": "Home linen, towels, sheets, bathrobes, foutas, beach items, stylish outfits, tailoring and beauty creams. A useful, elegant and direct boutique in Saly."
+  },
+  "visit_title": {
+    "fr": "Visite douce en diaporama",
+    "en": "A smooth slideshow visit"
+  },
+  "visit_text_1": {
+    "fr": "Avancez tranquillement, slide par slide, avec un déroulement latéral. Utilisez les flèches, les points du haut ou le geste du doigt sur téléphone.",
+    "en": "Move calmly, slide by slide, with a lateral flow. Use the arrows, the dots at the top, or swipe on your phone."
+  },
+  "visit_text_2": {
+    "fr": "La galerie dispose de plusieurs photos pour mieux apprécier les produits : linge, foutas, plage, tenues et beauté.",
+    "en": "The gallery includes several photos to better appreciate the products: linen, foutas, beach items, outfits and beauty."
+  },
+  "btn_whatsapp_direct": {
+    "fr": "💬 WhatsApp direct",
+    "en": "💬 Direct WhatsApp"
+  },
+  "btn_gallery": {
+    "fr": "🖼️ Galerie",
+    "en": "🖼️ Gallery"
+  },
+  "btn_official_qr": {
+    "fr": "▣ QR officiel",
+    "en": "▣ Official QR"
+  },
+  "btn_view_offer": {
+    "fr": "Voir l'offre →",
+    "en": "View the offer →"
+  },
+  "s2_kicker": {
+    "fr": "Ce que propose la boutique",
+    "en": "What the boutique offers"
+  },
+  "s2_title": {
+    "fr": "Utile, belle<br>et directe",
+    "en": "Useful, elegant<br>and direct"
+  },
+  "s2_intro": {
+    "fr": "Familles, femmes, touristes, hôtels, villas, maisons d'hôtes et locations — Astou Boutique s'adresse à tous ceux qui veulent du beau et du pratique.",
+    "en": "Families, women, tourists, hotels, villas, guesthouses and rentals — Astou Boutique speaks to everyone looking for beautiful and practical items."
+  },
+  "s2_box1_title": {
+    "fr": "🛏️ Maison &amp; linge",
+    "en": "🛏️ Home &amp; linen"
+  },
+  "s2_box1_text": {
+    "fr": "Draps, serviettes, couvertures et peignoirs pour équiper la maison avec goût, douceur et simplicité.",
+    "en": "Sheets, towels, blankets and bathrobes to equip the home with taste, softness and simplicity."
+  },
+  "s2_box2_title": {
+    "fr": "🏨 Hôtels &amp; villas",
+    "en": "🏨 Hotels &amp; villas"
+  },
+  "s2_box2_text": {
+    "fr": "Articles propres et présentables pour chambres, piscines, transats, villas et locations courte durée.",
+    "en": "Clean, presentable items for rooms, pools, loungers, villas and short-term rentals."
+  },
+  "s2_box3_title": {
+    "fr": "👗 Style &amp; beauté",
+    "en": "👗 Style &amp; beauty"
+  },
+  "s2_box3_text": {
+    "fr": "Robes, tenues stylées, confection et crèmes de beauté pour compléter l'univers féminin de la boutique.",
+    "en": "Dresses, stylish outfits, tailoring and beauty creams to complete the boutique’s feminine universe."
+  },
+  "s3_kicker": {
+    "fr": "Textile &amp; hébergement",
+    "en": "Textiles &amp; hospitality"
+  },
+  "s3_title": {
+    "fr": "Maison, hôtels<br>&amp; villas",
+    "en": "Homes, hotels<br>&amp; villas"
+  },
+  "s3_box1_title": {
+    "fr": "Univers maison",
+    "en": "Home universe"
+  },
+  "s3_box1_text": {
+    "fr": "Linge de maison, serviettes, draps, couvertures et peignoirs pour la maison, les familles et les maisons de vacances.",
+    "en": "Home linen, towels, sheets, blankets and bathrobes for homes, families and holiday houses."
+  },
+  "s3_tag_1": {
+    "fr": "Serviettes",
+    "en": "Towels"
+  },
+  "s3_tag_2": {
+    "fr": "Draps",
+    "en": "Sheets"
+  },
+  "s3_tag_3": {
+    "fr": "Couvertures",
+    "en": "Blankets"
+  },
+  "s3_tag_4": {
+    "fr": "Peignoirs",
+    "en": "Bathrobes"
+  },
+  "s3_tag_5": {
+    "fr": "Linge de maison",
+    "en": "Home linen"
+  },
+  "s3_box2_title": {
+    "fr": "Pros du séjour",
+    "en": "Hospitality professionals"
+  },
+  "s3_li_1": {
+    "fr": "Serviettes hôtel",
+    "en": "Hotel towels"
+  },
+  "s3_li_2": {
+    "fr": "Foutas pour transats",
+    "en": "Foutas for loungers"
+  },
+  "s3_li_3": {
+    "fr": "Textile plage et piscine",
+    "en": "Beach and pool textiles"
+  },
+  "s3_li_4": {
+    "fr": "Équipement villas et maisons d'hôtes",
+    "en": "Villa and guesthouse equipment"
+  },
+  "s3_li_5": {
+    "fr": "Locations courte durée",
+    "en": "Short-term rentals"
+  },
+  "s3_notice": {
+    "fr": "Le client professionnel comprend vite quoi demander : quantités, couleurs, tailles, usage hôtel ou plage.",
+    "en": "The professional client quickly knows what to ask for: quantities, colors, sizes, hotel use or beach use."
+  },
+  "s4_kicker": {
+    "fr": "Plage · Mode · Beauté",
+    "en": "Beach · Fashion · Beauty"
+  },
+  "s4_title": {
+    "fr": "Plage, style<br>&amp; beauté",
+    "en": "Beach, style<br>&amp; beauty"
+  },
+  "s4_box1_title": {
+    "fr": "🌊 Plage &amp; transats",
+    "en": "🌊 Beach &amp; loungers"
+  },
+  "s4_box1_text": {
+    "fr": "Foutas pour transats, serviettes de plage et textiles légers pour les journées au soleil, les piscines et les espaces détente.",
+    "en": "Foutas for loungers, beach towels and light textiles for sunny days, pools and relaxation areas."
+  },
+  "s4_box2_title": {
+    "fr": "👗 Tenues stylées",
+    "en": "👗 Stylish outfits"
+  },
+  "s4_box2_text": {
+    "fr": "Robes, tenues et confection pour les femmes qui veulent rester élégantes, à l'aise et bien habillées en toutes circonstances.",
+    "en": "Dresses, outfits and tailoring for women who want to remain elegant, comfortable and well dressed in every situation."
+  },
+  "s4_box3_title": {
+    "fr": "✨ Crèmes &amp; soins",
+    "en": "✨ Creams &amp; care"
+  },
+  "s4_box3_text": {
+    "fr": "Sélection de crèmes de beauté et produits de soin, présentés simplement pour aider la cliente à choisir facilement.",
+    "en": "A selection of beauty creams and care products, presented simply to help clients choose easily."
+  },
+  "s5_kicker": {
+    "fr": "Galerie produits",
+    "en": "Product gallery"
+  },
+  "s5_title": {
+    "fr": "Nos produits<br>en images",
+    "en": "Our products<br>in pictures"
+  },
+  "s5_intro": {
+    "fr": "La galerie contient plusieurs photos. Faites défiler avec les flèches, les vignettes ou le geste latéral pour voir les produits doucement, sans précipitation.",
+    "en": "The gallery contains several photos. Browse with the arrows, thumbnails or a side swipe to view the products calmly, without rushing."
+  },
+  "s5_cap_1": {
+    "fr": "Peignoirs &amp; linge de maison",
+    "en": "Bathrobes &amp; home linen"
+  },
+  "s5_cap_2": {
+    "fr": "Foutas pour transats",
+    "en": "Foutas for loungers"
+  },
+  "s5_cap_3": {
+    "fr": "Serviettes de plage",
+    "en": "Beach towels"
+  },
+  "s5_cap_4": {
+    "fr": "Robes &amp; tenues stylées",
+    "en": "Dresses &amp; stylish outfits"
+  },
+  "s5_cap_5": {
+    "fr": "Crèmes de beauté",
+    "en": "Beauty creams"
+  },
+  "s6_kicker": {
+    "fr": "Commander &amp; contacter",
+    "en": "Order &amp; contact"
+  },
+  "s6_title": {
+    "fr": "Préparez votre<br>demande",
+    "en": "Prepare your<br>request"
+  },
+  "label_name": {
+    "fr": "Nom",
+    "en": "Name"
+  },
+  "label_phone": {
+    "fr": "Téléphone WhatsApp",
+    "en": "WhatsApp phone"
+  },
+  "label_message": {
+    "fr": "Message",
+    "en": "Message"
+  },
+  "ph_name": {
+    "fr": "Votre nom",
+    "en": "Your name"
+  },
+  "ph_phone": {
+    "fr": "+221 ...",
+    "en": "+221 ..."
+  },
+  "ph_msg": {
+    "fr": "Je cherche des draps, serviettes ou foutas. Qu'avez-vous ?",
+    "en": "I am looking for sheets, towels or foutas. What do you have?"
+  },
+  "send_whatsapp": {
+    "fr": "Envoyer sur WhatsApp →",
+    "en": "Send on WhatsApp →"
+  },
+  "info_title": {
+    "fr": "Informations pratiques",
+    "en": "Practical information"
+  },
+  "info_whatsapp": {
+    "fr": "<strong>WhatsApp :</strong> +221 77 876 57 85",
+    "en": "<strong>WhatsApp:</strong> +221 77 876 57 85"
+  },
+  "info_hours": {
+    "fr": "<strong>Horaires :</strong> À confirmer avec Astou",
+    "en": "<strong>Opening hours:</strong> To be confirmed with Astou"
+  },
+  "info_maps": {
+    "fr": "<strong>Repère :</strong> Astou Boutique · Google Maps",
+    "en": "<strong>Location:</strong> Astou Boutique · Google Maps"
+  },
+  "info_social": {
+    "fr": "<strong>Réseaux :</strong> TikTok · nouveautés et produits",
+    "en": "<strong>Social:</strong> TikTok · new items and products"
+  },
+  "info_notice": {
+    "fr": "Écrire directement pour connaître les produits disponibles, les prix ou préparer sa visite.",
+    "en": "Write directly to ask about available products, prices or to prepare your visit."
+  },
+  "qr_badge": {
+    "fr": "▣ QR officiel DIGIYLYFE",
+    "en": "▣ Official DIGIYLYFE QR"
+  },
+  "qr_heading": {
+    "fr": "Scannez Astou Boutique",
+    "en": "Scan Astou Boutique"
+  },
+  "qr_text": {
+    "fr": "Ce QR ouvre la vitrine officielle Astou Boutique : produits, galerie, WhatsApp direct et partage facile. Le contact reste direct avec la boutique.",
+    "en": "This QR opens the official Astou Boutique showcase: products, gallery, direct WhatsApp and easy sharing. Contact stays direct with the boutique."
+  },
+  "qr_open": {
+    "fr": "▣ Ouvrir la vitrine",
+    "en": "▣ Open the showcase"
+  },
+  "qr_copy": {
+    "fr": "📋 Copier le lien",
+    "en": "📋 Copy link"
+  },
+  "s7_kicker": {
+    "fr": "Présence digitale",
+    "en": "Digital presence"
+  },
+  "s7_title": {
+    "fr": "Sur le terrain<br>&amp; en ligne",
+    "en": "On the ground<br>&amp; online"
+  },
+  "s7_box1_title": {
+    "fr": "🎥 TikTok",
+    "en": "TikTok"
+  },
+  "s7_box1_text": {
+    "fr": "Vidéos produits, nouveautés, arrivages, inspirations et démonstrations en direct depuis la boutique.",
+    "en": "Product videos, new arrivals, inspirations and live demonstrations from the boutique."
+  },
+  "s7_box1_notice": {
+    "fr": "Lien TikTok à confirmer.",
+    "en": "TikTok link to confirm."
+  },
+  "s7_box2_title": {
+    "fr": "📍 Google Maps",
+    "en": "Google Maps"
+  },
+  "s7_box2_text": {
+    "fr": "Astou Boutique est référencée sur Google Maps. Retrouvez le repère, préparez votre visite et contactez avant de passer.",
+    "en": "Astou Boutique is listed on Google Maps. Find the location, prepare your visit and contact before coming."
+  },
+  "s7_box2_notice": {
+    "fr": "Lien Google Maps à confirmer.",
+    "en": "Google Maps link to confirm."
+  },
+  "s7_box3_title": {
+    "fr": "🛒 DIGIY MARKET",
+    "en": "DIGIY MARKET"
+  },
+  "s7_box3_text": {
+    "fr": "Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible sur la plateforme terrain.",
+    "en": "Astou Boutique can be connected to DIGIY MARKET as a visible boutique on the terrain platform."
+  },
+  "s7_box3_notice": {
+    "fr": "À brancher côté MARKET avec l'adresse publique.",
+    "en": "To connect on the MARKET side with the public address."
+  },
+  "s7_box4_title": {
+    "fr": "▣ QR officiel",
+    "en": "▣ Official QR"
+  },
+  "s7_box4_text": {
+    "fr": "La vitrine Astou Boutique devient partageable par QR : le client scanne, voit les produits et contacte directement.",
+    "en": "The Astou Boutique showcase becomes shareable by QR: the client scans, sees the products and contacts directly."
+  },
+  "s7_box4_notice": {
+    "fr": "https://astou-boutique.digiylyfe.com/",
+    "en": "https://astou-boutique.digiylyfe.com/"
+  },
+  "s7_signature": {
+    "fr": "Chaque partenaire est une facette. DIGIY lui donne la lumière. · BY DIGIYLYFE",
+    "en": "Every partner is a facet. DIGIY gives it light. · BY DIGIYLYFE"
+  },
+  "player_name": {
+    "fr": "Astou Boutique en audio",
+    "en": "Astou Boutique in audio"
+  },
+  "player_status_ready": {
+    "fr": "Présentation vocale · prêt",
+    "en": "Voice presentation · ready"
+  },
+  "return_voice": {
+    "fr": "← La Voix du Business",
+    "en": "← The Business Voice"
+  }
+};
+  const ASTOU_META = {
+  "fr": {
+    "title": "Astou Boutique · Maison, plage & élégance",
+    "description": "Astou Boutique à Saly : linge de maison, serviettes, draps, peignoirs, foutas, plage, robes, tenues stylées, confection et crèmes de beauté."
+  },
+  "en": {
+    "title": "Astou Boutique · Home, beach & elegance",
+    "description": "Astou Boutique in Saly: home linen, towels, sheets, bathrobes, foutas, beach items, dresses, stylish outfits, tailoring and beauty creams."
+  }
+};
+  const STORE_KEY = "astou_boutique_lang";
+  window.DIGIY_ACTIVE_LANG = "fr";
+
+  function applyAstouLanguage(lang){
+    const current = (lang === "en") ? "en" : "fr";
+    window.DIGIY_ACTIVE_LANG = current;
+    localStorage.setItem(STORE_KEY, current);
+    document.documentElement.setAttribute("lang", current);
+
+    document.querySelectorAll("[data-i18n]").forEach(function(el){
+      const key = el.getAttribute("data-i18n");
+      const row = ASTOU_I18N[key];
+      if(row && row[current] != null) el.innerHTML = row[current];
+    });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el){
+      const key = el.getAttribute("data-i18n-placeholder");
+      const row = ASTOU_I18N[key];
+      if(row && row[current] != null) el.setAttribute("placeholder", row[current]);
+    });
+
+    document.title = ASTOU_META[current].title;
+    const desc = document.querySelector('meta[name="description"]');
+    if(desc) desc.setAttribute("content", ASTOU_META[current].description);
+
+    const fr = document.getElementById("lang-fr");
+    const en = document.getElementById("lang-en");
+    if(fr) fr.classList.toggle("active", current === "fr");
+    if(en) en.classList.toggle("active", current === "en");
+
+    const status = document.getElementById("pStatus");
+    if(status && !window.__ASTOU_AUDIO_PLAYING) {
+      status.innerHTML = ASTOU_I18N.player_status_ready[current];
+    }
+  }
+
+  window.applyAstouLanguage = applyAstouLanguage;
+
+  document.getElementById("lang-fr")?.addEventListener("click", function(){ applyAstouLanguage("fr"); });
+  document.getElementById("lang-en")?.addEventListener("click", function(){ applyAstouLanguage("en"); });
+
+  /* FR maître : on force français à l'ouverture, comme les autres modules. */
+  applyAstouLanguage("fr");
+})();
+</script></body>
 </html>
+
 
