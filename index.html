@@ -4,8 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Astou Boutique · Maison, plage &amp; élégance</title>
-<meta content="Astou Boutique à Saly : linge de maison, serviettes à Saly, draps à Saly, peignoirs, packs villas et résidences, foutas, plage, robes, tenues stylées, confection et crèmes de beauté sur la Petite Côte." name="description"/>
+<title>Astou Boutique · Maison, plage &amp; élégance | DIGIYLYFE.COM</title>
+<meta content="Astou Boutique à Saly : linge de maison, serviettes, draps, peignoirs, packs villas et résidences, foutas, plage, robes, tenues stylées, confection et crèmes de beauté. Fiche officielle portée par DIGIYLYFE.COM." name="description"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;family=DM+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
@@ -713,7 +713,98 @@
       .topbar-r{gap:8px}
       .lang-switch button{min-width:36px;height:30px}
     }
+
+    /* ════════════════════════════
+       MARQUE MÈRE DIGIYLYFE.COM
+    ════════════════════════════ */
+    .digiy-site-pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:0 15px;
+      border-radius:999px;
+      border:1px solid rgba(245,199,107,.46);
+      background:linear-gradient(135deg,rgba(245,199,107,.18),rgba(22,199,132,.12));
+      color:var(--gold2);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      box-shadow:0 10px 28px rgba(0,0,0,.18);
+      white-space:nowrap;
+      transition:transform .2s,background .2s,box-shadow .2s;
+    }
+    .digiy-site-pill:hover{
+      transform:translateY(-1px);
+      background:linear-gradient(135deg,rgba(245,199,107,.28),rgba(22,199,132,.18));
+      box-shadow:0 14px 34px rgba(0,0,0,.25);
+    }
+    .digiy-brand-banner{
+      margin:20px 0 2px;
+      max-width:880px;
+      border:1px solid rgba(245,199,107,.34);
+      border-radius:24px;
+      padding:18px 20px;
+      background:
+        radial-gradient(circle at top left,rgba(245,199,107,.17),transparent 42%),
+        linear-gradient(155deg,rgba(22,46,34,.76),rgba(6,16,11,.64));
+      box-shadow:0 20px 54px rgba(0,0,0,.34);
+    }
+    .digiy-brand-banner a{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      color:var(--gold2);
+      font-size:18px;
+      font-weight:1000;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      text-decoration:none;
+    }
+    .digiy-brand-banner a::before{
+      content:'▣';
+      color:var(--green);
+      filter:drop-shadow(0 0 8px rgba(22,199,132,.85));
+    }
+    .digiy-brand-banner p{
+      margin-top:8px;
+      color:var(--ink2);
+      font-size:15px;
+      line-height:1.58;
+      font-weight:650;
+    }
+    .digiy-brand-signature{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      margin-top:16px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(245,199,107,.30);
+      background:rgba(245,199,107,.09);
+      color:var(--gold2);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+      text-decoration:none;
+    }
+    .digiy-brand-signature:hover{background:rgba(245,199,107,.18)}
+    @media(max-width:700px){
+      .digiy-site-pill{
+        min-height:32px;
+        padding:0 10px;
+        font-size:10px;
+        letter-spacing:.06em;
+      }
+      .digiy-brand-banner{padding:16px}
+      .digiy-brand-banner a{font-size:15px}
+      .digiy-brand-banner p{font-size:14px}
+    }
 </style>
+<link rel="canonical" href="https://astou-boutique.digiylyfe.com/"/>
 </head>
 <body>
 <div aria-hidden="true" id="aurora">
@@ -725,7 +816,8 @@
 <div class="slide-dots" id="slideDots"></div>
 <div class="topbar-r">
 <span class="slide-counter" id="slideCounter">1 / 7</span>
-<div aria-label="Changer la langue" class="lang-switch"><button class="active" id="lang-fr" type="button">FR</button><button id="lang-en" type="button">EN</button></div><a class="wa-pill" href="https://wa.me/221778765785" rel="noopener" target="_blank">💬 WhatsApp</a>
+<div aria-label="Changer la langue" class="lang-switch"><button class="active" id="lang-fr" type="button">FR</button><button id="lang-en" type="button">EN</button></div><a class="digiy-site-pill" href="https://digiylyfe.com/" rel="noopener" target="_blank">DIGIYLYFE.COM</a>
+<a class="wa-pill" href="https://wa.me/221778765785" rel="noopener" target="_blank">💬 WhatsApp</a>
 </div>
 </header>
 <!-- ══ SLIDESHOW ══ -->
@@ -737,6 +829,10 @@
 <h1 class="s-title" data-i18n="s1_title">Astou<br/>Boutique</h1>
 <p class="s-sub" data-i18n="s1_sub">Maison, plage &amp; élégance</p>
 <p class="s-lead" data-i18n="s1_lead">Linge de maison, serviettes, draps, peignoirs, foutas, tenues stylées, confection et crèmes de beauté. Une boutique utile, belle et directe à Saly.</p>
+<div class="digiy-brand-banner" aria-label="Marque officielle DIGIYLYFE">
+<a href="https://digiylyfe.com/" rel="noopener" target="_blank">DIGIYLYFE.COM</a>
+<p>La boutique garde son contact direct. La marque officielle ouvre la route digitale : visibilité, QR, partage et accès simple au terrain.</p>
+</div>
 <div class="visit-guide">
 <strong data-i18n="visit_title">Visite douce en diaporama</strong>
 <span data-i18n="visit_text_1">Avancez tranquillement, slide par slide, avec un déroulement latéral. Utilisez les flèches, les points du haut ou le geste du doigt sur téléphone.</span>
@@ -929,6 +1025,7 @@
               Le contact reste direct avec la boutique.
             </p>
 <div class="digiy-qr-link">https://astou-boutique.digiylyfe.com/</div>
+<a class="digiy-brand-signature" href="https://digiylyfe.com/" rel="noopener" target="_blank">Marque mère · DIGIYLYFE.COM</a>
 <div class="digiy-qr-actions">
 <a class="btn green" data-i18n="qr_open" href="https://astou-boutique.digiylyfe.com/" rel="noopener" target="_blank">▣ Ouvrir la vitrine</a>
 <button class="btn ghost" data-i18n="qr_copy" id="copyQrAstou" type="button">📋 Copier le lien</button>
@@ -979,8 +1076,11 @@
 </div>
 
 </div>
-<p data-i18n="s7_signature" style="margin-top:30px;text-align:center;opacity:.38;font-family:var(--font-h);font-style:italic;font-size:16px;color:#fff">
+<p data-i18n="s7_signature" style="margin-top:30px;text-align:center;opacity:.50;font-family:var(--font-h);font-style:italic;font-size:16px;color:#fff">
         Chaque partenaire est une facette. DIGIY lui donne la lumière. · BY DIGIYLYFE
+      </p>
+      <p style="text-align:center;margin-top:12px">
+        <a class="digiy-brand-signature" href="https://digiylyfe.com/" rel="noopener" target="_blank">DIGIYLYFE.COM · Maison mère</a>
       </p>
 </div>
 </div>
@@ -1018,7 +1118,7 @@
 <div class="p-fill" id="pFill"></div>
 </div>
 </div>
-<div class="p-note">BY DIGIYLYFE</div>
+<a class="p-note" href="https://digiylyfe.com/" rel="noopener" target="_blank">BY DIGIYLYFE.COM</a>
 </div>
 <script>
 (function(){
@@ -1758,6 +1858,11 @@ if('speechSynthesis' in window){
 })();
 </script></body>
 </html>
+
+
+
+
+
 
 
 
