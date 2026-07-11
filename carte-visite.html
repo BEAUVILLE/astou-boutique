@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07130f">
+  <meta name="description" content="Carte de visite digitale officielle d’Astou Boutique à Saly. QR cliquable, WhatsApp direct et partage rapide.">
+  <meta property="og:title" content="Astou Boutique · Carte de visite digitale">
+  <meta property="og:description" content="Maison, plage, mode & beauté à Saly. Scannez ou cliquez pour découvrir la boutique.">
+  <meta property="og:url" content="https://astou-boutique.digiylyfe.com/carte-visite.html">
+  <meta property="og:type" content="website">
+  <title>Astou Boutique · Carte de visite digitale</title>
+  <style>
+    :root{--bg:#050c09;--card:#0b1913;--card2:#10271d;--ink:#fffdf5;--muted:#c7d8cf;--gold:#f3c86a;--gold2:#ffe9aa;--green:#21c985;--line:rgba(243,200,106,.28);--shadow:0 30px 90px rgba(0,0,0,.55)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 12% 8%,rgba(33,201,133,.18),transparent 34%),radial-gradient(circle at 88% 22%,rgba(243,200,106,.16),transparent 32%),linear-gradient(145deg,#030806,#08130e 55%,#050b08);display:grid;place-items:center;padding:28px 16px}
+    body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitchTiles'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    .shell{width:min(100%,980px)}
+    .card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:34px;background:linear-gradient(135deg,rgba(255,255,255,.04),transparent 45%),linear-gradient(150deg,var(--card2),var(--card));box-shadow:var(--shadow);display:grid;grid-template-columns:1.2fr .8fr;min-height:540px}
+    .card::after{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-135px;top:-120px;border:1px solid rgba(243,200,106,.22);box-shadow:0 0 0 42px rgba(243,200,106,.025),0 0 0 85px rgba(33,201,133,.02);pointer-events:none}
+    .identity{padding:58px 54px 46px;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1}
+    .badge{display:inline-flex;align-items:center;gap:9px;width:max-content;padding:9px 14px;border:1px solid var(--line);border-radius:999px;color:var(--gold2);font-weight:800;font-size:12px;letter-spacing:.13em;text-transform:uppercase;background:rgba(243,200,106,.07)}
+    .badge i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+    h1{margin:28px 0 6px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(52px,7vw,82px);line-height:.9;letter-spacing:-.055em;background:linear-gradient(135deg,#fff,var(--gold2) 52%,#b7f3d7);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .tagline{margin:0;color:var(--muted);font-family:Georgia,"Times New Roman",serif;font-size:clamp(22px,3vw,31px);font-style:italic}
+    .offer{margin:30px 0 0;color:#ecf6f0;line-height:1.65;font-size:16px;font-weight:600;max-width:560px}
+    .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}.chip{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.045);font-size:12px;font-weight:800;color:#e8f4ed}
+    .contact{margin-top:34px;padding-top:24px;border-top:1px solid rgba(255,255,255,.11);display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}.phone{font-weight:900;color:var(--gold2);letter-spacing:.03em}.place{color:var(--muted);font-weight:700}
+    .qr-panel{position:relative;z-index:1;padding:46px 42px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,.06),rgba(0,0,0,.22));border-left:1px solid rgba(255,255,255,.08);text-align:center}
+    .qr-link{display:block;width:min(100%,310px);aspect-ratio:1;background:#fff;border-radius:28px;padding:20px;border:7px solid rgba(255,255,255,.95);box-shadow:0 24px 60px rgba(0,0,0,.38);transition:transform .2s ease,box-shadow .2s ease}.qr-link:hover{transform:translateY(-3px) scale(1.01);box-shadow:0 30px 70px rgba(0,0,0,.48)}.qr-link img{display:block;width:100%;height:100%}
+    .scan{margin:22px 0 4px;font-size:19px;font-weight:950;color:#fff}.click{margin:0;color:var(--gold2);font-size:13px;font-weight:800}
+    .actions{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+    .btn{appearance:none;border:1px solid rgba(255,255,255,.14);border-radius:15px;padding:13px 12px;background:rgba(255,255,255,.055);color:#fff;font:inherit;font-size:13px;font-weight:900;text-decoration:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:transform .18s ease,background .18s ease,border-color .18s ease}.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.1);border-color:var(--line)}.btn.primary{grid-column:1/-1;background:var(--green);color:#022d1d;border-color:transparent}.btn.primary:hover{background:#39d799}
+    .signature{margin-top:22px;color:rgba(255,255,255,.58);font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#fff;color:#08130e;padding:11px 17px;border-radius:999px;font-weight:900;font-size:13px;opacity:0;pointer-events:none;transition:.22s;box-shadow:0 15px 40px rgba(0,0,0,.35);z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}.smallprint{text-align:center;color:rgba(255,255,255,.52);font-size:11px;margin:15px 8px 0;font-weight:700}
+    @media(max-width:760px){body{padding:14px}.card{grid-template-columns:1fr;border-radius:27px}.identity{padding:38px 27px 30px}.qr-panel{padding:34px 24px 38px;border-left:0;border-top:1px solid rgba(255,255,255,.08)}.contact{align-items:flex-start;flex-direction:column;gap:8px}.qr-link{width:min(100%,290px)}}
+    @media print{@page{size:A4;margin:12mm}body{background:#fff;padding:0;display:block}body::before,.actions,.smallprint,.toast{display:none!important}.shell{width:100%}.card{box-shadow:none;min-height:0;page-break-inside:avoid}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="card" aria-label="Carte de visite Astou Boutique">
+      <div class="identity">
+        <div>
+          <div class="badge"><i></i> Fiche officielle DIGIYLYFE</div>
+          <h1>Astou<br>Boutique</h1>
+          <p class="tagline">Maison, plage & élégance</p>
+          <p class="offer">Linge de maison, draps, serviettes, peignoirs, packs villas, tenues stylées, confection et beauté — avec contact direct à Saly.</p>
+          <div class="chips"><span class="chip">Linge de maison</span><span class="chip">Plage</span><span class="chip">Mode</span><span class="chip">Confection</span><span class="chip">Beauté</span></div>
+        </div>
+        <div class="contact"><span class="phone">WhatsApp +221 77 876 57 85</span><span class="place">Saly · Petite Côte · Sénégal</span></div>
+      </div>
+      <aside class="qr-panel">
+        <a class="qr-link" href="https://astou-boutique.digiylyfe.com/" target="_blank" rel="noopener" aria-label="Ouvrir Astou Boutique"><img src="astou-qr.svg" alt="QR code vers Astou Boutique"></a>
+        <p class="scan">Scannez le QR</p><p class="click">ou cliquez dessus pour ouvrir la boutique</p>
+        <div class="actions">
+          <a class="btn primary" href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20viens%20de%20votre%20carte%20DIGIYLYFE%20et%20je%20souhaite%20d%C3%A9couvrir%20vos%20produits." target="_blank" rel="noopener">💬 WhatsApp Astou</a>
+          <a class="btn" href="https://astou-boutique.digiylyfe.com/" target="_blank" rel="noopener">🌐 Boutique</a>
+          <button class="btn" type="button" id="shareBtn">↗ Partager</button><button class="btn" type="button" id="copyBtn">🔗 Copier le lien</button><button class="btn" type="button" id="saveBtn">＋ Enregistrer</button><button class="btn" type="button" onclick="window.print()">🖨 Imprimer</button>
+        </div>
+        <div class="signature">0% commission · Paiement direct au pro</div>
+      </aside>
+    </section>
+    <p class="smallprint">Carte digitale partageable · QR cliquable · Contact direct</p>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    const PUBLIC_URL='https://astou-boutique.digiylyfe.com/';
+    const VCARD='BEGIN:VCARD\nVERSION:3.0\nFN:Astou Boutique\nORG:Astou Boutique\nTEL;TYPE=CELL,VOICE:+221778765785\nURL:https://astou-boutique.digiylyfe.com/\nNOTE:Linge de maison, plage, mode, confection et beauté à Saly. Fiche officielle DIGIYLYFE.\nEND:VCARD\n';
+    const toast=document.getElementById('toast');
+    function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>toast.classList.remove('show'),2200)}
+    async function copyLink(){try{await navigator.clipboard.writeText(PUBLIC_URL);showToast('Lien de la boutique copié')}catch(error){const input=document.createElement('textarea');input.value=PUBLIC_URL;document.body.appendChild(input);input.select();document.execCommand('copy');input.remove();showToast('Lien copié')}}
+    document.getElementById('copyBtn').addEventListener('click',copyLink);
+    document.getElementById('shareBtn').addEventListener('click',async()=>{const data={title:'Astou Boutique · Saly',text:'Maison, plage, mode et beauté — découvrez Astou Boutique.',url:PUBLIC_URL};if(navigator.share){try{await navigator.share(data)}catch(error){if(error.name!=='AbortError')await copyLink()}}else{await copyLink();showToast('Partage non disponible : lien copié')}});
+    document.getElementById('saveBtn').addEventListener('click',()=>{const blob=new Blob([VCARD],{type:'text/vcard;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='Astou-Boutique.vcf';document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);showToast('Contact Astou prêt à enregistrer')});
+  </script>
+</body>
+</html>
