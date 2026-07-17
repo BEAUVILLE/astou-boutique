@@ -396,6 +396,22 @@
     }
     .mini-doors a:hover{background:rgba(245,199,107,.15)}
 
+    /* Catalogue public : reflet simple de MON COM, sans exposer le stock exact. */
+    .quick-catalogue{
+      margin-top:24px;padding:22px;border:1px solid rgba(22,199,132,.34);
+      border-radius:26px;background:linear-gradient(155deg,rgba(12,45,32,.86),rgba(5,17,12,.82));
+      box-shadow:0 22px 58px rgba(0,0,0,.36);
+    }
+    .quick-catalogue-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:16px}
+    .quick-catalogue h2{font-family:var(--font-h);font-size:clamp(30px,4vw,46px);line-height:.95;color:#fff}
+    .quick-catalogue-head p{color:var(--muted);font-size:13px;font-weight:700;text-align:right}
+    .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px}
+    .product-card{display:flex;flex-direction:column;gap:7px;padding:15px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.065)}
+    .product-card strong{font-size:15px;color:#fff;line-height:1.25}
+    .product-price{font-family:var(--font-h);font-size:24px;font-weight:700;color:var(--gold2)}
+    .product-status{font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#79e8b8}
+    .product-card a{margin-top:auto;display:inline-flex;justify-content:center;padding:9px 12px;border-radius:999px;background:var(--green);color:#06231a;font-size:12px;font-weight:900}
+
     /* ════════════════════════════
        GALLERY
     ════════════════════════════ */
@@ -917,6 +933,24 @@
 <h1 class="s-title" data-i18n="s1_title">Astou<br/>Boutique</h1>
 <p class="s-sub" data-i18n="s1_sub">Maison, plage &amp; élégance</p>
 <p class="s-lead" data-i18n="s1_lead">Linge de maison, serviettes, draps, peignoirs, foutas, tenues stylées, confection et crèmes de beauté. Une boutique utile, belle et directe à Saly.</p>
+<section class="quick-catalogue" aria-labelledby="catalogue-title">
+<div class="quick-catalogue-head">
+<h2 id="catalogue-title">Produits disponibles</h2>
+<p>Prix boutique · disponibilité à confirmer au moment de la commande</p>
+</div>
+<div class="product-grid">
+<article class="product-card"><strong>🛏️ Drap 2 places</strong><span class="product-price">12 000 FCFA</span><span class="product-status">Disponible</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20commander%20un%20drap%202%20places%20%C3%A0%2012%20000%20FCFA." target="_blank" rel="noopener">Commander</a></article>
+<article class="product-card"><strong>🛏️ Drap 1 place</strong><span class="product-price">7 500 FCFA</span><span class="product-status">Disponible</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20commander%20un%20drap%201%20place%20%C3%A0%207%20500%20FCFA." target="_blank" rel="noopener">Commander</a></article>
+<article class="product-card"><strong>✨ Parure complète</strong><span class="product-price">25 000 FCFA</span><span class="product-status">Stock limité</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20voir%20les%20parures%20compl%C3%A8tes%20%C3%A0%2025%20000%20FCFA." target="_blank" rel="noopener">Voir les modèles</a></article>
+<article class="product-card"><strong>⬜ Taie d’oreiller</strong><span class="product-price">2 500 FCFA</span><span class="product-status">Disponible</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20commander%20une%20taie%20d%27oreiller%20%C3%A0%202%20500%20FCFA." target="_blank" rel="noopener">Commander</a></article>
+<article class="product-card"><strong>🧼 Serviette de bain</strong><span class="product-price">8 500 FCFA</span><span class="product-status">Disponible</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20commander%20une%20serviette%20de%20bain%20%C3%A0%208%20500%20FCFA." target="_blank" rel="noopener">Commander</a></article>
+<article class="product-card"><strong>🧥 Peignoir</strong><span class="product-price">15 000 FCFA</span><span class="product-status">Stock limité</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20voir%20les%20peignoirs%20%C3%A0%2015%20000%20FCFA." target="_blank" rel="noopener">Voir les modèles</a></article>
+<article class="product-card"><strong>☁️ Couette</strong><span class="product-price">30 000 FCFA</span><span class="product-status">Stock limité</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20voir%20les%20couettes%20%C3%A0%2030%20000%20FCFA." target="_blank" rel="noopener">Voir les modèles</a></article>
+<article class="product-card"><strong>🛌 Oreiller</strong><span class="product-price">8 000 FCFA</span><span class="product-status">Disponible</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20commander%20un%20oreiller%20%C3%A0%208%20000%20FCFA." target="_blank" rel="noopener">Commander</a></article>
+<article class="product-card"><strong>🍽️ Nappe de table</strong><span class="product-price">7 000 FCFA</span><span class="product-status">Disponible</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20voir%20les%20nappes%20%C3%A0%207%20000%20FCFA." target="_blank" rel="noopener">Voir les modèles</a></article>
+<article class="product-card"><strong>◻️ Torchon</strong><span class="product-price">1 000 FCFA</span><span class="product-status">Disponible</span><a href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20commander%20des%20torchons%20%C3%A0%201%20000%20FCFA." target="_blank" rel="noopener">Commander</a></article>
+</div>
+</section>
 <div class="digiy-brand-banner" aria-label="Marque officielle DIGIYLYFE">
 <a href="https://digiylyfe.com/" rel="noopener" target="_blank">DIGIYLYFE.COM</a>
 <p>La boutique garde son contact direct. La marque officielle ouvre la route digitale : visibilité, QR, partage et accès simple au terrain.</p>
@@ -1136,8 +1170,8 @@ Votre navigateur ne peut pas lire cette vidéo.
 <div class="box info-block">
 <h3 data-i18n="info_title">Informations pratiques</h3>
 <p data-i18n="info_whatsapp"><strong>WhatsApp :</strong> +221 77 876 57 85</p>
-<p data-i18n="info_hours"><strong>Horaires :</strong> À confirmer avec Astou</p>
-<p data-i18n="info_maps"><strong>Repère :</strong> Astou Boutique · Google Maps</p>
+<p data-i18n="info_hours"><strong>Visite :</strong> contactez Astou avant votre déplacement</p>
+<p data-i18n="info_maps"><strong>Repère :</strong> emplacement envoyé directement sur WhatsApp</p>
 <p data-i18n="info_social"><strong>Réseaux :</strong> TikTok · nouveautés et produits</p>
 <p class="notice" data-i18n="info_notice">Écrire directement pour connaître les produits disponibles, les prix ou préparer sa visite.</p>
 <div class="digiy-qr-officiel" id="qrAstou">
@@ -1170,17 +1204,17 @@ Votre navigateur ne peut pas lire cette vidéo.
 <div class="box">
 <h3 data-i18n="s7_box1_title">🎥 TikTok</h3>
 <p data-i18n="s7_box1_text">Vidéos produits, nouveautés, arrivages, inspirations et démonstrations en direct depuis la boutique.</p>
-<p class="notice" data-i18n="s7_box1_notice">Lien TikTok à confirmer.</p>
+<p class="notice" data-i18n="s7_box1_notice">Demandez les dernières vidéos directement à Astou.</p>
 </div>
 <div class="box">
 <h3 data-i18n="s7_box2_title">📍 Google Maps</h3>
 <p data-i18n="s7_box2_text">Astou Boutique est référencée sur Google Maps. Retrouvez le repère, préparez votre visite et contactez avant de passer.</p>
-<p class="notice" data-i18n="s7_box2_notice">Lien Google Maps à confirmer.</p>
+<p class="notice" data-i18n="s7_box2_notice">Le repère exact est envoyé sur WhatsApp avant la visite.</p>
 </div>
 <div class="box">
 <h3 data-i18n="s7_box3_title">🛒 DIGIY MARKET</h3>
-<p data-i18n="s7_box3_text">Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible sur la plateforme terrain.</p>
-<p class="notice" data-i18n="s7_box3_notice">À brancher côté MARKET avec l'adresse publique.</p>
+<p data-i18n="s7_box3_text">Astou Boutique est reliée à DIGIY MARKET avec sa vitrine publique et son contact direct.</p>
+<p class="notice" data-i18n="s7_box3_notice"><a href="https://market.digiylyfe.com/" target="_blank" rel="noopener">Voir DIGIY MARKET →</a></p>
 </div>
 <div class="box">
 <h3 data-i18n="s7_box4_title">▣ QR officiel</h3>
@@ -1190,7 +1224,7 @@ Votre navigateur ne peut pas lire cette vidéo.
 <div class="box">
 <h3 data-i18n="s7_box5_title">🚪 Portes Google</h3>
 <p data-i18n="s7_box5_text">Les routes produits rendent Astou Boutique trouvable sans connaître son nom : serviettes, draps, peignoirs, linge maison, Petite Côte, villas et résidences.</p>
-<p class="notice" data-i18n="s7_box5_notice">À indexer dans Google Search Console après publication.</p>
+<p class="notice" data-i18n="s7_box5_notice">Pages produits publiques et partageables.</p>
 <div class="mini-doors">
 <a href="serviettes-saly.html" data-i18n="door_serviettes">Serviettes à Saly</a>
 <a href="draps-saly.html" data-i18n="door_draps">Draps à Saly</a>
@@ -1820,12 +1854,12 @@ if('speechSynthesis' in window){
     "en": "<strong>WhatsApp:</strong> +221 77 876 57 85"
   },
   "info_hours": {
-    "fr": "<strong>Horaires :</strong> À confirmer avec Astou",
-    "en": "<strong>Opening hours:</strong> To be confirmed with Astou"
+    "fr": "<strong>Visite :</strong> contactez Astou avant votre déplacement",
+    "en": "<strong>Visit:</strong> contact Astou before travelling"
   },
   "info_maps": {
-    "fr": "<strong>Repère :</strong> Astou Boutique · Google Maps",
-    "en": "<strong>Location:</strong> Astou Boutique · Google Maps"
+    "fr": "<strong>Repère :</strong> emplacement envoyé directement sur WhatsApp",
+    "en": "<strong>Location:</strong> sent directly on WhatsApp"
   },
   "info_social": {
     "fr": "<strong>Réseaux :</strong> TikTok · nouveautés et produits",
@@ -1872,8 +1906,8 @@ if('speechSynthesis' in window){
     "en": "Product videos, new arrivals, inspirations and live demonstrations from the boutique."
   },
   "s7_box1_notice": {
-    "fr": "Lien TikTok à confirmer.",
-    "en": "TikTok link to confirm."
+    "fr": "Demandez les dernières vidéos directement à Astou.",
+    "en": "Ask Astou directly for the latest videos."
   },
   "s7_box2_title": {
     "fr": "📍 Google Maps",
@@ -1884,20 +1918,20 @@ if('speechSynthesis' in window){
     "en": "Astou Boutique is listed on Google Maps. Find the location, prepare your visit and contact before coming."
   },
   "s7_box2_notice": {
-    "fr": "Lien Google Maps à confirmer.",
-    "en": "Google Maps link to confirm."
+    "fr": "Le repère exact est envoyé sur WhatsApp avant la visite.",
+    "en": "The exact location is sent on WhatsApp before the visit."
   },
   "s7_box3_title": {
     "fr": "🛒 DIGIY MARKET",
     "en": "DIGIY MARKET"
   },
   "s7_box3_text": {
-    "fr": "Astou Boutique peut être reliée à DIGIY MARKET comme boutique visible sur la plateforme terrain.",
-    "en": "Astou Boutique can be connected to DIGIY MARKET as a visible boutique on the terrain platform."
+    "fr": "Astou Boutique est reliée à DIGIY MARKET avec sa vitrine publique et son contact direct.",
+    "en": "Astou Boutique is connected to DIGIY MARKET with its public storefront and direct contact."
   },
   "s7_box3_notice": {
-    "fr": "À brancher côté MARKET avec l'adresse publique.",
-    "en": "To connect on the MARKET side with the public address."
+    "fr": "Voir Astou dans DIGIY MARKET.",
+    "en": "See Astou in DIGIY MARKET."
   },
   "s7_box4_title": {
     "fr": "▣ QR officiel",
@@ -2056,8 +2090,6 @@ if('speechSynthesis' in window){
 
 </script></body>
 </html>
-
-
 
 
 
