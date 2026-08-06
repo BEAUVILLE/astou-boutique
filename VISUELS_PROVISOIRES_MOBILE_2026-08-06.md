@@ -4,23 +4,30 @@ Date : 6 août 2026
 
 ## Objectif
 
-Améliorer immédiatement la lecture sur téléphone en remplaçant les faux fichiers `test` par de vrais visuels web légers, organisés par famille de produits.
+Embellir immédiatement la vitrine Astou Boutique sur téléphone, sans présenter les visuels comme des photos réelles du stock.
 
-## Règle
+## Principe
 
-Ces images sont provisoires et illustratives. Elles ne doivent pas être présentées comme les photos exactes du stock réel d’Astou Boutique.
+- quatre familles visuelles légères : draps, serviettes, peignoirs, villas et résidences ;
+- réutilisation raisonnée des visuels par catégorie pour limiter le poids ;
+- remplacement progressif par les vraies photos d’Astou sans modifier les chemins publics ;
+- commande directe sur WhatsApp et paiement direct à la boutique.
 
-## Familles couvertes
+## Vitrine mobile
 
-- draps et linge de lit ;
-- serviettes et linge de bain ;
-- peignoirs ;
-- villas, résidences et locations.
+La page d’accueil est simplifiée autour de :
 
-## Remplacement futur
+1. la signature « Le linge de maison, sans promesse — seulement des caresses. » ;
+2. dix cartes produits illustrées et glissables au pouce ;
+3. trois univers commerciaux ;
+4. une seule zone de six routes produits ;
+5. une galerie courte ;
+6. le clip, la carte QR et le contact WhatsApp.
 
-Astou pourra transmettre ses propres photos. Les fichiers seront remplacés en conservant les mêmes chemins, donc sans modifier les pages ni les boutons WhatsApp.
+## Fichiers techniques
 
-## Performance
+- `index.html`
+- `assets/astou/mobile/mobile.css`
+- `assets/astou/mobile/mobile.js`
 
-Les quatre images maîtresses sont compressées en JPEG web. Plusieurs chemins peuvent pointer vers le même blob Git afin d’éviter d’alourdir inutilement le dépôt.
+Les anciens fichiers-note temporaires du dossier mobile ont été retirés avant fusion.
