@@ -1,1 +1,0 @@
-Les chemins de fichiers sont stables afin de permettre le remplacement futur des illustrations par les photos réelles sans modifier les pages.
