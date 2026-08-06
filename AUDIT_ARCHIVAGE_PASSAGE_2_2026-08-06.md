@@ -5,9 +5,9 @@ Dépôt : `BEAUVILLE/astou-boutique`
 
 ## Objet
 
-Nettoyage conservateur de faux médias présents dans le dossier `assets/astou`.
+Remplacement conservateur de faux médias présents dans le dossier `assets/astou` par des visuels d’illustration provisoires destinés à embellir les pages produits.
 
-## Constat
+## Constat initial
 
 Les quatre fichiers suivants :
 
@@ -16,21 +16,18 @@ Les quatre fichiers suivants :
 - `assets/astou/peignoirs/peignoir-homme-saly.jpg`
 - `assets/astou/serviettes/serviette-blanche-6500.jpg`
 
-avaient exactement le même blob Git :
+avaient exactement le même blob Git et contenaient uniquement `test`. Ce n’étaient pas de vraies images.
 
-`9daeafb9864cf43055ae93beb0afd6c7d144bfa4`
+## Action réalisée
 
-Chaque fichier pesait 5 octets et contenait uniquement :
+- retrait des quatre faux médias ;
+- création de quatre familles de visuels provisoires : draps, serviettes, peignoirs, villas et résidences ;
+- déploiement de ces visuels sur les chemins déjà prévus par les six pages produits ;
+- conversion en JPEG web léger pour préserver la vitesse de chargement.
 
-```text
-test
-```
+## Transparence commerciale
 
-Aucune référence à ces quatre noms n’a été trouvée dans les fichiers indexés du dépôt.
-
-## Action proposée
-
-Retrait de ces quatre faux fichiers image de la branche active.
+Ces images sont des visuels d’illustration provisoires. Elles ne prétendent pas représenter exactement le stock réel d’Astou Boutique. Les photos réelles fournies par Astou les remplaceront progressivement.
 
 ## Protection
 
@@ -49,4 +46,4 @@ et dans l’historique Git.
 - affiche du clip
 - workflow de signature
 - `.digiy-card-signatures.json`
-- tous les autres fichiers du dépôt
+- prix, contacts et liens WhatsApp
