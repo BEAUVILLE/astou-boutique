@@ -1,5 +1,18 @@
+const mobileSoberStyle=document.createElement("link");
+mobileSoberStyle.rel="stylesheet";
+mobileSoberStyle.href="assets/astou/mobile/mobile-sobre.css?v=20260806b";
+document.head.appendChild(mobileSoberStyle);
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const firstCategoryImage=document.querySelector(".categories .category img");
+  if(firstCategoryImage){
+    firstCategoryImage.src="assets/astou/premium/hero-linge.webp?v=20260806b";
+    firstCategoryImage.alt="Draps et parures Astou Boutique";
+  }
+});
+
 const categoryImages={
-draps:"assets/astou/premium/cat-draps.webp",
+draps:"assets/astou/premium/hero-linge.webp?v=20260806b",
 serviettes:"assets/astou/premium/cat-serviettes.webp",
 peignoirs:"assets/astou/premium/cat-peignoirs.webp",
 linge:"assets/astou/premium/cat-linge.webp",
