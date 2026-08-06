@@ -1,0 +1,70 @@
+name: Libérer le verrou Pages puis déployer
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/release-pages-lock.yml'
+
+permissions:
+  actions: write
+  contents: read
+  pages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Annuler les déploiements Pages bloqués
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -u
+          deployments=(
+            9b968107f22ce4b484be41e05ed89e402029c9dc
+            72680db8ecc58788a656e093553883fb22dd9b83
+            95dae70e00000000000000000000000000000000
+            bdad002500000000000000000000000000000000
+            430f0caa426c0dcf95ba9811eec616fa7149a53d
+            e35e40f900000000000000000000000000000000
+            2093ae0f00000000000000000000000000000000
+            c9934e03850e10620e7031cff365438938695992
+            a0422e4d775f7cf4dcefdc7905b43217fa22122e
+            28bd466468f9c81461f55d4c46bbdfa8a8fb19da
+            c101c69794aaa97b74667c3c4f4fac534186dc1f
+            a9fbf1d67ea4f70ba15c189cf484146ee02b9a2c
+          )
+          for deployment in "${deployments[@]}"; do
+            code=$(curl -sS -o /tmp/cancel.json -w '%{http_code}' \
+              -X POST \
+              -H 'Accept: application/vnd.github+json' \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H 'X-GitHub-Api-Version: 2022-11-28' \
+              "https://api.github.com/repos/${REPO}/pages/deployments/${deployment}/cancel")
+            echo "${deployment} -> HTTP ${code}"
+            if [ "${code}" != "204" ] && [ "${code}" != "404" ] && [ "${code}" != "409" ]; then
+              cat /tmp/cancel.json || true
+            fi
+          done
+
+      - name: Laisser GitHub libérer la file
+        run: sleep 45
+
+      - name: Déclencher un seul déploiement contrôlé
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          code=$(curl -sS -o /tmp/dispatch.json -w '%{http_code}' \
+            -X POST \
+            -H 'Accept: application/vnd.github+json' \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "https://api.github.com/repos/${REPO}/actions/workflows/deploy-pages.yml/dispatches" \
+            -d '{"ref":"main"}')
+          cat /tmp/dispatch.json || true
+          test "${code}" = "204"

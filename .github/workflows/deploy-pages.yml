@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - '.github/workflows/deploy-pages.yml'
+      - '.github/workflows/release-pages-lock.yml'
   workflow_dispatch:
 
 permissions:
