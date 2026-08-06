@@ -1,13 +1,9 @@
 ASTOU BOUTIQUE — DÉPLOIEMENT GITHUB PAGES
 
-Source de publication : GitHub Actions
-Branche : main
-Workflow : .github/workflows/deploy-pages.yml
+Source de publication : branche main, dossier racine /
+Système : GitHub Pages automatique
+Workflow observé : dynamic/pages/pages-build-deployment
 Domaine : https://astou-boutique.digiylyfe.com/
-
-Le déploiement est sérialisé avec :
-- group: pages
-- cancel-in-progress: false
 
 La vitrine utilise des fichiers HTML, CSS, JavaScript et des images séparées.
 Aucune image n'est intégrée en base64 dans index.html.
