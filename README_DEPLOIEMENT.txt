@@ -1,11 +1,21 @@
-ASTOU BOUTIQUE — PACK GITHUB PAGES
+ASTOU BOUTIQUE — DÉPLOIEMENT GITHUB PAGES
 
-Déposer les 4 fichiers à la racine du dépôt :
+Source de publication : GitHub Actions
+Branche : main
+Workflow : .github/workflows/deploy-pages.yml
+Domaine : https://astou-boutique.digiylyfe.com/
+
+Le déploiement est sérialisé avec :
+- group: pages
+- cancel-in-progress: false
+
+La vitrine utilise des fichiers HTML, CSS, JavaScript et des images séparées.
+Aucune image n'est intégrée en base64 dans index.html.
+
+Éléments conservés à la racine :
 - index.html
-- DIGIYLYFE_ASTOU_BOUTIQUE_CORRIGE_50s_THE_MEGE.mp4
 - ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png
 - ASTOU_BOUTIQUE_CLIP_POSTER.jpg
+- CNAME
 
-Le clip et la carte utilisent des chemins relatifs : ils doivent rester à côté de index.html.
-QR direct : https://astou-boutique.digiylyfe.com/
-WhatsApp : +221 77 876 57 85
+WhatsApp direct : +221 77 876 57 85
