@@ -31,3 +31,7 @@ La page d’accueil est simplifiée autour de :
 - `assets/astou/mobile/mobile.js`
 
 Les anciens fichiers-note temporaires du dossier mobile ont été retirés avant fusion.
+
+## Relance GitHub Pages
+
+Le premier déploiement du 6 août 2026 a été bloqué en file d’attente puis annulé par GitHub Pages. Ce changement documentaire ne modifie ni la vitrine ni les visuels ; il crée un nouveau SHA afin de déclencher un déploiement Pages neuf.
