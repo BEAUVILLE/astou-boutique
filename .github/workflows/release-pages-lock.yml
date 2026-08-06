@@ -1,0 +1,74 @@
+name: Release Pages lock once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/release-pages-lock.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release stale deployment and request a clean build if needed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          CURRENT_SHA: ${{ github.sha }}
+          STALE_DEPLOYMENT: bdad0025958912505555f0e013aa910dc527949b
+        run: |
+          set -euo pipefail
+
+          headers=(
+            -H 'Accept: application/vnd.github+json'
+            -H "Authorization: Bearer ${GH_TOKEN}"
+            -H 'X-GitHub-Api-Version: 2022-11-28'
+          )
+
+          cancel_code=$(curl -sS -o /tmp/cancel.json -w '%{http_code}' \
+            -X POST "${headers[@]}" \
+            "https://api.github.com/repos/${REPO}/pages/deployments/${STALE_DEPLOYMENT}/cancel")
+          cat /tmp/cancel.json || true
+          case "$cancel_code" in
+            204|404) echo "Stale deployment released (HTTP ${cancel_code})." ;;
+            *) echo "Unable to release stale deployment (HTTP ${cancel_code})."; exit 1 ;;
+          esac
+
+          echo "Waiting for GitHub Pages internal lock propagation..."
+          sleep 30
+
+          status_code=$(curl -sS -o /tmp/current.json -w '%{http_code}' \
+            "${headers[@]}" \
+            "https://api.github.com/repos/${REPO}/pages/deployments/${CURRENT_SHA}")
+
+          if [ "$status_code" = "200" ]; then
+            cat /tmp/current.json
+            current_status=$(python - <<'PY'
+import json
+with open('/tmp/current.json', encoding='utf-8') as f:
+    print(json.load(f).get('status', ''))
+PY
+)
+            case "$current_status" in
+              deployment_queued|deployment_in_progress|deployment_success)
+                echo "A healthy deployment already exists for ${CURRENT_SHA}: ${current_status}."
+                exit 0
+                ;;
+            esac
+          fi
+
+          echo "Requesting one fresh Pages build for ${CURRENT_SHA}..."
+          build_code=$(curl -sS -o /tmp/build.json -w '%{http_code}' \
+            -X POST "${headers[@]}" \
+            "https://api.github.com/repos/${REPO}/pages/builds")
+          cat /tmp/build.json || true
+          if [ "$build_code" != "201" ]; then
+            echo "Fresh build request failed (HTTP ${build_code})."
+            exit 1
+          fi
+          echo "Fresh Pages build requested."
