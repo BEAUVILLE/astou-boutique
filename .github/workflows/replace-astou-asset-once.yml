@@ -1,0 +1,31 @@
+name: Remplacer le visuel Astou Boutique une fois
+
+on:
+  push:
+    paths:
+      - '.github/workflows/replace-astou-asset-once.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Télécharger et vérifier le PNG
+        shell: bash
+        run: |
+          curl -L --fail --silent --show-error --retry 3 \
+            'https://photoshop-api.adobe.io/v2/short-url/urn:aaid:ps:US:d9be00aa-5718-4f8a-a22e-357850ab3f72' \
+            -o ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png
+          test "$(xxd -p -l 8 ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png)" = "89504e470d0a1a0a"
+          file ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png | grep -q 'PNG image data, 1080 x 1920'
+      - name: Publier la carte corrigée
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png
+          git commit -m "Améliorer la carte Astou Boutique et corriger le téléphone [skip ci]"
+          git push
