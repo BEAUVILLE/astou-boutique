@@ -150,6 +150,44 @@
 }
 </style>
 
+
+<style>
+.france-order-form{display:grid;gap:12px;margin-top:15px}
+.france-order-form .field{display:grid;gap:5px}
+.france-order-form label{font-size:12px;font-weight:900;color:#4b0737}
+.france-order-form input,
+.france-order-form select{
+  width:100%;min-height:46px;padding:10px 12px;
+  border:1px solid #eadfe5;border-radius:12px;
+  background:#fff;color:#241d21;font:inherit
+}
+.france-order-form input:focus,
+.france-order-form select:focus{
+  outline:2px solid rgba(123,7,87,.18);
+  border-color:#7b0757
+}
+.france-order-form .form-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.france-order-form button{
+  min-height:50px;border:0;border-radius:13px;
+  padding:11px 15px;background:#7b0757;color:#fff;
+  font:inherit;font-weight:950;cursor:pointer
+}
+.france-payment{
+  margin-top:15px;padding:14px;border-radius:16px;
+  border:1px solid #ead2e1;background:#f7ebf3
+}
+.france-payment strong{color:#4b0737}
+.france-payment .pay-number{
+  display:block;margin:7px 0 2px;
+  font-size:19px;font-weight:950;color:#7b0757
+}
+.france-payment small{display:block;color:#6e6268;line-height:1.4}
+.france-form-note{font-size:11px!important;text-align:center}
+@media(min-width:700px){
+  .france-order-form .form-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+
 </head>
 <body>
 <header class="top">
@@ -211,11 +249,18 @@
 </section>
 
 
-<section id="france" class="france-pilot" aria-label="Offre pilote France Astou Boutique">
+
+
+
+
+<section id="france" class="france-pilot" aria-label="Commande France Astou Boutique">
   <article class="france-pilot-card">
     <div class="france-pilot-head">
-      <span class="france-pilot-kicker" data-fr="France · Offre pilote" data-en="France · Pilot offer">France · Offre pilote</span>
-      <h2 data-fr="🇫🇷 Peignoir Astou Boutique" data-en="🇫🇷 Astou Boutique bathrobe">🇫🇷 Peignoir Astou Boutique</h2>
+      <span class="france-pilot-kicker"
+            data-fr="France · Commande directe"
+            data-en="France · Direct order">France · Commande directe</span>
+      <h2 data-fr="🇫🇷 Peignoir Astou Boutique"
+          data-en="🇫🇷 Astou Boutique bathrobe">🇫🇷 Peignoir Astou Boutique</h2>
     </div>
 
     <div class="france-price-grid">
@@ -234,36 +279,83 @@
     </div>
 
     <div class="france-pilot-body">
-      <p data-fr="Astou confirme d’abord la taille, la couleur, l’adresse de livraison et le montant final. Le paiement est ensuite effectué directement à Astou par transfert Sendwave vers Wave. L’expédition part après confirmation de réception du paiement."
-         data-en="Astou first confirms the size, colour, delivery address and final amount. Payment is then made directly to Astou by Sendwave transfer to Wave. Shipping starts after payment receipt is confirmed.">
-        Astou confirme d’abord la taille, la couleur, l’adresse de livraison et le montant final. Le paiement est ensuite effectué directement à Astou par transfert Sendwave vers Wave. L’expédition part après confirmation de réception du paiement.
+      <p class="france-direct"
+         data-fr="Choisissez votre taille et préparez votre commande"
+         data-en="Choose your size and prepare your order">
+        Choisissez votre taille et préparez votre commande
       </p>
 
-      <p class="france-direct"
+      <form id="franceOrderForm" class="france-order-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="frName" data-fr="Nom et prénom" data-en="Full name">Nom et prénom</label>
+            <input id="frName" name="name" type="text" required autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="frPhone" data-fr="Téléphone / WhatsApp" data-en="Phone / WhatsApp">Téléphone / WhatsApp</label>
+            <input id="frPhone" name="phone" type="tel" required autocomplete="tel">
+          </div>
+
+          <div class="field">
+            <label for="frSize" data-fr="Taille" data-en="Size">Taille</label>
+            <select id="frSize" name="size" required>
+              <option value="" data-fr="Choisir" data-en="Choose">Choisir</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="frColor" data-fr="Couleur souhaitée" data-en="Preferred colour">Couleur souhaitée</label>
+            <input id="frColor" name="color" type="text" required
+                   placeholder="Ex. : couleur souhaitée"
+                   data-placeholder-fr="Ex. : couleur souhaitée"
+                   data-placeholder-en="E.g. preferred colour">
+          </div>
+
+          <div class="field">
+            <label for="frCity" data-fr="Ville" data-en="City">Ville</label>
+            <input id="frCity" name="city" type="text" required autocomplete="address-level2">
+          </div>
+
+          <div class="field">
+            <label for="frAddress" data-fr="Adresse de livraison" data-en="Delivery address">Adresse de livraison</label>
+            <input id="frAddress" name="address" type="text" required autocomplete="street-address">
+          </div>
+        </div>
+
+        <button type="submit"
+                data-fr="🇫🇷 Préparer ma commande sur WhatsApp"
+                data-en="🇫🇷 Prepare my order on WhatsApp">
+          🇫🇷 Préparer ma commande sur WhatsApp
+        </button>
+      </form>
+
+      <div class="france-payment">
+        <strong data-fr="Paiement après validation de la commande"
+                data-en="Payment after order confirmation">
+          Paiement après validation de la commande
+        </strong>
+        <p data-fr="Transfert Sendwave vers le compte Wave d’Astou."
+           data-en="Sendwave transfer to Astou's Wave account.">
+          Transfert Sendwave vers le compte Wave d’Astou.
+        </p>
+        <span class="pay-number">ASTOU SOW · +221 77 876 57 86</span>
+        <small data-fr="Envoyez le paiement uniquement après confirmation de la taille, de la couleur, de l’adresse et du montant final par Astou. L’expédition part après réception du paiement."
+               data-en="Send payment only after Astou confirms the size, colour, address and final amount. Shipping starts after payment is received.">
+          Envoyez le paiement uniquement après confirmation de la taille, de la couleur, de l’adresse et du montant final par Astou. L’expédition part après réception du paiement.
+        </small>
+      </div>
+
+      <p class="france-form-note"
          data-fr="Paiement direct · Relation directe · 0 % commission DIGIYLYFE"
          data-en="Direct payment · Direct relationship · 0% DIGIYLYFE commission">
         Paiement direct · Relation directe · 0 % commission DIGIYLYFE
       </p>
-
-      <div class="france-actions">
-        <a class="france-order"
-           href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20suis%20en%20France%20et%20je%20souhaite%20commander%20un%20peignoir.%20Pouvez-vous%20me%20confirmer%20la%20taille%2C%20la%20couleur%2C%20les%20frais%20d%27envoi%20et%20le%20montant%20final%20avant%20paiement%20%3F"
-           target="_blank" rel="noopener"
-           data-fr="🇫🇷 Commander depuis la France"
-           data-en="🇫🇷 Order from France">🇫🇷 Commander depuis la France</a>
-
-        <a class="france-contact"
-           href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique"
-           target="_blank" rel="noopener"
-           data-fr="💬 Contacter Astou"
-           data-en="💬 Contact Astou">💬 Contacter Astou</a>
-      </div>
-
-      <small class="france-note"
-             data-fr="Offre pilote : les frais d’expédition sont confirmés par Astou avant paiement selon le colis et l’adresse de livraison."
-             data-en="Pilot offer: shipping costs are confirmed by Astou before payment depending on the parcel and delivery address.">
-        Offre pilote : les frais d’expédition sont confirmés par Astou avant paiement selon le colis et l’adresse de livraison.
-      </small>
     </div>
   </article>
 </section>
@@ -363,7 +455,48 @@
 </nav>
 <script src="assets/astou/mobile/mobile.js?v=20260808-mobile-flow"></script>
 <script src="assets/astou/mobile/product-karite.js?v=20260809-v2"></script>
+
+<script>
+(function(){
+  const form = document.getElementById('franceOrderForm');
+  if(!form) return;
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const name = document.getElementById('frName').value.trim();
+    const phone = document.getElementById('frPhone').value.trim();
+    const size = document.getElementById('frSize').value;
+    const color = document.getElementById('frColor').value.trim();
+    const city = document.getElementById('frCity').value.trim();
+    const address = document.getElementById('frAddress').value.trim();
+
+    const message =
+`Bonjour Astou Boutique,
+Je souhaite commander un peignoir depuis la France.
+
+Nom : ${name}
+Téléphone / WhatsApp : ${phone}
+Taille : ${size}
+Couleur souhaitée : ${color}
+Ville : ${city}
+Adresse de livraison : ${address}
+
+Prix indicatif : 23 000 FCFA ≈ 35 € (peignoir + expédition France pilote).
+
+Merci de me confirmer la disponibilité, la couleur, l’adresse et le montant final avant mon paiement Sendwave vers votre compte Wave ASTOU SOW · +221 77 876 57 86.`;
+
+    window.open(
+      'https://wa.me/221778765785?text=' + encodeURIComponent(message),
+      '_blank',
+      'noopener'
+    );
+  });
+})();
+</script>
+
 </body>
 </html>
+
 
 
