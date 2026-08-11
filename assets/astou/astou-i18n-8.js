@@ -1,394 +1,84 @@
-/* ASTOU BOUTIQUE — moteur local natif de parcours 8 langues
-   FR · EN · ES · PT · DE · IT · NL · AR
-   Aucun runtime WORLD8 externe. La langue change par rechargement propre. */
+/* ASTOU BOUTIQUE — chargeur public 8 langues + compatibilité visuelle historique.
+   Le cœur de traduction est conservé dans astou-i18n-core-8.js. */
 (function(){
 'use strict';
-if(window.__ASTOU_I18N8__) return;
-window.__ASTOU_I18N8__=true;
-const SUP=['fr','en','es','pt','de','it','nl','ar'];
-const FLAG={fr:'🇫🇷',en:'🇬🇧',es:'🇪🇸',pt:'🇵🇹',de:'🇩🇪',it:'🇮🇹',nl:'🇳🇱',ar:'🌙'};
-const STORE='astou-lang';
-const urlLang=(new URLSearchParams(location.search).get('lang')||'').slice(0,2).toLowerCase();
-let lang=SUP.includes(urlLang)?urlLang:(localStorage.getItem(STORE)||localStorage.getItem('digiy-lang')||'fr').slice(0,2).toLowerCase();
-if(!SUP.includes(lang)) lang='fr';
-try{localStorage.setItem(STORE,lang);localStorage.setItem('digiy-lang',lang);localStorage.setItem('digiy_lang',lang)}catch(e){}
-document.documentElement.lang=lang;
-document.documentElement.dir=lang==='ar'?'rtl':'ltr';
 
-const D={};
-function add(fr,en,es,pt,de,it,nl,ar){D[fr]={fr,en,es,pt,de,it,nl,ar};}
-const R=(fr)=>D[fr]&&D[fr][lang]?D[fr][lang]:fr;
+function restoreSecondaryPageUI(){
+  if(!document.querySelector('.topbar')) return;
+  if(document.getElementById('astou-ui-compat')) return;
 
-/* navigation */
-add('Accueil','Home','Inicio','Início','Start','Home','Home','الرئيسية');
-add('Draps','Sheets','Sábanas','Lençóis','Bettwäsche','Lenzuola','Lakens','ملاءات');
-add('Draps Saly','Sheets Saly','Sábanas Saly','Lençóis Saly','Bettwäsche Saly','Lenzuola Saly','Lakens Saly','ملاءات سالي');
-add('Serviettes','Towels','Toallas','Toalhas','Handtücher','Asciugamani','Handdoeken','مناشف');
-add('Serviettes Saly','Towels Saly','Toallas Saly','Toalhas Saly','Handtücher Saly','Asciugamani Saly','Handdoeken Saly','مناشف سالي');
-add('Peignoirs','Bathrobes','Albornoces','Roupões','Bademäntel','Accappatoi','Badjassen','أردية حمام');
-add('Peignoirs Saly','Bathrobes Saly','Albornoces Saly','Roupões Saly','Bademäntel Saly','Accappatoi Saly','Badjassen Saly','أردية حمام سالي');
-add('Linge maison','Home linen','Ropa de hogar','Roupa de casa','Heimtextilien','Biancheria casa','Huislinnen','مفروشات منزلية');
-add('Linge Maison Saly','Home Linen Saly','Ropa de hogar Saly','Roupa de casa Saly','Heimtextilien Saly','Biancheria casa Saly','Huislinnen Saly','مفروشات منزلية سالي');
-add('Linge Maison Petite Côte','Home Linen Petite Côte','Ropa de hogar Petite Côte','Roupa de casa Petite Côte','Heimtextilien Petite Côte','Biancheria casa Petite Côte','Huislinnen Petite Côte','مفروشات الساحل الصغير');
-add('Villas','Villas','Villas','Villas','Villen','Ville','Villa’s','فلل');
-add('Villas & Résidences','Villas & Residences','Villas y residencias','Villas e residências','Villen & Residenzen','Ville e residence','Villa’s & residenties','فلل وإقامات');
-add('Contact','Contact','Contacto','Contacto','Kontakt','Contatto','Contact','اتصال');
-add('Retour à l’accueil','Back to home','Volver al inicio','Voltar ao início','Zurück zur Startseite','Torna alla home','Terug naar home','العودة للرئيسية');
-add('Retour boutique','Back to boutique','Volver a la tienda','Voltar à loja','Zurück zum Shop','Torna alla boutique','Terug naar de winkel','العودة للمتجر');
-
-/* accueil */
-add('Saly · Maison · Villas · Contact direct','Saly · Home · Villas · Direct contact','Saly · Hogar · Villas · Contacto directo','Saly · Casa · Villas · Contacto direto','Saly · Zuhause · Villen · Direktkontakt','Saly · Casa · Ville · Contatto diretto','Saly · Wonen · Villa’s · Direct contact','سالي · منزل · فلل · اتصال مباشر');
-add('Le linge de maison, sans promesse — seulement des caresses.','Home linen, no promises — only soft touches.','Ropa de hogar, sin promesas — solo suavidad.','Roupa de casa, sem promessas — apenas suavidade.','Heimtextilien ohne Versprechen — nur sanfte Berührung.','Biancheria per la casa, senza promesse — solo morbidezza.','Huislinnen, geen beloften — alleen zachtheid.','مفروشات منزلية بلا وعود — فقط نعومة.');
-add('Des draps qui apaisent. Des serviettes qui enveloppent. Une douceur qui accompagne chaque instant.','Sheets that soothe. Towels that wrap you gently. Softness for every moment.','Sábanas que relajan. Toallas que envuelven. Suavidad para cada momento.','Lençóis que acalmam. Toalhas que envolvem. Suavidade em cada momento.','Bettwäsche zum Wohlfühlen. Handtücher, die umhüllen. Weichheit für jeden Moment.','Lenzuola che rilassano. Asciugamani avvolgenti. Morbidezza in ogni momento.','Lakens die rust geven. Handdoeken die omhullen. Zachtheid voor elk moment.','ملاءات تمنح الراحة. مناشف تحتضنك. نعومة في كل لحظة.');
-add('Voir nos produits','View our products','Ver nuestros productos','Ver os nossos produtos','Unsere Produkte ansehen','Vedi i nostri prodotti','Bekijk onze producten','عرض منتجاتنا');
-add('Commander sur WhatsApp','Order on WhatsApp','Pedir por WhatsApp','Encomendar no WhatsApp','Über WhatsApp bestellen','Ordina su WhatsApp','Bestel via WhatsApp','اطلب عبر واتساب');
-add('Prix · Karité · Contact direct','Prices · Shea butter · Direct contact','Precios · Karité · Contacto directo','Preços · Karité · Contacto direto','Preise · Sheabutter · Direktkontakt','Prezzi · Burro di karité · Contatto diretto','Prijzen · Sheaboter · Direct contact','الأسعار · زبدة الشيا · اتصال مباشر');
-add('Le clip Astou Boutique','Astou Boutique video','Vídeo de Astou Boutique','Vídeo Astou Boutique','Astou Boutique Video','Video Astou Boutique','Astou Boutique-video','فيديو أستو بوتيك');
-add('Regardez les produits et leurs prix. La vidéo ne se charge que lorsque vous la lancez.','See the products and their prices. The video only loads when you start it.','Mira los productos y sus precios. El vídeo solo se carga cuando lo inicias.','Veja os produtos e os preços. O vídeo só é carregado quando o inicia.','Produkte und Preise ansehen. Das Video lädt erst beim Start.','Guarda i prodotti e i prezzi. Il video si carica solo quando lo avvii.','Bekijk producten en prijzen. De video laadt pas wanneer je hem start.','شاهد المنتجات وأسعارها. لا يتم تحميل الفيديو إلا عند تشغيله.');
-add('Clip officiel · Prix & karité','Official video · Prices & shea butter','Vídeo oficial · Precios y karité','Vídeo oficial · Preços e karité','Offizielles Video · Preise & Sheabutter','Video ufficiale · Prezzi e karité','Officiële video · Prijzen & sheaboter','الفيديو الرسمي · الأسعار وزبدة الشيا');
-add('Draps, serviettes, peignoirs, linge de maison et beurre de karité bio maison à 7 000 FCFA. Contact direct avec Astou.','Sheets, towels, bathrobes, home linen and homemade organic shea butter at 7,000 FCFA. Direct contact with Astou.','Sábanas, toallas, albornoces, ropa de hogar y manteca de karité bio casera a 7.000 FCFA. Contacto directo con Astou.','Lençóis, toalhas, roupões, roupa de casa e manteiga de karité bio caseira a 7 000 FCFA. Contacto direto com Astou.','Bettwäsche, Handtücher, Bademäntel, Heimtextilien und hausgemachte Bio-Sheabutter für 7.000 FCFA. Direktkontakt mit Astou.','Lenzuola, asciugamani, accappatoi, biancheria casa e burro di karité bio artigianale a 7.000 FCFA. Contatto diretto con Astou.','Lakens, handdoeken, badjassen, huislinnen en huisgemaakte biologische sheaboter voor 7.000 FCFA. Direct contact met Astou.','ملاءات ومناشف وأردية حمام ومفروشات منزلية وزبدة شيا عضوية منزلية بسعر 7,000 فرنك CFA. تواصل مباشر مع أستو.');
-add('▶ Ouvrir le clip','▶ Open the video','▶ Abrir el vídeo','▶ Abrir o vídeo','▶ Video öffnen','▶ Apri il video','▶ Video openen','▶ فتح الفيديو');
-add('💬 Contacter Astou','💬 Contact Astou','💬 Contactar con Astou','💬 Contactar Astou','💬 Astou kontaktieren','💬 Contatta Astou','💬 Contact Astou','💬 تواصل مع أستو');
-add('Routes produits','Product routes','Rutas de productos','Rotas de produtos','Produktbereiche','Percorsi prodotti','Productroutes','أقسام المنتجات');
-add('Nos catégories','Our categories','Nuestras categorías','As nossas categorias','Unsere Kategorien','Le nostre categorie','Onze categorieën','فئاتنا');
-add('Six portes claires pour trouver rapidement le bon linge.','Six clear routes to quickly find the right linen.','Seis rutas claras para encontrar rápidamente la ropa adecuada.','Seis caminhos claros para encontrar rapidamente a roupa certa.','Sechs klare Wege zur passenden Wäsche.','Sei percorsi chiari per trovare rapidamente la biancheria giusta.','Zes duidelijke routes om snel het juiste linnengoed te vinden.','ستة مسارات واضحة للعثور بسرعة على المفروشات المناسبة.');
-add('Voir les produits','View products','Ver productos','Ver produtos','Produkte ansehen','Vedi prodotti','Producten bekijken','عرض المنتجات');
-add('Draps plats, housses, taies et parures.','Sheets, fitted sheets, pillowcases and sets.','Sábanas, bajeras, fundas y juegos.','Lençóis, capas, fronhas e conjuntos.','Bettlaken, Spannbettlaken, Kissenbezüge und Sets.','Lenzuola, coprimaterassi, federe e completi.','Lakens, hoeslakens, slopen en sets.','ملاءات وأغطية وسائد وأطقم.');
-add('Serviettes de bain, visage, invité et tapis.','Bath, face, guest towels and bath mats.','Toallas de baño, cara, invitados y alfombrillas.','Toalhas de banho, rosto, visita e tapetes.','Bade-, Gesichts- und Gästetücher sowie Badematten.','Asciugamani da bagno, viso, ospite e tappetini.','Bad-, gezichts- en gastendoeken en badmatten.','مناشف حمام ووجه وضيوف وحصائر.');
-add('Peignoirs doux pour elle et lui.','Soft bathrobes for her and him.','Albornoces suaves para ella y él.','Roupões macios para ela e para ele.','Weiche Bademäntel für sie und ihn.','Accappatoi morbidi per lei e lui.','Zachte badjassen voor haar en hem.','أردية حمام ناعمة لها وله.');
-add('Tout le linge utile pour votre intérieur.','All the useful linen for your home.','Toda la ropa útil para tu hogar.','Toda a roupa útil para a sua casa.','Alle wichtigen Heimtextilien.','Tutta la biancheria utile per la casa.','Al het nuttige linnengoed voor thuis.','كل المفروشات المفيدة لمنزلك.');
-add('Confort et élégance sur toute la Petite Côte.','Comfort and elegance across Petite Côte.','Confort y elegancia en toda la Petite Côte.','Conforto e elegância em toda a Petite Côte.','Komfort und Eleganz an der Petite Côte.','Comfort ed eleganza in tutta la Petite Côte.','Comfort en elegantie aan de Petite Côte.','راحة وأناقة في جميع أنحاء الساحل الصغير.');
-add('Packs linge pour villas, résidences et locations.','Linen packs for villas, residences and rentals.','Packs de ropa para villas, residencias y alquileres.','Packs de roupa para villas, residências e alojamentos.','Wäschepakete für Villen, Residenzen und Vermietungen.','Pacchetti biancheria per ville, residence e affitti.','Linnenpakketten voor villa’s, residenties en verhuur.','باقات مفروشات للفلل والإقامات والإيجارات.');
-add('Prix boutique','Boutique prices','Precios de tienda','Preços da loja','Shop-Preise','Prezzi boutique','Winkelprijzen','أسعار المتجر');
-add('Produits disponibles','Available products','Productos disponibles','Produtos disponíveis','Verfügbare Produkte','Prodotti disponibili','Beschikbare producten','المنتجات المتوفرة');
-add('Glissez les cartes · stock à confirmer','Swipe cards · confirm stock','Desliza las tarjetas · stock por confirmar','Deslize os cartões · stock a confirmar','Karten wischen · Bestand bestätigen','Scorri le schede · disponibilità da confermare','Veeg door kaarten · voorraad bevestigen','مرّر البطاقات · المخزون يحتاج تأكيد');
-add('Preuve terrain','Field proof','Prueba de terreno','Prova no terreno','Nachweis vor Ort','Prova sul campo','Praktijkbewijs','إثبات ميداني');
-add('Carte & QR','Card & QR','Tarjeta y QR','Cartão e QR','Karte & QR','Carta & QR','Kaart & QR','بطاقة وQR');
-add('Garder et partager en un geste.','Save and share in one tap.','Guarda y comparte en un gesto.','Guarde e partilhe num gesto.','Speichern und mit einem Tipp teilen.','Salva e condividi con un gesto.','Bewaar en deel met één tik.','احفظ وشارك بلمسة واحدة.');
-add('Carte de visite officielle','Official business card','Tarjeta oficial','Cartão de visita oficial','Offizielle Visitenkarte','Biglietto da visita ufficiale','Officieel visitekaartje','بطاقة العمل الرسمية');
-add('Partagez directement le PNG avec le QR, ou téléchargez-le pour WhatsApp, TikTok et Instagram.','Share the PNG with its QR directly, or download it for WhatsApp, TikTok and Instagram.','Comparte directamente el PNG con su QR o descárgalo para WhatsApp, TikTok e Instagram.','Partilhe diretamente o PNG com o QR ou descarregue-o para WhatsApp, TikTok e Instagram.','PNG mit QR direkt teilen oder für WhatsApp, TikTok und Instagram herunterladen.','Condividi direttamente il PNG con il QR o scaricalo per WhatsApp, TikTok e Instagram.','Deel de PNG met QR direct of download hem voor WhatsApp, TikTok en Instagram.','شارك صورة PNG مع رمز QR مباشرة أو نزّلها لواتساب وتيك توك وإنستغرام.');
-add('↗ Partager la carte','↗ Share the card','↗ Compartir tarjeta','↗ Partilhar cartão','↗ Karte teilen','↗ Condividi carta','↗ Kaart delen','↗ مشاركة البطاقة');
-add('↓ Télécharger le PNG','↓ Download PNG','↓ Descargar PNG','↓ Descarregar PNG','↓ PNG herunterladen','↓ Scarica PNG','↓ PNG downloaden','↓ تنزيل PNG');
-add('▣ Ouvrir la carte','▣ Open the card','▣ Abrir tarjeta','▣ Abrir cartão','▣ Karte öffnen','▣ Apri carta','▣ Kaart openen','▣ فتح البطاقة');
-add('Découvrir toute la boutique','Discover the full boutique','Descubrir toda la tienda','Descobrir toda a loja','Den ganzen Shop entdecken','Scopri tutta la boutique','Ontdek de hele winkel','اكتشف المتجر بالكامل');
-add('Une boutique pour tous','A boutique for everyone','Una tienda para todos','Uma loja para todos','Ein Shop für alle','Una boutique per tutti','Een winkel voor iedereen','متجر للجميع');
-add('Maison, séjour & douceur','Home, stays & softness','Hogar, estancias y suavidad','Casa, estadias e suavidade','Zuhause, Aufenthalt & Komfort','Casa, soggiorni e morbidezza','Wonen, verblijf & zachtheid','منزل وإقامة ونعومة');
-add('Maison & linge','Home & linen','Hogar y ropa','Casa e roupa','Zuhause & Wäsche','Casa e biancheria','Wonen & linnen','منزل ومفروشات');
-add('Draps, serviettes, couettes, oreillers, nappes et peignoirs pour la maison.','Sheets, towels, duvets, pillows, tablecloths and bathrobes for the home.','Sábanas, toallas, edredones, almohadas, manteles y albornoces para el hogar.','Lençóis, toalhas, edredões, almofadas, toalhas de mesa e roupões para casa.','Bettwäsche, Handtücher, Decken, Kissen, Tischdecken und Bademäntel für Zuhause.','Lenzuola, asciugamani, piumoni, cuscini, tovaglie e accappatoi per la casa.','Lakens, handdoeken, dekbedden, kussens, tafelkleden en badjassen voor thuis.','ملاءات ومناشف وألحفة ووسائد ومفارش وأردية حمام للمنزل.');
-add('Packs pratiques pour chambres, salles de bain, locations et maisons d’hôtes.','Practical packs for bedrooms, bathrooms, rentals and guesthouses.','Packs prácticos para dormitorios, baños, alquileres y casas de huéspedes.','Packs práticos para quartos, casas de banho, alojamentos e casas de hóspedes.','Praktische Pakete für Schlafzimmer, Bäder, Vermietungen und Gästehäuser.','Pacchetti pratici per camere, bagni, affitti e case vacanza.','Praktische pakketten voor slaapkamers, badkamers, verhuur en gastenhuizen.','باقات عملية لغرف النوم والحمامات والإيجارات وبيوت الضيافة.');
-add('Style & beauté','Style & beauty','Estilo y belleza','Estilo e beleza','Stil & Schönheit','Stile e bellezza','Stijl & schoonheid','أناقة وجمال');
-add('Tenues, confection et soins : demandez les nouveautés directement à Astou.','Outfits, tailoring and care: ask Astou directly for the latest arrivals.','Ropa, confección y cuidados: pide las novedades directamente a Astou.','Roupa, confeção e cuidados: peça as novidades diretamente à Astou.','Mode, Schneiderei und Pflege: Neuheiten direkt bei Astou erfragen.','Abbigliamento, confezione e cura: chiedi le novità direttamente ad Astou.','Kleding, maatwerk en verzorging: vraag Astou direct naar de nieuwste items.','ملابس وتفصيل وعناية: اسأل أستو مباشرة عن الجديد.');
-add('Voir avant de contacter','See before contacting','Ver antes de contactar','Ver antes de contactar','Erst ansehen, dann kontaktieren','Guarda prima di contattare','Bekijk vóór contact','شاهد قبل التواصل');
-add('Galerie produits','Product gallery','Galería de productos','Galeria de produtos','Produktgalerie','Galleria prodotti','Productgalerij','معرض المنتجات');
-add('Draps & parures','Sheets & bedding sets','Sábanas y juegos','Lençóis e conjuntos','Bettwäsche & Sets','Lenzuola e completi','Lakens & sets','ملاءات وأطقم');
-add('Serviettes de bain','Bath towels','Toallas de baño','Toalhas de banho','Badetücher','Asciugamani da bagno','Badhanddoeken','مناشف حمام');
-add('Peignoirs & détente','Bathrobes & relaxation','Albornoces y relax','Roupões e relaxamento','Bademäntel & Entspannung','Accappatoi e relax','Badjassen & ontspanning','أردية حمام واسترخاء');
-add('Packs villas & résidences','Villa & residence packs','Packs para villas y residencias','Packs para villas e residências','Pakete für Villen & Residenzen','Pacchetti ville e residence','Pakketten voor villa’s & residenties','باقات الفلل والإقامات');
-add('Besoin d’aide ou d’une commande spéciale ?','Need help or a special order?','¿Necesitas ayuda o un pedido especial?','Precisa de ajuda ou de uma encomenda especial?','Hilfe oder Sonderbestellung nötig?','Serve aiuto o un ordine speciale?','Hulp of een speciale bestelling nodig?','هل تحتاج مساعدة أو طلبًا خاصًا؟');
-add('Envoyez le nom du produit, la quantité et la couleur recherchée. Astou confirme le stock, le prix, le retrait ou la livraison locale.','Send the product name, quantity and preferred colour. Astou confirms stock, price, pickup or local delivery.','Envía el nombre del producto, la cantidad y el color. Astou confirma stock, precio, recogida o entrega local.','Envie o nome do produto, a quantidade e a cor. Astou confirma stock, preço, levantamento ou entrega local.','Produktname, Menge und Wunschfarbe senden. Astou bestätigt Bestand, Preis, Abholung oder lokale Lieferung.','Invia nome prodotto, quantità e colore. Astou conferma disponibilità, prezzo, ritiro o consegna locale.','Stuur productnaam, aantal en kleur. Astou bevestigt voorraad, prijs, afhalen of lokale levering.','أرسل اسم المنتج والكمية واللون. تؤكد أستو المخزون والسعر والاستلام أو التوصيل المحلي.');
-add('Visibilité directe · paiement direct · 0 % commission DIGIY','Direct visibility · direct payment · 0% DIGIY commission','Visibilidad directa · pago directo · 0 % comisión DIGIY','Visibilidade direta · pagamento direto · 0% comissão DIGIY','Direkte Sichtbarkeit · direkte Zahlung · 0 % DIGIY-Provision','Visibilità diretta · pagamento diretto · 0% commissione DIGIY','Directe zichtbaarheid · directe betaling · 0% DIGIY-commissie','ظهور مباشر · دفع مباشر · 0٪ عمولة DIGIY');
-add('Produits','Products','Productos','Produtos','Produkte','Prodotti','Producten','منتجات');
-add('Partager','Share','Compartir','Partilhar','Teilen','Condividi','Delen','مشاركة');
-
-/* commande France */
-add('France · Commande directe','France · Direct order','Francia · Pedido directo','França · Encomenda direta','Frankreich · Direktbestellung','Francia · Ordine diretto','Frankrijk · Direct bestellen','فرنسا · طلب مباشر');
-add('🇫🇷 Peignoir Astou Boutique','🇫🇷 Astou Boutique bathrobe','🇫🇷 Albornoz Astou Boutique','🇫🇷 Roupão Astou Boutique','🇫🇷 Astou Boutique Bademantel','🇫🇷 Accappatoio Astou Boutique','🇫🇷 Astou Boutique badjas','🇫🇷 رداء حمام أستو بوتيك');
-add('Peignoir','Bathrobe','Albornoz','Roupão','Bademantel','Accappatoio','Badjas','رداء حمام');
-add('Expédition France pilote','Pilot shipping to France','Envío piloto a Francia','Envio piloto para França','Pilotversand nach Frankreich','Spedizione pilota in Francia','Pilotverzending naar Frankrijk','شحن تجريبي إلى فرنسا');
-add('Total indicatif','Indicative total','Total indicativo','Total indicativo','Richtwert gesamt','Totale indicativo','Indicatief totaal','المجموع التقريبي');
-add('Choisissez votre taille et préparez votre commande','Choose your size and prepare your order','Elige tu talla y prepara tu pedido','Escolha o seu tamanho e prepare a encomenda','Größe wählen und Bestellung vorbereiten','Scegli la taglia e prepara l’ordine','Kies je maat en bereid je bestelling voor','اختر مقاسك وجهّز طلبك');
-add('Nom et prénom','Full name','Nombre y apellidos','Nome completo','Vor- und Nachname','Nome e cognome','Volledige naam','الاسم الكامل');
-add('Téléphone / WhatsApp','Phone / WhatsApp','Teléfono / WhatsApp','Telefone / WhatsApp','Telefon / WhatsApp','Telefono / WhatsApp','Telefoon / WhatsApp','الهاتف / واتساب');
-add('Taille','Size','Talla','Tamanho','Größe','Taglia','Maat','المقاس');
-add('Choisir','Choose','Elegir','Escolher','Wählen','Scegli','Kiezen','اختر');
-add('Couleur souhaitée','Preferred colour','Color deseado','Cor pretendida','Gewünschte Farbe','Colore desiderato','Gewenste kleur','اللون المطلوب');
-add('Ville','City','Ciudad','Cidade','Stadt','Città','Stad','المدينة');
-add('Adresse de livraison','Delivery address','Dirección de entrega','Morada de entrega','Lieferadresse','Indirizzo di consegna','Bezorgadres','عنوان التسليم');
-add('🇫🇷 Préparer ma commande sur WhatsApp','🇫🇷 Prepare my order on WhatsApp','🇫🇷 Preparar mi pedido en WhatsApp','🇫🇷 Preparar a minha encomenda no WhatsApp','🇫🇷 Bestellung auf WhatsApp vorbereiten','🇫🇷 Prepara il mio ordine su WhatsApp','🇫🇷 Bereid mijn bestelling voor op WhatsApp','🇫🇷 جهّز طلبي على واتساب');
-add('Paiement après validation de la commande','Payment after order confirmation','Pago después de confirmar el pedido','Pagamento após confirmação da encomenda','Zahlung nach Bestellbestätigung','Pagamento dopo conferma dell’ordine','Betaling na bevestiging van de bestelling','الدفع بعد تأكيد الطلب');
-add('Transfert Sendwave vers le compte Wave d’Astou.','Sendwave transfer to Astou’s Wave account.','Transferencia Sendwave a la cuenta Wave de Astou.','Transferência Sendwave para a conta Wave da Astou.','Sendwave-Überweisung auf Astous Wave-Konto.','Trasferimento Sendwave sul conto Wave di Astou.','Sendwave-overboeking naar Astou’s Wave-account.','تحويل Sendwave إلى حساب Wave الخاص بأستو.');
-add('Envoyez le paiement uniquement après confirmation de la taille, de la couleur, de l’adresse et du montant final par Astou. L’expédition part après réception du paiement.','Send payment only after Astou confirms the size, colour, address and final amount. Shipping starts after payment is received.','Envía el pago solo después de que Astou confirme la talla, el color, la dirección y el importe final. El envío sale después de recibir el pago.','Envie o pagamento apenas depois de Astou confirmar o tamanho, a cor, a morada e o valor final. O envio parte após a receção do pagamento.','Zahlung erst senden, nachdem Astou Größe, Farbe, Adresse und Endbetrag bestätigt hat. Versand nach Zahlungseingang.','Invia il pagamento solo dopo la conferma di taglia, colore, indirizzo e importo finale da parte di Astou. La spedizione parte dopo il pagamento.','Betaal pas nadat Astou maat, kleur, adres en eindbedrag heeft bevestigd. Verzending start na ontvangst van de betaling.','أرسل الدفع فقط بعد أن تؤكد أستو المقاس واللون والعنوان والمبلغ النهائي. يبدأ الشحن بعد استلام الدفع.');
-add('Paiement direct · Relation directe · 0 % commission DIGIYLYFE','Direct payment · Direct relationship · 0% DIGIYLYFE commission','Pago directo · Relación directa · 0 % comisión DIGIYLYFE','Pagamento direto · Relação direta · 0% comissão DIGIYLYFE','Direkte Zahlung · Direkte Beziehung · 0 % DIGIYLYFE-Provision','Pagamento diretto · Rapporto diretto · 0% commissioni DIGIYLYFE','Directe betaling · Direct contact · 0% DIGIYLYFE-commissie','دفع مباشر · علاقة مباشرة · 0٪ عمولة DIGIYLYFE');
-
-/* blocs communs des pages commerciales */
-add('Qualité sélectionnée','Selected quality','Calidad seleccionada','Qualidade selecionada','Ausgewählte Qualität','Qualità selezionata','Geselecteerde kwaliteit','جودة مختارة');
-add('Des articles choisis avec soin','Carefully selected items','Artículos elegidos con cuidado','Artigos escolhidos com cuidado','Sorgfältig ausgewählte Artikel','Articoli scelti con cura','Zorgvuldig gekozen artikelen','منتجات مختارة بعناية');
-add('Livraison locale','Local delivery','Entrega local','Entrega local','Lokale Lieferung','Consegna locale','Lokale levering','توصيل محلي');
-add('Saly, Petite Côte et secteurs proches','Saly, Petite Côte and nearby','Saly, Petite Côte y alrededores','Saly, Petite Côte e zonas próximas','Saly, Petite Côte und Umgebung','Saly, Petite Côte e zone vicine','Saly, Petite Côte en omgeving','سالي والساحل الصغير والمناطق القريبة');
-add('Particuliers & professionnels','Individuals & professionals','Particulares y profesionales','Particulares e profissionais','Privat & Gewerbe','Privati e professionisti','Particulieren & professionals','أفراد ومحترفون');
-add('Maisons, villas, résidences et locations','Homes, villas, residences and rentals','Casas, villas, residencias y alquileres','Casas, villas, residências e alojamentos','Häuser, Villen, Residenzen und Vermietungen','Case, ville, residence e affitti','Huizen, villa’s, residenties en verhuur','منازل وفلل وإقامات وإيجارات');
-add('Commande facile','Easy ordering','Pedido fácil','Encomenda fácil','Einfach bestellen','Ordine facile','Eenvoudig bestellen','طلب سهل');
-add('Contact et paiement directs','Direct contact and payment','Contacto y pago directos','Contacto e pagamento diretos','Direkter Kontakt und Zahlung','Contatto e pagamento diretti','Direct contact en betaling','اتصال ودفع مباشران');
-add('Livraison locale offerte à Saly et dans les secteurs proches, selon disponibilité.','Free local delivery in Saly and nearby areas, subject to availability.','Entrega local gratuita en Saly y zonas cercanas, según disponibilidad.','Entrega local gratuita em Saly e zonas próximas, conforme disponibilidade.','Kostenlose lokale Lieferung in Saly und Umgebung, je nach Verfügbarkeit.','Consegna locale gratuita a Saly e zone vicine, secondo disponibilità.','Gratis lokale levering in Saly en omgeving, afhankelijk van beschikbaarheid.','توصيل محلي مجاني في سالي والمناطق القريبة حسب التوفر.');
-add('Bon fidélité de 20 000 FCFA pour le prochain achat, selon les conditions de l’offre.','20,000 FCFA loyalty voucher for the next purchase, subject to offer conditions.','Bono de fidelidad de 20.000 FCFA para la próxima compra, según condiciones.','Vale fidelidade de 20 000 FCFA para a próxima compra, conforme condições.','20.000 FCFA Treuegutschein für den nächsten Einkauf gemäß Bedingungen.','Buono fedeltà da 20.000 FCFA per il prossimo acquisto, secondo le condizioni.','Loyaliteitsbon van 20.000 FCFA voor de volgende aankoop volgens de voorwaarden.','قسيمة ولاء بقيمة 20,000 فرنك CFA للشراء التالي وفق الشروط.');
-add('Disponible','Available','Disponible','Disponível','Verfügbar','Disponibile','Beschikbaar','متوفر');
-add('Collection','Collection','Colección','Coleção','Kollektion','Collezione','Collectie','مجموعة');
-add('Professionnels','Professionals','Profesionales','Profissionais','Profis','Professionisti','Professionals','محترفون');
-add('Maison','Home','Hogar','Casa','Zuhause','Casa','Wonen','منزل');
-add('Chambre','Bedroom','Dormitorio','Quarto','Schlafzimmer','Camera','Slaapkamer','غرفة نوم');
-add('Salle de bain','Bathroom','Baño','Casa de banho','Badezimmer','Bagno','Badkamer','حمام');
-add('Investissement','Investment','Inversión','Investimento','Investition','Investimento','Investering','استثمار');
-add('Plusieurs chambres','Several bedrooms','Varias habitaciones','Vários quartos','Mehrere Schlafzimmer','Più camere','Meerdere slaapkamers','عدة غرف');
-add('Livraison offerte','Free delivery','Entrega gratuita','Entrega gratuita','Kostenlose Lieferung','Consegna gratuita','Gratis levering','توصيل مجاني');
-add('Prix selon quantité','Price by quantity','Precio según cantidad','Preço conforme quantidade','Preis nach Menge','Prezzo secondo quantità','Prijs volgens aantal','السعر حسب الكمية');
-add('Devis direct','Direct quote','Presupuesto directo','Orçamento direto','Direktangebot','Preventivo diretto','Directe offerte','عرض سعر مباشر');
-add('Devis WhatsApp','WhatsApp quote','Presupuesto WhatsApp','Orçamento WhatsApp','WhatsApp-Angebot','Preventivo WhatsApp','WhatsApp-offerte','عرض سعر عبر واتساب');
-add('Économie : 500 FCFA','Save: 500 FCFA','Ahorro: 500 FCFA','Poupança: 500 FCFA','Ersparnis: 500 FCFA','Risparmio: 500 FCFA','Besparing: 500 FCFA','توفير: 500 فرنك CFA');
-add('Économie : 2 000 FCFA','Save: 2,000 FCFA','Ahorro: 2.000 FCFA','Poupança: 2 000 FCFA','Ersparnis: 2.000 FCFA','Risparmio: 2.000 FCFA','Besparing: 2.000 FCFA','توفير: 2,000 فرنك CFA');
-add('Économie : 3 000 FCFA','Save: 3,000 FCFA','Ahorro: 3.000 FCFA','Poupança: 3 000 FCFA','Ersparnis: 3.000 FCFA','Risparmio: 3.000 FCFA','Besparing: 3.000 FCFA','توفير: 3,000 فرنك CFA');
-add('Économie : 4 000 FCFA','Save: 4,000 FCFA','Ahorro: 4.000 FCFA','Poupança: 4 000 FCFA','Ersparnis: 4.000 FCFA','Risparmio: 4.000 FCFA','Besparing: 4.000 FCFA','توفير: 4,000 فرنك CFA');
-add('Économie : 4 000 FCFA + livraison locale offerte','Save: 4,000 FCFA + free local delivery','Ahorro: 4.000 FCFA + entrega local gratuita','Poupança: 4 000 FCFA + entrega local gratuita','Ersparnis: 4.000 FCFA + kostenlose lokale Lieferung','Risparmio: 4.000 FCFA + consegna locale gratuita','Besparing: 4.000 FCFA + gratis lokale levering','توفير: 4,000 فرنك CFA + توصيل محلي مجاني');
-add('Économie : 8 500 FCFA + livraison offerte','Save: 8,500 FCFA + free delivery','Ahorro: 8.500 FCFA + entrega gratuita','Poupança: 8 500 FCFA + entrega gratuita','Ersparnis: 8.500 FCFA + kostenlose Lieferung','Risparmio: 8.500 FCFA + consegna gratuita','Besparing: 8.500 FCFA + gratis levering','توفير: 8,500 فرنك CFA + توصيل مجاني');
-add('Économie : 17 000 FCFA + bon fidélité 20 000 FCFA','Save: 17,000 FCFA + 20,000 FCFA loyalty voucher','Ahorro: 17.000 FCFA + bono fidelidad 20.000 FCFA','Poupança: 17 000 FCFA + vale fidelidade 20 000 FCFA','Ersparnis: 17.000 FCFA + 20.000 FCFA Treuegutschein','Risparmio: 17.000 FCFA + buono fedeltà 20.000 FCFA','Besparing: 17.000 FCFA + loyaliteitsbon 20.000 FCFA','توفير: 17,000 فرنك CFA + قسيمة ولاء 20,000 فرنك CFA');
-
-/* produits et packs de l'accueil */
-add('Drap 2 places','Double-bed sheet','Sábana doble','Lençol de casal','Doppelbettlaken','Lenzuolo matrimoniale','Tweepersoonslaken','ملاءة سرير مزدوج');
-add('Drap 1 place','Single-bed sheet','Sábana individual','Lençol de solteiro','Einzelbettlaken','Lenzuolo singolo','Eenpersoonslaken','ملاءة سرير فردي');
-add('Parure complète','Complete bedding set','Juego completo','Conjunto completo','Komplettes Bettwäsche-Set','Completo letto','Complete bedset','طقم كامل');
-add('Taie d’oreiller','Pillowcase','Funda de almohada','Fronha','Kissenbezug','Federa','Kussensloop','غطاء وسادة');
-add('Serviette de bain','Bath towel','Toalla de baño','Toalha de banho','Badetuch','Asciugamano da bagno','Badhanddoek','منشفة حمام');
-add('Couette','Duvet','Edredón','Edredão','Bettdecke','Piumone','Dekbed','لحاف');
-add('Oreiller','Pillow','Almohada','Almofada','Kissen','Cuscino','Kussen','وسادة');
-add('Nappe','Tablecloth','Mantel','Toalha de mesa','Tischdecke','Tovaglia','Tafelkleed','مفرش طاولة');
-add('Torchon','Kitchen towel','Paño de cocina','Pano de cozinha','Küchentuch','Strofinaccio','Keukendoek','منشفة مطبخ');
-add('Beurre de karité bio maison','Homemade organic shea butter','Manteca de karité bio casera','Manteiga de karité bio caseira','Hausgemachte Bio-Sheabutter','Burro di karité bio artigianale','Huisgemaakte biologische sheaboter','زبدة شيا عضوية منزلية');
-add('Produits naturels','Natural products','Productos naturales','Produtos naturais','Naturprodukte','Prodotti naturali','Natuurlijke producten','منتجات طبيعية');
-add('Stock limité','Limited stock','Stock limitado','Stock limitado','Begrenzter Bestand','Scorte limitate','Beperkte voorraad','مخزون محدود');
-add('Commander','Order','Pedir','Encomendar','Bestellen','Ordina','Bestellen','اطلب');
-add('Voir les modèles','View styles','Ver modelos','Ver modelos','Modelle ansehen','Vedi modelli','Modellen bekijken','عرض النماذج');
-add('Réduire les produits','Show fewer products','Mostrar menos productos','Mostrar menos produtos','Weniger Produkte','Mostra meno prodotti','Minder producten','عرض منتجات أقل');
-add('Voir les 10 produits','View all 10 products','Ver los 10 productos','Ver os 10 produtos','Alle 10 Produkte','Vedi tutti i 10 prodotti','Bekijk alle 10 producten','عرض المنتجات العشرة');
-add('Voir les 11 produits','View all 11 products','Ver los 11 productos','Ver os 11 produtos','Alle 11 Produkte','Vedi tutti gli 11 prodotti','Bekijk alle 11 producten','عرض المنتجات الـ11');
-add('Réduire les packs','Show fewer packs','Mostrar menos packs','Mostrar menos packs','Weniger Pakete','Mostra meno pacchetti','Minder pakketten','عرض باقات أقل');
-add('Voir les 7 packs','View all 7 packs','Ver los 7 packs','Ver os 7 packs','Alle 7 Pakete','Vedi tutti i 7 pacchetti','Bekijk alle 7 pakketten','عرض الباقات السبع');
-add('Prix comparés · économies visibles','Compared prices · visible savings','Precios comparados · ahorro visible','Preços comparados · poupança visível','Vergleichspreise · sichtbare Ersparnis','Prezzi confrontati · risparmio visibile','Vergelijkprijzen · zichtbare besparing','أسعار مقارنة · توفير واضح');
-add('Les packs Astou','Astou packs','Packs Astou','Packs Astou','Astou Pakete','Pacchetti Astou','Astou-pakketten','باقات أستو');
-add('Glissez pour comparer les packs prioritaires, puis affichez toute la sélection.','Swipe to compare featured packs, then open the full selection.','Desliza para comparar los packs destacados y abre toda la selección.','Deslize para comparar os packs em destaque e depois veja toda a seleção.','Wischen, um Top-Pakete zu vergleichen, danach die ganze Auswahl öffnen.','Scorri per confrontare i pacchetti principali, poi apri tutta la selezione.','Veeg om aanbevolen pakketten te vergelijken en open daarna de hele selectie.','مرّر لمقارنة الباقات المميزة ثم افتح المجموعة كاملة.');
-add('Pack Douceur Solo','Solo Softness Pack','Pack Suavidad Solo','Pack Suavidade Solo','Solo-Komfortpaket','Pacchetto Morbidezza Solo','Solo Zachtheidspakket','باقة النعومة الفردية');
-add('Pack Chambre Duo','Duo Bedroom Pack','Pack Habitación Dúo','Pack Quarto Duo','Duo-Schlafzimmerpaket','Pacchetto Camera Duo','Duo Slaapkamerpakket','باقة غرفة مزدوجة');
-add('Pack Bain Duo','Duo Bath Pack','Pack Baño Dúo','Pack Banho Duo','Duo-Badezimmerpaket','Pacchetto Bagno Duo','Duo Badkamerpakket','باقة حمام مزدوجة');
-add('Pack Chambre Confort','Comfort Bedroom Pack','Pack Habitación Confort','Pack Quarto Conforto','Komfort-Schlafzimmerpaket','Pacchetto Camera Comfort','Comfort Slaapkamerpakket','باقة غرفة مريحة');
-add('Pack Maison Essentielle','Essential Home Pack','Pack Hogar Esencial','Pack Casa Essencial','Basis-Hauspaket','Pacchetto Casa Essenziale','Essentieel Huispakket','باقة المنزل الأساسية');
-add('Pack Villa · 1 chambre','Villa Pack · 1 bedroom','Pack Villa · 1 habitación','Pack Villa · 1 quarto','Villa-Paket · 1 Schlafzimmer','Pacchetto Villa · 1 camera','Villapakket · 1 slaapkamer','باقة فيلا · غرفة واحدة');
-add('Pack Villa · 2 chambres','Villa Pack · 2 bedrooms','Pack Villa · 2 habitaciones','Pack Villa · 2 quartos','Villa-Paket · 2 Schlafzimmer','Pacchetto Villa · 2 camere','Villapakket · 2 slaapkamers','باقة فيلا · غرفتان');
-add('Commander ce pack','Order this pack','Pedir este pack','Encomendar este pack','Paket bestellen','Ordina questo pacchetto','Bestel dit pakket','اطلب هذه الباقة');
-
-/* Draps */
-add('Astou Boutique · Saly · Petite Côte','Astou Boutique · Saly · Petite Côte','Astou Boutique · Saly · Petite Côte','Astou Boutique · Saly · Petite Côte','Astou Boutique · Saly · Petite Côte','Astou Boutique · Saly · Petite Côte','Astou Boutique · Saly · Petite Côte','أستو بوتيك · سالي · الساحل الصغير');
-add('Draps et parures à Saly','Sheets and bedding sets in Saly','Sábanas y juegos en Saly','Lençóis e conjuntos em Saly','Bettwäsche und Sets in Saly','Lenzuola e completi a Saly','Lakens en bedsets in Saly','ملاءات وأطقم في سالي');
-add('Des solutions simples pour la maison, les chambres, villas, résidences et appartements meublés.','Simple solutions for homes, bedrooms, villas, residences and furnished apartments.','Soluciones sencillas para casas, habitaciones, villas, residencias y apartamentos amueblados.','Soluções simples para casas, quartos, villas, residências e apartamentos mobilados.','Einfache Lösungen für Zuhause, Schlafzimmer, Villen, Residenzen und möblierte Apartments.','Soluzioni semplici per casa, camere, ville, residence e appartamenti arredati.','Eenvoudige oplossingen voor huizen, slaapkamers, villa’s, residenties en gemeubileerde appartementen.','حلول بسيطة للمنازل والغرف والفلل والإقامات والشقق المفروشة.');
-add('Commande directe WhatsApp.','Direct WhatsApp order.','Pedido directo por WhatsApp.','Encomenda direta por WhatsApp.','Direktbestellung per WhatsApp.','Ordine diretto via WhatsApp.','Direct bestellen via WhatsApp.','طلب مباشر عبر واتساب.');
-add('Modèles, couleurs et stock confirmés directement par Astou. Retrait boutique ou livraison locale selon organisation.','Models, colours and stock confirmed directly by Astou. Store pickup or local delivery depending on arrangements.','Modelos, colores y stock confirmados directamente por Astou. Recogida o entrega local según organización.','Modelos, cores e stock confirmados diretamente por Astou. Levantamento ou entrega local conforme organização.','Modelle, Farben und Bestand direkt von Astou bestätigt. Abholung oder lokale Lieferung nach Absprache.','Modelli, colori e disponibilità confermati direttamente da Astou. Ritiro o consegna locale secondo accordi.','Modellen, kleuren en voorraad direct bevestigd door Astou. Afhalen of lokale levering volgens afspraak.','تؤكد أستو النماذج والألوان والمخزون مباشرة. استلام من المتجر أو توصيل محلي حسب الترتيب.');
-add('Drap 2 places','Double-bed sheet','Sábana doble','Lençol de casal','Doppelbettlaken','Lenzuolo matrimoniale','Tweepersoonslaken','ملاءة مزدوجة');
-add('Pour chambre, maison, villa ou appartement meublé.','For a bedroom, home, villa or furnished apartment.','Para habitación, casa, villa o apartamento amueblado.','Para quarto, casa, villa ou apartamento mobilado.','Für Schlafzimmer, Haus, Villa oder möbliertes Apartment.','Per camera, casa, villa o appartamento arredato.','Voor slaapkamer, huis, villa of gemeubileerd appartement.','لغرفة أو منزل أو فيلا أو شقة مفروشة.');
-add('Une présentation élégante pour chambre principale ou maison d’hôtes.','An elegant presentation for a main bedroom or guesthouse.','Una presentación elegante para dormitorio principal o casa de huéspedes.','Uma apresentação elegante para quarto principal ou alojamento local.','Elegante Ausstattung für Hauptschlafzimmer oder Gästehaus.','Una presentazione elegante per camera principale o struttura ricettiva.','Een elegante presentatie voor hoofdslaapkamer of gastenverblijf.','تجهيز أنيق لغرفة رئيسية أو بيت ضيافة.');
-add('Lot linge de lit','Bed linen set','Lote de ropa de cama','Lote de roupa de cama','Bettwäsche-Set','Lotto biancheria letto','Set bedlinnen','مجموعة مفروشات سرير');
-add('Quantités adaptées au nombre de chambres et de lits.','Quantities adapted to the number of bedrooms and beds.','Cantidades adaptadas al número de habitaciones y camas.','Quantidades adaptadas ao número de quartos e camas.','Mengen passend zur Zahl der Schlafzimmer und Betten.','Quantità adatte al numero di camere e letti.','Aantallen afgestemd op slaapkamers en bedden.','كميات مناسبة لعدد الغرف والأسرة.');
-add('Packs recommandés','Recommended packs','Packs recomendados','Packs recomendados','Empfohlene Pakete','Pacchetti consigliati','Aanbevolen pakketten','باقات موصى بها');
-add('Voir tous les packs','View all packs','Ver todos los packs','Ver todos os packs','Alle Pakete ansehen','Vedi tutti i pacchetti','Bekijk alle pakketten','عرض كل الباقات');
-add('Villas et résidences','Villas and residences','Villas y residencias','Villas e residências','Villen und Residenzen','Ville e residence','Villa’s en residenties','فلل وإقامات');
-
-/* serviettes */
-add('Serviettes · Maison · Villas','Towels · Home · Villas','Toallas · Hogar · Villas','Toalhas · Casa · Villas','Handtücher · Zuhause · Villen','Asciugamani · Casa · Ville','Handdoeken · Wonen · Villa’s','مناشف · منزل · فلل');
-add('Des serviettes qui enveloppent vraiment','Towels that truly wrap you','Toallas que realmente envuelven','Toalhas que envolvem de verdade','Handtücher, die wirklich umhüllen','Asciugamani che avvolgono davvero','Handdoeken die echt omhullen','مناشف تحتضنك فعلًا');
-add('Pour la maison, les invités, une villa, une résidence ou une location sur la Petite Côte.','For home, guests, a villa, residence or rental on the Petite Côte.','Para casa, invitados, una villa, residencia o alquiler en la Petite Côte.','Para casa, hóspedes, uma villa, residência ou alojamento na Petite Côte.','Für Zuhause, Gäste, Villa, Residenz oder Vermietung an der Petite Côte.','Per casa, ospiti, villa, residence o affitto sulla Petite Côte.','Voor thuis, gasten, villa, residentie of verhuur aan de Petite Côte.','للمنزل والضيوف والفلل والإقامات والإيجارات في الساحل الصغير.');
-add('Nos serviettes et packs bain','Our towels and bath packs','Nuestras toallas y packs de baño','As nossas toalhas e packs de banho','Unsere Handtücher und Badpakete','I nostri asciugamani e pacchetti bagno','Onze handdoeken en badpakketten','مناشفنا وباقات الحمام');
-add('Des visuels clairs, des prix lisibles et une commande directe auprès d’Astou.','Clear visuals, readable prices and direct ordering from Astou.','Imágenes claras, precios legibles y pedido directo con Astou.','Imagens claras, preços legíveis e encomenda direta à Astou.','Klare Bilder, gut lesbare Preise und direkte Bestellung bei Astou.','Immagini chiare, prezzi leggibili e ordine diretto da Astou.','Duidelijke beelden, leesbare prijzen en direct bestellen bij Astou.','صور واضحة وأسعار مقروءة وطلب مباشر من أستو.');
-add('Une serviette douce et absorbante pour la maison, la plage, une villa ou une location.','A soft, absorbent towel for home, beach, villa or rental.','Una toalla suave y absorbente para casa, playa, villa o alquiler.','Uma toalha macia e absorvente para casa, praia, villa ou alojamento.','Weiches, saugfähiges Handtuch für Zuhause, Strand, Villa oder Vermietung.','Asciugamano morbido e assorbente per casa, spiaggia, villa o affitto.','Een zachte absorberende handdoek voor thuis, strand, villa of verhuur.','منشفة ناعمة وماصة للمنزل أو الشاطئ أو الفيلا أو الإيجار.');
-add('Serviettes pour la maison','Towels for home','Toallas para el hogar','Toalhas para casa','Handtücher für Zuhause','Asciugamani per casa','Handdoeken voor thuis','مناشف للمنزل');
-add('Préparez plusieurs serviettes pour la famille, les invités ou une salle de bain complète.','Prepare several towels for family, guests or a complete bathroom.','Prepara varias toallas para la familia, invitados o un baño completo.','Prepare várias toalhas para família, hóspedes ou uma casa de banho completa.','Mehrere Handtücher für Familie, Gäste oder ein komplettes Bad.','Prepara più asciugamani per famiglia, ospiti o bagno completo.','Bereid meerdere handdoeken voor familie, gasten of een complete badkamer.','جهّز عدة مناشف للعائلة أو الضيوف أو حمام كامل.');
-add('Lot de serviettes','Towel set','Lote de toallas','Lote de toalhas','Handtuch-Set','Lotto asciugamani','Set handdoeken','مجموعة مناشف');
-add('Une solution pratique pour équiper plusieurs chambres, salles de bain ou logements.','A practical solution for several bedrooms, bathrooms or accommodations.','Una solución práctica para varias habitaciones, baños o alojamientos.','Uma solução prática para vários quartos, casas de banho ou alojamentos.','Praktische Lösung für mehrere Schlafzimmer, Bäder oder Unterkünfte.','Soluzione pratica per più camere, bagni o alloggi.','Praktische oplossing voor meerdere slaapkamers, badkamers of verblijven.','حل عملي لتجهيز عدة غرف أو حمامات أو مساكن.');
-add('2 peignoirs + 2 serviettes','2 bathrobes + 2 towels','2 albornoces + 2 toallas','2 roupões + 2 toalhas','2 Bademäntel + 2 Handtücher','2 accappatoi + 2 asciugamani','2 badjassen + 2 handdoeken','رداءا حمام + منشفتان');
-add('Le nécessaire du couple déjà réuni pour le bain, la détente ou un cadeau utile.','Everything a couple needs for bath, relaxation or a useful gift.','Todo lo necesario para una pareja: baño, relax o regalo útil.','O essencial para um casal: banho, relaxamento ou presente útil.','Alles für ein Paar: Bad, Entspannung oder praktisches Geschenk.','Tutto per la coppia: bagno, relax o regalo utile.','Alles voor een koppel: bad, ontspanning of nuttig cadeau.','كل ما يحتاجه الزوجان للحمام أو الاسترخاء أو هدية مفيدة.');
-add('Besoin de plusieurs serviettes ?','Need several towels?','¿Necesitas varias toallas?','Precisa de várias toalhas?','Mehrere Handtücher nötig?','Servono più asciugamani?','Meerdere handdoeken nodig?','هل تحتاج عدة مناشف؟');
-add('Indiquez le nombre de salles de bain, de chambres ou de personnes. Astou prépare directement la quantité adaptée.','Tell us the number of bathrooms, bedrooms or people. Astou prepares the right quantity.','Indica el número de baños, habitaciones o personas. Astou prepara la cantidad adecuada.','Indique o número de casas de banho, quartos ou pessoas. Astou prepara a quantidade certa.','Anzahl der Bäder, Schlafzimmer oder Personen angeben. Astou stellt die passende Menge zusammen.','Indica numero di bagni, camere o persone. Astou prepara la quantità giusta.','Geef aantal badkamers, slaapkamers of personen door. Astou bereidt de juiste hoeveelheid.','اذكر عدد الحمامات أو الغرف أو الأشخاص، وستجهز أستو الكمية المناسبة.');
-add('Préparer mon lot','Prepare my set','Preparar mi lote','Preparar o meu lote','Mein Set vorbereiten','Prepara il mio lotto','Mijn set voorbereiden','جهّز مجموعتي');
-add('Stock, couleurs et livraison','Stock, colours and delivery','Stock, colores y entrega','Stock, cores e entrega','Bestand, Farben und Lieferung','Disponibilità, colori e consegna','Voorraad, kleuren en levering','المخزون والألوان والتوصيل');
-add('Les modèles et couleurs sont confirmés directement sur WhatsApp. Retrait boutique ou livraison locale selon l’organisation et la zone.','Models and colours are confirmed directly on WhatsApp. Store pickup or local delivery depending on arrangements and area.','Modelos y colores se confirman directamente por WhatsApp. Recogida o entrega local según organización y zona.','Modelos e cores são confirmados diretamente no WhatsApp. Levantamento ou entrega local conforme organização e zona.','Modelle und Farben werden direkt per WhatsApp bestätigt. Abholung oder lokale Lieferung je nach Absprache und Gebiet.','Modelli e colori confermati direttamente su WhatsApp. Ritiro o consegna locale secondo accordi e zona.','Modellen en kleuren worden direct via WhatsApp bevestigd. Afhalen of lokale levering volgens afspraak en gebied.','تُؤكد النماذج والألوان مباشرة عبر واتساب. استلام أو توصيل محلي حسب الترتيب والمنطقة.');
-add('Voir tout le linge maison','View all home linen','Ver toda la ropa de hogar','Ver toda a roupa de casa','Alle Heimtextilien ansehen','Vedi tutta la biancheria casa','Bekijk al het huislinnen','عرض كل مفروشات المنزل');
-add('Voir les peignoirs','View bathrobes','Ver albornoces','Ver roupões','Bademäntel ansehen','Vedi accappatoi','Bekijk badjassen','عرض أردية الحمام');
-
-/* peignoirs */
-add('Peignoirs · Bain · Détente','Bathrobes · Bath · Relaxation','Albornoces · Baño · Relax','Roupões · Banho · Relaxamento','Bademäntel · Bad · Entspannung','Accappatoi · Bagno · Relax','Badjassen · Bad · Ontspanning','أردية حمام · حمام · استرخاء');
-add('Le confort après le bain','Comfort after the bath','Confort después del baño','Conforto depois do banho','Komfort nach dem Bad','Comfort dopo il bagno','Comfort na het bad','الراحة بعد الحمام');
-add('Des peignoirs doux pour elle, pour lui, pour la maison ou pour équiper une villa.','Soft bathrobes for her, him, home or to equip a villa.','Albornoces suaves para ella, él, el hogar o una villa.','Roupões macios para ela, para ele, para casa ou para equipar uma villa.','Weiche Bademäntel für sie, ihn, Zuhause oder eine Villa.','Accappatoi morbidi per lei, lui, casa o villa.','Zachte badjassen voor haar, hem, thuis of een villa.','أردية حمام ناعمة لها وله وللمنزل أو لتجهيز فيلا.');
-add('Nos peignoirs et packs bain','Our bathrobes and bath packs','Nuestros albornoces y packs de baño','Os nossos roupões e packs de banho','Unsere Bademäntel und Badpakete','I nostri accappatoi e pacchetti bagno','Onze badjassen en badpakketten','أردية الحمام وباقات الحمام');
-add('Choisissez un modèle individuel, un duo ou un lot adapté à votre logement.','Choose an individual model, duo or set suited to your home.','Elige un modelo individual, dúo o lote adaptado a tu alojamiento.','Escolha um modelo individual, duo ou lote adaptado ao seu alojamento.','Einzelmodell, Duo oder Set passend zur Unterkunft wählen.','Scegli modello singolo, duo o lotto adatto alla casa.','Kies een individueel model, duo of set voor je woning.','اختر نموذجًا فرديًا أو ثنائيًا أو مجموعة تناسب منزلك.');
-add('Femme','Women','Mujer','Mulher','Damen','Donna','Dames','نساء');
-add('Homme','Men','Hombre','Homem','Herren','Uomo','Heren','رجال');
-add('Peignoir femme','Women’s bathrobe','Albornoz mujer','Roupão de mulher','Damenbademantel','Accappatoio donna','Damesbadjas','رداء حمام نسائي');
-add('Peignoir homme','Men’s bathrobe','Albornoz hombre','Roupão de homem','Herrenbademantel','Accappatoio uomo','Herenbadjas','رداء حمام رجالي');
-add('Un peignoir doux pour le bain, la maison, la détente ou un cadeau.','A soft bathrobe for bath, home, relaxation or a gift.','Un albornoz suave para baño, hogar, relax o regalo.','Um roupão macio para banho, casa, relaxamento ou presente.','Weicher Bademantel für Bad, Zuhause, Entspannung oder Geschenk.','Accappatoio morbido per bagno, casa, relax o regalo.','Een zachte badjas voor bad, thuis, ontspanning of cadeau.','رداء حمام ناعم للحمام والمنزل والاسترخاء أو كهدية.');
-add('Confortable et pratique pour la maison, la salle de bain ou une villa.','Comfortable and practical for home, bathroom or villa.','Cómodo y práctico para casa, baño o villa.','Confortável e prático para casa, casa de banho ou villa.','Bequem und praktisch für Zuhause, Bad oder Villa.','Comodo e pratico per casa, bagno o villa.','Comfortabel en praktisch voor thuis, badkamer of villa.','مريح وعملي للمنزل أو الحمام أو الفيلا.');
-add('Un ensemble complet pour le couple, la maison ou un cadeau prêt à offrir.','A complete set for a couple, home or ready-to-give gift.','Un conjunto completo para pareja, hogar o regalo listo.','Um conjunto completo para casal, casa ou presente pronto a oferecer.','Komplettes Set für Paare, Zuhause oder als Geschenk.','Set completo per coppia, casa o regalo pronto.','Complete set voor koppel, thuis of als cadeau.','طقم كامل للزوجين أو المنزل أو هدية جاهزة.');
-add('Peignoirs pour villa ou résidence','Bathrobes for villa or residence','Albornoces para villa o residencia','Roupões para villa ou residência','Bademäntel für Villa oder Residenz','Accappatoi per villa o residence','Badjassen voor villa of residentie','أردية حمام للفيلا أو الإقامة');
-add('Préparez un lot selon le nombre de chambres, de salles de bain ou de logements.','Prepare a set according to the number of bedrooms, bathrooms or units.','Prepara un lote según el número de habitaciones, baños o alojamientos.','Prepare um lote conforme o número de quartos, casas de banho ou alojamentos.','Set nach Anzahl der Schlafzimmer, Bäder oder Einheiten zusammenstellen.','Prepara un lotto secondo camere, bagni o alloggi.','Bereid een set volgens slaapkamers, badkamers of verblijven.','جهّز مجموعة حسب عدد الغرف والحمامات أو الوحدات.');
-add('Le confort pour elle et lui','Comfort for her and him','Confort para ella y él','Conforto para ela e para ele','Komfort für sie und ihn','Comfort per lei e lui','Comfort voor haar en hem','راحة لها وله');
-add('Astou confirme les tailles, couleurs et modèles disponibles. Pour plusieurs pièces, demandez directement un lot.','Astou confirms available sizes, colours and models. For several items, ask directly for a set.','Astou confirma tallas, colores y modelos. Para varias piezas, pide un lote.','Astou confirma tamanhos, cores e modelos. Para várias peças, peça um lote.','Astou bestätigt Größen, Farben und Modelle. Für mehrere Stücke direkt ein Set anfragen.','Astou conferma taglie, colori e modelli. Per più pezzi chiedi direttamente un lotto.','Astou bevestigt maten, kleuren en modellen. Vraag voor meerdere stuks direct een set.','تؤكد أستو المقاسات والألوان والنماذج. لعدة قطع اطلب مجموعة مباشرة.');
-add('Commande sans intermédiaire','Order without intermediary','Pedido sin intermediario','Encomenda sem intermediário','Bestellung ohne Vermittler','Ordine senza intermediario','Bestellen zonder tussenpersoon','طلب دون وسيط');
-add('Vous échangez directement avec Astou pour choisir la taille, la couleur, la quantité et le mode de retrait ou de livraison.','You deal directly with Astou to choose size, colour, quantity and pickup or delivery.','Hablas directamente con Astou para elegir talla, color, cantidad y recogida o entrega.','Fala diretamente com Astou para escolher tamanho, cor, quantidade e levantamento ou entrega.','Direkter Austausch mit Astou zu Größe, Farbe, Menge, Abholung oder Lieferung.','Parli direttamente con Astou per taglia, colore, quantità, ritiro o consegna.','Je spreekt direct met Astou over maat, kleur, aantal, afhalen of bezorgen.','تتواصل مباشرة مع أستو لاختيار المقاس واللون والكمية والاستلام أو التوصيل.');
-
-/* linge maison */
-add('Maison · Chambre · Confort','Home · Bedroom · Comfort','Hogar · Habitación · Confort','Casa · Quarto · Conforto','Zuhause · Schlafzimmer · Komfort','Casa · Camera · Comfort','Wonen · Slaapkamer · Comfort','منزل · غرفة · راحة');
-add('Tout le nécessaire sous la main','Everything you need at hand','Todo lo necesario a mano','Tudo o que precisa à mão','Alles Nötige griffbereit','Tutto il necessario a portata di mano','Alles wat je nodig hebt bij de hand','كل ما تحتاجه في متناول اليد');
-add('Des packs simples pour équiper une chambre, préparer la maison ou renouveler le linge sans calcul compliqué.','Simple packs to equip a bedroom, prepare the home or renew linen without complicated calculations.','Packs sencillos para equipar una habitación, preparar la casa o renovar la ropa sin cálculos complicados.','Packs simples para equipar um quarto, preparar a casa ou renovar a roupa sem contas complicadas.','Einfache Pakete für Schlafzimmer, Zuhause oder Wäschewechsel ohne komplizierte Rechnung.','Pacchetti semplici per camera, casa o rinnovo biancheria senza calcoli complicati.','Eenvoudige pakketten voor slaapkamer, huis of nieuw linnengoed zonder ingewikkelde berekening.','باقات بسيطة لتجهيز غرفة أو منزل أو تجديد المفروشات دون حسابات معقدة.');
-add('Nos packs linge de maison','Our home linen packs','Nuestros packs de ropa de hogar','Os nossos packs de roupa de casa','Unsere Heimtextilien-Pakete','I nostri pacchetti biancheria casa','Onze huislinnenpakketten','باقات مفروشات المنزل');
-add('Le prix séparé est barré : vous voyez immédiatement le prix pack et l’économie.','The separate price is crossed out: you immediately see the pack price and savings.','El precio separado aparece tachado: ves inmediatamente el precio del pack y el ahorro.','O preço separado está riscado: vê imediatamente o preço do pack e a poupança.','Einzelpreis gestrichen: Paketpreis und Ersparnis sind sofort sichtbar.','Prezzo separato barrato: vedi subito prezzo pacchetto e risparmio.','Losse prijs doorgestreept: je ziet direct pakketprijs en besparing.','السعر المنفصل مشطوب: ترى فورًا سعر الباقة والتوفير.');
-add('Comme les courses de la quinzaine','Like the fortnightly shop','Como la compra quincenal','Como as compras da quinzena','Wie der Einkauf für zwei Wochen','Come la spesa quindicinale','Zoals de tweewekelijkse boodschappen','مثل مشتريات أسبوعين');
-add('Tout le linge utile est déjà réuni. Vous gagnez du temps, vous voyez l’économie et vous gardez votre besoin sous la main.','All useful linen is already together. You save time, see the savings and keep your needs at hand.','Toda la ropa útil ya está reunida. Ahorras tiempo, ves el ahorro y tienes todo a mano.','Toda a roupa útil já está reunida. Poupa tempo, vê a poupança e tem tudo à mão.','Alle wichtigen Textilien sind zusammengestellt. Zeit sparen und Ersparnis sofort sehen.','Tutta la biancheria utile è già riunita. Risparmi tempo e vedi subito il risparmio.','Al het nuttige linnengoed is samengebracht. Je bespaart tijd en ziet direct je voordeel.','كل المفروشات المفيدة مجمعة. توفر الوقت وترى التوفير مباشرة.');
-add('Une maison équipée en une seule commande','Equip a home in one order','Equipa una casa en un solo pedido','Equipe uma casa numa só encomenda','Ein Zuhause mit einer Bestellung ausstatten','Arreda una casa con un solo ordine','Een huis uitgerust met één bestelling','جهّز منزلًا بطلب واحد');
-add('Les produits et couleurs sont proposés selon le stock disponible. Pour plusieurs chambres, Astou prépare une proposition personnalisée.','Products and colours depend on available stock. For several bedrooms, Astou prepares a personalised proposal.','Productos y colores según stock. Para varias habitaciones, Astou prepara una propuesta personalizada.','Produtos e cores conforme stock. Para vários quartos, Astou prepara uma proposta personalizada.','Produkte und Farben je nach Bestand. Für mehrere Schlafzimmer erstellt Astou ein persönliches Angebot.','Prodotti e colori secondo disponibilità. Per più camere Astou prepara una proposta personalizzata.','Producten en kleuren volgens voorraad. Voor meerdere slaapkamers maakt Astou een persoonlijk voorstel.','المنتجات والألوان حسب المخزون. لعدة غرف تجهز أستو عرضًا مخصصًا.');
-add('Packs maison','Home packs','Packs hogar','Packs casa','Hauspakete','Pacchetti casa','Huispakketten','باقات المنزل');
-add('Packs villas','Villa packs','Packs villas','Packs villas','Villenpakete','Pacchetti ville','Villapakketten','باقات الفلل');
-
-/* Petite Côte */
-add('Petite Côte · Maisons · Investissements','Petite Côte · Homes · Investments','Petite Côte · Hogares · Inversiones','Petite Côte · Casas · Investimentos','Petite Côte · Häuser · Investitionen','Petite Côte · Case · Investimenti','Petite Côte · Huizen · Investeringen','الساحل الصغير · منازل · استثمارات');
-add('Le linge adapté à une zone qui grandit','Linen suited to a growing area','Ropa adaptada a una zona en crecimiento','Roupa adaptada a uma zona em crescimento','Textilien für eine wachsende Region','Biancheria adatta a una zona in crescita','Linnen voor een groeiende regio','مفروشات مناسبة لمنطقة تنمو');
-add('Pour les familles, nouveaux résidents, propriétaires, investisseurs et professionnels de l’hébergement.','For families, new residents, owners, investors and accommodation professionals.','Para familias, nuevos residentes, propietarios, inversores y profesionales del alojamiento.','Para famílias, novos residentes, proprietários, investidores e profissionais de alojamento.','Für Familien, neue Bewohner, Eigentümer, Investoren und Beherbergungsprofis.','Per famiglie, nuovi residenti, proprietari, investitori e professionisti dell’ospitalità.','Voor gezinnen, nieuwe bewoners, eigenaars, investeerders en verblijfsprofessionals.','للعائلات والسكان الجدد والمالكين والمستثمرين ومحترفي الإقامة.');
-add('Les packs pour la Petite Côte','Packs for the Petite Côte','Packs para la Petite Côte','Packs para a Petite Côte','Pakete für die Petite Côte','Pacchetti per la Petite Côte','Pakketten voor de Petite Côte','باقات الساحل الصغير');
-add('Des ensembles prêts à commander pour une chambre, une maison ou plusieurs logements.','Ready-to-order sets for a bedroom, a home or several units.','Conjuntos listos para pedir para una habitación, una casa o varios alojamientos.','Conjuntos prontos a encomendar para um quarto, casa ou vários alojamentos.','Bestellfertige Sets für Schlafzimmer, Haus oder mehrere Einheiten.','Set pronti da ordinare per camera, casa o più alloggi.','Kant-en-klare sets voor slaapkamer, huis of meerdere verblijven.','مجموعات جاهزة للطلب لغرفة أو منزل أو عدة مساكن.');
-add('Une Petite Côte qui grandit','A growing Petite Côte','Una Petite Côte que crece','Uma Petite Côte em crescimento','Eine wachsende Petite Côte','Una Petite Côte che cresce','Een groeiende Petite Côte','ساحل صغير ينمو');
-add('Nouvelles maisons, appartements, villas et résidences : Astou prépare des ensembles adaptés aux besoins réels du terrain.','New homes, apartments, villas and residences: Astou prepares sets for real local needs.','Nuevas casas, apartamentos, villas y residencias: Astou prepara conjuntos adaptados a las necesidades reales.','Novas casas, apartamentos, villas e residências: Astou prepara conjuntos adaptados às necessidades reais.','Neue Häuser, Apartments, Villen und Residenzen: Astou stellt passende Sets für den lokalen Bedarf zusammen.','Nuove case, appartamenti, ville e residence: Astou prepara set adatti ai bisogni reali.','Nieuwe huizen, appartementen, villa’s en residenties: Astou maakt sets voor echte lokale behoeften.','منازل وشقق وفلل وإقامات جديدة: تجهز أستو مجموعات تناسب الاحتياجات الفعلية.');
-add('Saly et secteurs proches','Saly and nearby areas','Saly y zonas cercanas','Saly e zonas próximas','Saly und Umgebung','Saly e zone vicine','Saly en omgeving','سالي والمناطق القريبة');
-add('La disponibilité de la livraison dépend de la zone, du volume et de l’organisation du jour. Les conditions sont confirmées directement avec Astou.','Delivery availability depends on area, volume and daily organisation. Conditions are confirmed directly with Astou.','La entrega depende de la zona, volumen y organización del día. Las condiciones se confirman directamente con Astou.','A entrega depende da zona, volume e organização do dia. As condições são confirmadas diretamente com Astou.','Lieferung hängt von Gebiet, Volumen und Tagesplanung ab. Bedingungen direkt mit Astou bestätigen.','La consegna dipende da zona, volume e organizzazione del giorno. Condizioni confermate direttamente con Astou.','Levering hangt af van gebied, volume en dagplanning. Voorwaarden direct met Astou bevestigd.','يعتمد التوصيل على المنطقة والحجم وتنظيم اليوم. تؤكد الشروط مباشرة مع أستو.');
-
-/* villas */
-add('Villas · Résidences · Locations','Villas · Residences · Rentals','Villas · Residencias · Alquileres','Villas · Residências · Alojamentos','Villen · Residenzen · Vermietungen','Ville · Residence · Affitti','Villa’s · Residenties · Verhuur','فلل · إقامات · إيجارات');
-add('Équipez plusieurs pièces sans perdre de temps','Equip several rooms without wasting time','Equipa varias habitaciones sin perder tiempo','Equipe vários espaços sem perder tempo','Mehrere Räume ohne Zeitverlust ausstatten','Arreda più stanze senza perdere tempo','Rust meerdere kamers uit zonder tijdverlies','جهّز عدة غرف دون إضاعة الوقت');
-add('Des packs prêts à commander pour les chambres, les salles de bain et les besoins d’accueil.','Ready-to-order packs for bedrooms, bathrooms and guest needs.','Packs listos para pedir para habitaciones, baños y necesidades de acogida.','Packs prontos a encomendar para quartos, casas de banho e necessidades de acolhimento.','Bestellfertige Pakete für Schlafzimmer, Bäder und Gästebedarf.','Pacchetti pronti da ordinare per camere, bagni e accoglienza.','Kant-en-klare pakketten voor slaapkamers, badkamers en gastbehoeften.','باقات جاهزة للطلب للغرف والحمامات واحتياجات الضيوف.');
-add('Nos packs villas et résidences','Our villa and residence packs','Nuestros packs para villas y residencias','Os nossos packs para villas e residências','Unsere Villen- und Residenzpakete','I nostri pacchetti ville e residence','Onze villa- en residentiepakketten','باقات الفلل والإقامات');
-add('Chaque carte montre le contenu, le total séparé, le prix pack et l’avantage obtenu.','Each card shows contents, separate total, pack price and benefit.','Cada tarjeta muestra contenido, total separado, precio del pack y ventaja.','Cada cartão mostra conteúdo, total separado, preço do pack e vantagem.','Jede Karte zeigt Inhalt, Einzelgesamtpreis, Paketpreis und Vorteil.','Ogni scheda mostra contenuto, totale separato, prezzo pacchetto e vantaggio.','Elke kaart toont inhoud, losse totaalprijs, pakketprijs en voordeel.','تعرض كل بطاقة المحتوى والمجموع المنفصل وسعر الباقة والفائدة.');
-add('Plusieurs chambres à équiper ?','Several rooms to equip?','¿Varias habitaciones por equipar?','Vários quartos para equipar?','Mehrere Schlafzimmer ausstatten?','Più camere da arredare?','Meerdere kamers uitrusten?','هل لديك عدة غرف لتجهيزها؟');
-add('Envoyez le nombre de lits, de salles de bain et de personnes. Astou prépare une proposition claire sans intermédiaire.','Send the number of beds, bathrooms and people. Astou prepares a clear proposal without intermediary.','Envía número de camas, baños y personas. Astou prepara una propuesta clara sin intermediario.','Envie o número de camas, casas de banho e pessoas. Astou prepara uma proposta clara sem intermediário.','Anzahl Betten, Bäder und Personen senden. Astou erstellt ein klares Angebot ohne Vermittler.','Invia numero di letti, bagni e persone. Astou prepara una proposta chiara senza intermediari.','Stuur aantal bedden, badkamers en personen. Astou maakt een duidelijk voorstel zonder tussenpersoon.','أرسل عدد الأسرة والحمامات والأشخاص. تجهز أستو عرضًا واضحًا دون وسيط.');
-add('Pour villas, résidences et locations','For villas, residences and rentals','Para villas, residencias y alquileres','Para villas, residências e alojamentos','Für Villen, Residenzen und Vermietungen','Per ville, residence e affitti','Voor villa’s, residenties en verhuur','للفلل والإقامات والإيجارات');
-add('Ces offres s’adressent aux propriétaires, gérants, conciergeries, chambres d’hôtes, appartements meublés et locations courte durée à Saly et sur la Petite Côte.','These offers are for owners, managers, concierges, guesthouses, furnished apartments and short-term rentals in Saly and Petite Côte.','Estas ofertas son para propietarios, gestores, conserjerías, casas de huéspedes, apartamentos amueblados y alquileres de corta duración en Saly y Petite Côte.','Estas ofertas destinam-se a proprietários, gestores, concierges, alojamentos locais, apartamentos mobilados e alugueres de curta duração em Saly e Petite Côte.','Für Eigentümer, Betreiber, Concierges, Gästehäuser, möblierte Apartments und Kurzzeitvermietungen in Saly und Petite Côte.','Offerte per proprietari, gestori, concierge, guesthouse, appartamenti arredati e affitti brevi a Saly e Petite Côte.','Voor eigenaars, beheerders, conciërges, gastenverblijven, gemeubileerde appartementen en korte verhuur in Saly en Petite Côte.','هذه العروض للمالكين والمديرين وخدمات الاستقبال وبيوت الضيافة والشقق المفروشة والإيجارات القصيرة في سالي والساحل الصغير.');
-
-/* mots fréquents */
-add('Pack Solo','Solo Pack','Pack Solo','Pack Solo','Solo-Paket','Pacchetto Solo','Solo-pakket','باقة فردية');
-add('Pack Chambre','Bedroom Pack','Pack Habitación','Pack Quarto','Schlafzimmer-Paket','Pacchetto Camera','Slaapkamerpakket','باقة غرفة');
-add('Confort','Comfort','Confort','Conforto','Komfort','Comfort','Comfort','راحة');
-add('1 chambre','1 bedroom','1 habitación','1 quarto','1 Schlafzimmer','1 camera','1 slaapkamer','غرفة واحدة');
-add('2 chambres','2 bedrooms','2 habitaciones','2 quartos','2 Schlafzimmer','2 camere','2 slaapkamers','غرفتان');
-
-const PHRASE=Object.keys(D).sort((a,b)=>b.length-a.length);
-function transText(raw){
-  if(lang==='fr') return raw;
-  const lead=(raw.match(/^\s*/)||[''])[0], trail=(raw.match(/\s*$/)||[''])[0];
-  const core=raw.trim(); if(!core) return raw;
-  if(D[core]) return lead+D[core][lang]+trail;
-  let out=core;
-  PHRASE.forEach(fr=>{if(fr.length>7&&out.includes(fr)) out=out.split(fr).join(D[fr][lang]);});
-  return lead+out+trail;
+  const style=document.createElement('style');
+  style.id='astou-ui-compat';
+  style.textContent=`
+.logo img{object-position:left center}
+.nav a:hover{color:var(--wine)}
+.wa-top{white-space:nowrap}
+.hero::before{background-image:linear-gradient(90deg,rgba(251,247,242,.98) 0%,rgba(251,247,242,.88) 34%,rgba(251,247,242,.18) 72%),var(--hero)}
+.kicker{letter-spacing:.08em;text-transform:uppercase;box-shadow:0 5px 18px rgba(75,6,55,.08)}
+.hero p{color:#4b4046}
+.btn{border:1px solid transparent}
+.trust article{align-items:flex-start;border-right:1px solid var(--line)}
+.trust article:last-child{border-right:0}
+.trust b{font-size:14px}
+.trust span{font-size:25px}
+.offer-strip{margin:0 0 26px}
+.offer{box-shadow:0 8px 20px rgba(75,6,55,.06)}
+.offer strong{font-size:17px}
+.card{display:flex;flex-direction:column}
+.card figure{overflow:hidden;background:#eee}
+.card img{transition:transform .35s ease}
+.card:hover img{transform:scale(1.035)}
+.badge{text-transform:uppercase;letter-spacing:.04em}
+.card-body{display:flex;flex-direction:column;flex:1}
+.card h3{line-height:1.12}
+.card p{margin:0 0 12px}
+.price-row{margin-top:auto}
+.old{display:inline-block;font-size:14px}
+.wide{grid-column:span 2}
+.gallery-copy h2{margin:0 0 10px;line-height:1.08}
+.note h2{font:800 27px Georgia,serif}
+.links{margin-top:15px}
+.links a{font-size:13px}
+.footer strong{display:block;font-size:18px;letter-spacing:.08em}
+.footer small{color:#efdae7}
+@media(max-width:920px){
+  .trust article:nth-child(2){border-right:0}
+  .trust article:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .gallery-banner img{max-height:330px}
+  .wide{grid-column:auto}
 }
-function transNode(root){
-  if(!root||root.nodeType!==1) return;
-  if(root.matches('script,style,noscript,code,pre')) return;
-  if(root.hasAttribute('data-fr')){
-    const fr=root.getAttribute('data-fr');
-    root.textContent=lang==='en'&&root.hasAttribute('data-en')?root.getAttribute('data-en'):transText(fr);
-  }else{
-    Array.from(root.childNodes).forEach(n=>{if(n.nodeType===3&&n.nodeValue.trim()) n.nodeValue=transText(n.nodeValue);});
-  }
-  if(root.hasAttribute('data-placeholder-fr')) root.setAttribute('placeholder',lang==='en'&&root.hasAttribute('data-placeholder-en')?root.getAttribute('data-placeholder-en'):transText(root.getAttribute('data-placeholder-fr')));
-  ['title','aria-label','alt'].forEach(a=>{if(root.hasAttribute(a)) root.setAttribute(a,transText(root.getAttribute(a)));});
-  Array.from(root.children).forEach(transNode);
+@media(max-width:620px){
+  .hero::before{background-image:linear-gradient(180deg,rgba(251,247,242,.97) 0%,rgba(251,247,242,.86) 52%,rgba(251,247,242,.35) 100%),var(--hero);background-position:center}
+  .hero p{font-size:16px}
+  .trust article{border-right:0;border-bottom:1px solid var(--line)}
+  .trust article:last-child{border-bottom:0}
+  .gallery-copy{padding:23px}
+  .gallery-copy h2{font-size:29px}
 }
+`;
+  document.head.appendChild(style);
 
-function preserveLang(){
-  document.querySelectorAll('a[href]').forEach(a=>{
-    const h=a.getAttribute('href');
-    if(!h||h.startsWith('#')||h.startsWith('mailto:')||h.startsWith('tel:')||h.startsWith('javascript:')||h.includes('wa.me')||h.startsWith('http')&&!h.includes('astou-boutique.digiylyfe.com')) return;
-    try{const u=new URL(h,location.href);u.searchParams.set('lang',lang);a.setAttribute('href',u.pathname.split('/').pop()+(u.hash||'')+'?lang='+lang)}catch(e){}
+  document.querySelectorAll('a[target="_blank"]').forEach(a=>{
+    const rel=new Set((a.getAttribute('rel')||'').split(/\s+/).filter(Boolean));
+    rel.add('noopener');
+    a.setAttribute('rel',Array.from(rel).join(' '));
   });
-}
-function preserveLangSafe(){
-  document.querySelectorAll('a[href]').forEach(a=>{
-    const h=a.getAttribute('href'); if(!h||h.startsWith('#')||h.includes('wa.me')||h.startsWith('mailto:')||h.startsWith('tel:')) return;
-    try{
-      const u=new URL(h,location.href);
-      if(u.origin!==location.origin) return;
-      u.searchParams.set('lang',lang);
-      a.setAttribute('href',u.pathname.replace(/^\//,'')+(u.search||'')+(u.hash||''));
-    }catch(e){}
+  document.querySelectorAll('.card img,.gallery-banner img').forEach(img=>{
+    if(!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
   });
-}
-function goLang(code){
-  if(!SUP.includes(code)) return;
-  try{localStorage.setItem(STORE,code);localStorage.setItem('digiy-lang',code);localStorage.setItem('digiy_lang',code)}catch(e){}
-  const u=new URL(location.href);u.searchParams.set('lang',code);location.href=u.toString();
-}
-function languageBar(){
-  let box=document.querySelector('.top-actions .lang');
-  if(!box){
-    box=document.createElement('div');box.className='astou-lang8';
-    Object.assign(box.style,{display:'flex',gap:'4px',flexWrap:'wrap',justifyContent:'center',padding:'8px 10px',background:'#fff',borderBottom:'1px solid #eadfe5',position:'sticky',top:'0',zIndex:'9999'});
-    document.body.insertBefore(box,document.body.firstChild);
-  }else{box.innerHTML='';box.style.flexWrap='wrap';box.style.gap='3px';}
-  SUP.forEach(code=>{
-    const b=document.createElement('button');b.type='button';b.textContent=FLAG[code]+' '+code.toUpperCase();b.dataset.astouLang=code;
-    Object.assign(b.style,{border:code===lang?'2px solid #7b0757':'1px solid #d8c8d2',background:code===lang?'#f7e8f2':'#fff',color:'#4b0737',borderRadius:'9px',padding:'5px 7px',fontWeight:'900',fontSize:'11px',cursor:'pointer'});
-    b.addEventListener('click',()=>goLang(code));box.appendChild(b);
-  });
+  const trust=document.querySelector('.trust');
+  if(trust&&!trust.hasAttribute('aria-label')) trust.setAttribute('aria-label','Avantages Astou Boutique');
 }
 
-const greet={fr:'Bonjour Astou',en:'Hello Astou',es:'Hola Astou',pt:'Olá Astou',de:'Hallo Astou',it:'Ciao Astou',nl:'Hallo Astou',ar:'مرحباً أستو'};
-function waTranslate(message){
-  if(lang==='fr') return message;
-  let m=message.replace(/Bonjour Astou Boutique/g,greet[lang]+' Boutique').replace(/Bonjour Astou/g,greet[lang]);
-  PHRASE.forEach(fr=>{if(fr.length>5&&m.includes(fr))m=m.split(fr).join(D[fr][lang]);});
-  return m;
-}
-function rewriteWhatsApp(){
-  document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{
-    try{const u=new URL(a.href);const msg=u.searchParams.get('text');if(msg){u.searchParams.set('text',waTranslate(msg));a.href=u.toString();}}catch(e){}
-  });
+function loadCore(){
+  if(document.querySelector('script[data-astou-i18n-core]')) return;
+  const s=document.createElement('script');
+  s.src='assets/astou/astou-i18n-core-8.js?v=20260811-astou8-core1';
+  s.async=false;
+  s.dataset.astouI18nCore='1';
+  document.head.appendChild(s);
 }
 
-const voice={
-fr:'Bienvenue chez Astou Boutique à Saly. Découvrez notre sélection de linge de maison et nos produits naturels. Le beurre de karité bio maison est disponible à 7 000 francs CFA. Vous ne pouvez pas vous déplacer ? Astou peut vous présenter les produits directement en visio WhatsApp. Choisissez vos articles, posez vos questions et confirmez votre commande à distance.',
-en:'Welcome to Astou Boutique in Saly. Discover our home linen selection and natural products. Homemade organic shea butter is available for 7,000 CFA francs. Astou can show you available products by WhatsApp video call. Choose your items, ask questions and confirm your order remotely.',
-es:'Bienvenido a Astou Boutique en Saly. Descubre nuestra selección de ropa de hogar y productos naturales. La manteca de karité bio casera está disponible por 7.000 francos CFA. Astou puede mostrarte los productos por videollamada de WhatsApp. Elige tus artículos, pregunta y confirma tu pedido a distancia.',
-pt:'Bem-vindo à Astou Boutique em Saly. Descubra a nossa seleção de roupa de casa e produtos naturais. A manteiga de karité bio caseira está disponível por 7 000 francos CFA. Astou pode mostrar os produtos por videochamada WhatsApp. Escolha os artigos, faça perguntas e confirme a encomenda à distância.',
-de:'Willkommen bei Astou Boutique in Saly. Entdecken Sie Heimtextilien und Naturprodukte. Hausgemachte Bio-Sheabutter kostet 7.000 CFA-Franc. Astou kann verfügbare Produkte per WhatsApp-Video zeigen. Wählen Sie Artikel, stellen Sie Fragen und bestätigen Sie Ihre Bestellung aus der Ferne.',
-it:'Benvenuti da Astou Boutique a Saly. Scoprite la nostra selezione di biancheria per la casa e prodotti naturali. Il burro di karité bio artigianale costa 7.000 franchi CFA. Astou può mostrare i prodotti in videochiamata WhatsApp. Scegliete gli articoli, fate domande e confermate l’ordine a distanza.',
-nl:'Welkom bij Astou Boutique in Saly. Ontdek ons huislinnen en natuurlijke producten. Huisgemaakte biologische sheaboter is verkrijgbaar voor 7.000 CFA-frank. Astou kan producten via WhatsApp-video tonen. Kies artikelen, stel vragen en bevestig je bestelling op afstand.',
-ar:'مرحباً بكم في أستو بوتيك في سالي. اكتشفوا مفروشات المنزل والمنتجات الطبيعية. زبدة الشيا العضوية المنزلية متوفرة بسعر 7,000 فرنك CFA. يمكن لأستو عرض المنتجات عبر مكالمة فيديو واتساب. اختر المنتجات واطرح أسئلتك وأكد طلبك عن بعد.'};
-const listenLabel={fr:'🔊 Écouter la boutique',en:'🔊 Listen to the boutique',es:'🔊 Escuchar la tienda',pt:'🔊 Ouvir a loja',de:'🔊 Shop anhören',it:'🔊 Ascolta la boutique',nl:'🔊 Luister naar de winkel',ar:'🔊 استمع إلى المتجر'};
-function bindVoice(){
-  const b=document.getElementById('astouListen');if(!b||b.dataset.i18n8Bound)return;b.dataset.i18n8Bound='1';b.textContent=listenLabel[lang];
-  b.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();if(!('speechSynthesis'in window)||typeof SpeechSynthesisUtterance==='undefined')return;if(speechSynthesis.speaking){speechSynthesis.cancel();b.textContent=listenLabel[lang];return;}const u=new SpeechSynthesisUtterance(voice[lang]);u.lang={fr:'fr-FR',en:'en-US',es:'es-ES',pt:'pt-PT',de:'de-DE',it:'it-IT',nl:'nl-NL',ar:'ar-SA'}[lang];u.rate=.95;u.onend=()=>b.textContent=listenLabel[lang];u.onerror=()=>b.textContent=listenLabel[lang];speechSynthesis.speak(u);},{capture:true});
-}
-function bindFranceForm(){
-  const f=document.getElementById('franceOrderForm');if(!f||f.dataset.i18n8Bound)return;f.dataset.i18n8Bound='1';
-  f.addEventListener('submit',function(e){if(lang==='fr')return;e.preventDefault();e.stopImmediatePropagation();
-    const v=id=>(document.getElementById(id)||{}).value||'';
-    const labels={
-      en:['Hello Astou Boutique,','I would like to order a bathrobe from France.','Name','Phone / WhatsApp','Size','Preferred colour','City','Delivery address','Indicative price: 23,000 FCFA ≈ €35 (bathrobe + pilot shipping to France).','Please confirm availability, colour, address and final amount before my Sendwave payment to your Wave account ASTOU SOW · +221 77 876 57 86.'],
-      es:['Hola Astou Boutique,','Quiero pedir un albornoz desde Francia.','Nombre','Teléfono / WhatsApp','Talla','Color deseado','Ciudad','Dirección de entrega','Precio indicativo: 23.000 FCFA ≈ 35 € (albornoz + envío piloto a Francia).','Confírmame disponibilidad, color, dirección e importe final antes de mi pago Sendwave a tu cuenta Wave ASTOU SOW · +221 77 876 57 86.'],
-      pt:['Olá Astou Boutique,','Quero encomendar um roupão a partir de França.','Nome','Telefone / WhatsApp','Tamanho','Cor pretendida','Cidade','Morada de entrega','Preço indicativo: 23 000 FCFA ≈ 35 € (roupão + envio piloto para França).','Confirme a disponibilidade, cor, morada e valor final antes do meu pagamento Sendwave para a sua conta Wave ASTOU SOW · +221 77 876 57 86.'],
-      de:['Hallo Astou Boutique,','Ich möchte einen Bademantel aus Frankreich bestellen.','Name','Telefon / WhatsApp','Größe','Gewünschte Farbe','Stadt','Lieferadresse','Richtpreis: 23.000 FCFA ≈ 35 € (Bademantel + Pilotversand nach Frankreich).','Bitte Verfügbarkeit, Farbe, Adresse und Endbetrag vor meiner Sendwave-Zahlung auf Ihr Wave-Konto ASTOU SOW · +221 77 876 57 86 bestätigen.'],
-      it:['Ciao Astou Boutique,','Vorrei ordinare un accappatoio dalla Francia.','Nome','Telefono / WhatsApp','Taglia','Colore desiderato','Città','Indirizzo di consegna','Prezzo indicativo: 23.000 FCFA ≈ 35 € (accappatoio + spedizione pilota in Francia).','Conferma disponibilità, colore, indirizzo e importo finale prima del pagamento Sendwave sul conto Wave ASTOU SOW · +221 77 876 57 86.'],
-      nl:['Hallo Astou Boutique,','Ik wil vanuit Frankrijk een badjas bestellen.','Naam','Telefoon / WhatsApp','Maat','Gewenste kleur','Stad','Bezorgadres','Indicatieve prijs: 23.000 FCFA ≈ €35 (badjas + pilotverzending naar Frankrijk).','Bevestig beschikbaarheid, kleur, adres en eindbedrag vóór mijn Sendwave-betaling naar uw Wave-account ASTOU SOW · +221 77 876 57 86.'],
-      ar:['مرحباً أستو بوتيك،','أرغب في طلب رداء حمام من فرنسا.','الاسم','الهاتف / واتساب','المقاس','اللون المطلوب','المدينة','عنوان التسليم','السعر التقريبي: 23,000 فرنك CFA ≈ 35 € (رداء الحمام + الشحن التجريبي إلى فرنسا).','يرجى تأكيد التوفر واللون والعنوان والمبلغ النهائي قبل دفع Sendwave إلى حساب Wave: ASTOU SOW · +221 77 876 57 86.']};
-    const L=labels[lang]||labels.en;
-    const msg=`${L[0]}\n${L[1]}\n\n${L[2]} : ${v('frName')}\n${L[3]} : ${v('frPhone')}\n${L[4]} : ${v('frSize')}\n${L[5]} : ${v('frColor')}\n${L[6]} : ${v('frCity')}\n${L[7]} : ${v('frAddress')}\n\n${L[8]}\n\n${L[9]}`;
-    window.open('https://wa.me/221778765785?text='+encodeURIComponent(msg),'_blank','noopener');
-  },true);
-}
-function translateMeta(){
-  const title=document.title;document.title=transText(title);
-  const d=document.querySelector('meta[name="description"]');if(d)d.content=transText(d.content);
-  const ogt=document.querySelector('meta[property="og:title"]');if(ogt)ogt.content=transText(ogt.content);
-  const ogd=document.querySelector('meta[property="og:description"]');if(ogd)ogd.content=transText(ogd.content);
-}
-function apply(){
-  languageBar();transNode(document.body);preserveLangSafe();rewriteWhatsApp();bindVoice();bindFranceForm();translateMeta();
-  const v=document.getElementById('astouVisio');if(v){const x={fr:'📹 Vente en visio WhatsApp',en:'📹 WhatsApp video shopping',es:'📹 Venta por vídeo WhatsApp',pt:'📹 Venda por vídeo WhatsApp',de:'📹 Verkauf per WhatsApp-Video',it:'📹 Vendita video WhatsApp',nl:'📹 Verkoop via WhatsApp-video',ar:'📹 تسوق بالفيديو عبر واتساب'};v.textContent=x[lang];}
-}
-function observeDynamic(){
-  const targets=[document.getElementById('productGrid'),document.getElementById('packs')].filter(Boolean);
-  targets.forEach(t=>{new MutationObserver(()=>{Array.from(t.children).forEach(transNode);rewriteWhatsApp();}).observe(t,{childList:true,subtree:true});});
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{apply();observeDynamic();},0)});else setTimeout(()=>{apply();observeDynamic();},0);
+restoreSecondaryPageUI();
+loadCore();
 })();
