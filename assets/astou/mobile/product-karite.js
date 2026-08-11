@@ -57,4 +57,11 @@ const langObserver=new MutationObserver(()=>{
 });
 langObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 window.addEventListener('beforeunload',()=>{if('speechSynthesis' in window)speechSynthesis.cancel()},{once:true});
+
+// Moteur local 8 langues Astou — chargé après produits, packs, karité et boutons d'expérience.
+if(!document.querySelector('script[data-astou-i18n8]')){
+  const s=document.createElement('script');
+  s.src='assets/astou/astou-i18n-8.js?v=20260811-astou8-v1';
+  s.defer=true;s.dataset.astouI18n8='1';document.head.appendChild(s);
+}
 })();
