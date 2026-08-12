@@ -3,6 +3,43 @@
 (function(){
 'use strict';
 
+function installLanguageBarResponsiveFix(){
+  if(document.getElementById('astou-lang8-responsive')) return;
+
+  const style=document.createElement('style');
+  style.id='astou-lang8-responsive';
+  style.textContent=`
+.astou-lang8,
+.top-actions .lang{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:4px!important;
+  min-width:0!important;
+  max-width:100%!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.astou-lang8::-webkit-scrollbar,
+.top-actions .lang::-webkit-scrollbar{display:none}
+.astou-lang8 button,
+.top-actions .lang button{
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+}
+.top-actions{min-width:0!important}
+@media(min-width:760px) and (max-width:1119px){
+  .desktop-nav{display:none!important}
+  .top-actions{flex:1 1 auto!important;justify-content:flex-end!important}
+  .top-actions .lang{max-width:min(58vw,430px)!important}
+}
+`;
+  document.head.appendChild(style);
+}
+
 function restoreSecondaryPageUI(){
   if(!document.querySelector('.topbar')) return;
   if(document.getElementById('astou-ui-compat')) return;
@@ -79,6 +116,7 @@ function loadCore(){
   document.head.appendChild(s);
 }
 
+installLanguageBarResponsiveFix();
 restoreSecondaryPageUI();
 loadCore();
 })();
