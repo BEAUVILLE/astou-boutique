@@ -58,6 +58,43 @@ const langObserver=new MutationObserver(()=>{
 langObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 window.addEventListener('beforeunload',()=>{if('speechSynthesis' in window)speechSynthesis.cancel()},{once:true});
 
+// Carte vivante Astou : le PNG reste le visuel, le lien devient interactif.
+const astouLivingCardUrl='https://astou-boutique.digiylyfe.com/carte/';
+function installAstouLivingCard(){
+  const section=document.getElementById('carte');
+  if(!section)return;
+  const heading=section.querySelector('h2');
+  if(heading){heading.dataset.fr='Carte de visite interactive';heading.dataset.en='Interactive business card';heading.textContent=currentLang()==='en'?heading.dataset.en:heading.dataset.fr;}
+  const intro=section.querySelector('.section-head p');
+  if(intro){intro.dataset.fr='Une carte vivante : cliquez, contactez et partagez directement.';intro.dataset.en='A living card: tap, contact and share directly.';intro.textContent=currentLang()==='en'?intro.dataset.en:intro.dataset.fr;}
+  const card=section.querySelector('.media-card');
+  const img=card&&card.querySelector('img');
+  if(img&&img.parentElement.tagName!=='A'){
+    const link=document.createElement('a');link.href=astouLivingCardUrl;link.setAttribute('aria-label','Ouvrir la carte interactive Astou Boutique');img.parentNode.insertBefore(link,img);link.appendChild(img);
+  }
+  const text=card&&card.querySelector('div>p');
+  if(text){text.dataset.fr='Le visuel reste la carte officielle. Le clic ouvre la carte vivante avec WhatsApp, appel, contact, boutique et partage direct.';text.dataset.en='The visual remains the official card. Tapping it opens the living card with WhatsApp, call, contact, shop and direct sharing.';text.textContent=currentLang()==='en'?text.dataset.en:text.dataset.fr;}
+  const actions=section.querySelector('.media-actions');
+  if(actions){
+    const share=actions.querySelector('#shareAstouCard');
+    if(share){share.dataset.fr='📲 Partager la carte vivante';share.dataset.en='📲 Share living card';share.textContent=currentLang()==='en'?share.dataset.en:share.dataset.fr;share.addEventListener('click',shareLivingCard,{capture:true});}
+    const links=actions.querySelectorAll('a');
+    if(links[1]){links[1].href=astouLivingCardUrl;links[1].removeAttribute('download');links[1].removeAttribute('target');links[1].dataset.fr='📲 Ouvrir la carte interactive';links[1].dataset.en='📲 Open interactive card';links[1].textContent=currentLang()==='en'?links[1].dataset.en:links[1].dataset.fr;}
+  }
+  const dock=document.getElementById('shareAstouDock');
+  if(dock)dock.addEventListener('click',shareLivingCard,{capture:true});
+}
+async function shareLivingCard(event){
+  event.preventDefault();event.stopImmediatePropagation();
+  try{
+    if(navigator.share){await navigator.share({title:'Astou Boutique · Saly',text:currentLang()==='en'?'Astou Boutique · Direct contact':'Astou Boutique · Contact direct',url:astouLivingCardUrl});return;}
+    if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(astouLivingCardUrl);return;}
+    location.href=astouLivingCardUrl;
+  }catch(error){if(error&&error.name==='AbortError')return;}
+}
+installAstouLivingCard();
+langObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+
 // Moteur local 8 langues Astou — chargé après produits, packs, karité et boutons d'expérience.
 if(!document.querySelector('script[data-astou-i18n8]')){
   const s=document.createElement('script');
