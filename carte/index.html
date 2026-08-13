@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Astou Boutique — Carte de visite interactive</title>
+<meta name="description" content="Carte de visite interactive Astou Boutique à Saly : WhatsApp, appel, boutique, ajout aux contacts et partage direct.">
+<meta name="theme-color" content="#073c2c">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://astou-boutique.digiylyfe.com/carte/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://astou-boutique.digiylyfe.com/carte/">
+<meta property="og:title" content="Astou Boutique · Saly Centre">
+<meta property="og:description" content="Confort · Qualité · Élégance · Contact direct">
+<meta property="og:image" content="https://astou-boutique.digiylyfe.com/ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://astou-boutique.digiylyfe.com/ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png">
+<style>body{margin:0;background:#073c2c;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}.wrap{width:min(100%,560px);margin:auto;padding:12px}.card{overflow:hidden;border-radius:28px;border:1px solid #d5a02d;background:#052a20}.visual img{display:block;width:100%;height:auto}.body{padding:16px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.action{min-height:56px;padding:10px;border-radius:17px;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;text-decoration:none;font-weight:900;background:rgba(255,255,255,.08)}.whatsapp{background:#25D366;color:#04120d}.wide{grid-column:1/-1;background:#d5a02d;color:#173426}.phone{margin-top:10px;text-align:center;font-weight:900}.note{font-size:11px;text-align:center;opacity:.75}@media(max-width:390px){.actions{grid-template-columns:1fr}.wide{grid-column:auto}}</style>
+</head>
+<body>
+<main class="wrap"><section class="card"><a class="visual" href="https://astou-boutique.digiylyfe.com/"><img src="https://astou-boutique.digiylyfe.com/ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png" alt="Carte officielle Astou Boutique"></a><div class="body"><h1>Astou Boutique</h1><p>Saly Centre · draps · parures · serviettes · peignoirs · couettes · accessoires maison.</p><div class="actions"><a class="action whatsapp" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique">💬 WhatsApp</a><a class="action" href="tel:+221778765785">📞 Appeler</a><a class="action" href="https://astou-boutique.digiylyfe.com/">🛍️ Ouvrir la boutique</a><button class="action" type="button" id="contactBtn">👤 Ajouter aux contacts</button><button class="action wide" type="button" id="shareBtn">📲 Partager cette carte</button></div><div class="phone">+221 77 876 57 85 · <button type="button" id="copyPhone">📋 Copier le numéro</button></div><p class="note">Achat direct · Paiement direct · 0 % commission DIGIYLYFE</p></div></section></main>
+<script>(function(){var phone='+221778765785',url='https://astou-boutique.digiylyfe.com/carte/';document.getElementById('contactBtn').onclick=function(){var v=['BEGIN:VCARD','VERSION:3.0','FN:Astou Boutique','ORG:Astou Boutique','TEL;TYPE=CELL,VOICE:'+phone,'URL:https://astou-boutique.digiylyfe.com/','END:VCARD'].join('\r\n'),b=new Blob([v],{type:'text/vcard;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='Astou-Boutique.vcf';a.click();setTimeout(function(){URL.revokeObjectURL(u)},1000)};document.getElementById('copyPhone').onclick=async function(){try{await navigator.clipboard.writeText(phone);this.textContent='✅ Numéro copié'}catch(e){}};document.getElementById('shareBtn').onclick=async function(){try{if(navigator.share){await navigator.share({title:'Astou Boutique',url:url})}else{await navigator.clipboard.writeText(url)}}catch(e){}}})();</script>
+</body>
+</html>
