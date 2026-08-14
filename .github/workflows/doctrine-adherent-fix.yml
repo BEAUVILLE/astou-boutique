@@ -18,51 +18,39 @@ jobs:
           fetch-depth: 0
       - name: Installer Pillow
         run: python3 -m pip install --quiet pillow
-      - name: Corriger les cartes sans toucher au QR
+      - name: Corriger la carte sans toucher au QR
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from PIL import Image, ImageDraw, ImageFont
-
-          FONT_B='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
-          names=['ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png','ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY_QR_CORRIGE.png']
-
-          def fit(draw, text, maxw, start):
+          p=Path('ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png')
+          font_path='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+          im=Image.open(p).convert('RGB')
+          if im.size != (1080,1920):
+              raise SystemExit(f'Taille inattendue: {im.size}')
+          d=ImageDraw.Draw(im)
+          d.rounded_rectangle((20,1582,1060,1749),radius=24,fill=(246,239,225),outline=(218,204,178),width=2)
+          d.rounded_rectangle((34,1604,48,1727),radius=7,fill=(181,132,30))
+          def fit(text,maxw,start):
               size=start
               while size>14:
-                  f=ImageFont.truetype(FONT_B,size)
-                  b=draw.textbbox((0,0),text,font=f)
-                  if b[2]-b[0] <= maxw:
-                      return f
+                  f=ImageFont.truetype(font_path,size)
+                  b=d.textbbox((0,0),text,font=f)
+                  if b[2]-b[0] <= maxw: return f,b
                   size-=1
-              return ImageFont.truetype(FONT_B,size)
-
-          for name in names:
-              p=Path(name)
-              if not p.exists():
-                  continue
-              im=Image.open(p).convert('RGB')
-              if im.size != (1080,1920):
-                  raise SystemExit(f'Taille inattendue pour {name}: {im.size}')
-              d=ImageDraw.Draw(im)
-              d.rounded_rectangle((20,1582,1060,1749),radius=24,fill=(246,239,225),outline=(218,204,178),width=2)
-              d.rounded_rectangle((34,1604,48,1727),radius=7,fill=(181,132,30))
-              t1='ADHÉRENTE DIGIYLYFE'
-              f1=fit(d,t1,900,36)
-              b=d.textbbox((0,0),t1,font=f1)
-              d.text(((1080-(b[2]-b[0]))/2,1610),t1,font=f1,fill=(20,73,48))
-              t2='CONTACT DIRECT  ·  PAIEMENT DIRECT  ·  0 % COMMISSION DIGIYLYFE'
-              f2=fit(d,t2,930,27)
-              b=d.textbbox((0,0),t2,font=f2)
-              d.text(((1080-(b[2]-b[0]))/2,1677),t2,font=f2,fill=(40,40,38))
-              im.save(p,optimize=True)
+              f=ImageFont.truetype(font_path,size); return f,d.textbbox((0,0),text,font=f)
+          t1='ADHÉRENTE DIGIYLYFE'; f1,b=fit(t1,900,36)
+          d.text(((1080-(b[2]-b[0]))/2,1610),t1,font=f1,fill=(20,73,48))
+          t2='CONTACT DIRECT  ·  PAIEMENT DIRECT  ·  0 % COMMISSION DIGIYLYFE'; f2,b=fit(t2,930,27)
+          d.text(((1080-(b[2]-b[0]))/2,1677),t2,font=f2,fill=(40,40,38))
+          im.save(p,'PNG',optimize=True)
           PY
-      - name: Commit, rebase et push
+      - name: Commit et push
         run: |
           git config user.name 'DIGIYLYFE Bot'
           git config user.email 'actions@users.noreply.github.com'
           git rm .github/workflows/doctrine-adherent-fix.yml
-          git add ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY_QR_CORRIGE.png
+          git add ASTOU_BOUTIQUE_CARTE_VISITE_DIGIY.png
           git commit -m 'Carte Astou : adhérente DIGIYLYFE'
           git pull --rebase origin main
           git push
