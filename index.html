@@ -188,6 +188,51 @@
 }
 </style>
 
+<style>
+.digiy-hub-return-wrap{
+  width:min(760px,calc(100% - 28px));
+  margin:14px auto 0;
+}
+.digiy-hub-return{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  min-height:58px;
+  box-sizing:border-box;
+  padding:12px 18px;
+  border:2px solid #111;
+  border-radius:14px;
+  background:#fff;
+  color:#111;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:950;
+  line-height:1.1;
+  box-shadow:0 5px 16px rgba(0,0,0,.14);
+  -webkit-tap-highlight-color:transparent;
+}
+.digiy-hub-return .arrow{
+  font-size:26px;
+  line-height:1;
+}
+.digiy-hub-return:hover{
+  transform:translateY(-1px);
+  box-shadow:0 7px 18px rgba(0,0,0,.18);
+}
+.digiy-hub-return:focus-visible{
+  outline:3px solid #7b0757;
+  outline-offset:3px;
+}
+@media(min-width:700px){
+  .digiy-hub-return-wrap{
+    width:min(460px,calc(100% - 32px));
+    margin-top:18px;
+  }
+}
+</style>
+
 </head>
 <body>
 <header class="top">
@@ -210,6 +255,13 @@
     <a class="wa-mini" href="https://wa.me/221778765785?text=Bonjour%20Astou%20Boutique" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </header>
+
+<div class="digiy-hub-return-wrap">
+  <a class="digiy-hub-return" href="https://digiy-hub.digiylyfe.com/" aria-label="Retour à DIGIY HUB">
+    <span class="arrow" aria-hidden="true">←</span>
+    <span data-fr="RETOUR DIGIY HUB" data-en="BACK TO DIGIY HUB">RETOUR DIGIY HUB</span>
+  </a>
+</div>
 
 <main id="top">
 <section class="hero">
