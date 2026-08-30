@@ -1,0 +1,187 @@
+name: Optimiser medias Astou Boutique
+
+on:
+  push:
+    paths:
+      - '.github/workflows/optimiser-medias-astou.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  optimiser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Installer les outils image
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y webp libavif-bin
+
+      - name: Identifier et convertir les medias utilises
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+
+          root = Path('.')
+          text_files = [p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in {'.html','.css','.js'} and '.git' not in p.parts]
+          raster_re = re.compile(r'''(?P<q>["'])(?P<path>(?!https?://|//|data:|#)[^"']+?\.(?:png|jpe?g))(?:\?[^"']*)?(?P=q)''', re.I)
+          refs = set()
+
+          for tf in text_files:
+              try:
+                  text = tf.read_text(encoding='utf-8')
+              except Exception:
+                  continue
+              for m in raster_re.finditer(text):
+                  rel = m.group('path')
+                  src = (tf.parent / rel).resolve()
+                  try:
+                      src_rel = src.relative_to(root.resolve())
+                  except ValueError:
+                      continue
+                  if src_rel.exists():
+                      refs.add(src_rel)
+
+          print('Medias raster locaux utilises:')
+          for src in sorted(refs):
+              print(' -', src)
+              base = src.with_suffix('')
+              webp = base.with_suffix('.webp')
+              avif = base.with_suffix('.avif')
+              if not webp.exists():
+                  subprocess.run(['cwebp','-quiet','-q','82',str(src),'-o',str(webp)], check=True)
+              if not avif.exists():
+                  subprocess.run(['avifenc','--min','28','--max','35','--speed','6',str(src),str(avif)], check=True)
+              if not webp.exists() or webp.stat().st_size == 0:
+                  raise SystemExit(f'WebP invalide: {webp}')
+              if not avif.exists() or avif.stat().st_size == 0:
+                  raise SystemExit(f'AVIF invalide: {avif}')
+          PY
+
+      - name: Basculer les pages vers AVIF WebP fallback
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          root = Path('.').resolve()
+          html_files = [p for p in Path('.').rglob('*.html') if '.git' not in p.parts]
+
+          style = '''
+          <style id="digiy-media-opt">
+          picture.digiy-media-opt{display:block;max-width:100%}
+          picture.digiy-media-opt>img{display:block;max-width:100%}
+          .category>picture.digiy-media-opt,.gallery>figure>picture.digiy-media-opt{width:100%}
+          .media-card>picture.digiy-media-opt{width:115px;height:160px;border-radius:13px;background:#fbf7f2;overflow:hidden}
+          .media-card>picture.digiy-media-opt>img{width:100%;height:100%;object-fit:contain}
+          .gallery-banner>picture.digiy-media-opt{width:100%;height:100%}
+          .gallery-banner>picture.digiy-media-opt>img{width:100%;height:100%;object-fit:cover}
+          </style>
+          '''
+
+          img_re = re.compile(r'<img\b[^>]*\bsrc=(?P<q>["\'])(?P<src>(?!https?://|//|data:)[^"\']+?\.(?:png|jpe?g))(?P<query>\?[^"\']*)?(?P=q)[^>]*>', re.I)
+
+          def rel_exists(html, src):
+              p = (html.parent / src).resolve()
+              try:
+                  p.relative_to(root)
+              except ValueError:
+                  return None
+              return p if p.exists() else None
+
+          for html in html_files:
+              s = html.read_text(encoding='utf-8')
+              original = s
+
+              def repl_img(m):
+                  tag = m.group(0)
+                  src = m.group('src')
+                  source = rel_exists(html, src)
+                  if source is None:
+                      return tag
+                  avif = source.with_suffix('.avif')
+                  webp = source.with_suffix('.webp')
+                  if not avif.exists() or not webp.exists():
+                      return tag
+                  rel_avif = avif.relative_to(html.parent.resolve()).as_posix()
+                  rel_webp = webp.relative_to(html.parent.resolve()).as_posix()
+                  return (f'<picture class="digiy-media-opt">'
+                          f'<source type="image/avif" srcset="{rel_avif}">'
+                          f'<source type="image/webp" srcset="{rel_webp}">'
+                          f'{tag}</picture>')
+
+              # Eviter de re-wrapper des images deja dans un picture lors d'un rerun.
+              parts = []
+              pos = 0
+              for pm in re.finditer(r'<picture\b.*?</picture>', s, flags=re.I|re.S):
+                  segment = s[pos:pm.start()]
+                  segment = img_re.sub(repl_img, segment)
+                  parts.append(segment)
+                  parts.append(pm.group(0))
+                  pos = pm.end()
+              parts.append(img_re.sub(repl_img, s[pos:]))
+              s = ''.join(parts)
+
+              # Pages produits : la variable CSS --hero accepte directement image-set().
+              hero_re = re.compile(r'''--hero:url\((?P<q>["'])(?P<src>(?!https?://|//|data:)[^"']+?\.(?:png|jpe?g))(?P<query>\?[^"']*)?(?P=q)\)''', re.I)
+              def repl_hero(m):
+                  src = m.group('src')
+                  source = rel_exists(html, src)
+                  if source is None:
+                      return m.group(0)
+                  avif = source.with_suffix('.avif')
+                  webp = source.with_suffix('.webp')
+                  if not avif.exists() or not webp.exists():
+                      return m.group(0)
+                  ra = avif.relative_to(html.parent.resolve()).as_posix()
+                  rw = webp.relative_to(html.parent.resolve()).as_posix()
+                  original_src = src + (m.group('query') or '')
+                  return f'''--hero:image-set(url("{ra}") type("image/avif"),url("{rw}") type("image/webp"),url("{original_src}") type("image/jpeg"))'''
+              s = hero_re.sub(repl_hero, s)
+
+              if 'digiy-media-opt' in s and 'id="digiy-media-opt"' not in s:
+                  s = s.replace('</head>', style + '\n</head>', 1)
+
+              if s != original:
+                  html.write_text(s, encoding='utf-8')
+                  print('Page optimisee:', html)
+
+          # Accueil : conserver le JPG en fallback CSS et preferer AVIF/WebP si image-set est supporte.
+          css = Path('assets/astou/mobile/mobile.css')
+          s = css.read_text(encoding='utf-8')
+          marker = '/* DIGIY media opt 20260830 */'
+          if marker not in s:
+              s += '''\n\n/* DIGIY media opt 20260830 */\n@supports (background-image:image-set(url("../premium/hero-linge.avif") type("image/avif"))){\n  .hero{background-image:linear-gradient(180deg,rgba(255,255,255,.02) 24%,rgba(255,255,255,.94) 88%),image-set(url("../premium/hero-linge.avif") type("image/avif"),url("../premium/hero-linge.webp") type("image/webp"),url("../premium/hero-linge.jpg") type("image/jpeg"))}\n}\n'''
+              css.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Controler les gains
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          for src in sorted(Path('.').rglob('*')):
+              if not src.is_file() or src.suffix.lower() not in {'.png','.jpg','.jpeg'}:
+                  continue
+              avif = src.with_suffix('.avif')
+              webp = src.with_suffix('.webp')
+              if avif.exists() and webp.exists():
+                  old = src.stat().st_size
+                  print(f'{src}: original={old} webp={webp.stat().st_size} avif={avif.stat().st_size}')
+          PY
+
+      - name: Publier optimisation Astou
+        run: |
+          set -euo pipefail
+          git config user.name 'DIGIYLYFE Media Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add .
+          if git diff --cached --quiet; then
+            echo 'Aucun changement a publier.'
+            exit 0
+          fi
+          git commit -m 'Media: optimiser Astou Boutique en AVIF et WebP'
+          git push
