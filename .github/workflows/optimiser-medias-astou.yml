@@ -1,3 +1,4 @@
+# DIGIYLYFE Astou media optimization trigger 20260830
 name: Optimiser medias Astou Boutique
 
 on:
@@ -114,7 +115,6 @@ jobs:
                           f'<source type="image/webp" srcset="{rel_webp}">'
                           f'{tag}</picture>')
 
-              # Eviter de re-wrapper des images deja dans un picture lors d'un rerun.
               parts = []
               pos = 0
               for pm in re.finditer(r'<picture\b.*?</picture>', s, flags=re.I|re.S):
@@ -126,7 +126,6 @@ jobs:
               parts.append(img_re.sub(repl_img, s[pos:]))
               s = ''.join(parts)
 
-              # Pages produits : la variable CSS --hero accepte directement image-set().
               hero_re = re.compile(r'''--hero:url\((?P<q>["'])(?P<src>(?!https?://|//|data:)[^"']+?\.(?:png|jpe?g))(?P<query>\?[^"']*)?(?P=q)\)''', re.I)
               def repl_hero(m):
                   src = m.group('src')
@@ -150,7 +149,6 @@ jobs:
                   html.write_text(s, encoding='utf-8')
                   print('Page optimisee:', html)
 
-          # Accueil : conserver le JPG en fallback CSS et preferer AVIF/WebP si image-set est supporte.
           css = Path('assets/astou/mobile/mobile.css')
           s = css.read_text(encoding='utf-8')
           marker = '/* DIGIY media opt 20260830 */'
