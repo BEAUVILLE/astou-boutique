@@ -66,6 +66,17 @@ h1{max-width:670px;margin:18px 0 12px;font:800 clamp(38px,7vw,68px)/1.02 Georgia
   .offer-strip,.grid{grid-template-columns:1fr}.card img{height:235px}.gallery-copy{padding:23px}.gallery-copy h2{font-size:29px}
 }
 </style>
+
+<style id="digiy-media-opt">
+picture.digiy-media-opt{display:block;max-width:100%}
+picture.digiy-media-opt>img{display:block;max-width:100%}
+.category>picture.digiy-media-opt,.gallery>figure>picture.digiy-media-opt{width:100%}
+.media-card>picture.digiy-media-opt{width:115px;height:160px;border-radius:13px;background:#fbf7f2;overflow:hidden}
+.media-card>picture.digiy-media-opt>img{width:100%;height:100%;object-fit:contain}
+.gallery-banner>picture.digiy-media-opt{width:100%;height:100%}
+.gallery-banner>picture.digiy-media-opt>img{width:100%;height:100%;object-fit:cover}
+</style>
+
 </head>
 <body>
 
@@ -82,7 +93,7 @@ h1{max-width:670px;margin:18px 0 12px;font:800 clamp(38px,7vw,68px)/1.02 Georgia
   <a class="wa-top" href="https://wa.me/221778765785?text=Bonjour%20Astou%2C%20je%20souhaite%20voir%20les%20produits%20disponibles." target="_blank" rel="noopener">WhatsApp</a>
 </header>
 
-<section class="hero" style="--hero:url('assets/astou/premium/cat-serviettes.jpg?v=20260806f')">
+<section class="hero" style="--hero:image-set(url("assets/astou/premium/cat-serviettes.avif") type("image/avif"),url("assets/astou/premium/cat-serviettes.webp") type("image/webp"),url("assets/astou/premium/cat-serviettes.jpg?v=20260806f") type("image/jpeg"))">
   <div class="hero-inner">
     <span class="kicker">Serviettes · Maison · Villas</span>
     <h1>Des serviettes qui enveloppent vraiment</h1>
@@ -118,7 +129,7 @@ h1{max-width:670px;margin:18px 0 12px;font:800 clamp(38px,7vw,68px)/1.02 Georgia
       
 <article class="card ">
   <figure>
-    <img src="assets/astou/premium/cat-serviettes.jpg?v=20260806f" alt="Serviette de bain Astou Boutique" loading="lazy">
+    <picture class="digiy-media-opt"><source type="image/avif" srcset="assets/astou/premium/cat-serviettes.avif"><source type="image/webp" srcset="assets/astou/premium/cat-serviettes.webp"><img src="assets/astou/premium/cat-serviettes.jpg?v=20260806f" alt="Serviette de bain Astou Boutique" loading="lazy"></picture>
     <span class="badge">Disponible</span>
   </figure>
   <div class="card-body">
@@ -131,7 +142,7 @@ h1{max-width:670px;margin:18px 0 12px;font:800 clamp(38px,7vw,68px)/1.02 Georgia
 
 <article class="card ">
   <figure>
-    <img src="assets/astou/premium/cat-linge.jpg?v=20260806f" alt="Serviettes pour la maison Astou Boutique" loading="lazy">
+    <picture class="digiy-media-opt"><source type="image/avif" srcset="assets/astou/premium/cat-linge.avif"><source type="image/webp" srcset="assets/astou/premium/cat-linge.webp"><img src="assets/astou/premium/cat-linge.jpg?v=20260806f" alt="Serviettes pour la maison Astou Boutique" loading="lazy"></picture>
     <span class="badge">Collection</span>
   </figure>
   <div class="card-body">
@@ -144,7 +155,7 @@ h1{max-width:670px;margin:18px 0 12px;font:800 clamp(38px,7vw,68px)/1.02 Georgia
 
 <article class="card ">
   <figure>
-    <img src="assets/astou/premium/cat-villas.jpg?v=20260806f" alt="Lot de serviettes Astou Boutique" loading="lazy">
+    <picture class="digiy-media-opt"><source type="image/avif" srcset="assets/astou/premium/cat-villas.avif"><source type="image/webp" srcset="assets/astou/premium/cat-villas.webp"><img src="assets/astou/premium/cat-villas.jpg?v=20260806f" alt="Lot de serviettes Astou Boutique" loading="lazy"></picture>
     <span class="badge">Villa · Résidence</span>
   </figure>
   <div class="card-body">
@@ -157,7 +168,7 @@ h1{max-width:670px;margin:18px 0 12px;font:800 clamp(38px,7vw,68px)/1.02 Georgia
 
 <article class="card ">
   <figure>
-    <img src="assets/astou/premium/cat-peignoirs.jpg?v=20260806f" alt="2 peignoirs + 2 serviettes Astou Boutique" loading="lazy">
+    <picture class="digiy-media-opt"><source type="image/avif" srcset="assets/astou/premium/cat-peignoirs.avif"><source type="image/webp" srcset="assets/astou/premium/cat-peignoirs.webp"><img src="assets/astou/premium/cat-peignoirs.jpg?v=20260806f" alt="2 peignoirs + 2 serviettes Astou Boutique" loading="lazy"></picture>
     <span class="badge">Pack Bain Duo</span>
   </figure>
   <div class="card-body">
@@ -172,7 +183,7 @@ h1{max-width:670px;margin:18px 0 12px;font:800 clamp(38px,7vw,68px)/1.02 Georgia
   </section>
   
 <section class="gallery-banner">
-  <img src="assets/astou/premium/cat-serviettes.jpg?v=20260806f" alt="Collection de serviettes Astou Boutique" loading="lazy">
+  <picture class="digiy-media-opt"><source type="image/avif" srcset="assets/astou/premium/cat-serviettes.avif"><source type="image/webp" srcset="assets/astou/premium/cat-serviettes.webp"><img src="assets/astou/premium/cat-serviettes.jpg?v=20260806f" alt="Collection de serviettes Astou Boutique" loading="lazy"></picture>
   <div class="gallery-copy">
     <h2>Besoin de plusieurs serviettes ?</h2>
     <p>Indiquez le nombre de salles de bain, de chambres ou de personnes. Astou prépare directement la quantité adaptée.</p>

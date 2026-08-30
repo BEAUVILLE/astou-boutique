@@ -46,3 +46,9 @@ body{padding-bottom:0}.dock{display:none}.top{padding:9px 32px}.brand img{width:
 .wrap{padding:0 28px}.categories{grid-auto-flow:unset;grid-template-columns:repeat(3,1fr);overflow:visible}.products{grid-auto-flow:unset;grid-template-columns:repeat(3,1fr);overflow:visible}.families{grid-template-columns:repeat(3,1fr)}.gallery{grid-template-columns:repeat(4,1fr)}.media{grid-template-columns:1fr 1fr}.contact{grid-template-columns:1fr auto;align-items:center}.section-head p{font-size:14px}
 }
 @media(min-width:1120px){.categories{grid-template-columns:repeat(6,1fr)}.category h3{font-size:20px}.category p{font-size:14px}.products{grid-template-columns:repeat(5,1fr)}}
+
+
+/* DIGIY media opt 20260830 */
+@supports (background-image:image-set(url("../premium/hero-linge.avif") type("image/avif"))){
+  .hero{background-image:linear-gradient(180deg,rgba(255,255,255,.02) 24%,rgba(255,255,255,.94) 88%),image-set(url("../premium/hero-linge.avif") type("image/avif"),url("../premium/hero-linge.webp") type("image/webp"),url("../premium/hero-linge.jpg") type("image/jpeg"))}
+}
