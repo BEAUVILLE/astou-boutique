@@ -1,0 +1,21 @@
+{
+  "name": "Astou Boutique",
+  "short_name": "Astou Boutique",
+  "description": "Astou Boutique · présence professionnelle propulsée par DIGIYLYFE",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07150f",
+  "theme_color": "#126b43",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/assets/astou/premium/logo-astou.webp",
+      "sizes": "any",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}
