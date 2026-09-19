@@ -251,6 +251,7 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
     <meta name="apple-mobile-web-app-title" content="Astou Boutique">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+<style id="digiy-owner-web-only">@media (display-mode: standalone){#ownerWebOnly{display:none!important}}</style>
 </head>
 <body>
 <header class="top">
@@ -513,6 +514,9 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
   </div>
 </section>
 </div>
+<section id="ownerWebOnly" style="width:min(760px,calc(100% - 32px));margin:10px auto 24px;text-align:center">
+  <a id="ownerAccessBtn" href="https://mon-commerce.digiylyfe.com/acces-proprietaire-v2.html?site=astou-boutique&return=https%3A%2F%2Fastou-boutique.digiylyfe.com%2F" rel="nofollow" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid #eadfe5;border-radius:999px;background:#fff;color:#4b0737;text-decoration:none;font:900 12px/1.2 system-ui">🔐 <span data-fr="Accès propriétaire" data-en="Owner access">Accès propriétaire</span></a>
+</section>
 </main>
 
 <footer><div class="wrap"><strong>DIGIYLYFE.COM</strong><br><span data-fr="Visibilité directe · paiement direct · 0 % commission DIGIY" data-en="Direct visibility · direct payment · 0% DIGIY commission">Visibilité directe · paiement direct · 0 % commission DIGIY</span></div></footer>
@@ -571,6 +575,7 @@ Merci de me confirmer la disponibilité, la couleur, l’adresse et le montant f
 window.DIGIY_MEMBER_PWA={enabled:true,name:"Astou Boutique",finalUrl:"https://astou-boutique.digiylyfe.com/",manifestUrl:"/manifest.webmanifest?v=20260918-member-v1",iconUrl:"/assets/astou/premium/logo-astou.webp"};
 </script>
 <script src="https://digiylyfe.com/assets/digiy-member-pwa-v1.js?v=20260918-v1"></script>
+<script>(function(){var p=((window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true);var e=document.getElementById('ownerWebOnly');if(p&&e){e.hidden=true;e.style.display='none'}})();</script>
 </body>
 </html>
 
