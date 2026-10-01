@@ -399,9 +399,9 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
         </div>
 
         <button type="submit"
-                data-fr="🇫🇷 Préparer ma commande sur WhatsApp"
-                data-en="🇫🇷 Prepare my order on WhatsApp">
-          🇫🇷 Préparer ma commande sur WhatsApp
+                data-fr="🇫🇷 Ouvrir la commande sécurisée"
+                data-en="🇫🇷 Open secure order">
+          🇫🇷 Ouvrir la commande sécurisée
         </button>
       </form>
 
@@ -540,60 +540,7 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
     "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3"
   );
 
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-
-    const submit = form.querySelector('button[type="submit"]');
-    const name = document.getElementById('frName').value.trim();
-    const phone = document.getElementById('frPhone').value.trim();
-    const size = document.getElementById('frSize').value;
-    const color = document.getElementById('frColor').value.trim();
-    const city = document.getElementById('frCity').value.trim();
-    const address = document.getElementById('frAddress').value.trim();
-
-    const details =
-`Taille : ${size}
-Couleur souhaitée : ${color}
-Ville : ${city}
-Adresse de livraison : ${address}
-Prix indicatif : 23 000 FCFA ≈ 35 € (peignoir + expédition France pilote).`;
-
-    submit.disabled = true;
-    const { error } = await sb.from("digiy_commerce_orders").insert({
-      site_slug: "astou-boutique",
-      product_id: null,
-      product_name: "Peignoir Astou Boutique",
-      quantity: 1,
-      customer_name: name,
-      customer_phone: phone,
-      message: details,
-      status: "request"
-    });
-    submit.disabled = false;
-
-    if(error){
-      alert("La commande n’a pas pu être enregistrée dans MON COMMERCE : " + error.message);
-      return;
-    }
-
-    const message =
-`Bonjour Astou Boutique,
-Je souhaite commander un peignoir depuis la France.
-
-Nom : ${name}
-Téléphone / WhatsApp : ${phone}
-${details}
-
-La demande est aussi enregistrée dans votre espace propriétaire MON COMMERCE.
-
-Merci de me confirmer la disponibilité, la couleur, l’adresse et le montant final avant mon paiement Sendwave vers votre compte Wave ASTOU SOW · +221 77 876 57 86.`;
-
-    window.open(
-      'https://wa.me/221778765785?text=' + encodeURIComponent(message),
-      '_blank',
-      'noopener'
-    );
-  });
+  form.addEventListener('submit', function(e){e.preventDefault();location.href='commande-france-v2.html';});
 })();
 </script>
 

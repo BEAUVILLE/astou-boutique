@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Astou Boutique · Commande France V2</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fbf7f2;color:#241d21;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+.wrap{width:min(720px,calc(100% - 24px));margin:24px auto}.card{background:#fff;border:1px solid #eadfe5;border-radius:22px;padding:18px;box-shadow:0 14px 42px rgba(75,7,55,.10)}
+h1{margin:0 0 8px;color:#4b0737}p{line-height:1.5}.grid{display:grid;gap:10px}.field{display:grid;gap:5px}.field label{font-weight:900;color:#4b0737}
+input,select,button{font:inherit}input,select{width:100%;min-height:46px;padding:10px 12px;border:1px solid #eadfe5;border-radius:12px;background:#fff}
+button{min-height:50px;border:0;border-radius:13px;padding:11px 15px;background:#7b0757;color:#fff;font-weight:950;cursor:pointer}
+.note{margin-top:14px;padding:12px;border-radius:14px;background:#f7ebf3;color:#6e6268}.ok{color:#126b42;font-weight:900}.bad{color:#9b1c1c;font-weight:900}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="card">
+<h1>🇫🇷 Peignoir Astou Boutique</h1>
+<p><strong>23 000 FCFA ≈ 35 €</strong> · peignoir + expédition France pilote.</p>
+<form id="orderForm" class="grid">
+<div class="field"><label for="name">Nom et prénom</label><input id="name" required></div>
+<div class="field"><label for="phone">Téléphone / WhatsApp</label><input id="phone" required></div>
+<div class="field"><label for="size">Taille</label><select id="size" required><option value="">Choisir</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
+<div class="field"><label for="color">Couleur souhaitée</label><input id="color" required></div>
+<div class="field"><label for="city">Ville</label><input id="city" required></div>
+<div class="field"><label for="address">Adresse de livraison</label><input id="address" required></div>
+<button id="submit" type="submit">🇫🇷 Enregistrer puis ouvrir WhatsApp</button>
+</form>
+<div id="msg" class="note">La commande est d’abord enregistrée dans MON COMMERCE, puis le même récapitulatif s’ouvre dans WhatsApp.</div>
+</section>
+</main>
+<script>
+(async()=>{
+const sb=window.supabase.createClient("https://wesqmwjjtsefyjnluosj.supabase.co","sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3");
+const form=document.getElementById("orderForm"),msg=document.getElementById("msg"),submit=document.getElementById("submit");
+form.addEventListener("submit",async e=>{
+e.preventDefault();
+const name=document.getElementById("name").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const size=document.getElementById("size").value;
+const color=document.getElementById("color").value.trim();
+const city=document.getElementById("city").value.trim();
+const address=document.getElementById("address").value.trim();
+const details=["Taille : "+size,"Couleur : "+color,"Ville : "+city,"Adresse : "+address,"Prix indicatif : 23 000 FCFA ≈ 35 €"].join("\n");
+submit.disabled=true; msg.textContent="Enregistrement de la commande…"; msg.className="note";
+const {error}=await sb.from("digiy_commerce_orders").insert({
+site_slug:"astou-boutique",product_id:null,product_name:"Peignoir Astou Boutique",quantity:1,
+customer_name:name,customer_phone:phone,message:details,status:"request"
+});
+submit.disabled=false;
+if(error){msg.textContent="Erreur Supabase : "+error.message;msg.className="note bad";return}
+msg.textContent="Commande enregistrée dans MON COMMERCE. Ouverture de WhatsApp…";msg.className="note ok";
+const wa=["Bonjour Astou Boutique,","Je souhaite commander un peignoir depuis la France.","","Nom : "+name,"Téléphone / WhatsApp : "+phone,details,"","La demande est enregistrée dans MON COMMERCE DIGIYLYFE.","Paiement après validation via Wave Pro / Sendwave. 0 % commission DIGIY."].join("\n");
+window.open("https://wa.me/221778765785?text="+encodeURIComponent(wa),"_blank","noopener");
+});
+})();
+</script>
+</body></html>
