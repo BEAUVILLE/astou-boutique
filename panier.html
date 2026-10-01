@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>Panier · Astou Boutique</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fbf7f2;color:#241d21;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{width:min(760px,calc(100% - 24px));margin:18px auto 40px}.top{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.back{color:#7b0757;font-weight:900;text-decoration:none}
+.card{background:#fff;border:1px solid #eadfe5;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 10px 30px rgba(75,7,55,.08)}
+h1,h2{margin:0 0 10px;color:#4b0737}.muted{color:#6e6268;font-size:13px;line-height:1.45}.line{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0;border-top:1px solid #eee}.line:first-child{border-top:0}.name{font-weight:950}.price{color:#7b0757;font-weight:900}.qty{display:flex;gap:6px;align-items:center}.qty button{width:34px;height:34px;border-radius:50%;border:1px solid #eadfe5;background:#fff;font-weight:950}.qty b{min-width:24px;text-align:center}.variant{margin-top:8px;width:100%;padding:9px 10px;border:1px solid #eadfe5;border-radius:10px}
+.remove{margin-top:8px;border:0;background:transparent;color:#9b1c1c;font-weight:900;padding:0}
+.total{display:flex;justify-content:space-between;gap:12px;font-size:18px;font-weight:950}.grid{display:grid;gap:10px}.field{display:grid;gap:5px}.field label{font-size:12px;font-weight:950;color:#4b0737}.field input,.field select,.field textarea{width:100%;padding:11px 12px;border:1px solid #eadfe5;border-radius:12px;background:#fff;font:inherit}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.submit{width:100%;min-height:52px;border:0;border-radius:14px;background:#7b0757;color:#fff;font:950 16px/1 system-ui;cursor:pointer}.submit:disabled{opacity:.5}.empty{text-align:center;padding:24px}.ok{color:#126b42;font-weight:900}.bad{color:#9b1c1c;font-weight:900}.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#f7ebf3;color:#7b0757;font-size:11px;font-weight:950}
+@media(max-width:620px){.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main class="wrap">
+<div class="top"><a class="back" href="./">← Continuer mes achats</a><span class="badge">0 % commission DIGIY</span></div>
+<section class="card"><h1>🛒 Mon panier · Astou Boutique</h1><p class="muted">Préparez plusieurs articles dans une seule commande. Astou confirme ensuite le stock, la livraison et le montant final. Paiement direct commerçant via Wave Pro / Sendwave.</p><div id="cart"></div><div id="totalBox" class="total"></div></section>
+<section id="checkoutCard" class="card"><h2>Finaliser la demande</h2><form id="checkout" class="grid">
+<div class="two"><div class="field"><label>Nom et prénom</label><input id="name" required autocomplete="name"></div><div class="field"><label>Téléphone / WhatsApp</label><input id="phone" required autocomplete="tel"></div></div>
+<div class="two"><div class="field"><label>Pays</label><input id="country" required autocomplete="country-name"></div><div class="field"><label>Ville</label><input id="city" required autocomplete="address-level2"></div></div>
+<div class="field"><label>Adresse de livraison</label><input id="address" required autocomplete="street-address"></div>
+<div class="field"><label>Devise d’affichage</label><select id="currency"><option value="FCFA">FCFA</option><option value="EUR">EUR</option></select></div>
+<div class="field"><label>Message à Astou (facultatif)</label><textarea id="message" rows="3" placeholder="Précision générale sur votre commande"></textarea></div>
+<button id="submit" class="submit" type="submit">Enregistrer ma commande</button>
+<div id="status" class="muted">WhatsApp ne s’ouvrira qu’après l’enregistrement réussi dans MON COMMERCE.</div>
+</form></section>
+</main>
+<script>
+(()=>{
+const CART_KEY="digiy_cart_astou_v1";
+const $=id=>document.getElementById(id);
+const sb=window.supabase.createClient("https://wesqmwjjtsefyjnluosj.supabase.co","sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3");
+function read(){try{return JSON.parse(localStorage.getItem(CART_KEY)||"[]")}catch(_){return[]}}
+function save(x){localStorage.setItem(CART_KEY,JSON.stringify(x));render()}
+function parseFcfa(label){const n=Number(String(label||"").replace(/[^0-9]/g,""));return Number.isFinite(n)?n:0}
+function money(n){return new Intl.NumberFormat("fr-FR").format(n)+" FCFA"}
+function render(){
+  const items=read(),box=$("cart"),total=$("totalBox"),card=$("checkoutCard");
+  box.innerHTML="";
+  if(!items.length){box.innerHTML='<div class="empty"><strong>Votre panier est vide.</strong><p class="muted">Ajoutez des produits ou des packs depuis la boutique.</p><a class="back" href="./#produits">Voir les produits</a></div>';total.innerHTML="";card.hidden=true;return}
+  card.hidden=false;
+  items.forEach((x,i)=>{
+    const d=document.createElement("div");d.className="line";
+    d.innerHTML='<div><div class="name"></div><div class="price"></div><input class="variant" placeholder="Taille, couleur, modèle ou précision"><button class="remove" type="button">Retirer</button></div><div class="qty"><button class="minus" type="button">−</button><b></b><button class="plus" type="button">+</button></div>';
+    d.querySelector(".name").textContent=x.product_name;
+    d.querySelector(".price").textContent=x.unit_price_label||"Prix à confirmer";
+    d.querySelector(".variant").value=x.variant||"";
+    d.querySelector(".variant").onchange=e=>{const a=read();a[i].variant=e.target.value.trim();save(a)};
+    d.querySelector("b").textContent=x.quantity||1;
+    d.querySelector(".minus").onclick=()=>{const a=read();a[i].quantity=Math.max(1,(a[i].quantity||1)-1);save(a)};
+    d.querySelector(".plus").onclick=()=>{const a=read();a[i].quantity=Math.min(99,(a[i].quantity||1)+1);save(a)};
+    d.querySelector(".remove").onclick=()=>{const a=read();a.splice(i,1);save(a)};
+    box.appendChild(d);
+  });
+  const sum=items.reduce((n,x)=>n+parseFcfa(x.unit_price_label)*(Number(x.quantity)||1),0);
+  const eur=sum?Math.round((sum/655.957)*100)/100:0;
+  total.innerHTML='<span>Total produits indicatif</span><span>'+money(sum)+(eur?' · ≈ '+eur.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+' €':'')+'</span>';
+}
+$("checkout").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const items=read();if(!items.length)return;
+  const submit=$("submit"),status=$("status");
+  submit.disabled=true;status.className="muted";status.textContent="Enregistrement de la commande dans MON COMMERCE…";
+  const payload=items.map(x=>({product_id:null,product_name:x.product_name,quantity:Number(x.quantity)||1,unit_price_label:x.unit_price_label||null,variant:x.variant||null}));
+  const args={
+    p_site_slug:"astou-boutique",
+    p_customer_name:$("name").value.trim(),
+    p_customer_phone:$("phone").value.trim(),
+    p_country:$("country").value.trim(),
+    p_city:$("city").value.trim(),
+    p_delivery_address:$("address").value.trim(),
+    p_currency:$("currency").value,
+    p_message:$("message").value.trim(),
+    p_items:payload
+  };
+  const {data,error}=await sb.rpc("digiy_commerce_submit_cart_v1",args);
+  if(error){submit.disabled=false;status.className="bad";status.textContent="Commande non enregistrée : "+error.message;return}
+  const ref=String(data||"").slice(0,8).toUpperCase();
+  status.className="ok";status.textContent="Commande enregistrée · référence "+ref+". Ouverture de WhatsApp…";
+  const lines=items.map(x=>"• "+x.product_name+" × "+x.quantity+(x.variant?" · "+x.variant:"")+" · "+(x.unit_price_label||"prix à confirmer")).join("\n");
+  const wa=["Bonjour Astou Boutique,","Ma commande est enregistrée dans MON COMMERCE.","Référence : "+ref,"",lines,"","Nom : "+args.p_customer_name,"Téléphone : "+args.p_customer_phone,"Pays : "+args.p_country,"Ville : "+args.p_city,"Adresse : "+args.p_delivery_address,"Devise : "+args.p_currency,args.p_message?("Message : "+args.p_message):"","Merci de confirmer le stock, la livraison et le montant final avant paiement."].filter(Boolean).join("\n");
+  localStorage.removeItem(CART_KEY);
+  setTimeout(()=>window.open("https://wa.me/221778765785?text="+encodeURIComponent(wa),"_blank","noopener"),250);
+  setTimeout(()=>{location.href="./?order="+encodeURIComponent(ref)+"#commande-monde"},700);
+});
+render();
+})();
+</script>
+</body></html>
