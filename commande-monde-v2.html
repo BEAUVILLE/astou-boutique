@@ -20,9 +20,34 @@ button{min-height:50px;border:0;border-radius:13px;padding:11px 15px;background:
 <body>
 <main class="wrap">
 <section class="card">
-<h1>🌍 Peignoir Astou Boutique</h1>
+<h1>🌍 Commande Monde · Astou Boutique</h1>
 <p><strong>23 000 FCFA ≈ 35 €</strong> · peignoir + expédition France pilote.</p>
 <form id="orderForm" class="grid">
+<div class="field"><label for="product">Produit ou pack</label>
+<select id="product" required>
+<option value="">Choisir</option>
+<option value="Drap 2 places|12000">Drap 2 places · 12 000 FCFA</option>
+<option value="Drap 1 place|7500">Drap 1 place · 7 500 FCFA</option>
+<option value="Parure complète|25000">Parure complète · 25 000 FCFA</option>
+<option value="Beurre de karité bio maison|7000">Beurre de karité bio maison · 7 000 FCFA</option>
+<option value="Taie d’oreiller|2500">Taie d’oreiller · 2 500 FCFA</option>
+<option value="Serviette de bain|8500">Serviette de bain · 8 500 FCFA</option>
+<option value="Peignoir|15000">Peignoir · 15 000 FCFA</option>
+<option value="Couette|30000">Couette · 30 000 FCFA</option>
+<option value="Oreiller|8000">Oreiller · 8 000 FCFA</option>
+<option value="Nappe|7000">Nappe · 7 000 FCFA</option>
+<option value="Torchon|1000">Torchon · 1 000 FCFA</option>
+<option value="Pack Douceur Solo|15000">Pack Douceur Solo · 15 000 FCFA</option>
+<option value="Pack Chambre Duo|42000">Pack Chambre Duo · 42 000 FCFA</option>
+<option value="Pack Bain Duo|44000">Pack Bain Duo · 44 000 FCFA</option>
+<option value="Pack Chambre Confort|82000">Pack Chambre Confort · 82 000 FCFA</option>
+<option value="Pack Maison Essentielle|95000">Pack Maison Essentielle · 95 000 FCFA</option>
+<option value="Pack Villa · 1 chambre|130000">Pack Villa · 1 chambre · 130 000 FCFA</option>
+<option value="Pack Villa · 2 chambres|260000">Pack Villa · 2 chambres · 260 000 FCFA</option>
+<option value="Autre produit / demande spéciale|0">Autre produit / demande spéciale</option>
+</select></div>
+<div class="field"><label for="customProduct">Précision produit (si besoin)</label><input id="customProduct" placeholder="Ex. modèle, article non listé, demande spéciale"></div>
+<div class="field"><label for="quantity">Quantité</label><input id="quantity" type="number" min="1" max="99" value="1" required></div>
 <div class="field"><label for="name">Nom et prénom</label><input id="name" required></div>
 <div class="field"><label for="phone">Téléphone / WhatsApp</label><input id="phone" required></div>
 <div class="field"><label for="size">Taille</label><select id="size" required><option value="">Choisir</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
@@ -42,6 +67,12 @@ const sb=window.supabase.createClient("https://wesqmwjjtsefyjnluosj.supabase.co"
 const form=document.getElementById("orderForm"),msg=document.getElementById("msg"),submit=document.getElementById("submit");
 form.addEventListener("submit",async e=>{
 e.preventDefault();
+const productRaw=document.getElementById("product").value;
+const [productName,unitRaw]=productRaw.split("|");
+const unitPrice=Number(unitRaw||0);
+const customProduct=document.getElementById("customProduct").value.trim();
+const quantity=Math.max(1,Number(document.getElementById("quantity").value||1));
+const finalProduct=productName==="Autre produit / demande spéciale"&&customProduct?customProduct:productName;
 const name=document.getElementById("name").value.trim();
 const phone=document.getElementById("phone").value.trim();
 const size=document.getElementById("size").value;
@@ -50,17 +81,20 @@ const country=document.getElementById("country").value.trim();
 const currency=document.getElementById("currency").value;
 const city=document.getElementById("city").value.trim();
 const address=document.getElementById("address").value.trim();
-const indicative=currency==="EUR"?"≈ 23 000 FCFA / 35 € indicatif":"23 000 FCFA indicatif";
-const details=["Taille : "+size,"Couleur : "+color,"Pays : "+country,"Ville : "+city,"Adresse : "+address,"Devise affichée : "+currency,"Montant indicatif : "+indicative].join("\n");
+const subtotal=unitPrice>0?unitPrice*quantity:0;
+const indicative=subtotal>0
+  ? (currency==="EUR"?(subtotal+" FCFA · équivalent EUR à confirmer"):subtotal+" FCFA")
+  : "À confirmer avec Astou";
+const details=["Produit : "+finalProduct,"Quantité : "+quantity,"Taille : "+size,"Couleur : "+color,"Pays : "+country,"Ville : "+city,"Adresse : "+address,"Devise affichée : "+currency,"Montant produits indicatif : "+indicative,"Livraison / expédition : à confirmer avec Astou"].join("\n");
 submit.disabled=true; msg.textContent="Enregistrement de la commande…"; msg.className="note";
 const {data,error}=await sb.from("digiy_commerce_orders").insert({
-site_slug:"astou-boutique",product_id:null,product_name:"Peignoir Astou Boutique",quantity:1,
+site_slug:"astou-boutique",product_id:null,product_name:finalProduct,quantity:quantity,
 customer_name:name,customer_phone:phone,message:details,status:"request"
 });
 submit.disabled=false;
 if(error){msg.textContent="Erreur Supabase : "+error.message;msg.className="note bad";alert("Erreur Supabase : "+error.message);return}
 msg.textContent="Commande V2 enregistrée dans MON COMMERCE. Ouverture de WhatsApp…";msg.className="note ok";
-const wa=["Bonjour Astou Boutique,","Je souhaite commander un peignoir.","","Nom : "+name,"Téléphone / WhatsApp : "+phone,details,"","La demande est enregistrée dans MON COMMERCE DIGIYLYFE.","Merci de confirmer le montant final et le mode de paiement direct (Wave Pro / Sendwave). 0 % commission DIGIY."].join("\n");
+const wa=["Bonjour Astou Boutique,","Je souhaite passer une commande.","","Nom : "+name,"Téléphone / WhatsApp : "+phone,details,"","La demande est enregistrée dans MON COMMERCE DIGIYLYFE.","Merci de confirmer le montant final et le mode de paiement direct (Wave Pro / Sendwave). 0 % commission DIGIY."].join("\n");
 window.open("https://wa.me/221778765785?text="+encodeURIComponent(wa),"_blank","noopener");
 });
 })();
