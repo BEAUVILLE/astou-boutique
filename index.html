@@ -514,7 +514,7 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
 </section>
 </div>
 <section id="ownerWebOnly" style="width:min(760px,calc(100% - 32px));margin:10px auto 24px;text-align:center">
-  <a id="ownerAccessBtn" href="https://mon-commerce.digiylyfe.com/acces-proprietaire-v2.html?site=astou-boutique&return=https%3A%2F%2Fastou-boutique.digiylyfe.com%2F" rel="nofollow" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid #eadfe5;border-radius:999px;background:#fff;color:#4b0737;text-decoration:none;font:900 12px/1.2 system-ui">🔐 <span data-fr="Accès propriétaire" data-en="Owner access">Accès propriétaire</span></a>
+  <a id="ownerAccessBtn" href="https://mon-commerce.digiylyfe.com/acces-proprietaire-v4.html?site=astou-boutique&return=https%3A%2F%2Fastou-boutique.digiylyfe.com%2F" rel="nofollow" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px;border:1px solid #eadfe5;border-radius:999px;background:#fff;color:#4b0737;text-decoration:none;font:900 12px/1.2 system-ui">🔐 <span data-fr="Accès propriétaire" data-en="Owner access">Accès propriétaire</span></a>
 </section>
 </main>
 
@@ -529,14 +529,21 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
 <script src="assets/astou/mobile/mobile.js?v=20260808-mobile-flow"></script>
 <script src="assets/astou/mobile/product-karite.js?v=20260809-v2"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0"></script>
 <script>
 (function(){
   const form = document.getElementById('franceOrderForm');
-  if(!form) return;
+  if(!form || !window.supabase) return;
 
-  form.addEventListener('submit', function(e){
+  const sb = window.supabase.createClient(
+    "https://wesqmwjjtsefyjnluosj.supabase.co",
+    "sb_publishable_tGHItRgeWDmGjnd0CK1DVQ_BIep4Ug3"
+  );
+
+  form.addEventListener('submit', async function(e){
     e.preventDefault();
 
+    const submit = form.querySelector('button[type="submit"]');
     const name = document.getElementById('frName').value.trim();
     const phone = document.getElementById('frPhone').value.trim();
     const size = document.getElementById('frSize').value;
@@ -544,18 +551,40 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
     const city = document.getElementById('frCity').value.trim();
     const address = document.getElementById('frAddress').value.trim();
 
+    const details =
+`Taille : ${size}
+Couleur souhaitée : ${color}
+Ville : ${city}
+Adresse de livraison : ${address}
+Prix indicatif : 23 000 FCFA ≈ 35 € (peignoir + expédition France pilote).`;
+
+    submit.disabled = true;
+    const { error } = await sb.from("digiy_commerce_orders").insert({
+      site_slug: "astou-boutique",
+      product_id: null,
+      product_name: "Peignoir Astou Boutique",
+      quantity: 1,
+      customer_name: name,
+      customer_phone: phone,
+      message: details,
+      status: "request"
+    });
+    submit.disabled = false;
+
+    if(error){
+      alert("La commande n’a pas pu être enregistrée dans MON COMMERCE : " + error.message);
+      return;
+    }
+
     const message =
 `Bonjour Astou Boutique,
 Je souhaite commander un peignoir depuis la France.
 
 Nom : ${name}
 Téléphone / WhatsApp : ${phone}
-Taille : ${size}
-Couleur souhaitée : ${color}
-Ville : ${city}
-Adresse de livraison : ${address}
+${details}
 
-Prix indicatif : 23 000 FCFA ≈ 35 € (peignoir + expédition France pilote).
+La demande est aussi enregistrée dans votre espace propriétaire MON COMMERCE.
 
 Merci de me confirmer la disponibilité, la couleur, l’adresse et le montant final avant mon paiement Sendwave vers votre compte Wave ASTOU SOW · +221 77 876 57 86.`;
 
