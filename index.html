@@ -329,8 +329,8 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
       <span class="france-pilot-kicker"
             data-fr="Monde · Commande directe"
             data-en="World · Direct order">Monde · Commande directe</span>
-      <h2 data-fr="🇫🇷 Peignoir Astou Boutique"
-          data-en="🇫🇷 Astou Boutique bathrobe">🇫🇷 Peignoir Astou Boutique</h2>
+      <h2 data-fr="🌍 Peignoir Astou Boutique"
+          data-en="🌍 Astou Boutique bathrobe">🌍 Peignoir Astou Boutique</h2>
     </div>
 
     <div class="france-price-grid">
@@ -388,6 +388,19 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
           </div>
 
           <div class="field">
+            <label for="frCountry" data-fr="Pays" data-en="Country">Pays</label>
+            <input id="frCountry" name="country" type="text" required placeholder="Ex. Sénégal, France, Belgique">
+          </div>
+
+          <div class="field">
+            <label for="frCurrency" data-fr="Devise" data-en="Currency">Devise</label>
+            <select id="frCurrency" name="currency" required>
+              <option value="FCFA">FCFA</option>
+              <option value="EUR">EUR</option>
+            </select>
+          </div>
+
+          <div class="field">
             <label for="frCity" data-fr="Ville" data-en="City">Ville</label>
             <input id="frCity" name="city" type="text" required autocomplete="address-level2">
           </div>
@@ -410,14 +423,14 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
                 data-en="Payment after order confirmation">
           Paiement après validation de la commande
         </strong>
-        <p data-fr="Transfert Sendwave vers le compte Wave d’Astou."
-           data-en="Sendwave transfer to Astou's Wave account.">
-          Transfert Sendwave vers le compte Wave d’Astou.
+        <p data-fr="Paiement direct avec Astou via Wave Pro / Sendwave selon le pays."
+           data-en="Direct payment with Astou via Wave Pro / Sendwave depending on the country.">
+          Paiement direct avec Astou via Wave Pro / Sendwave selon le pays.
         </p>
         <span class="pay-number">ASTOU SOW · +221 77 876 57 86</span>
         <small data-fr="Envoyez le paiement uniquement après confirmation de la taille, de la couleur, de l’adresse et du montant final par Astou. L’expédition part après réception du paiement."
                data-en="Send payment only after Astou confirms the size, colour, address and final amount. Shipping starts after payment is received.">
-          Envoyez le paiement uniquement après confirmation de la taille, de la couleur, de l’adresse et du montant final par Astou. L’expédition part après réception du paiement.
+          Envoyez le paiement uniquement après confirmation de la taille, de la couleur, du pays, de l’adresse, de la devise et du montant final par Astou. L’expédition part après réception du paiement.
         </small>
       </div>
 
