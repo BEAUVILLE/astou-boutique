@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://astou-boutique.digiylyfe.com/sitemap.xml
