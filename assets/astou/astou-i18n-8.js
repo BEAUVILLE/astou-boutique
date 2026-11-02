@@ -1,4 +1,4 @@
-/* ASTOU BOUTIQUE — chargeur public 8 langues + compatibilité visuelle historique.
+/* ASTOU BOUTIQUE — chargeur public 10 langues + compatibilité visuelle historique.
    Le cœur de traduction est conservé dans astou-i18n-core-8.js. */
 (function(){
 'use strict';
@@ -12,13 +12,13 @@ function installLanguageBarResponsiveFix(){
 .astou-lang8,
 .top-actions .lang{
   display:flex!important;
-  flex-wrap:nowrap!important;
+  flex-wrap:wrap!important;
   align-items:center!important;
   justify-content:flex-start!important;
   gap:4px!important;
   min-width:0!important;
   max-width:100%!important;
-  overflow-x:auto!important;
+  overflow-x:visible!important;
   overflow-y:hidden!important;
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;
@@ -30,11 +30,13 @@ function installLanguageBarResponsiveFix(){
   flex:0 0 auto!important;
   white-space:nowrap!important;
 }
-.top-actions{min-width:0!important}
+.top-actions{min-width:0!important;flex-wrap:wrap!important}
+.top-actions .lang{flex:1 1 100%!important;max-width:100%!important;justify-content:center!important}
+.astou-lang8{width:100%!important;justify-content:center!important}
 @media(min-width:760px) and (max-width:1119px){
   .desktop-nav{display:none!important}
   .top-actions{flex:1 1 auto!important;justify-content:flex-end!important}
-  .top-actions .lang{max-width:min(58vw,430px)!important}
+  .top-actions .lang{max-width:100%!important}
 }
 `;
   document.head.appendChild(style);
@@ -110,7 +112,7 @@ function restoreSecondaryPageUI(){
 function loadCore(){
   if(document.querySelector('script[data-astou-i18n-core]')) return;
   const s=document.createElement('script');
-  s.src='assets/astou/astou-i18n-core-8.js?v=20260811-astou8-core1';
+  s.src='/assets/astou/astou-i18n-core-8.js?v=20261102-astou10-core1';
   s.async=false;
   s.dataset.astouI18nCore='1';
   document.head.appendChild(s);
