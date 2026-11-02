@@ -33,6 +33,6 @@ function update(){
 }
 update();
 if(copy){
- copy.addEventListener('click',()=>{setTimeout(()=>{if(copy.textContent.includes('✅'))copy.textContent=D[lang].copied;},0)});
+ copy.addEventListener('click',()=>{setTimeout(()=>{if(copy.textContent.includes('✅'))copy.textContent=D[lang].copied;},250)});
 }
 })();
