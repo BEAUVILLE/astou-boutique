@@ -5,18 +5,18 @@
 'use strict';
 if(window.__ASTOU_I18N8__) return;
 window.__ASTOU_I18N8__=true;
-const SUP=['fr','en','es','pt','de','it','nl','ar'];
-const FLAG={fr:'🇫🇷',en:'🇬🇧',es:'🇪🇸',pt:'🇵🇹',de:'🇩🇪',it:'🇮🇹',nl:'🇳🇱',ar:'🌙'};
+const SUP=['fr','en','es','pt','de','it','nl','ar','wo','zh'];
+const FLAG={fr:'🇫🇷',en:'🇬🇧',es:'🇪🇸',pt:'🇵🇹',de:'🇩🇪',it:'🇮🇹',nl:'🇳🇱',ar:'🌙',wo:'🇸🇳',zh:'🇨🇳'};
 const STORE='astou-lang';
 const urlLang=(new URLSearchParams(location.search).get('lang')||'').slice(0,2).toLowerCase();
 let lang=SUP.includes(urlLang)?urlLang:(localStorage.getItem(STORE)||localStorage.getItem('digiy-lang')||'fr').slice(0,2).toLowerCase();
 if(!SUP.includes(lang)) lang='fr';
 try{localStorage.setItem(STORE,lang);localStorage.setItem('digiy-lang',lang);localStorage.setItem('digiy_lang',lang)}catch(e){}
-document.documentElement.lang=lang;
+document.documentElement.lang=lang==='zh'?'zh-CN':lang;
 document.documentElement.dir=lang==='ar'?'rtl':'ltr';
 
 const D={};
-function add(fr,en,es,pt,de,it,nl,ar){D[fr]={fr,en,es,pt,de,it,nl,ar};}
+function add(fr,en,es,pt,de,it,nl,ar){D[fr]={fr,en,es,pt,de,it,nl,ar,wo:fr,zh:fr};}
 const R=(fr)=>D[fr]&&D[fr][lang]?D[fr][lang]:fr;
 
 /* navigation */
@@ -271,6 +271,9 @@ add('Confort','Comfort','Confort','Conforto','Komfort','Comfort','Comfort','را
 add('1 chambre','1 bedroom','1 habitación','1 quarto','1 Schlafzimmer','1 camera','1 slaapkamer','غرفة واحدة');
 add('2 chambres','2 bedrooms','2 habitaciones','2 quartos','2 Schlafzimmer','2 camere','2 slaapkamers','غرفتان');
 
+/* Two extra public languages. Missing new keys keep their original French instead of inventing meanings. */
+const EXTRA_WO_ZH={};
+Object.entries(EXTRA_WO_ZH).forEach(([source,translations])=>{if(D[source]){D[source].wo=translations[0];D[source].zh=translations[1];}});
 const PHRASE=Object.keys(D).sort((a,b)=>b.length-a.length);
 function transText(raw){
   if(lang==='fr') return raw;
@@ -326,13 +329,13 @@ function languageBar(){
     document.body.insertBefore(box,document.body.firstChild);
   }else{box.innerHTML='';box.style.flexWrap='wrap';box.style.gap='3px';}
   SUP.forEach(code=>{
-    const b=document.createElement('button');b.type='button';b.textContent=FLAG[code]+' '+code.toUpperCase();b.dataset.astouLang=code;
+    const b=document.createElement('button');b.type='button';b.textContent=FLAG[code]+' '+(code==='zh'?'中文':code.toUpperCase());b.dataset.astouLang=code;
     Object.assign(b.style,{border:code===lang?'2px solid #7b0757':'1px solid #d8c8d2',background:code===lang?'#f7e8f2':'#fff',color:'#4b0737',borderRadius:'9px',padding:'5px 7px',fontWeight:'900',fontSize:'11px',cursor:'pointer'});
     b.addEventListener('click',()=>goLang(code));box.appendChild(b);
   });
 }
 
-const greet={fr:'Bonjour Astou',en:'Hello Astou',es:'Hola Astou',pt:'Olá Astou',de:'Hallo Astou',it:'Ciao Astou',nl:'Hallo Astou',ar:'مرحباً أستو'};
+const greet={fr:'Bonjour Astou',en:'Hello Astou',es:'Hola Astou',pt:'Olá Astou',de:'Hallo Astou',it:'Ciao Astou',nl:'Hallo Astou',ar:'مرحباً أستو',wo:'Salaam Astou',zh:'您好 Astou'};
 function waTranslate(message){
   if(lang==='fr') return message;
   let m=message.replace(/Bonjour Astou Boutique/g,greet[lang]+' Boutique').replace(/Bonjour Astou/g,greet[lang]);
@@ -354,9 +357,10 @@ de:'Willkommen bei Astou Boutique in Saly. Entdecken Sie Heimtextilien und Natur
 it:'Benvenuti da Astou Boutique a Saly. Scoprite la nostra selezione di biancheria per la casa e prodotti naturali. Il burro di karité bio artigianale costa 7.000 franchi CFA. Astou può mostrare i prodotti in videochiamata WhatsApp. Scegliete gli articoli, fate domande e confermate l’ordine a distanza.',
 nl:'Welkom bij Astou Boutique in Saly. Ontdek ons huislinnen en natuurlijke producten. Huisgemaakte biologische sheaboter is verkrijgbaar voor 7.000 CFA-frank. Astou kan producten via WhatsApp-video tonen. Kies artikelen, stel vragen en bevestig je bestelling op afstand.',
 ar:'مرحباً بكم في أستو بوتيك في سالي. اكتشفوا مفروشات المنزل والمنتجات الطبيعية. زبدة الشيا العضوية المنزلية متوفرة بسعر 7,000 فرنك CFA. يمكن لأستو عرض المنتجات عبر مكالمة فيديو واتساب. اختر المنتجات واطرح أسئلتك وأكد طلبك عن بعد.'};
-const listenLabel={fr:'🔊 Écouter la boutique',en:'🔊 Listen to the boutique',es:'🔊 Escuchar la tienda',pt:'🔊 Ouvir a loja',de:'🔊 Shop anhören',it:'🔊 Ascolta la boutique',nl:'🔊 Luister naar de winkel',ar:'🔊 استمع إلى المتجر'};
+const listenLabel={fr:'🔊 Écouter la boutique',en:'🔊 Listen to the boutique',es:'🔊 Escuchar la tienda',pt:'🔊 Ouvir a loja',de:'🔊 Shop anhören',it:'🔊 Ascolta la boutique',nl:'🔊 Luister naar de winkel',ar:'🔊 استمع إلى المتجر',wo:'🔊 Baat ci wolof du am léegi',zh:'🔊 中文语音尚未验证'};
 function bindVoice(){
   const b=document.getElementById('astouListen');if(!b||b.dataset.i18n8Bound)return;b.dataset.i18n8Bound='1';b.textContent=listenLabel[lang];
+  if(lang==='wo'||lang==='zh'){b.disabled=true;b.title='Voix non validée pour cette langue';return;}
   b.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();if(!('speechSynthesis'in window)||typeof SpeechSynthesisUtterance==='undefined')return;if(speechSynthesis.speaking){speechSynthesis.cancel();b.textContent=listenLabel[lang];return;}const u=new SpeechSynthesisUtterance(voice[lang]);u.lang={fr:'fr-FR',en:'en-US',es:'es-ES',pt:'pt-PT',de:'de-DE',it:'it-IT',nl:'nl-NL',ar:'ar-SA'}[lang];u.rate=.95;u.onend=()=>b.textContent=listenLabel[lang];u.onerror=()=>b.textContent=listenLabel[lang];speechSynthesis.speak(u);},{capture:true});
 }
 function bindFranceForm(){
@@ -364,6 +368,8 @@ function bindFranceForm(){
   f.addEventListener('submit',function(e){if(lang==='fr')return;e.preventDefault();e.stopImmediatePropagation();
     const v=id=>(document.getElementById(id)||{}).value||'';
     const labels={
+      wo:['Salaam Astou Boutique,','Bëgg naa jënd peignoir bu jóge France.','Tur','Téléphone / WhatsApp','Taille','Melokaan','Dëkk','Adresse livraison','Njëg bu ñu jéema : 23 000 FCFA ≈ 35 € (peignoir ak yónnee test ci France).','Wóoralal disponibilité, melokaan, adresse ak njëg bu mujj bala ma fayee ci Sendwave ci compte Wave ASTOU SOW · +221 77 876 57 85.'],
+      zh:['您好 Astou Boutique，','我想从法国购买一件浴袍。','姓名','电话 / WhatsApp','尺码','希望的颜色','城市','收货地址','参考价格：23,000 西非法郎 ≈ 35 欧元（浴袍及法国试运配送）。','通过 Sendwave 向 ASTOU SOW 的 Wave 账户 +221 77 876 57 85 付款前，请先确认库存、颜色、地址及最终金额。'],
       en:['Hello Astou Boutique,','I would like to order a bathrobe from France.','Name','Phone / WhatsApp','Size','Preferred colour','City','Delivery address','Indicative price: 23,000 FCFA ≈ €35 (bathrobe + pilot shipping to France).','Please confirm availability, colour, address and final amount before my Sendwave payment to your Wave account ASTOU SOW · +221 77 876 57 85.'],
       es:['Hola Astou Boutique,','Quiero pedir un albornoz desde Francia.','Nombre','Teléfono / WhatsApp','Talla','Color deseado','Ciudad','Dirección de entrega','Precio indicativo: 23.000 FCFA ≈ 35 € (albornoz + envío piloto a Francia).','Confírmame disponibilidad, color, dirección e importe final antes de mi pago Sendwave a tu cuenta Wave ASTOU SOW · +221 77 876 57 85.'],
       pt:['Olá Astou Boutique,','Quero encomendar um roupão a partir de França.','Nome','Telefone / WhatsApp','Tamanho','Cor pretendida','Cidade','Morada de entrega','Preço indicativo: 23 000 FCFA ≈ 35 € (roupão + envio piloto para França).','Confirme a disponibilidade, cor, morada e valor final antes do meu pagamento Sendwave para a sua conta Wave ASTOU SOW · +221 77 876 57 85.'],
@@ -384,7 +390,7 @@ function translateMeta(){
 }
 function apply(){
   languageBar();transNode(document.body);preserveLangSafe();rewriteWhatsApp();bindVoice();bindFranceForm();translateMeta();
-  const v=document.getElementById('astouVisio');if(v){const x={fr:'📹 Vente en visio WhatsApp',en:'📹 WhatsApp video shopping',es:'📹 Venta por vídeo WhatsApp',pt:'📹 Venda por vídeo WhatsApp',de:'📹 Verkauf per WhatsApp-Video',it:'📹 Vendita video WhatsApp',nl:'📹 Verkoop via WhatsApp-video',ar:'📹 تسوق بالفيديو عبر واتساب'};v.textContent=x[lang];}
+  const v=document.getElementById('astouVisio');if(v){const x={fr:'📹 Vente en visio WhatsApp',en:'📹 WhatsApp video shopping',es:'📹 Venta por vídeo WhatsApp',pt:'📹 Venda por vídeo WhatsApp',de:'📹 Verkauf per WhatsApp-Video',it:'📹 Vendita video WhatsApp',nl:'📹 Verkoop via WhatsApp-video',ar:'📹 تسوق بالفيديو عبر واتساب',wo:'📹 Jënd ci vidéo WhatsApp',zh:'📹 WhatsApp 视频选购'};v.textContent=x[lang];}
 }
 function observeDynamic(){
   const targets=[document.getElementById('productGrid'),document.getElementById('packs')].filter(Boolean);
