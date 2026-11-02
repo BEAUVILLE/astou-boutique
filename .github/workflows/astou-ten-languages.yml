@@ -1,0 +1,20 @@
+name: Astou Boutique — 10 langues et sécurité commande
+on:
+  pull_request:
+    paths:
+      - index.html
+      - assets/astou/astou-i18n-8.js
+      - assets/astou/astou-i18n-core-8.js
+      - '*-saly.html'
+      - linge-maison-petite-cote.html
+      - tests/test_astou_ten_languages.py
+      - .github/workflows/astou-ten-languages.yml
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify ten real translations, public language bar and direct-only checkout
+        run: python3 -m unittest discover -s tests -p 'test_astou_ten_languages.py' -v
