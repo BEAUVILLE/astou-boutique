@@ -272,6 +272,13 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
 .top-actions .lang.astou-lang10-static a[aria-current="page"]{background:#7b0757;color:#fff}
 @media(max-width:700px){.top-actions .lang.astou-lang10-static{flex:1 1 100%;max-width:100%;justify-content:center}}
 </style>
+<style id="astou-gallery-languages-style">
+#galerie{scroll-margin-top:16px}
+.astou-gallery-language-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:14px auto 18px;max-width:720px}
+.astou-gallery-language-nav a{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:7px 10px;background:#fff;color:#4b0737;border:1px solid #d7b7cb;border-radius:12px;font:900 12px/1.2 system-ui,sans-serif;text-decoration:none;white-space:nowrap}
+.astou-gallery-language-nav a[aria-current="page"]{background:#7b0757;color:#fff;border-color:#7b0757}
+.astou-gallery-language-nav a:focus-visible{outline:2px solid #7b0757;outline-offset:2px}
+</style>
 </head>
 <body>
 <header class="top">
@@ -441,6 +448,18 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
       <span data-fr="Voir avant de contacter" data-en="See before contacting">Voir avant de contacter</span>
       <h2 data-fr="Galerie produits" data-en="Product gallery">Galerie produits</h2>
     </div>
+    <nav class="astou-gallery-language-nav" aria-label="Langues de la galerie · Gallery languages · 图库语言">
+      <a data-astou-gallery-lang="fr" href="?lang=fr#galerie" lang="fr">🇫🇷 FR</a>
+      <a data-astou-gallery-lang="en" href="?lang=en#galerie" lang="en">🇬🇧 EN</a>
+      <a data-astou-gallery-lang="es" href="?lang=es#galerie" lang="es">🇪🇸 ES</a>
+      <a data-astou-gallery-lang="pt" href="?lang=pt#galerie" lang="pt">🇵🇹 PT</a>
+      <a data-astou-gallery-lang="de" href="?lang=de#galerie" lang="de">🇩🇪 DE</a>
+      <a data-astou-gallery-lang="it" href="?lang=it#galerie" lang="it">🇮🇹 IT</a>
+      <a data-astou-gallery-lang="nl" href="?lang=nl#galerie" lang="nl">🇳🇱 NL</a>
+      <a data-astou-gallery-lang="ar" href="?lang=ar#galerie" lang="ar">🌙 AR</a>
+      <a data-astou-gallery-lang="wo" href="?lang=wo#galerie" lang="wo">🇸🇳 WO</a>
+      <a data-astou-gallery-lang="zh" href="?lang=zh#galerie" lang="zh-CN">🇨🇳 中文</a>
+    </nav>
     <div class="gallery">
       <figure><picture class="digiy-media-opt"><source type="image/webp" srcset="assets/astou/premium/cat-draps.webp"><source type="image/avif" srcset="assets/astou/premium/cat-draps.avif"><img src="assets/astou/premium/cat-draps.jpg" alt="Draps Astou Boutique" loading="lazy"></picture><figcaption data-fr="Draps & parures" data-en="Sheets & bedding sets">Draps & parures</figcaption></figure>
       <figure><picture class="digiy-media-opt"><source type="image/webp" srcset="assets/astou/premium/cat-serviettes.webp"><source type="image/avif" srcset="assets/astou/premium/cat-serviettes.avif"><img src="assets/astou/premium/cat-serviettes.jpg" alt="Serviettes Astou Boutique" loading="lazy"></picture><figcaption data-fr="Serviettes de bain" data-en="Bath towels">Serviettes de bain</figcaption></figure>
@@ -473,7 +492,7 @@ picture.digiy-media-opt>img{display:block;max-width:100%}
 </nav>
 <script src="assets/astou/mobile/mobile.js?v=20261001-cart-v3"></script>
 <script src="assets/astou/mobile/product-karite.js?v=20261001-cart-v2"></script>
-<script src="assets/astou/astou-i18n-8.js?v=20261102-astou10-static-v2"></script>
+<script src="assets/astou/astou-i18n-8.js?v=20261102-astou-gallery10-v3"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0"></script>
 <script>
