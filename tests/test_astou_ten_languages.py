@@ -8,7 +8,7 @@ LOADER=(ROOT/"assets/astou/astou-i18n-8.js").read_text(encoding="utf-8")
 CATEGORIES=["draps-saly.html","serviettes-saly.html","peignoirs-saly.html","linge-maison-saly.html","linge-maison-petite-cote.html","linge-maison-villas-residences-saly.html"]
 class TestAstouTenLanguages(unittest.TestCase):
  def test_home_loads_language_engine(self):
-  self.assertIn('astou-i18n-8.js?v=20261102-astou10-v1',HOME)
+  self.assertIn('astou-i18n-8.js?v=20261102-astou10-static-v2',HOME)
   self.assertIn('astou-i18n-core-8.js?v=20261102-astou10-core1',LOADER)
   self.assertIn("const SUP=['fr','en','es','pt','de','it','nl','ar','wo','zh']",CORE)
   self.assertIn("document.documentElement.lang=lang==='zh'?'zh-CN':lang",CORE)
