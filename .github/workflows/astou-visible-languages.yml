@@ -1,0 +1,20 @@
+name: ASTOU — visible language bar and card
+on:
+  pull_request:
+    paths:
+      - index.html
+      - carte/index.html
+      - assets/astou/astou-card-ten-languages.js
+      - assets/astou/astou-i18n-8.js
+      - tests/test_astou_visible_languages.py
+      - tests/test_astou_ten_languages.py
+      - .github/workflows/astou-visible-languages.yml
+permissions:
+  contents: read
+jobs:
+  visible-languages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Astou storefront and card languages
+        run: python3 -m unittest discover -s tests -p 'test_astou*.py' -v
